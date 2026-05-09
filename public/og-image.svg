@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#1a0408"/>
+      <stop offset="60%" stop-color="#0a0306"/>
+      <stop offset="100%" stop-color="#08060a"/>
+    </radialGradient>
+    <radialGradient id="phoenix" cx="50%" cy="55%" r="60%">
+      <stop offset="0%" stop-color="#ffb0b0"/>
+      <stop offset="35%" stop-color="#ff4444"/>
+      <stop offset="75%" stop-color="#dc2626"/>
+      <stop offset="100%" stop-color="#5a0a10"/>
+    </radialGradient>
+    <linearGradient id="title" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="60%" stop-color="#ff8080"/>
+      <stop offset="100%" stop-color="#dc2626"/>
+    </linearGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#dc2626" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- Phoenix glyph -->
+  <g transform="translate(180,200) scale(2.4)">
+    <path fill="url(#phoenix)" filter="blur(0.5)" d="M40 5 L52 25 L72 18 L62 42 L82 55 L58 58 L52 82 L40 64 L28 82 L22 58 L-2 55 L18 42 L8 18 L28 25 Z"/>
+    <circle cx="40" cy="48" r="7" fill="#08060a" opacity="0.92"/>
+  </g>
+
+  <!-- Title block -->
+  <g transform="translate(540,200)">
+    <text x="0" y="0" font-family="'JetBrains Mono', monospace" font-size="120" font-weight="700"
+          fill="url(#title)" letter-spacing="-3">Syn_OS</text>
+    <text x="0" y="60" font-family="'JetBrains Mono', monospace" font-size="28" font-weight="500"
+          fill="#ff8080" letter-spacing="2">SYNAPTIC OPERATING SYSTEM</text>
+    <text x="0" y="130" font-family="'Inter', sans-serif" font-size="32" font-weight="500"
+          fill="#e6e1de">AI-aware kernel · 17 syscalls · 160 Rust crates</text>
+    <text x="0" y="172" font-family="'Inter', sans-serif" font-size="32" font-weight="500"
+          fill="#e6e1de">Post-quantum crypto · GRIMOIRE labs · ARCANUM mesh</text>
+    <text x="0" y="240" font-family="'JetBrains Mono', monospace" font-size="24" font-weight="700"
+          fill="#dc2626" letter-spacing="3">v60.0.0 — SUN &amp; SALT</text>
+  </g>
+
+  <!-- Footer URL -->
+  <text x="600" y="585" text-anchor="middle" font-family="'JetBrains Mono', monospace"
+        font-size="22" fill="#6e6663" letter-spacing="4">SYNOS-LINUX.PRO</text>
+
+  <!-- Frame accents -->
+  <line x1="0"   y1="0"   x2="1200" y2="0"   stroke="#dc2626" stroke-width="3"/>
+  <line x1="0"   y1="630" x2="1200" y2="630" stroke="#5a0a10" stroke-width="3"/>
+</svg>

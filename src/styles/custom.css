@@ -1,0 +1,418 @@
+/* Syn_OS — Phoenix Red & Obsidian Theme
+   ------------------------------------------------
+   Force dark + crimson accents across both data-themes,
+   override Starlight's default blue with Phoenix red.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap');
+
+/* ============================================================
+   COLOR TOKENS — Phoenix Red & Obsidian
+   ============================================================ */
+
+:root,
+:root[data-theme='dark'],
+:root[data-theme='light'] {
+	/* Phoenix accent ramp (crimson → ember) */
+	--sl-color-accent-low:  #260408;
+	--sl-color-accent:      #dc2626;
+	--sl-color-accent-high: #ff6b6b;
+
+	/* Obsidian neutrals */
+	--sl-color-white:   #f5f1ee;
+	--sl-color-gray-1:  #e6e1de;
+	--sl-color-gray-2:  #b5acaa;
+	--sl-color-gray-3:  #6e6663;
+	--sl-color-gray-4:  #2c2624;
+	--sl-color-gray-5:  #1a1614;
+	--sl-color-gray-6:  #110d0c;
+	--sl-color-black:   #08060a;
+
+	/* Backgrounds */
+	--sl-color-bg:          #08060a;
+	--sl-color-bg-nav:      #0e0a0f;
+	--sl-color-bg-sidebar:  #0b0808;
+	--sl-color-bg-inline-code: #1a0a0a;
+	--sl-color-bg-accent:   #1a0408;
+
+	/* Text */
+	--sl-color-text:        var(--sl-color-gray-1);
+	--sl-color-text-accent: var(--sl-color-accent-high);
+	--sl-color-text-invert: var(--sl-color-black);
+
+	/* Hairlines / dividers */
+	--sl-color-hairline:        #2a0a0e;
+	--sl-color-hairline-light:  #3a0a10;
+	--sl-color-hairline-shade:  #1a0508;
+
+	/* Custom Phoenix tokens */
+	--phoenix-red:        #dc2626;
+	--phoenix-ember:      #ff4444;
+	--phoenix-blood:      #8b0000;
+	--phoenix-ash:        #1a1614;
+	--phoenix-obsidian:   #08060a;
+	--phoenix-glow:       0 0 24px rgba(220, 38, 38, 0.45);
+	--phoenix-glow-soft:  0 0 12px rgba(220, 38, 38, 0.25);
+
+	/* Fonts */
+	--sl-font: 'Inter', system-ui, -apple-system, sans-serif;
+	--sl-font-system-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+}
+
+/* Force the dark color scheme even when 'light' is requested */
+:root[data-theme='light'] {
+	color-scheme: dark;
+}
+
+/* ============================================================
+   GLOBAL — body, scrollbars, selection
+   ============================================================ */
+
+html, body {
+	background: var(--sl-color-bg) !important;
+	color: var(--sl-color-text);
+}
+
+body {
+	background-image:
+		radial-gradient(ellipse 1200px 600px at 80% -10%, rgba(220, 38, 38, 0.08), transparent 60%),
+		radial-gradient(ellipse 800px 400px at 0% 100%, rgba(139, 0, 0, 0.10), transparent 60%);
+	background-attachment: fixed;
+}
+
+::selection {
+	background: var(--phoenix-red);
+	color: var(--phoenix-obsidian);
+}
+
+::-webkit-scrollbar { width: 12px; height: 12px; }
+::-webkit-scrollbar-track { background: var(--sl-color-bg-sidebar); }
+::-webkit-scrollbar-thumb {
+	background: linear-gradient(180deg, #5a0a10, #2a0408);
+	border: 2px solid var(--sl-color-bg-sidebar);
+	border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: linear-gradient(180deg, var(--phoenix-red), var(--phoenix-blood));
+}
+
+/* ============================================================
+   HEADER & NAV
+   ============================================================ */
+
+header.header {
+	background: rgba(11, 8, 8, 0.85) !important;
+	backdrop-filter: blur(8px);
+	border-bottom: 1px solid var(--sl-color-hairline) !important;
+}
+
+.site-title {
+	font-family: var(--sl-font-system-mono);
+	font-weight: 700;
+	letter-spacing: 0.02em;
+	color: var(--sl-color-white);
+}
+
+.site-title:hover { color: var(--phoenix-ember); }
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+
+.sidebar-pane {
+	background: var(--sl-color-bg-sidebar) !important;
+	border-inline-end: 1px solid var(--sl-color-hairline) !important;
+}
+
+nav ul li a {
+	transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+nav a[aria-current='page'] {
+	color: var(--phoenix-ember) !important;
+	font-weight: 700;
+	background: linear-gradient(90deg, rgba(220, 38, 38, 0.18), transparent 80%);
+	border-inline-start: 2px solid var(--phoenix-red);
+}
+
+nav a:hover {
+	color: var(--phoenix-ember);
+	background: rgba(220, 38, 38, 0.06);
+}
+
+/* Sidebar group labels */
+.sidebar-content details > summary > .group-label > .large,
+nav .group-label .large {
+	color: var(--sl-color-gray-2);
+	font-family: var(--sl-font-system-mono);
+	font-size: 0.78rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+/* ============================================================
+   HERO / SPLASH
+   ============================================================ */
+
+.hero {
+	background:
+		radial-gradient(ellipse 100% 80% at 50% 0%, rgba(220, 38, 38, 0.18), transparent 70%),
+		radial-gradient(ellipse 60% 60% at 80% 100%, rgba(139, 0, 0, 0.18), transparent 70%),
+		linear-gradient(180deg, #15080a 0%, #08060a 100%);
+	border-bottom: 1px solid var(--sl-color-hairline);
+	padding-block: 4rem;
+	position: relative;
+	overflow: hidden;
+}
+
+.hero::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background-image:
+		linear-gradient(rgba(220, 38, 38, 0.04) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(220, 38, 38, 0.04) 1px, transparent 1px);
+	background-size: 48px 48px;
+	mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+	pointer-events: none;
+}
+
+.hero h1 {
+	font-family: var(--sl-font-system-mono);
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	background: linear-gradient(180deg, #ffffff 0%, #ff8080 60%, var(--phoenix-red) 100%);
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	text-shadow: 0 0 60px rgba(220, 38, 38, 0.35);
+}
+
+.hero .tagline {
+	color: var(--sl-color-gray-1);
+	font-size: 1.15rem;
+	max-width: 60ch;
+}
+
+/* Hero action buttons */
+.hero .actions a[data-variant='primary'],
+.hero a.button.primary {
+	background: linear-gradient(180deg, var(--phoenix-red) 0%, var(--phoenix-blood) 100%) !important;
+	color: var(--sl-color-white) !important;
+	border: 1px solid var(--phoenix-red) !important;
+	box-shadow: var(--phoenix-glow-soft);
+	font-weight: 600;
+	transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.hero .actions a[data-variant='primary']:hover,
+.hero a.button.primary:hover {
+	transform: translateY(-1px);
+	box-shadow: var(--phoenix-glow);
+}
+
+.hero .actions a[data-variant='minimal'] {
+	color: var(--sl-color-gray-1) !important;
+	border: 1px solid var(--sl-color-hairline-light) !important;
+	background: rgba(11, 8, 8, 0.6) !important;
+}
+
+.hero .actions a[data-variant='minimal']:hover {
+	border-color: var(--phoenix-red) !important;
+	color: var(--phoenix-ember) !important;
+}
+
+.hero img {
+	filter: drop-shadow(0 0 40px rgba(220, 38, 38, 0.5));
+}
+
+/* ============================================================
+   CARDS / CARD-GRID
+   ============================================================ */
+
+.card {
+	background: linear-gradient(180deg, #16100f 0%, #0d0809 100%) !important;
+	border: 1px solid var(--sl-color-hairline) !important;
+	border-radius: 10px !important;
+	padding: 1.25rem !important;
+	transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+	position: relative;
+	overflow: hidden;
+}
+
+.card::before {
+	content: '';
+	position: absolute;
+	top: 0; left: 0; right: 0;
+	height: 1px;
+	background: linear-gradient(90deg, transparent, var(--phoenix-red), transparent);
+	opacity: 0;
+	transition: opacity 0.2s ease;
+}
+
+.card:hover {
+	border-color: var(--phoenix-red) !important;
+	transform: translateY(-2px);
+	box-shadow: var(--phoenix-glow-soft);
+}
+
+.card:hover::before { opacity: 1; }
+
+.card .icon,
+.card svg.icon {
+	color: var(--phoenix-red);
+}
+
+.card .title,
+.card h2 {
+	color: var(--sl-color-white) !important;
+	font-family: var(--sl-font-system-mono);
+	font-weight: 700;
+}
+
+/* ============================================================
+   CONTENT
+   ============================================================ */
+
+main { background: transparent; }
+
+h1, h2, h3, h4 {
+	color: var(--sl-color-white);
+	letter-spacing: -0.01em;
+}
+
+h1 { font-family: var(--sl-font-system-mono); font-weight: 700; }
+h2 { border-bottom: 1px solid var(--sl-color-hairline); padding-bottom: 0.4rem; }
+
+a, .content a {
+	color: var(--phoenix-ember);
+	text-decoration-color: rgba(220, 38, 38, 0.5);
+	text-underline-offset: 3px;
+}
+
+a:hover, .content a:hover {
+	color: var(--sl-color-white);
+	text-decoration-color: var(--phoenix-red);
+}
+
+/* Inline code */
+code {
+	background: var(--sl-color-bg-inline-code) !important;
+	color: var(--phoenix-ember) !important;
+	border: 1px solid var(--sl-color-hairline) !important;
+	border-radius: 4px;
+	padding: 0.1em 0.4em !important;
+	font-family: var(--sl-font-system-mono);
+	font-size: 0.9em;
+}
+
+/* Code blocks */
+pre {
+	background: #0a0405 !important;
+	border: 1px solid var(--sl-color-hairline) !important;
+	border-radius: 8px !important;
+	box-shadow: inset 0 0 0 1px rgba(220, 38, 38, 0.05);
+}
+
+pre code {
+	background: transparent !important;
+	border: none !important;
+	color: var(--sl-color-gray-1) !important;
+	padding: 0 !important;
+}
+
+/* Tables */
+table {
+	border-collapse: collapse;
+	border: 1px solid var(--sl-color-hairline);
+	border-radius: 6px;
+	overflow: hidden;
+}
+
+th {
+	background: var(--phoenix-blood) !important;
+	color: var(--sl-color-white) !important;
+	font-family: var(--sl-font-system-mono);
+	letter-spacing: 0.03em;
+	text-transform: uppercase;
+	font-size: 0.85em;
+}
+
+tr:nth-child(even) td { background: rgba(220, 38, 38, 0.04); }
+
+td, th {
+	border-bottom: 1px solid var(--sl-color-hairline);
+	padding: 0.6em 0.9em !important;
+}
+
+/* Blockquotes */
+blockquote {
+	border-inline-start: 3px solid var(--phoenix-red) !important;
+	background: linear-gradient(90deg, rgba(220, 38, 38, 0.06), transparent) !important;
+	color: var(--sl-color-gray-1);
+	padding: 0.8rem 1rem !important;
+	margin-block: 1rem;
+	border-radius: 0 6px 6px 0;
+}
+
+/* Asides / callouts */
+.starlight-aside {
+	border-inline-start-width: 3px !important;
+	background: rgba(11, 8, 8, 0.6) !important;
+}
+
+.starlight-aside--note   { border-color: var(--phoenix-red) !important; }
+.starlight-aside--tip    { border-color: #00c853 !important; }
+.starlight-aside--caution{ border-color: #ffb300 !important; }
+.starlight-aside--danger { border-color: var(--phoenix-ember) !important; box-shadow: var(--phoenix-glow-soft); }
+
+/* HR */
+hr { border-color: var(--sl-color-hairline); }
+
+/* ============================================================
+   FOOTER / META
+   ============================================================ */
+
+footer {
+	border-top: 1px solid var(--sl-color-hairline);
+	color: var(--sl-color-gray-2);
+}
+
+/* ============================================================
+   SEARCH
+   ============================================================ */
+
+[data-pagefind-ui] button,
+.pagefind-ui__search-input {
+	background: var(--sl-color-bg-inline-code) !important;
+	border: 1px solid var(--sl-color-hairline) !important;
+	color: var(--sl-color-white) !important;
+}
+
+.pagefind-ui__search-input:focus {
+	border-color: var(--phoenix-red) !important;
+	box-shadow: var(--phoenix-glow-soft);
+	outline: none;
+}
+
+/* ============================================================
+   CRT FLICKER (subtle)
+   ============================================================ */
+
+@media (prefers-reduced-motion: no-preference) {
+	body::after {
+		content: '';
+		position: fixed;
+		inset: 0;
+		pointer-events: none;
+		background: repeating-linear-gradient(
+			to bottom,
+			transparent 0,
+			transparent 2px,
+			rgba(220, 38, 38, 0.012) 2px,
+			rgba(220, 38, 38, 0.012) 3px
+		);
+		z-index: 9999;
+		mix-blend-mode: overlay;
+	}
+}

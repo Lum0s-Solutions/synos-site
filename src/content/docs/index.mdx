@@ -1,0 +1,107 @@
+---
+title: Syn_OS
+description: The Synaptic Operating System — AI-aware Linux kernel, 17 custom syscalls, 160-crate Rust workspace, post-quantum crypto, gamified cybersecurity training. v60.0.0 "Sun & Salt".
+template: splash
+hero:
+  tagline: "The Synaptic Operating System. An Arch Linux derivative with an AI-aware Rust kernel, 17 custom syscalls, post-quantum crypto, and a gamified cybersecurity training platform — engineered as one cohesive product instead of a tool collection."
+  image:
+    file: ../../assets/phoenix-logo.png
+    alt: Syn_OS Phoenix
+  actions:
+    - text: Download ISOs
+      link: /guides/download/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/Lum0s-Solutions/Syn_OS
+      icon: external
+      variant: minimal
+    - text: What is Syn_OS?
+      link: /guides/overview/
+      icon: open-book
+      variant: minimal
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+## v60.0.0 — Sun & Salt
+
+The **Operation Warp Speed** codesprint (v44 → v60) is **code-complete**. Sixteen versions of work — Crucible through Sun & Salt — landed across the Rust workspace, kernel, and ISO pipeline. **17 custom syscalls** wired, **160 crates** with zero compile errors, **8 Bevy plugins**, and the full FedRAMP Moderate / CMMC L2 / SOC2 control map shipped. [Read the v60 release notes →](/guides/overview/#v60-status)
+
+## Three ISOs. One Codebase.
+
+<CardGrid stagger>
+	<Card title="GRIMOIRE Public" icon="rocket">
+		**Progressive-unlock cybersecurity training.** Start with a 10-tool starter kit and 5 intro labs; unlock the rest through XP, faction quests, and the Salvage Yard hardware-mesh arc. 100 labs across 13 categories. Cert-path mapping for OSCP, OSEP, GIAC, CISSP, CEH, eJPT and more.
+	</Card>
+	<Card title="GoodLife AI Research" icon="laptop">
+		**Safe AI research distro.** Ollama pre-configured with `qwen2.5:7b` + `llama3.2:3b` (offline-capable), Jupyter, curated ML tooling. No offensive tools, no internet-facing services by default. Built with the `research-mode` cargo feature.
+	</Card>
+	<Card title="Master (Operator)" icon="setting">
+		**Full development & operations image.** 160 Rust crates, ALFRED v5.1 daemon, ARCANUM mesh, RaaS engine, the complete toolchain. The bedrock of LumOs commercial contracts.
+	</Card>
+</CardGrid>
+
+## Built Different
+
+<CardGrid>
+	<Card title="17 Custom Syscalls" icon="seti:config">
+		Syscalls **469–479** expose consciousness state, AI stimulus, quantum memory entanglement, and eBPF monitor stats. Syscalls **480–485** (Glasswalker) ship kernel observability counters and perf ring buffers — the AI cortex talks to the kernel directly, no userspace shim.
+	</Card>
+	<Card title="Post-Quantum Crypto" icon="shield">
+		**Icarus v9.0** implements ML-KEM (FIPS 203), ML-DSA (FIPS 204), and SLH-DSA (FIPS 205). Curtain v3 capability tokens are signed with ed25519 today and PQ-ready for tomorrow.
+	</Card>
+	<Card title="160 Rust Crates" icon="seti:rust">
+		Pure Rust from kernel modules to the desktop shell. **8 Bevy 0.14 plugins** (Cutscene, Mindmap, RetroFilter, Cyberspace, SkillTree, FactionHQ, Rehoboam, Twin). 0 compile errors across the workspace; thousands of tests passing.
+	</Card>
+	<Card title="ALFRED Consciousness Fusion" icon="puzzle">
+		Nine neuroanatomical brain crates (thalamus, hippocampus, amygdala, cerebellum, insula, corpus-callosum, default-mode, glial, brainstem) wired into a four-path fusion engine: Traditional + Neuromorphic SNN + Quantum-inspired ML + TNGS + v53 MPS cortex.
+	</Card>
+	<Card title="Compliance, Out of the Box" icon="approve-check">
+		**FedRAMP Moderate** (NIST SP 800-53 Rev 5) + **CMMC L2** + **SOC2** control maps shipped with daily ConMon collector. **SLSA-3** reproducible builds with cosign + Sigstore Rekor + cross-oracle verify.
+	</Card>
+	<Card title="ARCANUM Hive Mesh" icon="random">
+		Tailscale + WireGuard backbone + Kubernetes operator for distributed inference across discarded laptops. The accessibility ceiling drops from "needs $2,000 GPU" to "needs a working laptop." E-waste reduction tracked as an in-game metric.
+	</Card>
+	<Card title="GRIMOIRE — 100 Labs, 13 Tracks" icon="pencil">
+		Network, OSINT, Web App, Active Directory, Exploitation, Reverse Engineering, Malware, Cloud, AI Security, Cognitive Warfare, Blockchain, Purple Team, API. Every lab has Docker overlays, MITRE ATT&CK + UKC tags, and SHA-256 integrity manifests verified by `lab-integrity`.
+	</Card>
+	<Card title="Weaponization Ceiling" icon="seti:lock">
+		**Curtain v3** runtime ceiling enforces that GRIMOIRE Public can never become operationally equivalent to Master. Ed25519-signed capability tokens, tier-isolated LLM federation, separated audit chain HMAC roots, scrubbed C2 binaries.
+	</Card>
+</CardGrid>
+
+## The Synaptic Gap
+
+> The underscore in `Syn_OS` is the visual representation of the synaptic gap — the cleft where electrical signal jumps into chemical meaning.
+>
+> Pre-synaptic neuron = Hardware. Synaptic cleft = Syn_OS itself. Post-synaptic neuron = Application consciousness. Neurotransmitters = syscalls 469–485. Receptors = syscall handlers. Synaptic plasticity = adaptive kernel modules and ALFRED's learning loops.
+>
+> **The OS is the gap.**
+
+[Read the architecture deep dive →](/architecture/layers/)
+
+## Pick Your Path
+
+<CardGrid>
+	<LinkCard
+		title="I want to learn cybersecurity"
+		description="Boot GRIMOIRE Public, finish the intro labs, pick a faction, climb the leaderboard."
+		href="/grimoire/overview/"
+	/>
+	<LinkCard
+		title="I want a sovereign AI lab"
+		description="Boot GoodLife, run local Ollama, build a salvaged-hardware inference mesh."
+		href="/goodlife/overview/"
+	/>
+	<LinkCard
+		title="I want to read the kernel"
+		description="17 syscalls, 17 loadable Rust modules, 5 eBPF monitors, LSM attestation."
+		href="/architecture/kernel/"
+	/>
+	<LinkCard
+		title="I'm an enterprise / federal buyer"
+		description="FedRAMP Moderate, CMMC L2, SOC2, SLSA-3 reproducible builds, multi-tenant federation."
+		href="/architecture/forge/"
+	/>
+</CardGrid>

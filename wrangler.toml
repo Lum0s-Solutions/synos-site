@@ -1,0 +1,12 @@
+# Cloudflare Pages — synos-linux.pro
+# Used by `wrangler pages deploy` for manual deploys; the GitHub Action
+# in .github/workflows/deploy-cloudflare.yml is the primary CI deploy path.
+
+name = "synos-site"
+compatibility_date = "2026-05-09"
+pages_build_output_dir = "./dist"
+
+[vars]
+# Public, build-time environment for the static site.
+# Anything secret must go in GitHub Actions secrets, not here.
+SITE_URL = "https://synos-linux.pro"

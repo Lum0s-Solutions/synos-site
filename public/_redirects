@@ -1,0 +1,14 @@
+# Cloudflare Pages redirects
+# https://developers.cloudflare.com/pages/configuration/redirects/
+
+# Convenience: bare /grimoire → /grimoire/overview/
+/grimoire     /grimoire/overview/     301
+/architecture /architecture/layers/   301
+/goodlife     /goodlife/overview/     301
+/guides       /guides/overview/       301
+/reference    /reference/syscalls/    301
+
+# Legacy / common typos
+/download     /guides/download/       301
+/install      /guides/installation/   301
+/docs         /                       301

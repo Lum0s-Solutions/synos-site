@@ -2,7 +2,7 @@
 # Used by `wrangler pages deploy` for manual deploys; the GitHub Action
 # in .github/workflows/deploy-cloudflare.yml is the primary CI deploy path.
 
-name = "synos-site"
+name = "synos-linux-pro"
 compatibility_date = "2026-05-09"
 pages_build_output_dir = "./dist"
 

@@ -15,7 +15,7 @@ One-time setup, ~3 minutes.
 
 1. Sign in to **[Cloudflare Pages](https://dash.cloudflare.com/?to=/:account/pages)**.
 2. **Create application → Pages → Connect to Git**.
-3. Choose **GitHub**, authorise the Cloudflare GitHub app for the `Lum0s-Solutions` org, and pick `Lum0s-Solutions/synos-site`.
+3. Choose **GitHub**, authorise the Cloudflare GitHub app for the `Lum0s-Solutions` org, and pick `Lum0s-Solutions/synos-site` (the GitHub repo; Cloudflare project name is `synos-linux-pro` to match the domain).
 4. Configure the build:
 
    | Field                | Value           |
@@ -29,7 +29,7 @@ One-time setup, ~3 minutes.
 
 5. **Save and Deploy.**
 
-Cloudflare Pages will publish to `synos-site.pages.dev` on every push to `main`. The first build takes ~2 minutes.
+Cloudflare Pages will publish to `synos-linux-pro.pages.dev` on every push to `main`. The first build takes ~2 minutes.
 
 After the first successful deploy, jump to **[Namecheap DNS](#namecheap-dns--apex-and-www)** below.
 
@@ -60,13 +60,13 @@ gh secret set CLOUDFLARE_API_TOKEN  --body "$YOUR_TOKEN"  -R Lum0s-Solutions/syn
 gh secret set CLOUDFLARE_ACCOUNT_ID --body "$ACCOUNT_ID" -R Lum0s-Solutions/synos-site
 ```
 
-The workflow (`.github/workflows/deploy-cloudflare.yml`) uses [`cloudflare/pages-action`](https://github.com/cloudflare/pages-action) and ships a deploy on every push to `main`. The Pages project must be created (empty is fine) under the `synos-site` name once before the first action run; the easiest way is to do the first deploy from the dashboard (Option 1) and then move the cadence to Actions.
+The workflow (`.github/workflows/deploy-cloudflare.yml`) uses [`cloudflare/pages-action`](https://github.com/cloudflare/pages-action) and ships a deploy on every push to `main`. The Pages project must be created (empty is fine) under the `synos-linux-pro` name once before the first action run; the easiest way is to do the first deploy from the dashboard (Option 1) and then move the cadence to Actions.
 
 ---
 
 ## Namecheap DNS — apex and www
 
-Once Cloudflare Pages publishes `synos-site.pages.dev`, you bind it to the real domain. You have two choices.
+Once Cloudflare Pages publishes `synos-linux-pro.pages.dev`, you bind it to the real domain. You have two choices.
 
 ### Option A — full Cloudflare nameservers *(recommended)*
 
@@ -75,7 +75,7 @@ This gives you the full Cloudflare CDN, security, and analytics layer; the Pages
 1. **In Cloudflare:** Add Site → enter `synos-linux.pro` → Free plan → Cloudflare assigns two nameservers (e.g. `bonita.ns.cloudflare.com` and `tucker.ns.cloudflare.com`).
 2. **In Namecheap:** Domain List → `synos-linux.pro` → **Manage** → **Nameservers** → set **Custom DNS** to the two Cloudflare nameservers.
 3. Wait for propagation (Cloudflare emails when active — usually ≤30 min).
-4. **Back in Cloudflare Pages → synos-site → Custom domains** → add `synos-linux.pro` and `www.synos-linux.pro`. Cloudflare Pages will create the necessary CNAME / flattened-A records automatically inside its own DNS zone.
+4. **Back in Cloudflare Pages → synos-linux-pro → Custom domains** → add `synos-linux.pro` and `www.synos-linux.pro`. Cloudflare Pages will create the necessary CNAME / flattened-A records automatically inside its own DNS zone.
 
 After this, every push to `main` rebuilds and serves to `https://synos-linux.pro`.
 
@@ -83,13 +83,13 @@ After this, every push to `main` rebuilds and serves to `https://synos-linux.pro
 
 Use this if you don't want to delegate nameservers to Cloudflare.
 
-1. Cloudflare Pages → `synos-site` → Custom domains → **Set up a custom domain** → `synos-linux.pro` (and again for `www`). Cloudflare will give you a CNAME target like `synos-site.pages.dev`.
+1. Cloudflare Pages → `synos-linux-pro` → Custom domains → **Set up a custom domain** → `synos-linux.pro` (and again for `www`). Cloudflare will give you a CNAME target like `synos-linux-pro.pages.dev`.
 2. **In Namecheap:** Domain List → `synos-linux.pro` → **Advanced DNS** → add records:
 
    | Type           | Host  | Value                              | TTL       |
    |----------------|-------|------------------------------------|-----------|
-   | CNAME          | `www` | `synos-site.pages.dev`             | Automatic |
-   | ALIAS / ANAME  | `@`   | `synos-site.pages.dev`             | Automatic |
+   | CNAME          | `www` | `synos-linux-pro.pages.dev`             | Automatic |
+   | ALIAS / ANAME  | `@`   | `synos-linux-pro.pages.dev`             | Automatic |
 
    Namecheap calls apex CNAMEs **ALIAS** records. If your Namecheap UI doesn't expose ALIAS, use the four Cloudflare-Pages **A-record** targets they hand you instead (Cloudflare prints them in the Custom Domain dialog).
 
@@ -101,7 +101,7 @@ Use this if you don't want to delegate nameservers to Cloudflare.
 
 ```bash
 # Cloudflare Pages canonical URL
-curl -sI https://synos-site.pages.dev | head -1
+curl -sI https://synos-linux-pro.pages.dev | head -1
 
 # Apex (after DNS propagates)
 curl -sI https://synos-linux.pro    | head -1
@@ -128,3 +128,17 @@ npm run preview      # serves dist/ for sanity-check
 ## Updating content
 
 Push to `main` is the only deploy trigger. If a Syn_OS release bumps the version, the **`synos-site` Claude agent** can be invoked to mirror the README/CHANGELOG into the matching content pages and open a PR. See `~/.claude/agents/synos-site.md`.
+
+## Quick facts
+
+| | |
+|--|--|
+| GitHub repo | `Lum0s-Solutions/synos-site` |
+| Cloudflare Pages project | `synos-linux-pro` |
+| Cloudflare account ID | `8f63953bddc5bdf004b63cad5cc0c702` |
+| Production branch | `main` |
+| Build command | `npm run build` |
+| Build output | `dist` |
+| Node version | `22` (`engines.node >=22.12.0`, `.nvmrc`) |
+| Custom domains | `synos-linux.pro`, `www.synos-linux.pro` |
+| Deploy preview subdomain | `synos-linux-pro.pages.dev` |

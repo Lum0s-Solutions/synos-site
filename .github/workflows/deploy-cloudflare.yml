@@ -29,7 +29,23 @@ jobs:
       - name: Build (Astro)
         run: npm run build
 
+      # If the Cloudflare Pages dashboard GitHub integration is the deploy
+      # path, this step is intentionally skipped and the workflow just acts
+      # as build-verification CI. To switch deploy to this Action, set both
+      # CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID as repo secrets.
+      - name: Check Cloudflare secrets
+        id: cf
+        run: |
+          if [ -n "${{ secrets.CLOUDFLARE_API_TOKEN }}" ] \
+             && [ -n "${{ secrets.CLOUDFLARE_ACCOUNT_ID }}" ]; then
+            echo "deploy=true"  >> $GITHUB_OUTPUT
+          else
+            echo "deploy=false" >> $GITHUB_OUTPUT
+            echo "::notice::Cloudflare secrets not set; skipping Pages deploy step (build verification only)."
+          fi
+
       - name: Publish to Cloudflare Pages
+        if: steps.cf.outputs.deploy == 'true'
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}

@@ -17,15 +17,15 @@ Syn_OS is structured as a six-layer stack from silicon to story, with strict sep
 ║  EXPERIENCE LAYER — Bevy 0.14 Desktop                       ║
 ║  8 plugins: Cutscene, Cyberspace, FactionHQ, Mindmap,       ║
 ║  RetroFilter, SkillTree, Rehoboam system monitor, Twin       ║
-║  synos-ops TUI (7 tabs)                                     ║
+║  synos-ops TUI (multi-tab: system, mesh, PQ-posture, …)     ║
 ╠══════════════════════════════════════════════════════════════╣
 ║  APPLICATION LAYER                                          ║
-║  GRIMOIRE (100 labs, 13 categories, 110+ modules)           ║
+║  GRIMOIRE 1.0 (108 labs, 13 categories, 110+ modules)       ║
 ║  synos-gamification (~53k LOC)                              ║
 ║  Security Arsenal (600+ tools + 3,400+ Distrobox)           ║
 ║  spider-web intel dashboard, grimoire-mobile companion      ║
 ╠══════════════════════════════════════════════════════════════╣
-║  CORE PLATFORM — 160 Rust Crates                            ║
+║  CORE PLATFORM — 209 Rust Crates                            ║
 ║  ALFRED + 9 brain crates + nucleus root-of-trust            ║
 ║  Arcanum Hive (controller, attestor, profiler, tests)       ║
 ║  synos-fragment-field (energy IDS pipeline, 3,002 LOC)      ║
@@ -37,8 +37,8 @@ Syn_OS is structured as a six-layer stack from silicon to story, with strict sep
 ╠══════════════════════════════════════════════════════════════╣
 ║  CUSTOM LINUX KERNEL — 6.19-synos-ai                        ║
 ║  CONFIG_RUST=y · KSPP hardening · 12 CONFIG_SYNOS_* knobs   ║
-║  17 custom syscalls (469–485)                               ║
-║  17 loadable Rust kernel modules                            ║
+║  Capability-gated, signed Rust kernel-module interface      ║
+║  Loadable Rust kernel modules (CAP_SYS_ADMIN-gated, signed) ║
 ║  5 eBPF monitors: memory, network, process, security, perf ║
 ║  LSM integration · Riftrunner safe-bytecode VM (v52)        ║
 ║  Snapshot crate · Observability crate · Attest crate        ║
@@ -72,7 +72,7 @@ Underneath the six-layer stack is a **four-layer biological organism** that expl
 │  synos-ops, 600+ security tools                              │
 ├──────────────────────────────────────────────────────────────┤
 │  PROKARYOTIC CELL                                            │
-│  Kernel / Ring 0 (syscalls 469–485, 17 Rust LKMs, drivers)   │
+│  Kernel / Ring 0 (capability-gated kernel interface, Rust LKMs, drivers) │
 │  Primitive, fast, always-on. Mitochondria for the whole org. │
 └──────────────────────────────────────────────────────────────┘
 ```
@@ -91,8 +91,8 @@ The name is not decorative. A synapse is the junction where a signal crosses fro
 Pre-synaptic neuron    = Hardware
 Synaptic cleft         = Syn_OS (kernel + userspace + ALFRED)
 Post-synaptic neuron   = Application consciousness (ALFRED decisions, user processes)
-Neurotransmitters      = System calls (especially 469–485)
-Receptors              = Syscall handlers
+Neurotransmitters      = Kernel interface calls (capability-gated, signed)
+Receptors              = Capability-gated kernel handlers
 Synaptic plasticity    = Adaptive kernel modules + ALFRED's learning loops
 ```
 
@@ -108,16 +108,16 @@ ALFRED is **not "an LLM wrapper."** It is a fusion engine that routes every inco
 
 1. **Traditional AI** — decision trees, Bayesian inference, rule engines, signature matching. Fast-path for known-unknown threats.
 2. **Neuromorphic computing** — spiking neural networks (LIF, Izhikevich, Hodgkin-Huxley, AdEx, SRM models). Biologically-plausible path for temporal pattern recognition.
-3. **Quantum coherence collapse theory** — Penrose-Hameroff Orchestrated Objective Reduction, clock-edge collapse model, fragment superposition. Research path for detecting energy-topology anomalies via Fragment Field IDS.
+3. **Quantum coherence collapse theory** — Penrose-Hameroff Orchestrated Objective Reduction, clock-edge collapse model, fragment superposition. Research path for detecting energy-topology anomalies via Fragment Field IDS. Runs on kernel-visible signals exposed through the capability-gated interface.
 4. **Theory of Neuronal Group Selection (TNGS)** — Gerald Edelman's neural Darwinism applied to attack pattern evolution. Path for recognising new attacks by analogy to past ones.
 
-The fusion engine is not aspirational. Path 1 runs on every event. Path 2 runs on temporal anomalies. Path 3 runs on kernel-visible signals via syscalls 475/476/477. Path 4 runs during idle consolidation cycles in the Default Mode Network. Their outputs are weighted by `ConsciousnessState` (coherence, activity, mode, decision latency) and combined into ALFRED's decisions.
+The fusion engine is not aspirational. Path 1 runs on every event. Path 2 runs on temporal anomalies. Path 3 runs on kernel-visible signals via the capability-gated kernel module interface. Path 4 runs during idle consolidation cycles in the Default Mode Network. Their outputs are weighted by `ConsciousnessState` (coherence, activity, mode, decision latency) and combined into ALFRED's decisions.
 
 ## What each layer is for
 
 - **Hardware** — Physical substrate. Nothing application-specific lives here.
 - **Kernel** — Ring 0. The custom syscalls, kernel modules, eBPF programs, and LSM integration. Everything here is *cycles per operation*; if a feature can live in userspace, it does.
-- **Core Platform** — The 160-crate Rust workspace. The actual product. ALFRED, Icarus, Fragment Field, Curtain, Forge, RaaS, federation, the brain crates, and the supporting infrastructure.
+- **Core Platform** — The 209-crate Rust workspace. The actual product. ALFRED v6.0, Icarus, Fragment Field, Curtain, Forge, RaaS, federation, the brain crates, and the supporting infrastructure.
 - **Application** — Things you run *on* Syn_OS. GRIMOIRE labs, security arsenal tools, the spider-web intelligence dashboard, the mobile companion.
 - **Experience** — The shell. Bevy desktop plugins, the synos-ops TUI, Cinnamon DE customisation, branding assets.
 - **Narrative** — The story that makes the rest cohere. Faction lore, RICO contracts, boss-contract chains, the Sovereign Operator Path.

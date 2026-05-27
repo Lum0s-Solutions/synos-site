@@ -17,7 +17,7 @@ GRIMOIRE Public is the talent funnel. The premise is that play produces operator
 
 Curtain enforces, by construction:
 
-- Public players cannot enable AI dispatch syscalls (470–474 return `ENOSYS` no matter what)
+- Public players cannot enable AI dispatch operations (`ENOSYS` on every attempt — capability-token enforcement, no in-band bypass)
 - Public Sanctums cannot federate with Master Sanctums
 - Public audit trails use a separate HMAC-SHA256 chain root from Master
 - Fragment Field IDS *kernel-side* detection is Master-only (public gets userspace-only access)
@@ -36,7 +36,7 @@ A Curtain v3 capability token is an ed25519-signed envelope containing:
   "tenant":    "<tenant-uuid>",
   "tier":      "grimoire-public" | "goodlife" | "master",
   "subject":   "<process-or-node-uuid>",
-  "claims":    [ "syscall:475", "ebpf:enable", "federation:peer" ],
+  "claims":    [ "kernel:ai-dispatch", "ebpf:enable", "federation:peer" ],
   "issued":    1746813600,
   "expires":   1746900000,
   "nonce":     "<32-byte hex>",
@@ -47,7 +47,7 @@ A Curtain v3 capability token is an ed25519-signed envelope containing:
 
 …with a signature appended. Tokens are short-lived (typically ≤24 h) and chained: each token references the parent that authorised its issuance, all the way back to the federation root.
 
-The `algorithm` field is forward-compatible with **ML-DSA** for the planned post-quantum migration.
+The `algorithm` field supports both `ed25519` and **ML-DSA** — post-quantum signing is available for capability tokens and the field was designed from the start to carry an algorithm OID for clean rotation.
 
 ## Tiers
 
@@ -68,7 +68,7 @@ Curtain v3 inherits and augments the seven runtime enforcement points from v2:
 3. **AppArmor** — `synos.grimoire.lab` profile pins file access
 4. **Kernel taint flag** — once set (e.g. an unsigned module loaded), the process loses Master claims permanently
 5. **PromptGuard** — content guard between user prompts and ALFRED's master-mode actions; signed receipts in `synos-attest-ledger`
-6. **Syscall filter** — direct dispatch table check for 469–485 (return `ENOSYS` based on tier)
+6. **Kernel interface filter** — capability-token check on every gated kernel operation (return `ENOSYS` based on tier)
 7. **Mesh peering** — federation handshake refuses cross-tier sessions
 
 ## Issuance flow

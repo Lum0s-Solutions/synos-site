@@ -63,7 +63,7 @@ The playbooks:
 
 - enrol the node into Tailscale (with auth key rotation)
 - generate a node-scoped Curtain capability token signed by the federation root
-- install the synos kernel + 17 modules + 17 syscalls
+- install the synos kernel + signed Rust kernel modules (capability-gated kernel-module interface)
 - pull the appropriate ALFRED model fingerprints and verify ML-DSA signatures
 - register with the Hive controller and request a workload assignment
 

@@ -1,24 +1,24 @@
 ---
 title: ALFRED AI Daemon
-description: ALFRED — Adaptive Learning Framework for Responsive Evolution & Defense. Two-layer Rust + Python architecture, four-path consciousness fusion, nine neuroanatomical brain crates, four operating modes.
+description: ALFRED v6.0 — Adaptive Learning Framework for Responsive Evolution & Defense. Two-layer Rust + Python architecture, four-path consciousness fusion, nine neuroanatomical brain crates, four operating modes.
 ---
 
-**ALFRED** — Adaptive Learning Framework for Responsive Evolution & Defense — is the **nervous system** of Syn_OS. It is a v5.1 daemon running nine neuroanatomically-named Rust crates that model the AI's mind on the architecture of a mammalian brain, fused with a Python user-facing layer for LLM integration, voice, RAG, and the privacy-first job-hunt mode.
+**ALFRED** — Adaptive Learning Framework for Responsive Evolution & Defense — is the **nervous system** of Syn_OS. v6.0 is a Rust daemon running nine neuroanatomically-named crates that model the AI's mind on the architecture of a mammalian brain, fused with a Python user-facing layer for LLM integration, voice, RAG, and the privacy-first job-hunt mode.
 
 ALFRED is **not an LLM wrapper.** It is a fusion engine that routes every incoming event through four parallel processing paths and combines their outputs into a single decision vector.
 
 ## Two-layer architecture
 
-### Rust daemon (v4.0 API)
+### Rust daemon (REST API v4)
 
 `fruit/core/src/ai/daemons/alfred/`
 
-- System intelligence: CPU/memory optimisation, kernel bridge via syscalls 469–485
+- System intelligence: CPU/memory optimisation, kernel bridge via the capability-gated kernel module interface
 - 11-endpoint REST API
 - NATS event bus
-- God Mode dashboard aggregator (~1,700 LOC)
-- **Consciousness fusion engine** (`consciousness_fusion.rs`, ~1,610 LOC) — routes events through the four processing paths
-- **BrainBridge** (Wave 4) routes `AlfredSignal::SecurityEvent / ThreatAutoHandled / HealthAlert / DmnCycleSummary` into the cortex
+- God Mode dashboard aggregator
+- **Consciousness fusion engine** (`consciousness_fusion.rs`) — routes events through the four processing paths
+- **BrainBridge** routes security events, threat-auto-handled signals, health alerts, and DMN cycle summaries into the cortex
 
 ### Python layer (v2.1.0)
 
@@ -68,12 +68,12 @@ Every incoming event goes through **all four** in parallel:
 |------|------------|---------|---------------|
 | **Traditional AI** | Known-unknown threats — signature matching, decision trees, Bayesian inference, rule engines | Every event | `consciousness_fusion::traditional` |
 | **Neuromorphic SNN** | Temporal pattern recognition | Temporal anomalies | LIF / Izhikevich / Hodgkin-Huxley / AdEx / SRM models |
-| **Quantum coherence** | Energy-topology anomaly detection | Kernel signals via syscalls 475/476/477 | Penrose-Hameroff Orch-OR, clock-edge collapse, fragment superposition |
+| **Quantum coherence** | Energy-topology anomaly detection | Kernel signals via the observability interface | Penrose-Hameroff Orch-OR, clock-edge collapse, fragment superposition |
 | **TNGS** (neural Darwinism) | Novel attacks recognised by analogy | Idle consolidation cycles in the Default Mode Network | Edelman's Theory of Neuronal Group Selection |
 
-In v53 (Quantumweave) a fifth path joined: **MPS cortex** (`synos-cortex-q`) — a tensor-network matrix-product-state inference path for high-dimensional pattern compression.
+A fifth path — the **MPS cortex** (`synos-cortex-q`) — is a tensor-network matrix-product-state inference path for high-dimensional pattern compression, added in v53.
 
-Outputs are weighted by `ConsciousnessState` (coherence, activity, mode, decision latency) and combined into ALFRED's decisions. The consciousness state itself is exposed to userspace via syscall **469** (`get_consciousness_state`).
+Outputs are weighted by `ConsciousnessState` (coherence, activity, mode, decision latency) and combined into ALFRED's decisions.
 
 ## Four operating modes
 
@@ -116,7 +116,7 @@ Eleven endpoints exposed on `http://localhost:7437/v4/`:
 ## How to talk to ALFRED
 
 ```bash
-synos-ops                    # 7-tab TUI
+synos-ops                    # multi-tab TUI
 synos-alfred chat            # interactive Python chat layer
 synos-alfred ask "..."       # one-shot query
 synos-alfred status          # daemon + brain pipeline state
@@ -124,6 +124,6 @@ synos-alfred status          # daemon + brain pipeline state
 
 ## Related reading
 
-- **[Custom Kernel →](/architecture/kernel/)** — the syscalls ALFRED talks to
+- **[Custom Kernel →](/architecture/kernel/)** — the kernel module interface ALFRED talks to
 - **[ARCANUM Mesh →](/architecture/arcanum/)** — distributed consciousness federation
 - **[Curtain →](/architecture/curtain/)** — capability gating between modes

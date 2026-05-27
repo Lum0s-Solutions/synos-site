@@ -12,7 +12,7 @@ Pick one. All ISOs are bootable on UEFI and Legacy BIOS.
 ### dd (Linux / macOS)
 
 ```bash
-sudo dd if=synos-grimoire-public-v60.0.0.iso of=/dev/sdX bs=4M status=progress conv=fsync
+sudo dd if=synos-grimoire-public-v80.0.0.iso of=/dev/sdX bs=4M status=progress conv=fsync
 sync
 ```
 
@@ -33,7 +33,7 @@ Syn_OS ISOs are Ventoy-compatible. Drop the ISO onto a Ventoy USB drive (`/vento
 
 1. Plug in the USB and reboot into the firmware boot menu (commonly **F12** / **F11** / **Esc** / **F2**)
 2. Select the USB drive
-3. The Syn_OS GRUB menu appears with Phoenix branding (Crimson Spire / Sun & Salt theme)
+3. The Syn_OS GRUB menu appears with Phoenix branding (Crimson Spire theme)
 4. Default option boots the live system; advanced options expose memtest, forensic mode, and EFI shell
 
 The first-boot animation is **Plymouth** with the Phoenix decay sequence — `decay_000` → `decay_002` cross-fading into the neural-node sigil.
@@ -74,7 +74,7 @@ After first boot:
 
 ```bash
 synos-doctor                 # 41-stage post-install validation wizard
-synos-ops                    # ALFRED TUI (7 tabs: system, benchmark, hive, services, ALFRED, node grid, AI models)
+synos-ops                    # ALFRED TUI (23 tabs: system, benchmark, hive, services, ALFRED, PQ-posture, supply-chain, and more)
 grimoire status              # GRIMOIRE state + unlocked tools
 ```
 

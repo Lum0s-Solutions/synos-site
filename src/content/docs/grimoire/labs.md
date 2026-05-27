@@ -1,9 +1,9 @@
 ---
 title: Lab Catalog
-description: 100 GRIMOIRE labs across 13 categories, every one with Docker overlays, MITRE ATT&CK + UKC tags, difficulty rating, and SHA-256 integrity manifests.
+description: 108 GRIMOIRE labs across 13 categories (catalog 1.0), every one with Docker overlays, MITRE ATT&CK + UKC tags, difficulty rating, and SHA-256 integrity manifests.
 ---
 
-Every lab in GRIMOIRE ships with a Docker overlay (71 / 100 with full network-isolated environments), a MITRE ATT&CK tag, a Unified Kill Chain (UKC) phase tag, a difficulty rating, and an XP reward. Labs are verified by the `lab-integrity` xtask; SHA-256 manifests are regenerated on every merge to `main`. The full catalogue is **pre-bundled** in every GRIMOIRE Public ISO — unlocks just grant execution permission, never download anything.
+Every lab in GRIMOIRE ships with a Docker overlay (the majority with full network-isolated environments), a MITRE ATT&CK tag, a Unified Kill Chain (UKC) phase tag, a difficulty rating, and an XP reward. Labs are verified by the `lab-integrity` xtask; SHA-256 manifests are regenerated on every merge to `main`. The full catalogue is **pre-bundled** in every GRIMOIRE Public ISO — unlocks just grant execution permission, never download anything.
 
 ## The 13 categories
 
@@ -23,7 +23,7 @@ Every lab in GRIMOIRE ships with a Docker overlay (71 / 100 with full network-is
 | **Purple Team / Detection**  |  14  |  Intermediate → Expert  | Detection engineering, Sigma rule authoring, SIEM correlation             |
 | **API Security**             |   8  | Intermediate → Advanced | REST / GraphQL abuse, OAuth misconfigurations, mass assignment            |
 
-**Total: 100 labs, 13 categories, ~110+ game modules wrapping them.**
+**Total: 108 labs, 13 categories (catalog 1.0), ~110+ game modules wrapping them.**
 
 ## What every lab ships with
 
@@ -38,9 +38,9 @@ Every lab in GRIMOIRE ships with a Docker overlay (71 / 100 with full network-is
 
 ## Docker overlay architecture
 
-71 of 100 labs ship with content-addressable Docker overlays:
+71+ labs ship with content-addressable Docker overlays:
 
-- **Dedup layer** — common base images (`synos/lab-base:v60`, `synos/lab-network:v60`, `synos/lab-ad:v60`) are stored once and overlay-mounted per lab
+- **Dedup layer** — common base images (`synos/lab-base:v80`, `synos/lab-network:v80`, `synos/lab-ad:v80`) are stored once and overlay-mounted per lab
 - **Compression** — zstd level 22 inside the squashfs; first-boot loader expands hot paths into `/var/lib/grimoire/labs/`
 - **Network isolation** — each lab spins on its own bridge (`grimoire-lab0`, `lab1`, …) with no path to the host LAN by default
 - **Sandbox** — seccomp BPF filter (`synos-lab-sandbox`) blocks an 18-syscall deny list, validates x86_64 architecture, and enforces AppArmor profile `synos.grimoire.lab`
@@ -69,7 +69,7 @@ If a lab manifest fails verification, the SkillTree plugin refuses to unlock it 
 The following are **scrubbed at build time** for the public profile (Curtain v3 enforcement):
 
 - Cobalt Strike, Empire, Covenant, Sliver C2 binaries (game-only stand-in: `synos-c2-sandbox`)
-- Master-tier AI dispatch syscalls (470–474 return `ENOSYS`)
+- Master-tier AI dispatch operations (capability-token enforcement; return `ENOSYS` on GRIMOIRE)
 - Real-target offensive labs (anything tagged `master-only` in the manifest)
 - Federation peering with non-GRIMOIRE Sanctum tenants
 

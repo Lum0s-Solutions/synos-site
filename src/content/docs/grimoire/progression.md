@@ -91,7 +91,7 @@ Sovereign-tier players can host their own GRIMOIRE instances, federate (within t
 
 XP does not promote you to Master. It cannot. Curtain v3 enforces a hard ceiling regardless of progression:
 
-- AI dispatch syscalls 470–474 always return `ENOSYS`
+- AI dispatch operations always return `ENOSYS` (Curtain v3 capability-token enforcement)
 - LLM federation stays tier-isolated to GRIMOIRE peers
 - Audit chain HMAC roots stay separated
 - Fragment Field IDS kernel-side detection stays Master-only

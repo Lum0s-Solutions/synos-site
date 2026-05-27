@@ -17,14 +17,14 @@ Syn_OS ships as a **three-image family**. All three share the same kernel, Rust 
 
 ### GRIMOIRE Public
 
-- 6.19-synos-ai kernel with `CONFIG_RUST=y` and 17 loadable Rust modules
+- 6.19-synos-ai kernel with `CONFIG_RUST=y` and capability-gated, signed Rust kernel modules
 - ALFRED in **GameMode** (sandboxed for labs, AppArmor + seccomp restricted)
 - 10-tool starter kit (`nmap`, `wireshark`, `netcat`, `curl`, `tcpdump`, `strace`, `ltrace`, `hexdump`, `binwalk`, `strings`) and 5 intro labs
-- The full 100-lab catalogue is **pre-bundled** inside the ISO — unlocked progressively, no internet required
+- The full 108-lab catalogue is **pre-bundled** inside the ISO — unlocked progressively, no internet required
 - Cinnamon DE with Rehoboam system monitor overlay
 - synos-bevy desktop plugins (Cutscene, FactionHQ, SkillTree, Mindmap, RetroFilter, Cyberspace)
 - C2 framework binaries (cobalt-strike, empire, covenant, sliver) **scrubbed at build time**
-- Syscalls 470–474 (AI dispatch) return `ENOSYS`; Fragment Field IDS is userspace-only
+- AI dispatch operations return `ENOSYS` (Curtain v3 capability-token enforcement); Fragment Field IDS is userspace-only
 - Tier-isolated LLM federation (GRIMOIRE nodes federate only with GRIMOIRE peers)
 
 ### GoodLife
@@ -72,5 +72,5 @@ The cross-oracle verifier (`synos-rebuild-verify.sh`) lets you rebuild any relea
 Star the [GitHub repository](https://github.com/Lum0s-Solutions/Syn_OS) to be notified when public ISOs cut. Join the [Discord](https://discord.gg/synos) for build-day announcements.
 
 :::caution[Beta status]
-GRIMOIRE Public and GoodLife are **code-complete on `feat/operation-warp-speed`** as of v60. Public distribution is blocked on counsel review of the MIT vs LicenseRef-Proprietary split, EULA, ToS, and MSA bundle, plus a $1M / $3M Tech E&O cyber-liability binding. Engineering is ready; legal is in motion.
+GRIMOIRE Public and GoodLife are **code-complete — v80.0.0 "Sunlance" (1.0 GA)**. Public distribution is blocked on counsel review of the MIT vs LicenseRef-Proprietary split, EULA, ToS, and MSA bundle, plus a $1M / $3M Tech E&O cyber-liability binding. Engineering is ready; legal is in motion.
 :::

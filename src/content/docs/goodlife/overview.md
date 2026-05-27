@@ -3,14 +3,14 @@ title: GoodLife AI Research ISO
 description: GoodLife — the AI-research profile of Syn_OS. Same kernel, same Rust workspace, ALFRED in research-mode, Ollama pre-configured, no offensive tooling, no internet-facing services by default.
 ---
 
-**GoodLife** is the AI-research profile of Syn_OS. Same custom 6.19-synos-ai kernel, same 160-crate Rust workspace, same Sanctum federation — but ALFRED is built with the `research-mode` cargo feature, Ollama is pre-configured offline-capable, and the offensive security tooling is gone. It is the right profile if you want a sovereign local AI lab without becoming a target by accident.
+**GoodLife** is the AI-research profile of Syn_OS. Same custom 6.19-synos-ai kernel, same 209-crate Rust workspace, same Sanctum federation — but ALFRED is built with the `research-mode` cargo feature, Ollama is pre-configured offline-capable, and the offensive security tooling is gone. It is the right profile if you want a sovereign local AI lab without becoming a target by accident.
 
 ## What's in the box
 
 | Component | What you get |
 |-----------|--------------|
-| **Kernel** | 6.19-synos-ai with `CONFIG_RUST=y`, 17 syscalls, 17 Rust modules — same as every other profile |
-| **ALFRED** | v5.1, built with `research-mode` cargo feature; loads `ResearchModeSettings` from `~/.config/alfred/research.toml` |
+| **Kernel** | 6.19-synos-ai with `CONFIG_RUST=y`, capability-gated signed Rust kernel modules — same as every other profile |
+| **ALFRED** | v6.0, built with `research-mode` cargo feature; loads `ResearchModeSettings` from `~/.config/alfred/research.toml` |
 | **Local LLMs** | Ollama pre-configured with `qwen2.5:7b` + `llama3.2:3b` (~6.5 GB pre-pulled in stage 12); ISO is offline-capable |
 | **Notebook stack** | Jupyter Lab + JupyterText + Quarto, all locally hosted |
 | **ML tooling** | PyTorch, TensorFlow, scikit-learn, polars, duckdb, sentence-transformers, transformers |

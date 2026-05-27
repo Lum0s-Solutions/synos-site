@@ -5,7 +5,7 @@ description: Frequently asked questions about Syn_OS — what it is, who it's fo
 
 ## What is Syn_OS?
 
-The **Synaptic Operating System** — an Arch Linux derivative built almost entirely in Rust, with an AI-aware kernel (17 custom syscalls), a 160-crate workspace, post-quantum crypto, gamified cybersecurity training, and a distributed mesh layer for federated inference. The OS itself is the security product, not a tool collection on top of one.
+The **Synaptic Operating System** — an Arch Linux derivative built almost entirely in Rust, with a capability-gated AI kernel interface, a 209-crate workspace, post-quantum crypto by default, gamified cybersecurity training (108 labs), and a distributed mesh layer for federated inference. The OS itself is the security product, not a tool collection on top of one.
 
 [Read the overview →](/guides/overview/)
 
@@ -15,7 +15,7 @@ The underscore in `Syn_OS` is the synaptic gap — the cleft where electrical si
 
 ## Is this real or is it vapourware?
 
-It's real. **v60.0.0 "Sun & Salt"** is on `main`. 160 Rust crates, 0 compile errors. 17 custom syscalls wired with full handlers and host tests. Three ISO profiles building from the same codebase. Public release of GRIMOIRE Public and GoodLife is gated on counsel review and cyber-liability binding, not on engineering.
+It's real. **v80.0.0 "Sunlance"** is on `main` — the 1.0 GA release. 209 Rust crates, 0 compile errors. Capability-gated, signed Rust kernel modules — QEMU-boot-validated. Three ISO profiles building from the same codebase. Public release of GRIMOIRE Public and GoodLife is gated on counsel review and cyber-liability binding, not on engineering.
 
 ## Where can I download it?
 
@@ -34,7 +34,7 @@ GRIMOIRE Public is the talent funnel: progressive-unlock training that produces 
 
 GRIMOIRE Public cannot become Master no matter how far a player progresses:
 
-- Syscalls 470–474 return `ENOSYS` on GRIMOIRE
+- AI dispatch operations return `ENOSYS` on GRIMOIRE (capability-token enforcement)
 - LLM federation is tier-isolated to GRIMOIRE peers
 - Audit chain HMAC roots are separated
 - Fragment Field IDS kernel-side detection is Master-only
@@ -44,7 +44,7 @@ GRIMOIRE Public cannot become Master no matter how far a player progresses:
 
 ## Is ALFRED an LLM wrapper?
 
-No. ALFRED is a **fusion engine** that routes every event through four parallel processing paths and combines their outputs into a single decision vector. Path 1: traditional AI (decision trees, signature matching). Path 2: neuromorphic spiking neural networks. Path 3: quantum coherence collapse theory (Penrose-Hameroff Orch-OR). Path 4: TNGS / Edelman's neural Darwinism. Plus a v53 MPS cortex.
+No. ALFRED v6.0 is a **fusion engine** that routes every event through four parallel processing paths and combines their outputs into a single decision vector. Path 1: traditional AI (decision trees, signature matching). Path 2: neuromorphic spiking neural networks. Path 3: quantum coherence collapse theory (Penrose-Hameroff Orch-OR). Path 4: TNGS / Edelman's neural Darwinism. Plus the MPS cortex tensor-network path.
 
 LLMs (Ollama, Claude, OpenAI, Gemini, DeepSeek, llama-cpp) are *backends* the Python user-facing layer can use. They are not ALFRED.
 
@@ -77,7 +77,7 @@ Syn_OS uses ML-KEM (FIPS 203) for transport, ML-DSA (FIPS 204) for high-frequenc
 
 ## What's the deal with the consciousness language?
 
-It is not metaphorical decoration. The kernel actually exposes a `consciousness_state` struct via syscall 469 (coherence, activity, mode, decision latency); ALFRED's nine brain crates are wired into a real signal-processing loop by the brainstem; the Default Mode Network actually runs 30-second consolidation cycles when CPU load drops below 10%.
+It is not metaphorical decoration. The kernel actually exposes a `consciousness_state` struct via the capability-gated kernel interface (coherence, activity, mode, decision latency); ALFRED's nine brain crates are wired into a real signal-processing loop by the brainstem; the Default Mode Network actually runs 30-second consolidation cycles when CPU load drops below 10%.
 
 The vocabulary is borrowed from neuroscience because the architecture is borrowed from neuroscience. If you find the vocabulary off-putting, ignore it and read the Rust — the code is unambiguous.
 
@@ -87,13 +87,15 @@ The vocabulary is borrowed from neuroscience because the architecture is borrowe
 
 Public security policy lives at `SECURITY.md` in the GitHub repo (added in v41 Wave 9, replacing the earlier internal symlink).
 
-## What does the v60 status table actually mean?
+## What does the v80 status table actually mean?
 
 | Field | Means |
 |-------|-------|
-| **17/17 syscalls wired** | All 17 custom syscalls have full handlers, copy-to/from-user paths, host tests. Not stubs. |
-| **160 crates, 0 compile errors** | `cargo check --workspace` clean across 160 active crates. |
-| **8 Bevy plugins** | All 8 plugins (Cutscene, Mindmap, RetroFilter, Cyberspace, SkillTree, FactionHQ, Rehoboam, Twin) are integrated into `synos-bevy`. |
+| **Capability-gated kernel interface** | Real, loadable, QEMU-boot-validated Rust kernel modules — not stubs. `CAP_SYS_ADMIN`-gated, signed, `0600` device nodes. |
+| **209 crates, 0 compile errors** | `cargo check --workspace` clean across 209 active crates. |
+| **ALFRED v6.0** | GA consolidation: 1.0 stable API, nine brain crates wired, consciousness fusion engine fully integrated. |
+| **GRIMOIRE 1.0** | Catalog promoted to 1.0: 108 labs, 13 categories, SHA-256 manifests verified on every merge. |
+| **Post-quantum by default** | No classical-only path in TLS, SSH, SBOM signing, ALFRED models, audit trail, or release attestation. |
 | **SLSA-3 reproducible** | Cross-oracle build verification works today; SLSA-4 (two-witness) is queued behind provisioning the second build oracle. |
 | **FedRAMP / CMMC / SOC2** | Control maps are written and the daily ConMon collector runs. The audits themselves are gated on Big-4 kickoff (deferred until ≥$1M ARR). |
 

@@ -1,9 +1,9 @@
 ---
 title: Syn_OS
-description: The Synaptic Operating System — AI-aware Linux kernel, 17 custom syscalls, 160-crate Rust workspace, post-quantum crypto, gamified cybersecurity training. v60.0.0 "Sun & Salt".
+description: The Synaptic Operating System — AI-aware Linux kernel, 209-crate Rust workspace, post-quantum crypto by default, gamified cybersecurity training. v80.0.0 "Sunlance" (1.0 GA).
 template: splash
 hero:
-  tagline: "The Synaptic Operating System. An Arch Linux derivative with an AI-aware Rust kernel, 17 custom syscalls, post-quantum crypto, and a gamified cybersecurity training platform — engineered as one cohesive product instead of a tool collection."
+  tagline: "The Synaptic Operating System. An Arch Linux derivative with an AI-aware Rust kernel, post-quantum crypto by default, and a gamified cybersecurity training platform — engineered as one cohesive product instead of a tool collection."
   image:
     file: ../../assets/phoenix-logo.png
     alt: Syn_OS Phoenix
@@ -24,38 +24,38 @@ hero:
 
 import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
 
-## v60.0.0 — Sun & Salt
+## v80.0.0 — Sunlance (1.0 GA)
 
-The **Operation Warp Speed** codesprint (v44 → v60) is **code-complete**. Sixteen versions of work — Crucible through Sun & Salt — landed across the Rust workspace, kernel, and ISO pipeline. **17 custom syscalls** wired, **160 crates** with zero compile errors, **8 Bevy plugins**, and the full FedRAMP Moderate / CMMC L2 / SOC2 control map shipped. [Read the v60 release notes →](/guides/overview/#v60-status)
+**v80.0.0 "Sunlance"** is the **1.0 GA release** — completing the v61→v80 software campaign. ALFRED reaches **v6.0**, the GRIMOIRE catalog is promoted to **1.0** (108 labs, 13 categories), the Rust workspace stands at **209 crates** with 0 compile errors, and post-quantum cryptography (ML-KEM, ML-DSA, SLH-DSA) is now **on by default** across every transport, signing path, and audit trail. [Read the v80 overview →](/guides/overview/#v80-status)
 
 ## Three ISOs. One Codebase.
 
 <CardGrid stagger>
 	<Card title="GRIMOIRE Public" icon="rocket">
-		**Progressive-unlock cybersecurity training.** Start with a 10-tool starter kit and 5 intro labs; unlock the rest through XP, faction quests, and the Salvage Yard hardware-mesh arc. 100 labs across 13 categories. Cert-path mapping for OSCP, OSEP, GIAC, CISSP, CEH, eJPT and more.
+		**Progressive-unlock cybersecurity training.** Start with a 10-tool starter kit and 5 intro labs; unlock the rest through XP, faction quests, and the Salvage Yard hardware-mesh arc. 108 labs across 13 categories. Cert-path mapping for OSCP, OSEP, GIAC, CISSP, CEH, eJPT and more.
 	</Card>
 	<Card title="GoodLife AI Research" icon="laptop">
 		**Safe AI research distro.** Ollama pre-configured with `qwen2.5:7b` + `llama3.2:3b` (offline-capable), Jupyter, curated ML tooling. No offensive tools, no internet-facing services by default. Built with the `research-mode` cargo feature.
 	</Card>
 	<Card title="Master (Operator)" icon="setting">
-		**Full development & operations image.** 160 Rust crates, ALFRED v5.1 daemon, ARCANUM mesh, RaaS engine, the complete toolchain. The bedrock of LumOs commercial contracts.
+		**Full development & operations image.** 209 Rust crates, ALFRED v6.0 daemon, ARCANUM mesh, RaaS engine, the complete toolchain. The bedrock of LumOs commercial contracts.
 	</Card>
 </CardGrid>
 
 ## Built Different
 
 <CardGrid>
-	<Card title="17 Custom Syscalls" icon="seti:config">
-		Syscalls **469–479** expose consciousness state, AI stimulus, quantum memory entanglement, and eBPF monitor stats. Syscalls **480–485** (Glasswalker) ship kernel observability counters and perf ring buffers — the AI cortex talks to the kernel directly, no userspace shim.
+	<Card title="Capability-Gated Kernel Interface" icon="seti:config">
+		A **capability-gated, signed Rust kernel-module interface** exposes AI state and observability data to userspace — root-only, `CAP_SYS_ADMIN`-gated, signed modules. The AI cortex talks to the kernel directly, no userspace shim.
 	</Card>
-	<Card title="Post-Quantum Crypto" icon="shield">
-		**Icarus v9.0** implements ML-KEM (FIPS 203), ML-DSA (FIPS 204), and SLH-DSA (FIPS 205). Curtain v3 capability tokens are signed with ed25519 today and PQ-ready for tomorrow.
+	<Card title="Post-Quantum Crypto — By Default" icon="shield">
+		**ML-KEM (FIPS 203), ML-DSA (FIPS 204), and SLH-DSA (FIPS 205)** are on across every transport, signing path, and audit trail — not an opt-in flag. Hybrid mode pairs each PQC primitive with a classical counterpart for transition safety.
 	</Card>
-	<Card title="160 Rust Crates" icon="seti:rust">
+	<Card title="209 Rust Crates" icon="seti:rust">
 		Pure Rust from kernel modules to the desktop shell. **8 Bevy 0.14 plugins** (Cutscene, Mindmap, RetroFilter, Cyberspace, SkillTree, FactionHQ, Rehoboam, Twin). 0 compile errors across the workspace; thousands of tests passing.
 	</Card>
-	<Card title="ALFRED Consciousness Fusion" icon="puzzle">
-		Nine neuroanatomical brain crates (thalamus, hippocampus, amygdala, cerebellum, insula, corpus-callosum, default-mode, glial, brainstem) wired into a four-path fusion engine: Traditional + Neuromorphic SNN + Quantum-inspired ML + TNGS + v53 MPS cortex.
+	<Card title="ALFRED v6.0 Consciousness Fusion" icon="puzzle">
+		Nine neuroanatomical brain crates (thalamus, hippocampus, amygdala, cerebellum, insula, corpus-callosum, default-mode, glial, brainstem) wired into a four-path fusion engine: Traditional + Neuromorphic SNN + Quantum-inspired ML + TNGS + MPS cortex.
 	</Card>
 	<Card title="Compliance, Out of the Box" icon="approve-check">
 		**FedRAMP Moderate** (NIST SP 800-53 Rev 5) + **CMMC L2** + **SOC2** control maps shipped with daily ConMon collector. **SLSA-3** reproducible builds with cosign + Sigstore Rekor + cross-oracle verify.
@@ -63,7 +63,7 @@ The **Operation Warp Speed** codesprint (v44 → v60) is **code-complete**. Sixt
 	<Card title="ARCANUM Hive Mesh" icon="random">
 		Tailscale + WireGuard backbone + Kubernetes operator for distributed inference across discarded laptops. The accessibility ceiling drops from "needs $2,000 GPU" to "needs a working laptop." E-waste reduction tracked as an in-game metric.
 	</Card>
-	<Card title="GRIMOIRE — 100 Labs, 13 Tracks" icon="pencil">
+	<Card title="GRIMOIRE 1.0 — 108 Labs, 13 Tracks" icon="pencil">
 		Network, OSINT, Web App, Active Directory, Exploitation, Reverse Engineering, Malware, Cloud, AI Security, Cognitive Warfare, Blockchain, Purple Team, API. Every lab has Docker overlays, MITRE ATT&CK + UKC tags, and SHA-256 integrity manifests verified by `lab-integrity`.
 	</Card>
 	<Card title="Weaponization Ceiling" icon="seti:lock">
@@ -75,7 +75,7 @@ The **Operation Warp Speed** codesprint (v44 → v60) is **code-complete**. Sixt
 
 > The underscore in `Syn_OS` is the visual representation of the synaptic gap — the cleft where electrical signal jumps into chemical meaning.
 >
-> Pre-synaptic neuron = Hardware. Synaptic cleft = Syn_OS itself. Post-synaptic neuron = Application consciousness. Neurotransmitters = syscalls 469–485. Receptors = syscall handlers. Synaptic plasticity = adaptive kernel modules and ALFRED's learning loops.
+> Pre-synaptic neuron = Hardware. Synaptic cleft = Syn_OS itself. Post-synaptic neuron = Application consciousness. Neurotransmitters = kernel interface calls. Receptors = capability-gated handlers. Synaptic plasticity = adaptive kernel modules and ALFRED's learning loops.
 >
 > **The OS is the gap.**
 
@@ -96,7 +96,7 @@ The **Operation Warp Speed** codesprint (v44 → v60) is **code-complete**. Sixt
 	/>
 	<LinkCard
 		title="I want to read the kernel"
-		description="17 syscalls, 17 loadable Rust modules, 5 eBPF monitors, LSM attestation."
+		description="Capability-gated Rust kernel modules, eBPF monitors, LSM attestation, reproducible builds."
 		href="/architecture/kernel/"
 	/>
 	<LinkCard

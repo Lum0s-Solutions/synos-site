@@ -1,6 +1,6 @@
 ---
 title: GRIMOIRE Overview
-description: GRIMOIRE — the competitive hacker training platform built into Syn_OS. 100 labs, 13 categories, 110+ game modules, faction wars, and a Sovereign Operator Path.
+description: GRIMOIRE — the competitive hacker training platform built into Syn_OS. 108 labs, 13 categories, 110+ game modules, faction wars, and a Sovereign Operator Path. Catalog 1.0.
 ---
 
 **GRIMOIRE** — Gamified Reconnaissance, Intelligence, Malware Operations, Intrusion Response & Exploitation — is the cybersecurity training layer of Syn_OS. It is not a tool collection bolted onto a distro; it is a complete **progression system** for mastering offensive, defensive, and purple-team cybersecurity, preparing for industry certifications, and competing globally to be the best hacker in the game.
@@ -19,13 +19,13 @@ description: GRIMOIRE — the competitive hacker training platform built into Sy
 
 | Metric                   | Value                                                                |
 |--------------------------|----------------------------------------------------------------------|
-| **Labs**                 | 100 across 13 categories — 71 with full Docker overlays              |
+| **Labs**                 | **108 across 13 categories** (catalog **1.0**) — 71+ with full Docker overlays |
 | **Game modules**         | 110+ (~53,000 LOC of `synos-gamification`)                           |
 | **Engine**               | Bevy 0.14 — `synos-bevy` 7,129+ LOC                                  |
 | **Bevy plugins**         | 8 — Cutscene, Mindmap, RetroFilter, Cyberspace, SkillTree, FactionHQ, Rehoboam, Twin |
 | **Factions**             | 3 — Crimson Spire, Neon Collective, The Warden                       |
 | **Cert paths mapped**    | 11+ professional credentials                                         |
-| **Engine offline**       | All 100 labs ship pre-bundled in the ISO                             |
+| **Engine offline**       | All 108 labs ship pre-bundled in the ISO                             |
 | **Lab integrity**        | SHA-256 manifests verified by `lab-integrity` xtask on every merge   |
 
 ## The progressive unlock system (v41+)
@@ -57,7 +57,7 @@ Faction choice affects RICO contract dispersal, available boss-contract chains, 
 
 GRIMOIRE Public **cannot** become operationally equivalent to Master, no matter how far a player progresses. The **Curtain v3** runtime ceiling enforces:
 
-- Syscalls 470–474 (AI dispatch) return `ENOSYS` on GRIMOIRE
+- AI dispatch operations return `ENOSYS` on GRIMOIRE (capability-token enforcement)
 - LLM federation is tier-isolated (GRIMOIRE nodes federate only with GRIMOIRE peers)
 - Audit chain HMAC roots are separated between GRIMOIRE and Master
 - Fragment Field IDS kernel detection is Master-only; GRIMOIRE gets userspace-only access
@@ -69,6 +69,6 @@ This is the bedrock of the LumOs commercial model: GRIMOIRE is the talent funnel
 
 ## Where to next
 
-- **[Lab Catalog →](/grimoire/labs/)** — the 100 labs, by category
+- **[Lab Catalog →](/grimoire/labs/)** — the 108 labs, by category
 - **[XP & Progression →](/grimoire/progression/)** — how unlock works
 - **[Competition Mode →](/grimoire/competition/)** — leaderboards, war games, and the Sovereign Operator Path

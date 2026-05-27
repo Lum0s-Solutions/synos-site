@@ -10,7 +10,7 @@ The first boot of an installed Syn_OS system runs the v43.2 first-boot wizard (r
 ```
 GRUB (Phoenix-themed)
   ↓
-6.19-synos-ai kernel + 17 Rust modules load
+6.19-synos-ai kernel + signed Rust kernel modules load
   ↓
 Plymouth — Phoenix decay sequence (decay_000 → decay_002 → neural-node sigil)
   ↓
@@ -39,7 +39,7 @@ The wizard writes its completion state to `/var/lib/synos/wizard.completed` so i
 
 ALFRED runs as a **two-layer architecture**:
 
-- **Rust daemon (v4.0 API)** — system intelligence: CPU/memory optimization, kernel bridge via syscalls 469–485, an 11-endpoint REST API, NATS event bus, the God Mode dashboard aggregator, and the consciousness fusion engine.
+- **Rust daemon (v6.0)** — system intelligence: CPU/memory optimization, kernel bridge via the capability-gated kernel module interface, an 11-endpoint REST API, NATS event bus, the God Mode dashboard aggregator, and the consciousness fusion engine.
 - **Python layer (v2.1.0)** — user-facing assistant: LLM integration, voice, RAG, TUI, and the privacy-first job-hunt mode.
 
 On first boot ALFRED starts in **Advisory mode**: read-only system inspection, no command execution. You can promote it to GameMode (lab sandboxing) or Master (full execution) via:
@@ -53,19 +53,21 @@ synos-alfred-mode set mesh       # gossip-protocol distributed consciousness
 
 ## The TUI
 
-`synos-ops` is a 7-tab terminal UI for everything ALFRED can see:
+`synos-ops` is a 23-tab terminal UI for everything ALFRED can see. Core tabs:
 
-| Tab          | Shows                                                                |
-|--------------|----------------------------------------------------------------------|
-| **System**   | CPU / memory / temperature / kernel module status                    |
-| **Benchmark**| `synos-bench` results, neural inference throughput, latency P99      |
-| **Hive**     | ARCANUM mesh node grid (gossip state, mTLS health, peer reachability)|
-| **Services** | systemd unit status, ALFRED REST API, NATS bus, Fragment Field IDS   |
-| **ALFRED**   | Consciousness state — coherence, activity, mode, decision latency    |
-| **Node grid**| Per-node CPU / RAM / GPU + assigned models                           |
-| **Models**   | Loaded LLM / ONNX models, Ollama queue, inference stats              |
+| Tab              | Shows                                                                 |
+|------------------|-----------------------------------------------------------------------|
+| **System**       | CPU / memory / temperature / kernel module status                     |
+| **Benchmark**    | `synos-bench` results, neural inference throughput, latency P99       |
+| **Hive**         | ARCANUM mesh node grid (gossip state, mTLS health, peer reachability) |
+| **Services**     | systemd unit status, ALFRED REST API, NATS bus, Fragment Field IDS    |
+| **ALFRED**       | Consciousness state — coherence, activity, mode, decision latency     |
+| **Node grid**    | Per-node CPU / RAM / GPU + assigned models                            |
+| **Models**       | Loaded LLM / ONNX models, Ollama queue, inference stats               |
+| **PQ-posture**   | Post-quantum crypto status across transports and signing paths        |
+| **Supply-chain** | SBOM drift, Forge attestation status, Sigstore Rekor entries          |
 
-Cycle tabs with `Tab` / `Shift+Tab`. Quit with `q`.
+Additional tabs surface multiplayer state, observability counters, and other subsystems. Cycle tabs with `Tab` / `Shift+Tab`. Quit with `q`.
 
 ## Your first lab (GRIMOIRE Public)
 

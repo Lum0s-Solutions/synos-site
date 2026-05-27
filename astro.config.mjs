@@ -9,7 +9,7 @@ export default defineConfig({
 		starlight({
 			title: 'Syn_OS',
 			description:
-				'The Synaptic Operating System — AI-aware Linux kernel, 160-crate Rust workspace, post-quantum crypto, gamified cybersecurity training. v60.0.0 "Sun & Salt".',
+				'The Synaptic Operating System — AI-aware Linux kernel, 209-crate Rust workspace, post-quantum crypto by default, gamified cybersecurity training. v80.0.0 "Sunlance" (1.0 GA).',
 			logo: {
 				src: './src/assets/phoenix-logo.png',
 				alt: 'Syn_OS Phoenix',
@@ -24,7 +24,7 @@ export default defineConfig({
 			head: [
 				// Open Graph
 				{ tag: 'meta', attrs: { property: 'og:title',        content: 'Syn_OS — Synaptic Operating System' } },
-				{ tag: 'meta', attrs: { property: 'og:description',  content: 'AI-aware Linux kernel, 17 custom syscalls, 160-crate Rust workspace, post-quantum crypto, GRIMOIRE training labs, ARCANUM mesh. v60.0.0 Sun & Salt.' } },
+				{ tag: 'meta', attrs: { property: 'og:description',  content: 'AI-aware Linux kernel, 209-crate Rust workspace, post-quantum crypto by default, GRIMOIRE 1.0 (108 labs), ARCANUM mesh. v80.0.0 Sunlance (1.0 GA).' } },
 				{ tag: 'meta', attrs: { property: 'og:type',         content: 'website' } },
 				{ tag: 'meta', attrs: { property: 'og:url',          content: 'https://synos-linux.pro/' } },
 				{ tag: 'meta', attrs: { property: 'og:image',        content: 'https://synos-linux.pro/og-image.svg' } },
@@ -34,7 +34,7 @@ export default defineConfig({
 				// Twitter / X
 				{ tag: 'meta', attrs: { name: 'twitter:card',        content: 'summary_large_image' } },
 				{ tag: 'meta', attrs: { name: 'twitter:title',       content: 'Syn_OS — Synaptic Operating System' } },
-				{ tag: 'meta', attrs: { name: 'twitter:description', content: 'AI-aware Linux kernel, post-quantum crypto, gamified cyber training. v60.0.0 Sun & Salt.' } },
+				{ tag: 'meta', attrs: { name: 'twitter:description', content: 'AI-aware Linux kernel, post-quantum crypto by default, gamified cyber training. v80.0.0 Sunlance (1.0 GA).' } },
 				{ tag: 'meta', attrs: { name: 'twitter:image',       content: 'https://synos-linux.pro/og-image.svg' } },
 
 				// Theme

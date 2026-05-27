@@ -21,9 +21,9 @@ The Syn_OS codebase has accumulated its own vocabulary. This is the canonical re
 
 ## Components & products
 
-**ALFRED** — Adaptive Learning Framework for Responsive Evolution & Defense. The AI daemon. Two-layer Rust + Python architecture. v5.1.
+**ALFRED** — Adaptive Learning Framework for Responsive Evolution & Defense. The AI daemon. Two-layer Rust + Python architecture. **v6.0** (1.0 GA consolidation).
 
-**GRIMOIRE** — Gamified Reconnaissance, Intelligence, Malware Operations, Intrusion Response & Exploitation. The training platform. 100 labs, 13 categories, 110+ game modules.
+**GRIMOIRE** — Gamified Reconnaissance, Intelligence, Malware Operations, Intrusion Response & Exploitation. The training platform. **108 labs, 13 categories** (catalog **1.0**), 110+ game modules.
 
 **ARCANUM Hive** — The distributed mesh layer. Tailscale + WireGuard + Kubernetes operator. v55 Stoneglass shipped 8-node Ansible GA.
 
@@ -45,15 +45,15 @@ The Syn_OS codebase has accumulated its own vocabulary. This is the canonical re
 
 **Doublecross** — FedRAMP Moderate readiness. v59. NIST SP 800-53 Rev 5 control map + daily ConMon collector.
 
-**Sun & Salt** — IPO / Series-A readiness package. **v60 (current).**
+**Sun & Salt** — IPO / Series-A readiness package. v60 (prior release).
 
-## Kernel & syscalls
+**Sunlance** — The 1.0 GA release. **v80.0.0 (current).** Completes the v61→v80 software campaign. ALFRED v6.0, GRIMOIRE 1.0 (108 labs), 209 active crates, post-quantum by default.
 
-**6.19-synos-ai** — The Syn_OS kernel build target. Linux 6.19 + `CONFIG_RUST=y` + 12 `CONFIG_SYNOS_*` knobs + 17 loadable Rust modules.
+## Kernel & interface
 
-**Syscalls 469–479** — Consciousness fusion syscalls (v41 Wave 8). 469 = `GET_CONSCIOUSNESS_STATE`.
+**6.19-synos-ai** — The Syn_OS kernel build target. Linux 6.19 + `CONFIG_RUST=y` + 12 `CONFIG_SYNOS_*` knobs + capability-gated signed loadable Rust modules.
 
-**Syscalls 480–485** — Glasswalker observability syscalls (v45). Counter registration + perf ring buffer.
+**Kernel AI interface** — The capability-gated, signed Rust kernel-module interface that exposes AI/observability state to userspace (root-only, `CAP_SYS_ADMIN`-gated, `0600` device nodes). Replaced the retired custom-syscall approach (v80). See [Kernel Interface Reference →](/reference/syscalls/).
 
 **LSM hook** — Linux Security Module hook in `synos-security` that consults Curtain v3 capability tokens before privileged operations.
 
@@ -103,7 +103,7 @@ The Syn_OS codebase has accumulated its own vocabulary. This is the canonical re
 
 **synos-doctor** — 41-stage post-install validation wizard.
 
-**synos-ops** — 7-tab terminal UI for ALFRED + system + mesh observation.
+**synos-ops** — Multi-tab terminal UI for ALFRED, system, mesh, PQ-posture, supply-chain, and observability dashboards.
 
 **synos-bench** — Benchmark runner — neural inference throughput, latency P99, etc.
 
@@ -134,6 +134,8 @@ The Syn_OS codebase has accumulated its own vocabulary. This is the canonical re
 ## Build & release
 
 **Operation Warp Speed** — Umbrella codename for the v44 → v60 codesprint. Code-complete on `feat/operation-warp-speed`.
+
+**v61→v80 campaign** — The 20-version codesprint that delivered the 1.0 GA milestone. Completes with v80.0.0 "Sunlance".
 
 **SYNOS_STRICT** — Build-orchestrator flag. When `=1`, any stage failure aborts the entire build (fail-loud).
 

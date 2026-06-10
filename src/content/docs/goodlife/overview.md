@@ -60,8 +60,8 @@ GoodLife is the easiest entry point to the **ARCANUM Hive**: turn a stack of dis
 
 ```bash
 synos-hive-bootstrap --tier goodlife
-synos-hive-add-node 10.66.0.42 --role inference
-synos-hive-add-node 10.66.0.43 --role embedding
+synos-hive-add-node <mesh-ip> --role inference
+synos-hive-add-node <mesh-ip> --role embedding
 ollama serve --hive  # automatically shards across the mesh
 ```
 

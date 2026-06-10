@@ -37,7 +37,7 @@ Different PQC families have different security assumptions. Syn_OS uses all thre
 
 ## Performance
 
-Measured on Haswell-era i7-4790 (the THEDARKNESS admin node baseline):
+Measured on Haswell-era CPU (the <admin-node> admin node baseline):
 
 | Operation                          | ML-KEM | ML-DSA | SLH-DSA |
 |------------------------------------|-------:|-------:|--------:|

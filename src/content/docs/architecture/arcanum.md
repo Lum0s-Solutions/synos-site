@@ -106,14 +106,14 @@ The mesh is designed to lose nodes gracefully:
 - Tailscale primary down → WireGuard fallback (sub-second cutover)
 - Single-node failure → workloads rescheduled, model shards re-replicated within minutes
 - Federation split-brain → audit trails diverge but never corrupt; merge happens cryptographically when partition heals (v51 Storm Glass twin-substrate replays)
-- Active-passive build oracle → `thedarkness` warm-spare ready to take over from `the10thLayerVoidness` (v41 Wave 8 Ansible playbook)
+- Active-passive build oracle → `<admin-node>` warm-spare ready to take over from `<build-oracle>` (v41 Wave 8 Ansible playbook)
 
 ## Hardware reality check
 
 The reference deployment (active production):
 
-- **the10thLayerVoidness** — sanctum oracle (Intel i5-3337U, 11 GiB RAM, 281 GiB free) — primary build oracle
-- **THEDARKNESS** — Windows admin / WSL Parrot, warm-spare oracle
+- **<build-oracle>** — sanctum oracle (Intel i5-3337U, 11 GiB RAM, 281 GiB free) — primary build oracle
+- **<admin-node>** — Windows admin / WSL Parrot, warm-spare oracle
 - **the-void-of-ty** — Tailscale relay, ARCANUM gossip aggregator
 - **Hive workers (4× Lenovo)** — sharded inference + lab hosting
 - **PS3, Minecraft server, NOC node** — auxiliary mesh participants

@@ -33,30 +33,65 @@ The interface exposes: consciousness fusion state, AI stimulus and memory update
 
 ## Loadable Rust modules
 
-Syn_OS ships a set of real, loadable, compile-and-boot-validated Rust kernel modules. Eleven canonical modules live in `fruit/core/src/linux-kernel/rust-modules/` and additional modules were introduced through the v61–v80 campaign:
+Syn_OS ships **28 real, loadable, QEMU-boot-validated Rust kernel modules** (65/65 PASS). All live in `fruit/core/src/linux-kernel/rust-modules/`, register a root-only (`0600`) `/dev/synos_*` device node with a `CAP_SYS_ADMIN`-gated ioctl ABI, and are signed at build stage `02b`.
 
-| Module                    | Role                                                |
-|---------------------------|-----------------------------------------------------|
-| `synos_consciousness`     | Hosts the consciousness-fusion kernel interface     |
-| `synos_hardening`         | Runtime hardening hooks (LSM glue)                   |
-| `synos_interrupts`        | IRQ-affinity tuning, RPS/XPS adjustments             |
-| `synos_memory`            | Fragment-aware allocator hints                       |
-| `synos_modloader`         | Signed-module load gate                              |
-| `synos_network`           | eBPF network monitor controller                       |
-| `synos_power`             | Intel RAPL telemetry, CPU governor guard             |
-| `synos_procfs`            | `/proc/synos/*` exposure                             |
-| `synos_scheduler`         | Predictive scheduler hints from cerebellum           |
-| `synos_security`          | Capability-gating LSM hook                           |
-| `synos_syscall`           | Fragment field and kernel interface dispatch         |
+### AI Char-Device Interface (8)
 
-Plus modules introduced across the v61–v80 campaign:
+| Module                  | Role |
+|-------------------------|------|
+| `synos_consciousness`   | 11 ioctls: decision LRU cache, stimulus ring, AI memory, eBPF monitor, quantum/recommend, ktime latency. **Push-channel source** — ALFRED reads `synos_stimulus_record` structs via blocking `read()` with no polling. |
+| `synos_ns_trust`        | Live nsproxy/cred walk, namespace trust classification |
+| `synos_io_uring_audit`  | Per-PID io_uring audit |
+| `synos_incident_sink`   | Incident ring buffer (report/drain) |
+| `synos_mitigation_state`| CPU/kernel mitigation posture (`is_module_sig_enforced` + lockdown) |
+| `synos_security`        | Capability check + signed token control (LSM hook) |
+| `synos_scheduler`       | Run-queue telemetry, predictive hints from cerebellum |
+| `synos_memory`          | AI memory-pool accounting, fragment-aware allocator hints |
 
-- `synos-attest` — LSM attestation module + HMAC-SHA256 chained ledger + PromptGuard receipts
-- `synos-observability-module` — kernel observability counters + perf ring buffers
-- `kernel/snapshot` — kernel snapshot crate, digital-twin substrate
-- `kernel/observability` — eBPF-friendly counters, perf ring-buffer hooks
-- `kernel/attest` — LSM attestation kernel-side crate
-- `kernel/riftrunner` — in-kernel safe-bytecode VM (22-instruction eBPF subset, in-kernel verifier + interpreter)
+### Security Capability (6)
+
+| Module              | Role |
+|---------------------|------|
+| `synos_capability`  | SipHash-2-4 keyed-MAC capability tokens (issue / verify / revoke; forged-tier → `BAD_MAC`) |
+| `synos_audit`       | NIST 800-53 tamper-evident SipHash-chained control log |
+| `synos_policyvm`    | Safe 16-reg bytecode VM + static verifier (max 1M steps, no kernel API surface) |
+| `synos_observability`| Real `si_meminfo` / ktime telemetry (Glasswalker) |
+| `synos_attest`      | Per-PID measurement ledger + SipHash chain (Threadwalker) |
+| `synos_twin`        | Snapshot lineage registry with generation/hash tracking (Storm Glass) |
+
+### System Interface (7)
+
+| Module            | Role |
+|-------------------|------|
+| `synos_hardening` | CR4 posture via inline asm (SMEP/SMAP/UMIP/lockdown/modsig readout) |
+| `synos_interrupts`| IRQ accounting, RPS/XPS adjustments |
+| `synos_power`     | Thermal/cpufreq stats, Intel RAPL telemetry, CPU governor guard |
+| `synos_network`   | Per-ifindex rx/tx counters via RCU, eBPF network monitor |
+| `synos_procfs`    | `/proc/synos/info` aggregator |
+| `synos_modloader` | Module notifier event counts, signed-module load gate |
+| `synos_syscall`   | ABI-map device (legacy 469–491 range → consciousness ioctl ops) |
+
+### Defensive Telemetry (5)
+
+| Module              | Role |
+|---------------------|------|
+| `synos_forensics`   | Volatile memory snapshot |
+| `synos_detect`      | Posture detection — blue-team pair for `synos_rootkit` |
+| `synos_lsm`         | Caller capability + lockdown posture |
+| `synos_audit_bridge`| Emits real kernel audit records via `audit_log_start`/`audit_log_end` |
+| `synos_pcap`        | Netfilter packet counter (`NF_ACCEPT`-only) |
+
+### Enforcement (1 — all profiles)
+
+| Module            | Role |
+|-------------------|------|
+| `synos_modverify` | kprobe on `__x64_sys_finit_module` + blocking notifier; monitor or enforce mode (`NOTIFY_BAD` → `EPERM`). PROVEN: 27/27 synos module loads counted; deny path returns `EPERM`. |
+
+### Offensive (1 — Master + ChurchOfMalware only)
+
+| Module          | Role |
+|-----------------|------|
+| `synos_rootkit` | RESOLVE (kallsyms via kprobe), PRIVESC (`commit_creds` + `prepare_kernel_cred(&init_task)`), HOOK (live kprobe on `__x64_sys_getdents64`; `hits=1` PROVEN). Always paired with `synos_detect`. CAP_SYS_ADMIN-gated, `0600`. |
 
 ## eBPF monitors
 
@@ -74,7 +109,7 @@ Each monitor contributes events to the Fragment Field IDS pipeline and exposes s
 
 ## LSM integration — capability gating
 
-Syn_OS ships its own Linux Security Module hook that consults Curtain v3 capability tokens before allowing privileged operations. The integration lives in:
+Syn_OS ships its own Linux Security Module hook that consults Curtain v4 capability tokens before allowing privileged operations. The integration lives in:
 
 - `synos-security` kernel module — the LSM hook itself
 - `synos-curtain-tokens` user-space crate — token issuance, ed25519 / ML-DSA signature

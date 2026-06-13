@@ -66,7 +66,7 @@ If a lab manifest fails verification, the SkillTree plugin refuses to unlock it 
 
 ## What's not in GRIMOIRE Public
 
-The following are **scrubbed at build time** for the public profile (Curtain v3 enforcement):
+The following are **scrubbed at build time** for the public profile (Curtain v4 enforcement):
 
 - Cobalt Strike, Empire, Covenant, Sliver C2 binaries (game-only stand-in: `synos-c2-sandbox`)
 - Master-tier AI dispatch operations (capability-token enforcement; return `ENOSYS` on GRIMOIRE)

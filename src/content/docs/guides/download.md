@@ -24,7 +24,7 @@ Syn_OS ships as a **three-image family**. All three share the same kernel, Rust 
 - Cinnamon DE with Rehoboam system monitor overlay
 - synos-bevy desktop plugins (Cutscene, FactionHQ, SkillTree, Mindmap, RetroFilter, Cyberspace)
 - C2 framework binaries (cobalt-strike, empire, covenant, sliver) **scrubbed at build time**
-- AI dispatch operations return `ENOSYS` (Curtain v3 capability-token enforcement); Fragment Field IDS is userspace-only
+- AI dispatch operations return `ENOSYS` (Curtain v4 capability-token enforcement); Fragment Field IDS is userspace-only
 - Tier-isolated LLM federation (GRIMOIRE nodes federate only with GRIMOIRE peers)
 
 ### GoodLife
@@ -38,7 +38,7 @@ Syn_OS ships as a **three-image family**. All three share the same kernel, Rust 
 
 ### Master
 
-- Every capability enabled from first boot — full ALFRED, full ARCANUM, full Fragment Field IDS, full Curtain v3 admin tokens
+- Every capability enabled from first boot — full ALFRED, full ARCANUM, full Fragment Field IDS, full Curtain v4 admin tokens
 - 600+ security tools (155 native + 250 Arsenal container + 2,800 BlackArch on-demand)
 - RaaS engine + finding ranker + digest renderer + Stripe billing
 - SOC2 / CMMC L2 / FedRAMP Moderate compliance posture
@@ -63,7 +63,7 @@ The cross-oracle verifier (`synos-rebuild-verify.sh`) lets you rebuild any relea
 | CPU        | x86_64 (Haswell+), 2 cores  | 4+ cores, AVX2                             |
 | RAM        | 4 GB                        | 8+ GB (16 GB for AI workloads)             |
 | Storage    | 32 GB                       | 64 GB SSD                                  |
-| Firmware   | UEFI w/ SecureBoot optional | UEFI + TPM 2.0 (for Curtain v3 attest)     |
+| Firmware   | UEFI w/ SecureBoot optional | UEFI + TPM 2.0 (for Curtain v4 attest)     |
 | GPU        | Optional (Vulkan for Bevy)  | Discrete GPU for local LLM inference       |
 | Network    | Optional                    | Tailscale-capable (ARCANUM mesh)           |
 

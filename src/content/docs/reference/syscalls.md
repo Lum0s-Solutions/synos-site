@@ -35,7 +35,7 @@ The kernel-module interface covers the following domains:
 
 ## Tier gating
 
-The Curtain v3 LSM hook intercepts each interface call and consults the calling process's capability token before dispatching:
+The Curtain v4 LSM hook intercepts each interface call and consults the calling process's capability token before dispatching:
 
 | Operation domain | grimoire-public | goodlife | master |
 |------------------|-----------------|----------|--------|
@@ -52,7 +52,7 @@ Read more: [Curtain Capability Tokens →](/architecture/curtain/)
 
 | errno | Meaning |
 |-------|---------|
-| `ENOSYS` | Operation denied by Curtain v3 capability token for this tier |
+| `ENOSYS` | Operation denied by Curtain v4 capability token for this tier |
 | `EPERM` | The kernel taint flag is set; Master claims revoked |
 | `EAGAIN` | The fusion pipeline is at capacity — back off and retry |
 | `EINVAL` | Argument structure failed validation |

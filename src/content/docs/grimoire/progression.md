@@ -3,7 +3,7 @@ title: XP & Progression
 description: How the GRIMOIRE progressive-unlock system works — XP, tier gates, certification mapping, and the Sovereign Operator Path.
 ---
 
-GRIMOIRE Public is built around **earned-not-given progression**. You start with a 10-tool starter kit and 5 intro labs, and you build the rest of your toolkit, your authority, and your reputation through play. Everything ships pre-bundled in the ISO; XP grants execution permission via Curtain v3 capability tokens.
+GRIMOIRE Public is built around **earned-not-given progression**. You start with a 10-tool starter kit and 5 intro labs, and you build the rest of your toolkit, your authority, and your reputation through play. Everything ships pre-bundled in the ISO; XP grants execution permission via Curtain v4 capability tokens.
 
 The system is implemented in the `synos-progression` crate — 57 tests, 111-entry seed catalog, integrated with the Bevy SkillTree plugin for visual unlock animation.
 
@@ -89,9 +89,9 @@ Sovereign-tier players can host their own GRIMOIRE instances, federate (within t
 
 ## What XP does *not* unlock
 
-XP does not promote you to Master. It cannot. Curtain v3 enforces a hard ceiling regardless of progression:
+XP does not promote you to Master. It cannot. Curtain v4 enforces a hard ceiling regardless of progression:
 
-- AI dispatch operations always return `ENOSYS` (Curtain v3 capability-token enforcement)
+- AI dispatch operations always return `ENOSYS` (Curtain v4 capability-token enforcement)
 - LLM federation stays tier-isolated to GRIMOIRE peers
 - Audit chain HMAC roots stay separated
 - Fragment Field IDS kernel-side detection stays Master-only

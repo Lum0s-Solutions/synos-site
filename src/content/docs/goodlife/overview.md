@@ -52,7 +52,7 @@ job_hunt_mode = true          # privacy-first, no cross-context bleed
 context_isolation = "tenant"  # each conversation is its own tenant
 ```
 
-Curtain v3 enforces this from the kernel side: research-mode tokens cannot acquire claims for offensive syscalls or cross-tier federation peering.
+Curtain v4 enforces this from the kernel side: research-mode tokens cannot acquire claims for offensive syscalls or cross-tier federation peering.
 
 ## Salvaged-hardware mesh
 

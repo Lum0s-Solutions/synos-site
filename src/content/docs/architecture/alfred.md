@@ -1,9 +1,9 @@
 ---
 title: ALFRED AI Daemon
-description: ALFRED v6.0 — Adaptive Learning Framework for Responsive Evolution & Defense. Two-layer Rust + Python architecture, four-path consciousness fusion, nine neuroanatomical brain crates, four operating modes.
+description: ALFRED v6.0 — Adaptive Learning Framework for Responsive Evolution & Defense. Two-layer Rust + Python architecture, four-path consciousness fusion, 11 neuroanatomical brain crates, four operating modes.
 ---
 
-**ALFRED** — Adaptive Learning Framework for Responsive Evolution & Defense — is the **nervous system** of Syn_OS. v6.0 is a Rust daemon running nine neuroanatomically-named crates that model the AI's mind on the architecture of a mammalian brain, fused with a Python user-facing layer for LLM integration, voice, RAG, and the privacy-first job-hunt mode.
+**ALFRED** — Adaptive Learning Framework for Responsive Evolution & Defense — is the **nervous system** of Syn_OS. v6.0 is a Rust daemon running 11 neuroanatomically-named crates that model the AI's mind on the architecture of a mammalian brain, fused with a Python user-facing layer for LLM integration, voice, RAG, and the privacy-first job-hunt mode.
 
 ALFRED is **not an LLM wrapper.** It is a fusion engine that routes every incoming event through four parallel processing paths and combines their outputs into a single decision vector.
 
@@ -30,35 +30,43 @@ User-facing assistant:
 - TUI (`synos-ops`)
 - Privacy-first job-hunt mode
 
-## The nine brain crates
+## The 11 brain crates
 
-The ALFRED consciousness layer is implemented as nine anatomically-named Rust crates, each modelling a distinct brain region's function and wired into a live event-driven signal-processing loop by the ninth.
+The ALFRED consciousness layer is implemented as **11 anatomically-named Rust crates**, each modelling a distinct brain region's function and wired into a live event-driven signal-processing loop.
 
-| #  | Crate                          | Anatomical role                                 | Function                                                          |
-|----|--------------------------------|-------------------------------------------------|-------------------------------------------------------------------|
-| 1  | `synos-thalamus`               | Sensory relay                                    | Event gating middleware. Decides which signals cross the cortex.   |
-| 2  | `synos-hippocampus`            | Long-term memory                                | Stores `MemoryFragment` objects, performs consolidation cycles.    |
-| 3  | `synos-amygdala`               | Threat detection                                | Fast-path threat eval — sub-millisecond `AmygdalaStats`.           |
-| 4  | `synos-cerebellum`             | Predictive timing                               | Scheduler feedback, P99 latency tracking via `LatencyReport`.      |
-| 5  | `synos-insula`                 | Interoception                                   | System health awareness. Event-driven, not polling.                |
-| 6  | `synos-corpus-callosum`        | Inter-hemisphere bridge                         | Red ↔ Blue team IPC, hemisphere coordination.                      |
-| 7  | `synos-default-mode-network`   | Idle / consolidation                            | 30-second consolidation cycles when CPU load < 10%.                |
-| 8  | `synos-glial`                  | Support / pruning                               | Adaptive caching, memory pruning. `MyelinCache::get()`.            |
-| 9  | `synos-brainstem`              | Pipeline runtime                                | **Wires the eight peer crates into the live signal loop.**         |
-
-A tenth crate — `synos-nucleus` — models root-of-trust governance per the biological metaphor.
+| #  | Crate                          | Anatomical role              | Function                                                          |
+|----|--------------------------------|------------------------------|-------------------------------------------------------------------|
+| 1  | `synos-thalamus`               | Sensory relay                | Event gating middleware. Decides which signals cross the cortex.   |
+| 2  | `synos-hippocampus`            | Long-term memory             | Stores `MemoryFragment` objects, performs consolidation cycles.    |
+| 3  | `synos-amygdala`               | Threat detection             | Fast-path threat eval — sub-millisecond `AmygdalaStats`.           |
+| 4  | `synos-cerebellum`             | Predictive timing            | Scheduler feedback, P99 latency tracking via `LatencyReport`.      |
+| 5  | `synos-insula`                 | Interoception                | System health awareness. Event-driven, not polling.                |
+| 6  | `synos-corpus-callosum`        | Inter-hemisphere bridge      | Red ↔ Blue team IPC, hemisphere coordination.                      |
+| 7  | `synos-default-mode-network`   | Idle / consolidation         | 30-second consolidation cycles when CPU load < 10%.                |
+| 8  | `synos-glial`                  | Support / pruning            | Adaptive caching, memory pruning. `MyelinCache::get()`.            |
+| 9  | `synos-brainstem`              | Pipeline runtime             | **Wires the peer crates into the live signal loop.**               |
+| 10 | `synos-nucleus`                | Root-of-trust governance     | Identity, attestation, Curtain token chain validation.             |
+| 11 | `synos-consciousness-types`    | Shared type substrate        | `ConsciousnessState`, `BrainSignal`, taint markers shared across crates. |
 
 The **signal flow** through brainstem runs:
 
 ```
-external event
+external event (or kernel push via synos_consciousness read_iter)
   → thalamic gate (relevance filter)
   → amygdala fast-path (sub-millisecond threat eval)
   → ALFRED full analysis (four-path fusion)
   → hippocampus storage (glial-accelerated cache)
 ```
 
-The brainstem `VALIDATION.md` documents 17 critical API corrections that had to be applied across the crate interfaces — a measure of how much iteration went into making the nine anatomical regions actually speak to each other.
+The brainstem `VALIDATION.md` documents 17 critical API corrections applied across the crate interfaces.
+
+## Kernel push-channel (v80 Sunlance)
+
+In v80, the kernel wakes ALFRED directly. The `synos_consciousness` kernel module exposes a **blocking `read()`** path on `/dev/synos_consciousness` that yields `synos_stimulus_record` structs (4112 bytes each) as they arrive from the kernel. ALFRED runs a dedicated `synos-stimulus` consumer thread that reads these structs and injects them as `BrainSignal::RawEvent` with `Taint::KernelTelemetry` into the thalamus gate.
+
+There is no polling. No timer. No userspace scheduler waking up on a fixed interval to ask "anything new?" — the kernel signals ALFRED exactly when an event occurs, and not before.
+
+This path is QEMU-validated at ISO build stage `02b` (`RESULT consciousness:READ_STIMULUS PASS`).
 
 ## Consciousness fusion — the four paths
 
@@ -81,7 +89,7 @@ Outputs are weighted by `ConsciousnessState` (coherence, activity, mode, decisio
 |--------------|---------------------|------------------------------------------------------|----------------------------------------|
 | **Advisory** | Read-only           | Default. System inspection, recommendation only      | Full read-only ACLs                    |
 | **GameMode** | Lab-scoped          | GRIMOIRE lab execution, contained per lab            | AppArmor `synos.grimoire.lab` + seccomp 18-syscall deny |
-| **Master**   | Full execution      | Master ISO operators, C2 integration, fleet telemetry| No guardrails — Curtain v3 admin token required |
+| **Master**   | Full execution      | Master ISO operators, C2 integration, fleet telemetry| No guardrails — Curtain v4 admin token required |
 | **Mesh**     | Distributed         | Gossip protocol, distributed consciousness across ARCANUM | Tenant-scoped per peer       |
 
 Mode switching:

@@ -77,7 +77,7 @@ grimoire start
 
 This launches the Bevy faction-HQ scene. Pick **Beginner** in your chosen faction, accept the lab brief, and the Docker overlay spins up an isolated environment. Submit the flag, earn XP, watch the SkillTree plugin animate the unlock.
 
-After 5 intro labs you have enough XP to spend on your first tool unlock — typically `nikto`, `gobuster`, or `enum4linux`. The catalogue is **already on disk**; XP just grants execution permission via Curtain v3 capability tokens.
+After 5 intro labs you have enough XP to spend on your first tool unlock — typically `nikto`, `gobuster`, or `enum4linux`. The catalogue is **already on disk**; XP just grants execution permission via Curtain v4 capability tokens.
 
 ## Recovering from a bad boot
 

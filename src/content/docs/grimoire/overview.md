@@ -55,7 +55,7 @@ Faction choice affects RICO contract dispersal, available boss-contract chains, 
 
 ## The weaponization ceiling
 
-GRIMOIRE Public **cannot** become operationally equivalent to Master, no matter how far a player progresses. The **Curtain v3** runtime ceiling enforces:
+GRIMOIRE Public **cannot** become operationally equivalent to Master, no matter how far a player progresses. The **Curtain v4** runtime ceiling enforces:
 
 - AI dispatch operations return `ENOSYS` on GRIMOIRE (capability-token enforcement)
 - LLM federation is tier-isolated (GRIMOIRE nodes federate only with GRIMOIRE peers)

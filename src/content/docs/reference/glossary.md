@@ -15,7 +15,7 @@ The Syn_OS codebase has accumulated its own vocabulary. This is the canonical re
 
 **Fragment Field IDS** — Energy-topology intrusion detection. Treats attack patterns as physics-layer signatures. Implemented in `synos-fragment-field` (3,002 LOC) + `fragment_field.rs` in the kernel.
 
-**Curtain** — The mechanism that prevents tier escalation. v1 was static (build-time scanner). v2 added 7 runtime enforcement points. v3 (Sundered Crown) ships ed25519 capability tokens.
+**Curtain** — The mechanism that prevents tier escalation. v1 was static (build-time scanner). v2 added 7 runtime enforcement points. v3 *(Sundered Crown)* added ed25519 capability tokens. **v4 *(Sunlance — current)*** integrates a compile-time `xtask` ELF/string scanner with v3's token system, replacing raw ed25519 per-operation gates with SipHash-2-4 keyed-MACs enforced by the `synos_capability` kernel module.
 
 **Sovereign Operator Path** — The long-form GRIMOIRE questline that graduates a player from CTF novice to running their own encrypted mesh.
 
@@ -55,13 +55,13 @@ The Syn_OS codebase has accumulated its own vocabulary. This is the canonical re
 
 **Kernel AI interface** — The capability-gated, signed Rust kernel-module interface that exposes AI/observability state to userspace (root-only, `CAP_SYS_ADMIN`-gated, `0600` device nodes). Replaced the retired custom-syscall approach (v80). See [Kernel Interface Reference →](/reference/syscalls/).
 
-**LSM hook** — Linux Security Module hook in `synos-security` that consults Curtain v3 capability tokens before privileged operations.
+**LSM hook** — Linux Security Module hook in `synos-security` that consults Curtain v4 capability tokens before privileged operations.
 
 **MOK** — Machine Owner Key. Used in the SecureBoot signing chain (v41 Wave 9).
 
 **KSPP** — Kernel Self Protection Project. Hardening defaults Syn_OS adopts.
 
-## Brain crates (the nine)
+## Brain crates (the 11)
 
 **synos-thalamus** — Sensory relay. Event gating middleware.
 
@@ -79,9 +79,11 @@ The Syn_OS codebase has accumulated its own vocabulary. This is the canonical re
 
 **synos-glial** — Adaptive caching, memory pruning. `MyelinCache::get()`.
 
-**synos-brainstem** — Pipeline runtime. Wires the eight peer crates into the live signal loop.
+**synos-brainstem** — Pipeline runtime. Wires the 10 peer crates into the live signal loop.
 
-**synos-nucleus** — Tenth crate. Root-of-trust governance per the biological metaphor.
+**synos-nucleus** — Root-of-trust governance. Identity, attestation, Curtain token chain validation.
+
+**synos-consciousness-types** — Shared type substrate. `ConsciousnessState`, `BrainSignal`, taint markers shared across all brain crates.
 
 ## Factions
 

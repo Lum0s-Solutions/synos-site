@@ -1,15 +1,16 @@
 ---
 title: Curtain Capability Tokens
-description: Curtain v3 (Sundered Crown) — tier-based ed25519 capability tokens enforced by an LSM hook. The mechanism that prevents GRIMOIRE Public from ever becoming operationally equivalent to Master.
+description: Curtain v4 — tier-based ed25519 capability tokens enforced by an LSM hook, with compile-time ELF symbol scanning. The mechanism that prevents GRIMOIRE Public from ever becoming operationally equivalent to Master.
 ---
 
 The **Curtain** is the mechanism that lets Syn_OS ship the same code to a 14-year-old playing GRIMOIRE and to a federal contractor running offensive operations under a customer agreement, without those two systems being interchangeable.
 
-It evolved across three generations:
+It evolved across four generations:
 
 - **Curtain v1** — build-time ELF symbol scanner + feature audit + lab integrity manifests. Static.
 - **Curtain v2** — runtime capability ceiling with seven enforcement points (tier gate + seccomp + AppArmor + taint + prompt guard + syscall filter + mesh).
-- **Curtain v3** *(v54 Sundered Crown — current)* — **tier-based ed25519 capability tokens**, signed and chained, enforced by an LSM hook in `synos-security`.
+- **Curtain v3** *(v54 Sundered Crown)* — **tier-based ed25519 capability tokens**, signed and chained, enforced by an LSM hook in `synos-security`.
+- **Curtain v4** *(v80 Sunlance — current)* — Integrates the compile-time `xtask` scanner (13 forbidden symbols, 8 forbidden strings enforced at build time) with the v3 runtime token system. SipHash-2-4 keyed-MAC capability tokens replace raw ed25519 for per-operation gates; the `synos_capability` kernel module (issue / verify / revoke) makes forged-tier tokens return `BAD_MAC` before the LSM hook is ever reached.
 
 ## Why Curtain exists
 
@@ -27,7 +28,7 @@ These rules are not enforced by best-effort runtime checks. They are enforced by
 
 ## Token format
 
-A Curtain v3 capability token is an ed25519-signed envelope containing:
+A Curtain v4 capability token is an ed25519-signed envelope containing:
 
 ```
 {
@@ -59,9 +60,9 @@ The `algorithm` field supports both `ed25519` and **ML-DSA** — post-quantum si
 
 There is no "elevate" claim. A `grimoire-public` subject cannot acquire a `master` token under any in-band path — the issuance ceremony for a `master` root requires a hardware-attested ceremony with two custodians, and the federation root's signing key never leaves an offline HSM.
 
-## The seven enforcement points (v2, still active under v3)
+## The seven enforcement points (v2, still active under v4)
 
-Curtain v3 inherits and augments the seven runtime enforcement points from v2:
+Curtain v4 inherits and augments the seven runtime enforcement points from v2:
 
 1. **Tier gate** — token tier checked on every privileged operation (LSM hook in `synos-security`)
 2. **seccomp BPF** — 18-syscall deny list enforced per-process for lab sandboxes
@@ -116,7 +117,7 @@ The ledger is append-only, replicated across Sanctum federation peers, and signe
 
 ## Why this matters commercially
 
-The Curtain is the bedrock of the LumOs commercial model. GRIMOIRE Public is the talent funnel that produces the best cybersecurity operators in the world; Master is the product LumOs sells to customers who need the actual weapon for actual work. Both are built from the same codebase, audited together, and shipped by the same supply chain — but Curtain v3 makes the boundary between them mechanical, signed, and externally auditable.
+The Curtain is the bedrock of the LumOs commercial model. GRIMOIRE Public is the talent funnel that produces the best cybersecurity operators in the world; Master is the product LumOs sells to customers who need the actual weapon for actual work. Both are built from the same codebase, audited together, and shipped by the same supply chain — but Curtain v4 makes the boundary between them mechanical, signed, and externally auditable.
 
 ## Related
 

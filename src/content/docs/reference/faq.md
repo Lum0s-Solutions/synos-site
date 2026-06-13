@@ -30,7 +30,7 @@ Star [the GitHub repo](https://github.com/Lum0s-Solutions/Syn_OS) and join [Disc
 
 ## How is GRIMOIRE Public different from Master?
 
-GRIMOIRE Public is the talent funnel: progressive-unlock training that produces operators. Master is the product LumOs sells to customers who need the actual weapon for actual work. They are built from the same codebase, audited together, and shipped by the same supply chain — but **Curtain v3** makes the boundary between them mechanical, signed, and externally auditable.
+GRIMOIRE Public is the talent funnel: progressive-unlock training that produces operators. Master is the product LumOs sells to customers who need the actual weapon for actual work. They are built from the same codebase, audited together, and shipped by the same supply chain — but **Curtain v4** makes the boundary between them mechanical, signed, and externally auditable.
 
 GRIMOIRE Public cannot become Master no matter how far a player progresses:
 
@@ -52,7 +52,7 @@ LLMs (Ollama, Claude, OpenAI, Gemini, DeepSeek, llama-cpp) are *backends* the Py
 
 ## What hardware do I need?
 
-Minimum: x86_64 (Haswell+), 4 GB RAM, 32 GB storage, UEFI firmware. Recommended: 4+ cores with AVX2, 8+ GB RAM (16 GB for AI workloads), 64 GB SSD, UEFI + TPM 2.0 (for Curtain v3 attest), and a Tailscale-capable network.
+Minimum: x86_64 (Haswell+), 4 GB RAM, 32 GB storage, UEFI firmware. Recommended: 4+ cores with AVX2, 8+ GB RAM (16 GB for AI workloads), 64 GB SSD, UEFI + TPM 2.0 (for Curtain v4 attest), and a Tailscale-capable network.
 
 The Salvage Yard quest in GRIMOIRE assumes you can reclaim 3-4 discarded laptops to build a personal mesh — the hardware floor is "can find a working laptop", not "can buy a $2,000 GPU."
 

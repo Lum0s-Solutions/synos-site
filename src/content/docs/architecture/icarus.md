@@ -28,7 +28,7 @@ Different PQC families have different security assumptions. Syn_OS uses all thre
 | Subsystem | Algorithm | Notes |
 |-----------|-----------|-------|
 | **TLS terminators** (Sanctum federation, ARCANUM mesh) | ML-KEM hybrid with X25519 | rustls-pqc fork, hybrid key share |
-| **Curtain v3 capability tokens** | ed25519 today, ML-DSA migration prepared | Token format already carries an algorithm OID for clean rotation |
+| **Curtain v4 capability tokens** | ed25519 today, ML-DSA migration prepared | Token format already carries an algorithm OID for clean rotation |
 | **Audit trail** (`synos-audit-trail`) | ML-DSA per entry, SLH-DSA on epoch roots | HMAC-SHA256 chained, signed roots |
 | **Build attestation** (v48 Forge) | SLH-DSA on release manifests | Signed alongside cosign / Sigstore |
 | **ALFRED model provenance** | ML-DSA on ONNX / Ollama model fingerprints | v42 Carcossa Burning |

@@ -44,7 +44,7 @@ Three reasons:
 | Crate                  | Role                                                                |
 |------------------------|---------------------------------------------------------------------|
 | `arcanum-controller`   | Reconciliation loop, custom resource definitions, scheduling        |
-| `arcanum-attestor`     | mTLS bootstrap, peer attestation, Curtain v3 token issuance         |
+| `arcanum-attestor`     | mTLS bootstrap, peer attestation, Curtain v4 token issuance         |
 | `arcanum-profiler`     | Per-node hardware profiling, model placement decisions               |
 | `arcanum-tests`        | Integration test harness                                             |
 
@@ -97,7 +97,7 @@ Multi-tenant federation runs above the mesh layer. Each Sanctum is a tenant boun
 
 - **Replica join** — bring a new Sanctum online and join the federation with cryptographic enrolment
 - **Federation health endpoint** — peer reachability matrix exposed for Mission Control dashboards
-- **Tier isolation** — GRIMOIRE-tier Sanctums federate only with GRIMOIRE peers; Master tenants federate freely; cross-tier traffic is gated by Curtain v3
+- **Tier isolation** — GRIMOIRE-tier Sanctums federate only with GRIMOIRE peers; Master tenants federate freely; cross-tier traffic is gated by Curtain v4
 
 ## Failure modes
 

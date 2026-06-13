@@ -53,7 +53,7 @@ export default defineConfig({
 			tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 3 },
 			sidebar: [
 				{
-					label: 'Getting Started',
+					label: '▶ Getting Started',
 					items: [
 						{ label: 'What is Syn_OS?',           slug: 'guides/overview' },
 						{ label: 'Three ISOs',                slug: 'guides/download' },
@@ -62,7 +62,7 @@ export default defineConfig({
 					],
 				},
 				{
-					label: 'GRIMOIRE',
+					label: '⚔ GRIMOIRE',
 					items: [
 						{ label: 'Overview',                  slug: 'grimoire/overview' },
 						{ label: 'Lab Catalog',               slug: 'grimoire/labs' },
@@ -71,7 +71,7 @@ export default defineConfig({
 					],
 				},
 				{
-					label: 'Architecture',
+					label: '◈ Architecture',
 					items: [
 						{ label: 'Six-Layer Stack',           slug: 'architecture/layers' },
 						{ label: 'ALFRED AI Daemon',          slug: 'architecture/alfred' },
@@ -83,14 +83,14 @@ export default defineConfig({
 					],
 				},
 				{
-					label: 'GoodLife',
+					label: '◉ GoodLife',
 					items: [
 						{ label: 'AI Research ISO',           slug: 'goodlife/overview' },
 						{ label: 'Included Tools',            slug: 'goodlife/tools' },
 					],
 				},
 				{
-					label: 'Reference',
+					label: '◆ Reference',
 					autogenerate: { directory: 'reference' },
 				},
 			],

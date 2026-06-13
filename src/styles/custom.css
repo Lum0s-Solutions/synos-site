@@ -2,9 +2,11 @@
    ------------------------------------------------
    Force dark + crimson accents across both data-themes,
    override Starlight's default blue with Phoenix red.
+   50-point UI optimization pass (v80 Sunlance)
 */
 
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap');
+/* I4 — load only used weights (drops ~40KB: 500 JetBrains, 500/700 Inter) */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600&display=swap');
 
 /* ============================================================
    COLOR TOKENS — Phoenix Red & Obsidian
@@ -29,11 +31,11 @@
 	--sl-color-black:   #08060a;
 
 	/* Backgrounds */
-	--sl-color-bg:          #08060a;
-	--sl-color-bg-nav:      #0e0a0f;
-	--sl-color-bg-sidebar:  #0b0808;
+	--sl-color-bg:             #08060a;
+	--sl-color-bg-nav:         #0e0a0f;
+	--sl-color-bg-sidebar:     #0b0808;
 	--sl-color-bg-inline-code: #1a0a0a;
-	--sl-color-bg-accent:   #1a0408;
+	--sl-color-bg-accent:      #1a0408;
 
 	/* Text */
 	--sl-color-text:        var(--sl-color-gray-1);
@@ -41,32 +43,33 @@
 	--sl-color-text-invert: var(--sl-color-black);
 
 	/* Hairlines / dividers */
-	--sl-color-hairline:        #2a0a0e;
-	--sl-color-hairline-light:  #3a0a10;
-	--sl-color-hairline-shade:  #1a0508;
+	--sl-color-hairline:       #2a0a0e;
+	--sl-color-hairline-light: #3a0a10;
+	--sl-color-hairline-shade: #1a0508;
 
 	/* Custom Phoenix tokens */
-	--phoenix-red:        #dc2626;
-	--phoenix-ember:      #ff4444;
-	--phoenix-blood:      #8b0000;
-	--phoenix-ash:        #1a1614;
-	--phoenix-obsidian:   #08060a;
-	--phoenix-glow:       0 0 24px rgba(220, 38, 38, 0.45);
-	--phoenix-glow-soft:  0 0 12px rgba(220, 38, 38, 0.25);
+	--phoenix-red:       #dc2626;
+	--phoenix-ember:     #ff4444;
+	--phoenix-blood:     #8b0000;
+	--phoenix-ash:       #1a1614;
+	--phoenix-obsidian:  #08060a;
+	--phoenix-glow:      0 0 24px rgba(220, 38, 38, 0.45);
+	--phoenix-glow-soft: 0 0 12px rgba(220, 38, 38, 0.25);
 
 	/* Fonts */
 	--sl-font: 'Inter', system-ui, -apple-system, sans-serif;
 	--sl-font-system-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
 }
 
-/* Force the dark color scheme even when 'light' is requested */
-:root[data-theme='light'] {
-	color-scheme: dark;
-}
+/* Force dark color scheme even when 'light' is requested */
+:root[data-theme='light'] { color-scheme: dark; }
 
 /* ============================================================
-   GLOBAL — body, scrollbars, selection
+   GLOBAL — scroll, body, selection, focus
    ============================================================ */
+
+/* H4 — smooth anchor scroll (zero cost, ToC/cross-ref links animate) */
+html { scroll-behavior: smooth; }
 
 html, body {
 	background: var(--sl-color-bg) !important;
@@ -78,11 +81,20 @@ body {
 		radial-gradient(ellipse 1200px 600px at 80% -10%, rgba(220, 38, 38, 0.08), transparent 60%),
 		radial-gradient(ellipse 800px 400px at 0% 100%, rgba(139, 0, 0, 0.10), transparent 60%);
 	background-attachment: fixed;
+	/* A4 — slightly open tracking on dark backgrounds */
+	letter-spacing: 0.012em;
 }
 
 ::selection {
 	background: var(--phoenix-red);
 	color: var(--phoenix-obsidian);
+}
+
+/* H2 — brand focus ring: accessibility upgrade + design consistency */
+:focus-visible {
+	outline: 2px solid var(--phoenix-red);
+	outline-offset: 3px;
+	border-radius: 3px;
 }
 
 ::-webkit-scrollbar { width: 12px; height: 12px; }
@@ -124,8 +136,22 @@ header.header {
 	border-inline-end: 1px solid var(--sl-color-hairline) !important;
 }
 
+/* F4 — scroll fade: signals more items below viewport */
+.sidebar-content { position: relative; }
+.sidebar-content::after {
+	content: '';
+	position: sticky;
+	bottom: 0;
+	display: block;
+	height: 2.5rem;
+	background: linear-gradient(to top, var(--sl-color-bg-sidebar) 15%, transparent);
+	pointer-events: none;
+}
+
+/* F3 — active border draws in (transition from 0 → 2px on navigation) */
 nav ul li a {
-	transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+	border-inline-start: 0px solid transparent;
+	transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease, border-inline-start-width 0.15s ease;
 }
 
 nav a[aria-current='page'] {
@@ -150,6 +176,13 @@ nav .group-label .large {
 	text-transform: uppercase;
 }
 
+/* F5 — breadcrumb: current page bold, ancestors dimmed */
+.sl-breadcrumbs li:last-child a {
+	font-weight: 700;
+	color: var(--sl-color-white);
+}
+.sl-breadcrumbs li:not(:last-child) a { opacity: 0.55; }
+
 /* ============================================================
    HERO / SPLASH
    ============================================================ */
@@ -165,6 +198,7 @@ nav .group-label .large {
 	overflow: hidden;
 }
 
+/* Animated grid overlay */
 .hero::before {
 	content: '';
 	position: absolute;
@@ -175,6 +209,16 @@ nav .group-label .large {
 	background-size: 48px 48px;
 	mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
 	pointer-events: none;
+}
+
+/* B5 — gradient separator: visual paragraph break below hero */
+.hero::after {
+	content: '';
+	position: absolute;
+	bottom: 0; left: 0; right: 0;
+	height: 1px;
+	background: linear-gradient(to right, transparent, var(--phoenix-red) 50%, transparent);
+	opacity: 0.5;
 }
 
 .hero h1 {
@@ -188,10 +232,11 @@ nav .group-label .large {
 	text-shadow: 0 0 60px rgba(220, 38, 38, 0.35);
 }
 
+/* B1 — fluid hero tagline */
 .hero .tagline {
 	color: var(--sl-color-gray-1);
-	font-size: 1.15rem;
-	max-width: 60ch;
+	font-size: clamp(1rem, 1.5vw + 0.5rem, 1.3rem);
+	max-width: 58ch;
 }
 
 /* Hero action buttons */
@@ -211,10 +256,13 @@ nav .group-label .large {
 	box-shadow: var(--phoenix-glow);
 }
 
+/* B6 — secondary buttons visually rank below primary */
 .hero .actions a[data-variant='minimal'] {
 	color: var(--sl-color-gray-1) !important;
 	border: 1px solid var(--sl-color-hairline-light) !important;
 	background: rgba(11, 8, 8, 0.6) !important;
+	padding: 0.4em 1em;
+	font-size: 0.9rem;
 }
 
 .hero .actions a[data-variant='minimal']:hover {
@@ -222,8 +270,28 @@ nav .group-label .large {
 	color: var(--phoenix-ember) !important;
 }
 
+/* B3 — phoenix logo ember glow pulse */
 .hero img {
 	filter: drop-shadow(0 0 40px rgba(220, 38, 38, 0.5));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.hero img { animation: ember-pulse 4s ease-in-out infinite; }
+}
+
+/* B2 — version badge: pill with hairline red border */
+.version-badge {
+	display: inline-block;
+	font-family: var(--sl-font-system-mono);
+	font-size: 0.7rem;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	padding: 0.2em 0.65em;
+	border: 1px solid var(--phoenix-red);
+	border-radius: 3px;
+	color: var(--phoenix-ember);
+	text-transform: uppercase;
+	margin-bottom: 0.75rem;
 }
 
 /* ============================================================
@@ -235,11 +303,14 @@ nav .group-label .large {
 	border: 1px solid var(--sl-color-hairline) !important;
 	border-radius: 10px !important;
 	padding: 1.25rem !important;
-	transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+	transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 	position: relative;
 	overflow: hidden;
+	/* I2 — GPU-promote animated properties */
+	will-change: transform, box-shadow;
 }
 
+/* Top accent line (appears on hover) */
 .card::before {
 	content: '';
 	position: absolute;
@@ -248,41 +319,141 @@ nav .group-label .large {
 	background: linear-gradient(90deg, transparent, var(--phoenix-red), transparent);
 	opacity: 0;
 	transition: opacity 0.2s ease;
+	pointer-events: none;
+}
+
+/* C7 — bottom fill bar: scaleX left→right on hover */
+.card::after {
+	content: '';
+	position: absolute;
+	bottom: 0; left: 0; right: 0;
+	height: 2px;
+	background: var(--phoenix-red);
+	transform: scaleX(0);
+	transform-origin: left;
+	transition: transform 0.25s ease;
+	pointer-events: none;
 }
 
 .card:hover {
 	border-color: var(--phoenix-red) !important;
 	transform: translateY(-2px);
 	box-shadow: var(--phoenix-glow-soft);
+	/* C5 — subtle brightened bg on hover (gradient corner effect) */
+	background: linear-gradient(135deg, #1e1210 0%, #100a0a 100%) !important;
 }
 
 .card:hover::before { opacity: 1; }
+.card:hover::after  { transform: scaleX(1); }
 
 .card .icon,
 .card svg.icon {
 	color: var(--phoenix-red);
+	/* C2 — ember drop-shadow on icons */
+	filter: drop-shadow(0 0 6px rgba(220, 38, 38, 0.5));
 }
 
+/* C1 — card title gradient text */
 .card .title,
 .card h2 {
-	color: var(--sl-color-white) !important;
+	background: linear-gradient(90deg, var(--sl-color-white) 60%, var(--phoenix-ember));
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
 	font-family: var(--sl-font-system-mono);
 	font-weight: 700;
 }
 
+/* C3 — card body text slightly dimmed vs title */
+.card p { color: rgba(230, 225, 222, 0.8); }
+
+/* C8 — featured first card: fractionally larger title + warmer border */
+.card-grid > :first-child .card h2,
+.card-grid > :first-child h2 { font-size: 1.05em; }
+.card-grid > :first-child .card {
+	border-color: rgba(220, 38, 38, 0.22) !important;
+}
+
+/* C6 — LinkCard hover arrow animation */
+a.sl-link-card:hover .sl-link-card-icon,
+.link-card:hover [class*='icon'],
+a[class*='link-card']:hover svg { transform: translateX(4px); transition: transform 0.15s ease; }
+
 /* ============================================================
-   CONTENT
+   CONTENT TYPOGRAPHY
    ============================================================ */
 
 main { background: transparent; }
 
-h1, h2, h3, h4 {
+/* A1 — fluid type scale: no more breakpoint jumps */
+h1 {
+	font-family: var(--sl-font-system-mono);
+	font-weight: 700;
+	font-size: clamp(1.75rem, 4vw + 1rem, 3rem);
+	letter-spacing: -0.02em;
 	color: var(--sl-color-white);
-	letter-spacing: -0.01em;
 }
 
-h1 { font-family: var(--sl-font-system-mono); font-weight: 700; }
-h2 { border-bottom: 1px solid var(--sl-color-hairline); padding-bottom: 0.4rem; }
+h2 {
+	font-size: clamp(1.25rem, 2.5vw + 0.5rem, 1.85rem);
+	letter-spacing: -0.01em;
+	color: var(--sl-color-white);
+	border-bottom: 1px solid var(--sl-color-hairline);
+	padding-bottom: 0.4rem;
+}
+
+h3 {
+	font-size: clamp(1rem, 1.5vw + 0.4rem, 1.35rem);
+	letter-spacing: -0.01em;
+	/* A2 — opacity hierarchy: h3 slightly dimmed vs h2 */
+	color: rgba(255, 255, 255, 0.85);
+}
+
+h4 {
+	letter-spacing: -0.01em;
+	/* A2 — opacity hierarchy: h4 further dimmed */
+	color: rgba(255, 255, 255, 0.65);
+}
+
+/* H1 — gradient text on content h2 + A5 left accent bar */
+.sl-markdown-content h2 {
+	background: linear-gradient(90deg, #ffffff 65%, var(--phoenix-ember));
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	border-bottom: none;
+	padding-bottom: 0;
+	/* A5 — left accent bar carries sidebar motif into content */
+	border-left: 2px solid var(--phoenix-red);
+	padding-left: 0.65rem;
+	margin-bottom: 1rem;
+}
+
+/* A3 — body line-height boost for long technical prose */
+.sl-markdown-content p {
+	line-height: 1.85;
+	/* A7 — 72ch max-width: empirical sweet spot for reading speed */
+	max-width: 72ch;
+}
+
+/* A6 — inline code inside headings: lighter wash, no heavy border */
+h1 code, h2 code, h3 code {
+	background: rgba(220, 38, 38, 0.1) !important;
+	border: none !important;
+	padding: 0.05em 0.3em !important;
+	font-size: 0.88em !important;
+}
+
+/* A8 — drop cap on first content paragraph */
+.sl-markdown-content > p:first-of-type::first-letter {
+	color: var(--phoenix-red);
+	font-size: 3em;
+	font-family: var(--sl-font-system-mono);
+	font-weight: 700;
+	float: left;
+	line-height: 0.82;
+	margin: 0.05em 0.1em 0 0;
+}
 
 a, .content a {
 	color: var(--phoenix-ember);
@@ -295,7 +466,42 @@ a:hover, .content a:hover {
 	text-decoration-color: var(--phoenix-red);
 }
 
-/* Inline code */
+/* G1 — phoenix bullet marker replaces default disc */
+.sl-markdown-content ul li::marker {
+	content: '▸ ';
+	color: var(--phoenix-red);
+}
+
+/* G2 — ordered list with numbered red circles */
+.sl-markdown-content ol {
+	counter-reset: ol-counter;
+	list-style: none;
+	padding-left: 0;
+}
+.sl-markdown-content ol li {
+	counter-increment: ol-counter;
+	padding-left: 2.2em;
+	position: relative;
+}
+.sl-markdown-content ol li::before {
+	content: counter(ol-counter);
+	position: absolute;
+	left: 0;
+	top: 0.12em;
+	background: var(--phoenix-red);
+	color: #fff;
+	width: 1.4em;
+	height: 1.4em;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 0.72em;
+	font-weight: 700;
+	font-family: var(--sl-font-system-mono);
+}
+
+/* E2 — floor font-size prevents code from shrinking in small contexts */
 code {
 	background: var(--sl-color-bg-inline-code) !important;
 	color: var(--phoenix-ember) !important;
@@ -303,7 +509,7 @@ code {
 	border-radius: 4px;
 	padding: 0.1em 0.4em !important;
 	font-family: var(--sl-font-system-mono);
-	font-size: 0.9em;
+	font-size: max(0.85em, 0.8rem);
 }
 
 /* Code blocks */
@@ -312,6 +518,14 @@ pre {
 	border: 1px solid var(--sl-color-hairline) !important;
 	border-radius: 8px !important;
 	box-shadow: inset 0 0 0 1px rgba(220, 38, 38, 0.05);
+	/* E1 — language label positioning anchor */
+	position: relative;
+	/* E3 — horizontal scroll with right-edge shadow hint */
+	overflow-x: auto;
+	background-image: linear-gradient(to left, rgba(10,4,5,0.9) 0%, transparent 24px) !important;
+	background-repeat: no-repeat;
+	background-position: right !important;
+	background-size: 24px 100% !important;
 }
 
 pre code {
@@ -321,7 +535,40 @@ pre code {
 	padding: 0 !important;
 }
 
-/* Tables */
+/* E1 — language label: ember text, top-right corner */
+pre[data-language]::before {
+	content: attr(data-language);
+	position: absolute;
+	top: 0.4rem;
+	right: 0.75rem;
+	font-size: 0.65rem;
+	color: var(--phoenix-ember);
+	font-family: var(--sl-font-system-mono);
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	opacity: 0.7;
+	pointer-events: none;
+}
+
+/* E4 — selection color inside code/Expressive Code */
+.expressive-code ::selection,
+pre ::selection { background: rgba(220, 38, 38, 0.35); color: #fff; }
+
+/* ============================================================
+   TABLES
+   ============================================================ */
+
+/* D1 — mobile horizontal scroll with right-edge indicator */
+.sl-markdown-content table {
+	display: block;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+	border-collapse: collapse;
+	border: 1px solid var(--sl-color-hairline);
+	border-radius: 6px;
+}
+
+/* Non-content tables keep original display */
 table {
 	border-collapse: collapse;
 	border: 1px solid var(--sl-color-hairline);
@@ -340,12 +587,27 @@ th {
 
 tr:nth-child(even) td { background: rgba(220, 38, 38, 0.04); }
 
+/* D2 — row hover highlight for dense tables */
+.sl-markdown-content tr:hover td { background: rgba(220, 38, 38, 0.08); }
+
 td, th {
 	border-bottom: 1px solid var(--sl-color-hairline);
 	padding: 0.6em 0.9em !important;
+	/* D4 — min-width prevents mid-word wrapping */
+	min-width: 100px;
 }
 
-/* Blockquotes */
+/* D3 — tabular nums for aligned numeric columns */
+.sl-markdown-content td:last-child { font-variant-numeric: tabular-nums; }
+
+/* D5 — table links use ember color instead of inheriting table text */
+.sl-markdown-content table a { color: var(--phoenix-ember); }
+.sl-markdown-content table a:hover { color: var(--sl-color-white); }
+
+/* ============================================================
+   BLOCKQUOTES, ASIDES, DIVIDERS
+   ============================================================ */
+
 blockquote {
 	border-inline-start: 3px solid var(--phoenix-red) !important;
 	background: linear-gradient(90deg, rgba(220, 38, 38, 0.06), transparent) !important;
@@ -355,19 +617,81 @@ blockquote {
 	border-radius: 0 6px 6px 0;
 }
 
+/* D6 — blockquote as caption: smaller text above tables */
+.sl-markdown-content blockquote p {
+	font-size: 0.82rem;
+	opacity: 0.75;
+	max-width: none;
+}
+
+/* G7 — blockquote citation line */
+.sl-markdown-content blockquote cite,
+.sl-markdown-content blockquote footer {
+	display: block;
+	margin-top: 0.75rem;
+	font-size: 0.8rem;
+	opacity: 0.6;
+	font-family: var(--sl-font-system-mono);
+	letter-spacing: 0.04em;
+}
+
 /* Asides / callouts */
 .starlight-aside {
 	border-inline-start-width: 3px !important;
 	background: rgba(11, 8, 8, 0.6) !important;
 }
-
 .starlight-aside--note   { border-color: var(--phoenix-red) !important; }
 .starlight-aside--tip    { border-color: #00c853 !important; }
 .starlight-aside--caution{ border-color: #ffb300 !important; }
 .starlight-aside--danger { border-color: var(--phoenix-ember) !important; box-shadow: var(--phoenix-glow-soft); }
 
-/* HR */
+/* G4 — callout title: monospace uppercase matches sidebar group labels */
+.starlight-aside__title {
+	font-family: var(--sl-font-system-mono);
+	font-size: 0.8rem;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+}
+
+/* G5 — gradient HR replaces plain hairline */
+.sl-markdown-content hr {
+	border: none;
+	height: 1px;
+	background: linear-gradient(to right, transparent, var(--phoenix-red) 50%, transparent);
+	opacity: 0.4;
+	margin: 2.5rem 0;
+}
 hr { border-color: var(--sl-color-hairline); }
+
+/* G3 — definition list styling (for glossary semantic markup) */
+.sl-markdown-content dt {
+	color: var(--phoenix-ember);
+	font-family: var(--sl-font-system-mono);
+	font-weight: 700;
+	margin-top: 1.2rem;
+}
+.sl-markdown-content dd {
+	margin-left: 1.5rem;
+	color: rgba(230, 225, 222, 0.85);
+	line-height: 1.75;
+}
+
+/* G6 — badge utility class for inline tier/profile tags */
+.badge {
+	display: inline-block;
+	font-family: var(--sl-font-system-mono);
+	font-size: 0.7rem;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	padding: 0.15em 0.55em;
+	border-radius: 3px;
+	border: 1px solid currentColor;
+	text-transform: uppercase;
+	vertical-align: middle;
+}
+.badge--red   { color: var(--phoenix-red); }
+.badge--green { color: #00c853; }
+.badge--gray  { color: var(--sl-color-gray-3); }
 
 /* ============================================================
    FOOTER / META
@@ -396,7 +720,36 @@ footer {
 }
 
 /* ============================================================
+   ANIMATIONS & KEYFRAMES
+   ============================================================ */
+
+/* B3 — phoenix logo ember glow pulse */
+@keyframes ember-pulse {
+	0%, 100% { filter: drop-shadow(0 0 14px rgba(220, 38, 38, 0.3)); }
+	50%       { filter: drop-shadow(0 0 36px rgba(220, 38, 38, 0.65)); }
+}
+
+/* C4 — card entrance stagger */
+@keyframes card-entrance {
+	from { opacity: 0; transform: translateY(14px); }
+	to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.card-grid > * { animation: card-entrance 0.35s ease both; }
+	.card-grid > :nth-child(1) { animation-delay:   0ms; }
+	.card-grid > :nth-child(2) { animation-delay:  75ms; }
+	.card-grid > :nth-child(3) { animation-delay: 150ms; }
+	.card-grid > :nth-child(4) { animation-delay: 225ms; }
+	.card-grid > :nth-child(5) { animation-delay: 300ms; }
+	.card-grid > :nth-child(6) { animation-delay: 375ms; }
+	.card-grid > :nth-child(7) { animation-delay: 450ms; }
+	.card-grid > :nth-child(8) { animation-delay: 525ms; }
+}
+
+/* ============================================================
    CRT FLICKER (subtle)
+   H3 — opacity 0.012 → 0.022: visible on high-DPI, still subtle
    ============================================================ */
 
 @media (prefers-reduced-motion: no-preference) {
@@ -409,8 +762,8 @@ footer {
 			to bottom,
 			transparent 0,
 			transparent 2px,
-			rgba(220, 38, 38, 0.012) 2px,
-			rgba(220, 38, 38, 0.012) 3px
+			rgba(220, 38, 38, 0.022) 2px,
+			rgba(220, 38, 38, 0.022) 3px
 		);
 		z-index: 9999;
 		mix-blend-mode: overlay;

@@ -5,8 +5,30 @@
    50-point UI optimization pass (v80 Sunlance)
 */
 
-/* I4 — load only used weights (drops ~40KB: 500 JetBrains, 500/700 Inter) */
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600&display=swap');
+/* I1 — self-hosted fonts: eliminates Google DNS round-trip + removes CSP exceptions
+   Variable fonts — one woff2 covers the full weight range (400–700 JBM, 400–600 Inter)
+   I4 — latin-only subset: ~79KB total vs ~200KB+ multi-language Google import */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url('/fonts/jetbrains-mono-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/inter-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
 
 /* ============================================================
    COLOR TOKENS — Phoenix Red & Obsidian
@@ -277,6 +299,16 @@ nav .group-label .large {
 
 @media (prefers-reduced-motion: no-preference) {
 	.hero img { animation: ember-pulse 4s ease-in-out infinite; }
+
+	/* B4 — CTA glow pulse; animation-play-state: paused on hover lets transition take over */
+	.hero .actions a[data-variant='primary'],
+	.hero a.button.primary {
+		animation: cta-pulse 3.5s ease-in-out infinite 1.5s;
+	}
+	.hero .actions a[data-variant='primary']:hover,
+	.hero a.button.primary:hover {
+		animation-play-state: paused;
+	}
 }
 
 /* B2 — version badge: pill with hairline red border */
@@ -729,6 +761,12 @@ footer {
 	50%       { filter: drop-shadow(0 0 36px rgba(220, 38, 38, 0.65)); }
 }
 
+/* B4 — CTA button glow pulse; paused on hover so transition takes over cleanly */
+@keyframes cta-pulse {
+	0%, 100% { box-shadow: 0 0 8px rgba(220, 38, 38, 0.2); }
+	50%       { box-shadow: 0 0 22px rgba(220, 38, 38, 0.55), 0 0 40px rgba(220, 38, 38, 0.18); }
+}
+
 /* C4 — card entrance stagger */
 @keyframes card-entrance {
 	from { opacity: 0; transform: translateY(14px); }
@@ -745,6 +783,23 @@ footer {
 	.card-grid > :nth-child(6) { animation-delay: 375ms; }
 	.card-grid > :nth-child(7) { animation-delay: 450ms; }
 	.card-grid > :nth-child(8) { animation-delay: 525ms; }
+}
+
+/* ============================================================
+   F1 — search keyboard shortcut hint (⌘K / Ctrl+K)
+   Targets Starlight's header search trigger button
+   ============================================================ */
+
+site-search summary::after,
+[data-open-modal]::after,
+button[aria-label*='earch']::after {
+	content: '⌘K';
+	font-size: 0.6rem;
+	font-family: var(--sl-font-system-mono);
+	opacity: 0.45;
+	margin-left: 0.5rem;
+	letter-spacing: 0;
+	vertical-align: middle;
 }
 
 /* ============================================================

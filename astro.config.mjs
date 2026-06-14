@@ -44,6 +44,10 @@ export default defineConfig({
 				// Apple touch icon
 				{ tag: 'link', attrs: { rel: 'apple-touch-icon', href: '/phoenix-256.png' } },
 				{ tag: 'link', attrs: { rel: 'icon', type: 'image/png', sizes: '256x256', href: '/phoenix-256.png' } },
+
+				// I1 — preload self-hosted fonts (eliminates Google Fonts DNS round-trip)
+				{ tag: 'link', attrs: { rel: 'preload', href: '/fonts/jetbrains-mono-latin.woff2', as: 'font', type: 'font/woff2', crossorigin: 'anonymous' } },
+				{ tag: 'link', attrs: { rel: 'preload', href: '/fonts/inter-latin.woff2',         as: 'font', type: 'font/woff2', crossorigin: 'anonymous' } },
 			],
 			editLink: {
 				baseUrl: 'https://github.com/Lum0s-Solutions/Syn_OS/edit/main/growth/LumOs-Repos/site/',

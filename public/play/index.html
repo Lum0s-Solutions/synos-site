@@ -21,7 +21,8 @@
   #world{width:100%;height:100%;display:block;background:radial-gradient(ellipse at 50% 40%,#151517,#08080a 75%);cursor:default}
   #hint{position:absolute;left:12px;top:10px;font-size:11px;color:var(--dim);background:rgba(7,10,18,.7);padding:5px 9px;border-radius:5px;border:1px solid var(--edge)}
   #hint b{color:var(--txt)}
-  #hotbar{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);display:flex;gap:7px}
+  #hotbar{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);display:flex;gap:7px;transition:opacity .4s,transform .4s}
+    #hotbar.combat-hidden{opacity:.14;transform:translate(-50%,26px);pointer-events:none}
   .slot{width:52px;height:52px;background:#16161a;border:1px solid var(--edge);border-radius:7px;position:relative;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:.12s}
   .slot:hover{border-color:var(--azure)}
   .slot .k{position:absolute;top:2px;left:4px;font-size:9px;color:var(--acc);font-weight:bold}
@@ -54,7 +55,8 @@
   .card input{width:100%;background:#0a0a0b;border:1px solid var(--edge);color:var(--txt);padding:10px 12px;font-size:15px;border-radius:6px;margin-bottom:12px;font-family:inherit}
   .card button{width:100%;background:linear-gradient(90deg,var(--azure),#0ea5c4);color:#04121a;border:0;padding:12px;font-size:15px;font-weight:bold;border-radius:6px;cursor:pointer;letter-spacing:2px}
   .card button:hover{filter:brightness(1.12)}
-  .facpick{display:flex;gap:6px;margin-bottom:14px}
+  .facpick{display:flex;gap:6px;margin-bottom:8px}
+  #facdesc{font-size:10.5px;color:var(--dim);min-height:22px;margin-bottom:10px;line-height:1.4;text-align:center}
   .facpick label{flex:1;padding:9px 0;border:1px solid var(--edge);border-radius:6px;font-size:11px;cursor:pointer;opacity:.5}
   .facpick input{display:none}
   .facpick label:has(input:checked){opacity:1;border-color:currentColor;font-weight:bold;box-shadow:0 0 12px currentColor}
@@ -126,15 +128,17 @@
     <div id="tip" class="hidden"></div>
     <div id="join">
       <div class="card">
-        <div class="sub">SHARED-WORLD ACCESS</div><h1>GRIMOIRE</h1>
-        <p>cyberpunk hacking MMO · <span id="srvlbl"></span></p>
+        <div class="brandmark" style="font-size:13px;letter-spacing:2px">SYN<span style="color:var(--brand)">_</span>OS</div><h1>GRIMOIRE</h1>
+          <div class="sub">THE WEAVE · shared-world hacking MMO</div>
+        <p style="color:var(--dim);margin:9px 0 13px;line-height:1.55">Walk to a contested node, solve its lab, capture the territory for your faction.<br><b style="color:var(--white)">The exploit is the objective.</b><span id="srvlbl" style="font-size:11px;display:block;margin-top:6px"></span></p>
         <input id="jname" maxlength="20" placeholder="callsign" autocomplete="off">
         <div class="facpick">
           <label class="fac-DarkArmy"><input type="radio" name="fac" value="DarkArmy">DarkArmy</label>
           <label class="fac-AzureWatch"><input type="radio" name="fac" value="AzureWatch" checked>AzureWatch</label>
           <label class="fac-GraySyndicate"><input type="radio" name="fac" value="GraySyndicate">GraySyndicate</label>
         </div>
-        <button id="jgo">JACK IN</button>
+        <div id="facdesc"></div>
+          <button id="jgo">JACK IN</button>
       </div>
     </div>
     <div id="hub" class="hidden">
@@ -198,6 +202,29 @@ let NODES=[]; // fetched from daemon GET /api/v1/world/nodes (the 6 faction-war 
 const NRADIUS=7; // contest proximity
 let nodeState={};
 let nearNode=null, activeCapture=null; // node id in range / node being captured
+let capFlash={t:0,col:"#e11d2a",name:""}; // node-capture cinematic flash
+function drawCaptureFlash(){ if(capFlash.t<=0)return; const a=capFlash.t;
+  const g=cx.createRadialGradient(cv.width/2,cv.height/2,cv.height*0.2,cv.width/2,cv.height/2,cv.height*0.72);
+  g.addColorStop(0,"rgba(0,0,0,0)"); g.addColorStop(1,capFlash.col+Math.round(a*90).toString(16).padStart(2,"0"));
+  cx.fillStyle=g; cx.fillRect(0,0,cv.width,cv.height);
+  if(a>0.4){ cx.globalAlpha=Math.min(1,(a-0.4)*3.2); cx.textAlign="center"; cx.shadowColor=capFlash.col; cx.shadowBlur=26;
+    cx.fillStyle="#fff"; cx.font="bold 34px monospace"; cx.fillText("◈ CAPTURED",cv.width/2,cv.height/2-38);
+    cx.fillStyle=capFlash.col; cx.font="bold 15px monospace"; cx.fillText(capFlash.name.toUpperCase(),cv.width/2,cv.height/2-10);
+    cx.shadowBlur=0; cx.globalAlpha=1; }
+  capFlash.t-=0.012; }
+let tutorialDone=localStorage.getItem("grim_tut")=="1"; // first-spawn onboarding
+function drawTutorial(meP,ox,oy){ if(tutorialDone||!meP||!NODES.length)return;
+  let best=null,bd=1e9; for(const n of NODES){ const ns=nodeState[n.id]; if(ns&&ns.state=="Captured")continue;
+    const d=Math.hypot(n.pos[0]-meP.rx,n.pos[2]-meP.rz); if(d<bd){bd=d;best=n;} }
+  if(!best)return;
+  const bx=ox+best.pos[0]*scale, by=oy+best.pos[2]*scale, ang=Math.atan2(by-cv.height/2,bx-cv.width/2), ar=70+8*Math.sin(fr*0.12);
+  const axp=cv.width/2+Math.cos(ang)*ar, ayp=cv.height/2+Math.sin(ang)*ar;
+  cx.fillStyle="rgba(225,29,42,"+(0.6+0.3*Math.sin(fr*0.12))+")"; cx.save(); cx.translate(axp,ayp); cx.rotate(ang);
+  cx.beginPath(); cx.moveTo(11,0); cx.lineTo(-6,-6); cx.lineTo(-6,6); cx.closePath(); cx.fill(); cx.restore();
+  const hint=bd<NRADIUS?"Press [E] to CONTEST — then solve its lab & submit the flag to capture it":("Walk to "+best.name+" — your first territory to capture");
+  cx.fillStyle="rgba(10,10,11,.9)"; cx.fillRect(cv.width/2-200,cv.height-94,400,30);
+  cx.strokeStyle="#e11d2a"; cx.lineWidth=1.5; cx.strokeRect(cv.width/2-200,cv.height-94,400,30);
+  cx.fillStyle="#ececee"; cx.font="11px monospace"; cx.textAlign="center"; cx.fillText("◈ TUTORIAL — "+hint,cv.width/2,cv.height-74); }
 // built-in registry — mirrors the daemon's world_node_layout; used if the fetch fails
 const FALLBACK_NODES=[
   {id:"zone_recon",name:"Recon Outpost",pos:[24,0,0],lab:"tut_first_scan",icon:"🔭"},
@@ -246,6 +273,8 @@ function onNodeCaptured(m){ const id=m.node_id, ns=nodeState[id]; if(!ns)return;
   const fac=m.faction||FAC;
   ns.state="Captured"; ns.faction=fac; ns.token=null; if(activeCapture==id)activeCapture=null;
   wlog("★ CAPTURED "+nodeName(id)+" for "+fac+"!"); try{sfx(880,0.18,"sine");sfx(1180,0.14,"sine");}catch(e){}
+  capFlash={t:1,col:(FCOL[facNorm(fac)]||"#e11d2a"),name:nodeName(id)}; // cinematic flash
+  if(!tutorialDone){ tutorialDone=true; try{localStorage.setItem("grim_tut","1");}catch(e){} } // onboarding complete
     /* Phase-2: daemon flips the real zone in flag validation on a proven solve;
        client no longer POSTs the capture (that was the fake-flip vector). */ }
 function onNodeUpdate(m){ const id=m.node_id, ns=nodeState[id]; if(!ns)return;
@@ -393,6 +422,10 @@ function draw(){
   const meP=players.get(me), camX=meP?meP.rx:0, camZ=meP?meP.rz:0;
   const ox=cv.width/2-camX*scale, oy=cv.height/2-camZ*scale;
   const pulse=0.5+0.5*Math.sin(fr*0.03);
+  // ── combat UI only surfaces when combat is relevant → exploration is the default lens ──
+  let enemyNear=false;
+  if(meP&&meP.alive){ for(const p of players.values()){ if(p.id!==me&&p.alive&&p.fac!==meP.fac&&Math.hypot(p.rx-meP.rx,p.rz-meP.rz)<16){ enemyNear=true; break; } } }
+  const _hb=$("hotbar"); if(_hb) _hb.classList.toggle("combat-hidden", !enemyNear);
   // ── neon grid ──
   cx.lineWidth=1;
   for(let g=-60;g<=60;g+=10){ cx.strokeStyle=`rgba(120,120,132,${g%20===0?0.5:0.2})`;
@@ -400,27 +433,39 @@ function draw(){
     cx.moveTo(ox-60*scale,oy+g*scale);cx.lineTo(ox+60*scale,oy+g*scale);cx.stroke(); }
   cx.strokeStyle=`rgba(225,29,42,${0.4+0.3*pulse})`; cx.lineWidth=2; cx.shadowColor="#e11d2a"; cx.shadowBlur=14;
   cx.strokeRect(ox-55*scale,oy-55*scale,110*scale,110*scale); cx.shadowBlur=0;
-  // ── v88 Fusion: capturable world-nodes ──
+  // ── v88 Fusion: territory floor tint (captured nodes stain the ground their faction color) ──
+  for(const n of NODES){ const ns=nodeState[n.id]; if(!ns||ns.state!="Captured")continue;
+    const nx=ox+n.pos[0]*scale, ny=oy+n.pos[2]*scale, col=FCOL[facNorm(ns.faction)]||"#f5c518";
+    const tg=cx.createRadialGradient(nx,ny,0,nx,ny,17*scale);
+    tg.addColorStop(0,col+"26"); tg.addColorStop(1,col+"00");
+    cx.fillStyle=tg; cx.beginPath(); cx.arc(nx,ny,17*scale,0,7); cx.fill(); }
+  // ── v88 Fusion: capturable world-nodes — the centerpiece ──
   nearNode=null;
   for(const n of NODES){
     const nx=ox+n.pos[0]*scale, ny=oy+n.pos[2]*scale, ns=nodeState[n.id];
     const cap=ns.state=="Captured", act=(ns.state=="LabActive"||ns.state=="Contesting"||activeCapture==n.id);
-    const col=cap?(FCOL[facNorm(ns.faction)]||"#f5c518"):act?"#f5c518":"#4b6a8a";
+    const col=cap?(FCOL[facNorm(ns.faction)]||"#f5c518"):act?"#f5c518":"#8aa0c0";
     const d=meP?Math.hypot(n.pos[0]-meP.rx,n.pos[2]-meP.rz):999;
     if(d<NRADIUS&&!cap) nearNode=n.id;
-    const R=(18+(act?3*pulse:0))*(scale/6);
-    if(d<NRADIUS&&!cap){ cx.strokeStyle="rgba(225,29,42,.28)"; cx.lineWidth=1; cx.beginPath(); cx.arc(nx,ny,NRADIUS*scale,0,7); cx.stroke(); }
-    cx.strokeStyle=col; cx.lineWidth=cap?3:2; cx.shadowColor=col; cx.shadowBlur=cap?18:act?14:6;
+    const R=(24+(act?4*pulse:0))*(scale/6);
+    if(d<NRADIUS&&!cap){ cx.strokeStyle="rgba(225,29,42,.32)"; cx.lineWidth=1.5; cx.beginPath(); cx.arc(nx,ny,NRADIUS*scale,0,7); cx.stroke(); }
+    cx.strokeStyle=col; cx.lineWidth=cap?3.5:2.5; cx.shadowColor=col; cx.shadowBlur=cap?20:act?16:9;
     cx.beginPath();
     for(let i=0;i<6;i++){ const a=Math.PI/6+i*Math.PI/3, px=nx+Math.cos(a)*R, py=ny+Math.sin(a)*R; i?cx.lineTo(px,py):cx.moveTo(px,py); }
     cx.closePath(); cx.stroke();
-    if(cap){ cx.globalAlpha=.16; cx.fillStyle=col; cx.fill(); cx.globalAlpha=1; }
+    if(cap){ cx.globalAlpha=.2; cx.fillStyle=col; cx.fill(); cx.globalAlpha=1; }
     cx.shadowBlur=0;
-    if(act){ cx.strokeStyle="rgba(245,197,24,"+(0.35+0.4*pulse)+")"; cx.setLineDash([4,4]); cx.lineWidth=1.5; cx.beginPath(); cx.arc(nx,ny,R+8,0,7); cx.stroke(); cx.setLineDash([]); }
-    cx.fillStyle=col; cx.font="bold 10px monospace"; cx.textAlign="center";
-    cx.fillText((cap?"◈ ":act?"⚔ ":"◇ ")+n.name,nx,ny-R-7);
-    cx.fillStyle="#7c8ba1"; cx.font="8px monospace";
-    cx.fillText(cap?("HELD · "+(facNorm(ns.faction)||ns.faction)):act?("SOLVE "+n.lab):n.lab,nx,ny+R+13);
+    // rotating capture-progress ring while a lab is being solved
+    if(act){ cx.strokeStyle="rgba(245,197,24,"+(0.4+0.4*pulse)+")"; cx.lineWidth=2.5;
+      cx.beginPath(); cx.arc(nx,ny,R+9,fr*0.06,fr*0.06+4.7); cx.stroke(); }
+    // node icon in the hex center
+    if(n.icon){ cx.font=Math.round(R*0.85)+"px serif"; cx.textAlign="center"; cx.textBaseline="middle"; cx.fillText(n.icon,nx,ny); cx.textBaseline="alphabetic"; }
+    // labels: name · state/lab · bonus
+    cx.fillStyle=col; cx.font="bold 11px monospace"; cx.textAlign="center";
+    cx.fillText(n.name,nx,ny-R-10);
+    cx.fillStyle="#9aa8bd"; cx.font="8.5px monospace";
+    cx.fillText(cap?("◈ HELD · "+(facNorm(ns.faction)||ns.faction)):act?("SOLVE: "+n.lab):("◇ "+n.lab),nx,ny+R+13);
+    if(n.bonus){ cx.fillStyle="#6b7686"; cx.font="7.5px monospace"; cx.fillText(n.bonus,nx,ny+R+23); }
   }
   // ── my attack-range ring (basic reach = 12) ──
   if(meP&&meP.alive){ cx.strokeStyle="rgba(225,29,42,0.16)"; cx.setLineDash([3,6]); cx.lineWidth=1;
@@ -476,20 +521,31 @@ function draw(){
     cx.strokeStyle="#e11d2a"; cx.lineWidth=1.5; cx.strokeRect(cv.width/2-120,cv.height-56,240,26);
     cx.fillStyle="#e11d2a"; cx.font="bold 12px monospace"; cx.textAlign="center";
     cx.fillText("[E] CONTEST "+nodeName(nearNode).toUpperCase(),cv.width/2,cv.height-38); }
+  drawTutorial(meP,ox,oy);
+  drawCaptureFlash();
   // ── CRT overlay: scanlines + vignette ──
   cx.globalAlpha=0.045; cx.fillStyle="#000";
   for(let sy=0;sy<cv.height;sy+=3) cx.fillRect(0,sy,cv.width,1); cx.globalAlpha=1;
   const vg=cx.createRadialGradient(cv.width/2,cv.height/2,cv.height*0.35,cv.width/2,cv.height/2,cv.height*0.82);
   vg.addColorStop(0,"rgba(0,0,0,0)"); vg.addColorStop(1,"rgba(0,0,0,0.5)"); cx.fillStyle=vg; cx.fillRect(0,0,cv.width,cv.height);
-  // ── minimap (top-right) ──
-  { const ms=94, mx=cv.width-ms-14, my=14, hs=ms/130;
-    cx.fillStyle="rgba(7,10,18,.74)"; cx.fillRect(mx,my,ms,ms);
+  // ── network-topology minimap (top-right): nodes = hosts, you = your foothold ──
+  { const ms=104, mx=cv.width-ms-14, my=14, hs=ms/130, cxm=mx+ms/2, cym=my+ms/2;
+    cx.fillStyle="rgba(10,10,11,.8)"; cx.fillRect(mx,my,ms,ms);
     cx.strokeStyle="rgba(225,29,42,.5)"; cx.lineWidth=1; cx.strokeRect(mx,my,ms,ms);
-    cx.strokeStyle="rgba(120,120,132,.4)"; cx.strokeRect(mx+ms/2-55*hs,my+ms/2-55*hs,110*hs,110*hs);
-    for(const p of players.values()){ const px=mx+ms/2+p.rx*hs, py=my+ms/2+p.rz*hs;
-      cx.globalAlpha=p.alive?1:.4; cx.fillStyle=p.id===me?"#f5c518":(FCOL[p.fac]||"#888");
-      cx.beginPath(); cx.arc(px,py,p.id===me?2.6:1.8,0,7); cx.fill(); } cx.globalAlpha=1;
-    cx.fillStyle="#7c7c86"; cx.font="8px monospace"; cx.textAlign="left"; cx.fillText("ARENA",mx+4,my+10); }
+    cx.strokeStyle="rgba(120,120,140,.22)"; cx.lineWidth=1; // topology links (hub + ring)
+    for(let i=0;i<NODES.length;i++){ const a=NODES[i].pos, b=NODES[(i+1)%NODES.length].pos;
+      cx.beginPath(); cx.moveTo(cxm+a[0]*hs,cym+a[2]*hs); cx.lineTo(cxm+b[0]*hs,cym+b[2]*hs); cx.stroke();
+      cx.beginPath(); cx.moveTo(cxm,cym); cx.lineTo(cxm+a[0]*hs,cym+a[2]*hs); cx.stroke(); }
+    for(const p of players.values()){ if(p.id===me)continue; cx.globalAlpha=p.alive?.6:.2; cx.fillStyle=FCOL[p.fac]||"#888";
+      cx.beginPath(); cx.arc(cxm+p.rx*hs,cym+p.rz*hs,1.5,0,7); cx.fill(); } cx.globalAlpha=1;
+    for(const n of NODES){ const ns=nodeState[n.id], px=cxm+n.pos[0]*hs, py=cym+n.pos[2]*hs;
+      const cap=ns&&ns.state=="Captured", act=ns&&(ns.state=="LabActive"||ns.state=="Contesting");
+      cx.fillStyle=cap?(FCOL[facNorm(ns.faction)]||"#f5c518"):act?"#f5c518":"#8aa0c0";
+      cx.beginPath(); cx.arc(px,py,cap?3.4:2.6,0,7); cx.fill();
+      if(cap){ cx.strokeStyle=cx.fillStyle; cx.lineWidth=1; cx.beginPath(); cx.arc(px,py,5,0,7); cx.stroke(); } }
+    if(meP){ cx.fillStyle="#fff"; cx.strokeStyle="#e11d2a"; cx.lineWidth=1.5;
+      cx.beginPath(); cx.arc(cxm+meP.rx*hs,cym+meP.rz*hs,2.6,0,7); cx.fill(); cx.stroke(); }
+    cx.fillStyle="#e11d2a"; cx.font="bold 8px monospace"; cx.textAlign="left"; cx.fillText("◈ NETWORK",mx+5,my+11); }
   // ── kill feed (top-center) ──
   killfeed=killfeed.filter(k=>k.t>0); cx.font="bold 12px monospace";
   killfeed.forEach((k,i)=>{ const y=20+i*18; cx.globalAlpha=Math.min(1,k.t*2.5);
@@ -520,6 +576,10 @@ function draw(){
 $("jgo").onclick=()=>{ NAME=($("jname").value||"Op").trim().slice(0,20);
   FAC=document.querySelector('input[name=fac]:checked').value; $("join").classList.add("hidden"); connect(); };
 $("jname").addEventListener("keydown",e=>{ if(e.key=="Enter")$("jgo").click(); });
+// lobby — faction blurbs to help the player pick
+const FACDESC={DarkArmy:"⚔ Offense-first — the Recon Outpost & The Armory reward aggression.",AzureWatch:"🛡 Defense & detection — hold The Citadel, deny the enemy.",GraySyndicate:"💰 The market runs on you — The Vault & The Exchange stack credits."};
+function updFacDesc(){ const f=document.querySelector('input[name="fac"]:checked'), d=$("facdesc"); if(f&&d)d.textContent=FACDESC[f.value]||""; }
+document.querySelectorAll('input[name="fac"]').forEach(r=>r.addEventListener("change",updFacDesc)); updFacDesc();
 // ── GRIMOIRE HUB — RPG layer via the SAME-ORIGIN daemon API (/api/v1/*) ──
 const RPG = location.protocol.startsWith("http") ? "" : null;   // null = file:// (CORS-blocked)
 let token = localStorage.getItem("grim_token")||"", myPid="";

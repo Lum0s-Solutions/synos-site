@@ -12,7 +12,7 @@ Pick one. All ISOs are bootable on UEFI and Legacy BIOS.
 ### dd (Linux / macOS)
 
 ```bash
-sudo dd if=synos-grimoire-public-v80.0.0.iso of=/dev/sdX bs=4M status=progress conv=fsync
+sudo dd if=synos-grimoire-public-v111.0.0.iso of=/dev/sdX bs=4M status=progress conv=fsync
 sync
 ```
 

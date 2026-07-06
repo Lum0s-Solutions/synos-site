@@ -3,7 +3,7 @@ title: Icarus Post-Quantum Crypto
 description: Icarus v9.0 — NIST-standardised post-quantum cryptography for Syn_OS, on by default. ML-KEM (FIPS 203), ML-DSA (FIPS 204), SLH-DSA (FIPS 205). Quantum-safe today, across every transport and signing path.
 ---
 
-**Icarus** is the post-quantum cryptography engine of Syn_OS. v9.0 implements all three NIST-standardised PQC algorithms and exposes them through a single Rust crate (`synos-icarus`) used by every component that signs, encrypts, or attests anything. As of v80.0.0 "Sunlance", post-quantum is **on by default** — not an opt-in flag. Every transport, signing path, and audit trail uses ML-KEM, ML-DSA, or SLH-DSA (or a hybrid pairing).
+**Icarus** is the post-quantum cryptography engine of Syn_OS. v9.0 implements all three NIST-standardised PQC algorithms and exposes them through a single Rust crate (`synos-icarus`) used by every component that signs, encrypts, or attests anything. As of v111.0.0 "Last Light", post-quantum is **on by default** — not an opt-in flag. Every transport, signing path, and audit trail uses ML-KEM, ML-DSA, or SLH-DSA (or a hybrid pairing).
 
 The name is the test: fly toward the sun if you must, but make sure your wings are made of something that doesn't melt under quantum heat.
 
@@ -70,7 +70,7 @@ The `synos-icarus` crate exposes a stable Rust API that the rest of the workspac
 
 ## Quantum-safe today vs quantum-safe tomorrow
 
-Icarus is **quantum-safe today** — every signing and key-agreement primitive that defends Syn_OS infrastructure is either FIPS-203/204/205 or a hybrid that includes one of those. As of v80.0.0 there is **no** classical-only path in production Sanctum federation traffic, TLS, SSH, SBOM signing, ALFRED model provenance, audit trail, or release attestation. Post-quantum is the default, not the upgrade.
+Icarus is **quantum-safe today** — every signing and key-agreement primitive that defends Syn_OS infrastructure is either FIPS-203/204/205 or a hybrid that includes one of those. As of v111.0.0 there is **no** classical-only path in production Sanctum federation traffic, TLS, SSH, SBOM signing, ALFRED model provenance, audit trail, or release attestation. Post-quantum is the default, not the upgrade.
 
 ## Related
 

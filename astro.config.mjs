@@ -57,6 +57,11 @@ export default defineConfig({
 			tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 3 },
 			sidebar: [
 				{
+					label: '🎮 Play GRIMOIRE',
+					link: '/play/',
+					attrs: { target: '_blank', style: 'font-weight:700' },
+				},
+				{
 					label: '▶ Getting Started',
 					items: [
 						{ label: 'What is Syn_OS?',           slug: 'guides/overview' },

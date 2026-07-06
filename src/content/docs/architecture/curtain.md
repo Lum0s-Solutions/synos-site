@@ -10,7 +10,7 @@ It evolved across four generations:
 - **Curtain v1** — build-time ELF symbol scanner + feature audit + lab integrity manifests. Static.
 - **Curtain v2** — runtime capability ceiling with seven enforcement points (tier gate + seccomp + AppArmor + taint + prompt guard + syscall filter + mesh).
 - **Curtain v3** *(v54 Sundered Crown)* — **tier-based ed25519 capability tokens**, signed and chained, enforced by an LSM hook in `synos-security`.
-- **Curtain v4** *(v80 Sunlance — current)* — Integrates the compile-time `xtask` scanner (13 forbidden symbols, 8 forbidden strings enforced at build time) with the v3 runtime token system. SipHash-2-4 keyed-MAC capability tokens replace raw ed25519 for per-operation gates; the `synos_capability` kernel module (issue / verify / revoke) makes forged-tier tokens return `BAD_MAC` before the LSM hook is ever reached.
+- **Curtain v4** *(v80 Last Light — current)* — Integrates the compile-time `xtask` scanner (13 forbidden symbols, 8 forbidden strings enforced at build time) with the v3 runtime token system. SipHash-2-4 keyed-MAC capability tokens replace raw ed25519 for per-operation gates; the `synos_capability` kernel module (issue / verify / revoke) makes forged-tier tokens return `BAD_MAC` before the LSM hook is ever reached.
 
 ## Why Curtain exists
 

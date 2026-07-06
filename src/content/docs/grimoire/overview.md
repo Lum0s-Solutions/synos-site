@@ -1,9 +1,13 @@
 ---
 title: GRIMOIRE Overview
-description: GRIMOIRE — the competitive hacker training platform built into Syn_OS. 108 labs, 13 categories, 110+ game modules, faction wars, and a Sovereign Operator Path. Catalog 1.0.
+description: GRIMOIRE — the competitive hacker training platform built into Syn_OS. 117 labs, 13 categories, 110+ game modules, faction wars, and a Sovereign Operator Path. Catalog 1.0.
 ---
 
 **GRIMOIRE** — Gamified Reconnaissance, Intelligence, Malware Operations, Intrusion Response & Exploitation — is the cybersecurity training layer of Syn_OS. It is not a tool collection bolted onto a distro; it is a complete **progression system** for mastering offensive, defensive, and purple-team cybersecurity, preparing for industry certifications, and competing globally to be the best hacker in the game.
+
+:::tip[Play GRIMOIRE now]
+GRIMOIRE is a **playable shared-world hacking MMO** — spawn into the Weave, walk to a contested world-node, solve its real lab, and capture that territory for your faction. **The exploit *is* the objective**, and rivals can interrupt you mid-hack. [▶ Play in your browser →](/play/)
+:::
 
 ## What GRIMOIRE covers
 
@@ -25,7 +29,7 @@ description: GRIMOIRE — the competitive hacker training platform built into Sy
 | **Bevy plugins**         | 8 — Cutscene, Mindmap, RetroFilter, Cyberspace, SkillTree, FactionHQ, Rehoboam, Twin |
 | **Factions**             | 3 — Crimson Spire, Neon Collective, The Warden                       |
 | **Cert paths mapped**    | 11+ professional credentials                                         |
-| **Engine offline**       | All 108 labs ship pre-bundled in the ISO                             |
+| **Engine offline**       | All 117 labs ship pre-bundled in the ISO                             |
 | **Lab integrity**        | SHA-256 manifests verified by `lab-integrity` xtask on every merge   |
 
 ## The progressive unlock system (v41+)
@@ -69,6 +73,6 @@ This is the bedrock of the LumOs commercial model: GRIMOIRE is the talent funnel
 
 ## Where to next
 
-- **[Lab Catalog →](/grimoire/labs/)** — the 108 labs, by category
+- **[Lab Catalog →](/grimoire/labs/)** — the 117 labs, by category
 - **[XP & Progression →](/grimoire/progression/)** — how unlock works
 - **[Competition Mode →](/grimoire/competition/)** — leaderboards, war games, and the Sovereign Operator Path

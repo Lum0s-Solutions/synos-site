@@ -15,7 +15,7 @@ The Syn_OS codebase has accumulated its own vocabulary. This is the canonical re
 
 **Fragment Field IDS** — Energy-topology intrusion detection. Treats attack patterns as physics-layer signatures. Implemented in `synos-fragment-field` (3,002 LOC) + `fragment_field.rs` in the kernel.
 
-**Curtain** — The mechanism that prevents tier escalation. v1 was static (build-time scanner). v2 added 7 runtime enforcement points. v3 *(Sundered Crown)* added ed25519 capability tokens. **v4 *(Sunlance — current)*** integrates a compile-time `xtask` ELF/string scanner with v3's token system, replacing raw ed25519 per-operation gates with SipHash-2-4 keyed-MACs enforced by the `synos_capability` kernel module.
+**Curtain** — The mechanism that prevents tier escalation. v1 was static (build-time scanner). v2 added 7 runtime enforcement points. v3 *(Sundered Crown)* added ed25519 capability tokens. **v4 *(Last Light — current)*** integrates a compile-time `xtask` ELF/string scanner with v3's token system, replacing raw ed25519 per-operation gates with SipHash-2-4 keyed-MACs enforced by the `synos_capability` kernel module.
 
 **Sovereign Operator Path** — The long-form GRIMOIRE questline that graduates a player from CTF novice to running their own encrypted mesh.
 
@@ -23,7 +23,7 @@ The Syn_OS codebase has accumulated its own vocabulary. This is the canonical re
 
 **ALFRED** — Adaptive Learning Framework for Responsive Evolution & Defense. The AI daemon. Two-layer Rust + Python architecture. **v6.0** (1.0 GA consolidation).
 
-**GRIMOIRE** — Gamified Reconnaissance, Intelligence, Malware Operations, Intrusion Response & Exploitation. The training platform. **108 labs, 13 categories** (catalog **1.0**), 110+ game modules.
+**GRIMOIRE** — Gamified Reconnaissance, Intelligence, Malware Operations, Intrusion Response & Exploitation. The training platform. **117 labs, 13 categories** (catalog **1.0**), 110+ game modules.
 
 **ARCANUM Hive** — The distributed mesh layer. Tailscale + WireGuard + Kubernetes operator. v55 Stoneglass shipped 8-node Ansible GA.
 
@@ -47,7 +47,7 @@ The Syn_OS codebase has accumulated its own vocabulary. This is the canonical re
 
 **Sun & Salt** — IPO / Series-A readiness package. v60 (prior release).
 
-**Sunlance** — The 1.0 GA release. **v80.0.0 (current).** Completes the v61→v80 software campaign. ALFRED v6.0, GRIMOIRE 1.0 (108 labs), 209 active crates, post-quantum by default.
+**Last Light** — The 1.0 GA release. **v111.0.0 (current).** Completes the v61→v80 software campaign. ALFRED v6.0, GRIMOIRE 1.0 (117 labs), 209 active crates, post-quantum by default.
 
 ## Kernel & interface
 
@@ -137,7 +137,7 @@ The Syn_OS codebase has accumulated its own vocabulary. This is the canonical re
 
 **Operation Warp Speed** — Umbrella codename for the v44 → v60 codesprint. Code-complete on `feat/operation-warp-speed`.
 
-**v61→v80 campaign** — The 20-version codesprint that delivered the 1.0 GA milestone. Completes with v80.0.0 "Sunlance".
+**v61→v80 campaign** — The 20-version codesprint that delivered the 1.0 GA milestone. Completes with v111.0.0 "Last Light".
 
 **SYNOS_STRICT** — Build-orchestrator flag. When `=1`, any stage failure aborts the entire build (fail-loud).
 

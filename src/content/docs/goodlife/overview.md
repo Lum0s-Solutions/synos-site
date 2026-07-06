@@ -3,7 +3,7 @@ title: GoodLife AI Research ISO
 description: GoodLife — the AI-research profile of Syn_OS. Same kernel, same Rust workspace, ALFRED in research-mode, Ollama pre-configured, no offensive tooling, no internet-facing services by default.
 ---
 
-**GoodLife** is the AI-research profile of Syn_OS. Same custom 6.19-synos-ai kernel, same 209-crate Rust workspace, same Sanctum federation — but ALFRED is built with the `research-mode` cargo feature, Ollama is pre-configured offline-capable, and the offensive security tooling is gone. It is the right profile if you want a sovereign local AI lab without becoming a target by accident.
+**GoodLife** is the AI-research profile of Syn_OS. Same custom 6.19-synos-ai kernel, same 239-crate Rust workspace, same Sanctum federation — but ALFRED is built with the `research-mode` cargo feature, Ollama is pre-configured offline-capable, and the offensive security tooling is gone. It is the right profile if you want a sovereign local AI lab without becoming a target by accident.
 
 ## What's in the box
 

@@ -60,7 +60,7 @@ external event (or kernel push via synos_consciousness read_iter)
 
 The brainstem `VALIDATION.md` documents 17 critical API corrections applied across the crate interfaces.
 
-## Kernel push-channel (v80 Sunlance)
+## Kernel push-channel (v80 Last Light)
 
 In v80, the kernel wakes ALFRED directly. The `synos_consciousness` kernel module exposes a **blocking `read()`** path on `/dev/synos_consciousness` that yields `synos_stimulus_record` structs (4112 bytes each) as they arrive from the kernel. ALFRED runs a dedicated `synos-stimulus` consumer thread that reads these structs and injects them as `BrainSignal::RawEvent` with `Taint::KernelTelemetry` into the thalamus gate.
 

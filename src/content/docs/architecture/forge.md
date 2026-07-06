@@ -25,9 +25,9 @@ The result: two oracle nodes, building from the same commit, produce ISOs whose 
 ```bash
 # on a second oracle:
 synos-rebuild-verify.sh \
-    --release v80.0.0 \
+    --release v111.0.0 \
     --commit 8fee198a \
-    --reference https://releases.synos-linux.pro/v80.0.0/synos-master-v80.0.0.iso.sha256
+    --reference https://releases.synos-linux.pro/v111.0.0/synos-master-v111.0.0.iso.sha256
 
 # →   PASS — local digest matches reference
 #     Sigstore Rekor entry verified
@@ -42,13 +42,13 @@ Every release artefact is signed with **cosign** and the signature is published 
 
 ```bash
 cosign verify-blob \
-    --certificate synos-master-v80.0.0.iso.cert \
-    --signature  synos-master-v80.0.0.iso.sig \
+    --certificate synos-master-v111.0.0.iso.cert \
+    --signature  synos-master-v111.0.0.iso.sig \
     --certificate-identity-regexp '.*@lumossolutions\.io$' \
     --certificate-oidc-issuer https://github.com/login/oauth \
-    synos-master-v80.0.0.iso
+    synos-master-v111.0.0.iso
 
-rekor-cli search --artifact synos-master-v80.0.0.iso
+rekor-cli search --artifact synos-master-v111.0.0.iso
 ```
 
 Public Rekor index entries make every release independently verifiable forever, even if Lumos goes dark — the transparency log is operated by Sigstore, not by Lumos.

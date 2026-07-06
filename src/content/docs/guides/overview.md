@@ -19,14 +19,14 @@ Three reinforcing missions drive every architectural decision:
 
 | Field | Value |
 |-------|-------|
-| **Release line** | v80.0.0 "Sunlance" — **1.0 GA release** |
+| **Release line** | v111.0.0 "Last Light" — **1.0 GA release** |
 | **Codename umbrella** | v61→v80 campaign — code-complete |
 | **Base OS** | Arch Linux (`mkarchiso` + `pacstrap`, Docker-based on sanctum oracle) |
 | **Rust workspace** | **209 active crates**, 0 compile errors |
 | **Kernel** | 6.19-synos-ai (LLVM + `CONFIG_RUST=y`), 12 `CONFIG_SYNOS_*` knobs, capability-gated signed Rust kernel modules |
 | **Kernel AI interface** | Capability-gated, signed Rust kernel-module interface (root-only, `CAP_SYS_ADMIN`-gated, `0600` device nodes via udev); replaces the dead syscall approach (upstream 6.19 collision) |
 | **ALFRED** | **v6.0** — Rust daemon, brainstem-wired consciousness fusion (Traditional + Neuromorphic + Quantum + TNGS + MPS cortex) |
-| **GRIMOIRE** | **108 labs across 13 categories** (catalog **1.0**), 110+ game modules, ~53k LOC of gamification |
+| **GRIMOIRE** | **117 labs across 13 categories** (catalog **1.0**), 110+ game modules, ~53k LOC of gamification |
 | **synos-bevy** | Bevy 0.14, **8 plugins** (Cutscene, Mindmap, RetroFilter, Cyberspace, SkillTree, FactionHQ, Rehoboam, Twin) |
 | **Post-quantum crypto** | **By default** — ML-KEM, ML-DSA, SLH-DSA across TLS, SSH, SBOM signing, ALFRED models, audit trail |
 | **Local LLM** | Ollama (`qwen2.5:7b` + `llama3.2:3b`) pre-bundled — ISO is offline-capable |

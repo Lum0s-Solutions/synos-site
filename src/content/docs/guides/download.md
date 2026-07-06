@@ -72,5 +72,5 @@ The cross-oracle verifier (`synos-rebuild-verify.sh`) lets you rebuild any relea
 Star the [GitHub repository](https://github.com/Lum0s-Solutions/Syn_OS) to be notified when public ISOs cut. Join the [Discord](https://discord.gg/synos) for build-day announcements.
 
 :::caution[Beta status]
-GRIMOIRE Public and GoodLife are **code-complete — v80.0.0 "Sunlance" (1.0 GA)**. Public distribution is blocked on counsel review of the MIT vs LicenseRef-Proprietary split, EULA, ToS, and MSA bundle, plus a $1M / $3M Tech E&O cyber-liability binding. Engineering is ready; legal is in motion.
+GRIMOIRE Public and GoodLife are **code-complete — v111.0.0 "Last Light"**. Public distribution is blocked on counsel review of the MIT vs LicenseRef-Proprietary split, EULA, ToS, and MSA bundle, plus a $1M / $3M Tech E&O cyber-liability binding. Engineering is ready; legal is in motion.
 :::

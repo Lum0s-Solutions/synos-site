@@ -23,7 +23,7 @@ Every lab in GRIMOIRE ships with a Docker overlay (the majority with full networ
 | **Purple Team / Detection**  |  14  |  Intermediate → Expert  | Detection engineering, Sigma rule authoring, SIEM correlation             |
 | **API Security**             |   8  | Intermediate → Advanced | REST / GraphQL abuse, OAuth misconfigurations, mass assignment            |
 
-**Total: 108 labs, 13 categories (catalog 1.0), ~110+ game modules wrapping them.**
+**Total: 117 labs, 13 categories (catalog 1.0), ~110+ game modules wrapping them.**
 
 ## What every lab ships with
 

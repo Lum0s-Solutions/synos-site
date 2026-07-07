@@ -180,7 +180,7 @@
 // World URL is configurable so a baked launcher can point any image at any world:
 //   ?server=ws://HOST:PORT   (query param)  ·  window.SYNOS_WORLD_SERVER  ·  default
 const _P=new URLSearchParams(location.search);
-const URL=((_P.get("server")||window.SYNOS_WORLD_SERVER||"ws://100.76.133.110:9000").replace(/\/+$/,""))+"/";
+const URL=((_P.get("server")||window.SYNOS_WORLD_SERVER||"wss://world.synos-linux.pro").replace(/\/+$/,""))+"/";
 const NIL="00000000-0000-0000-0000-000000000000";
 const $=id=>document.getElementById(id), cv=$("world"), cx=cv.getContext("2d");
 const FCOL={DarkArmy:"#ff2b4e",AzureWatch:"#e11d2a",GraySyndicate:"#a855f7"};

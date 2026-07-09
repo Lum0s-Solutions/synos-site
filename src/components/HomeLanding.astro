@@ -17,7 +17,7 @@ import HeartbeatHero from './HeartbeatHero.astro';
         <svg class="phx-svg" viewBox="0 0 862 548" role="img" aria-label="Syn_OS phoenix" preserveAspectRatio="xMidYMid meet">
           <defs>
             <linearGradient id="phxGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop class="gs" offset="0" stop-color="#84100f"/><stop class="gs" offset="0.5" stop-color="#c11f1f"/><stop class="gs" offset="1" stop-color="#560808"/>
+              <stop class="gs" offset="0" stop-color="#d42222"/><stop class="gs" offset="0.5" stop-color="#ff3a3a"/><stop class="gs" offset="1" stop-color="#9c1616"/>
             </linearGradient>
             <radialGradient id="phxEnergy" cx="0.5" cy="0.5" r="0.5">
               <stop offset="0" stop-color="#ff7a5e" stop-opacity="0.98"/><stop offset="0.4" stop-color="#ff3a2f" stop-opacity="0.5"/><stop offset="1" stop-color="#ff2b2b" stop-opacity="0"/>
@@ -209,7 +209,7 @@ import HeartbeatHero from './HeartbeatHero.astro';
             <path id="chanH" d="M431,300 L431,150" fill="none" stroke="none"/>
             <path id="chanT" d="M431,322 C425,400 427,470 431,528" fill="none" stroke="none"/>
           </defs>
-          <g transform="translate(0,548) scale(0.1,-0.1)"><path class="phx-body" d="M70 4006 c-8 -11 31 -56 179 -208 189 -194 189 -194 318 -226 230
+          <g transform="translate(0,548) scale(0.1,-0.1)"><path class="phx-body" style="filter:drop-shadow(0 0 13px rgba(255,58,48,.45))" d="M70 4006 c-8 -11 31 -56 179 -208 189 -194 189 -194 318 -226 230
         -58 474 -125 470 -129 -3 -2 -89 12 -193 32 -104 19 -250 47 -324 61 -74 14
         -210 40 -303 58 -194 38 -212 34 -144 -31 57 -55 319 -287 334 -296 10 -6 242
         -39 661 -93 73 -9 131 -18 129 -20 -3 -3 -363 20 -735 47 -240 18 -240 18 -5
@@ -391,8 +391,8 @@ import HeartbeatHero from './HeartbeatHero.astro';
         0 -474 10 -10 137 59 191 105 21 18 15 146 -8 173 -10 10 -11 18 -3 26 13 13
         -4 158 -22 179 -12 14 -72 44 -89 44 -4 0 -13 -6 -19 -14z" fill="url(#phxGrad)"/></g>
           <g clip-path="url(#phxClip)"><ellipse class="phx-energy" cx="431" cy="618" rx="491" ry="150" fill="url(#phxEnergy)" opacity="0"/></g>
-          <g class="phx-dots" fill="#ff7a4a" filter="url(#phxGlow)"></g>
-          <g class="phx-embers" fill="#ff5a2a"></g>
+          <g class="phx-dots" fill="#ff4a34" filter="url(#phxGlow)"></g>
+          <g class="phx-embers" fill="#ff4028"></g>
           <g transform="translate(0,548) scale(0.1,-0.1)"><path class="phx-outline" d="M70 4006 c-8 -11 31 -56 179 -208 189 -194 189 -194 318 -226 230
         -58 474 -125 470 -129 -3 -2 -89 12 -193 32 -104 19 -250 47 -324 61 -74 14
         -210 40 -303 58 -194 38 -212 34 -144 -31 57 -55 319 -287 334 -296 10 -6 242
@@ -573,7 +573,7 @@ import HeartbeatHero from './HeartbeatHero.astro';
         6 -53 26 -74 25 -26 25 -26 -1 -48 -21 -16 -31 -18 -46 -10 -20 10 -26 44 -9
         54 6 3 10 30 10 59 0 51 -2 55 -44 89 -32 27 -46 33 -55 24 -15 -15 -16 -458
         0 -474 10 -10 137 59 191 105 21 18 15 146 -8 173 -10 10 -11 18 -3 26 13 13
-        -4 158 -22 179 -12 14 -72 44 -89 44 -4 0 -13 -6 -19 -14z" fill="none" stroke="#ff4a3a" stroke-width="16" stroke-opacity="0" filter="url(#phxGlow)"/></g>
+        -4 158 -22 179 -12 14 -72 44 -89 44 -4 0 -13 -6 -19 -14z" fill="none" stroke="#ff6a5a" stroke-width="14" stroke-opacity="0.5" filter="url(#phxGlow)"/></g>
         </svg>
       </div>
       <h1 class="wordmark"><span class="ltr">S</span><span class="ltr">Y</span><span class="ltr">N</span><i class="us">_</i><span class="ltr">O</span><span class="ltr">S</span></h1>
@@ -798,10 +798,10 @@ import HeartbeatHero from './HeartbeatHero.astro';
     // outline glow flare on each beat
     guard(function () {
       A({ targets: outline, keyframes: [
-        { strokeOpacity: 0.9, strokeWidth: 24, duration: 120, easing: 'easeOutQuad' },
-        { strokeOpacity: 0.12, strokeWidth: 16, duration: 200 },
-        { strokeOpacity: 0.55, strokeWidth: 20, duration: 100 },
-        { strokeOpacity: 0.06, strokeWidth: 16, duration: 580 } ], loop: true, delay: 1700 });
+        { strokeOpacity: 1, strokeWidth: 22, duration: 120, easing: 'easeOutQuad' },
+        { strokeOpacity: 0.5, strokeWidth: 14, duration: 200 },
+        { strokeOpacity: 0.78, strokeWidth: 17, duration: 100 },
+        { strokeOpacity: 0.45, strokeWidth: 14, duration: 580 } ], loop: true, delay: 1700 });
     });
 
     // energy pulse courses UP through the silhouette — the phoenix's real veins light up
@@ -841,7 +841,7 @@ import HeartbeatHero from './HeartbeatHero.astro';
     // (2) RISING EMBERS — sparks spawn from the wings on each beat and drift up + fade
     guard(function () {
       function spawnEmbers() {
-        var n = 5;
+        var n = 3;
         for (var i = 0; i < n; i++) {
           var e = ns('circle');
           var x = A.random(120, 742), y = A.random(200, 360);
@@ -876,6 +876,7 @@ import HeartbeatHero from './HeartbeatHero.astro';
     // (7) POINTER PARALLAX — phoenix leans toward the cursor (on the wrapper, so it
     // never fights the pulse which owns the SVG's own transform)
     guard(function () {
+      if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
       var tx = 0, ty = 0, cxp = 0, cyp = 0, raf;
       function loop() { cxp += (tx - cxp) * 0.08; cyp += (ty - cyp) * 0.08; logo.style.transform = 'perspective(760px) translate3d(' + cxp + 'px,' + cyp + 'px,0) rotateX(' + (-cyp * 0.55) + 'deg) rotateY(' + (cxp * 0.55) + 'deg)'; raf = requestAnimationFrame(loop); }
       window.addEventListener('pointermove', function (ev) {

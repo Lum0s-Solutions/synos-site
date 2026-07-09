@@ -691,7 +691,7 @@ import HeartbeatHero from './HeartbeatHero.astro';
   }
   .pulsechip .hb { width: 7px; height: 7px; border-radius: 50%; background: var(--crimson-hi); box-shadow: 0 0 9px var(--crimson-hi); animation: hbpulse 2s cubic-bezier(.3, .6, .4, 1) infinite; }
   @keyframes hbpulse { 0%, 100% { transform: scale(1); opacity: .72 } 10% { transform: scale(1.35); opacity: .95 } 22% { transform: scale(1); opacity: .74 } 30% { transform: scale(1.16); opacity: .85 } 40% { transform: scale(1); opacity: .7 } }
-  .wordmark { font-family: var(--display); font-size: clamp(30px, 6.4vw, 74px); font-weight: 400; letter-spacing: -0.04em; line-height: 0.9; margin: 26px 0 0; color: var(--text); text-shadow: 0 6px 70px rgba(0, 0, 0, .6); }
+  .wordmark { font-family: var(--display); font-size: clamp(34px, 7.6vw, 92px); font-weight: 700; letter-spacing: 0.02em; letter-spacing: -0.04em; line-height: 0.9; margin: 26px 0 0; color: var(--text); text-shadow: 0 6px 70px rgba(0, 0, 0, .6); }
   .wordmark i { color: var(--crimson-hi); font-style: normal; text-shadow: 0 0 50px var(--crimson-glow); }
   .wordmark .ltr, .wordmark .us { display: inline-block; will-change: transform, opacity; }
   .wordmark .us { color: var(--crimson-hi); font-style: normal; text-shadow: 0 0 30px var(--crimson-glow); }
@@ -756,135 +756,23 @@ import HeartbeatHero from './HeartbeatHero.astro';
     .reveal { opacity: 1; transform: none; transition: none; }
   }
 </style>
-
 <script is:inline src="/vendor/anime.min.js"></script>
 <script is:inline>
 (function () {
-  var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function q(s){ return document.querySelector(s); }
-  function qa(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); }
-  function ns(n){ return document.createElementNS('http://www.w3.org/2000/svg', n); }
-  function guard(fn){ try { fn(); } catch (e) { /* one feature failing must not break the rest */ } }
-
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   function start() {
     if (!window.anime) return void setTimeout(start, 60);
-    var A = window.anime;
-    var logo = q('.hero-logo'), svg = q('.hero-logo .phx-svg');
-    if (!logo || !svg) return;
-    var outline = q('.hero-logo .phx-outline'), body = q('.hero-logo .phx-body'), energy = q('.hero-logo .phx-energy');
-    var dotsG = q('.hero-logo .phx-dots'), embG = q('.hero-logo .phx-embers');
-    var letters = qa('.wordmark .ltr, .wordmark .us'), us = q('.wordmark .us');
-
-    if (RM) { if (outline) outline.setAttribute('stroke-opacity', '0.28'); return; }
-
-    // (1) CINEMATIC ENTRANCE TIMELINE — outline draws, body fades, wordmark letters rise
-    guard(function () {
-      var tl = A.timeline({ easing: 'easeOutExpo' });
-      tl.add({ targets: outline, strokeDashoffset: [A.setDashoffset, 0], strokeOpacity: [0, 0.75], duration: 1500, easing: 'easeInOutSine' }, 0)
-        .add({ targets: svg, opacity: [0, 1], scale: [0.9, 1], duration: 1000, easing: 'spring(1, 80, 11, 0)' }, 250)
-        .add({ targets: body, opacity: [0, 1], duration: 800 }, 500)
-        .add({ targets: letters, opacity: [0, 1], translateY: [26, 0], duration: 700, delay: A.stagger(65) }, 850);
-    });
-
-    // (6) HEARTBEAT PULSE — spring/elastic, 1s cardiac cycle locked to shader per=60/bpm
-    guard(function () {
-      A({ targets: svg, keyframes: [
-        { scale: 1.055, duration: 120, easing: 'easeOutQuad' },
-        { scale: 1.00, duration: 170, easing: 'easeInQuad' },
-        { scale: 1.028, duration: 100, easing: 'easeOutQuad' },
-        { scale: 1.00, duration: 610, easing: 'easeOutElastic(1, 0.55)' } ], loop: true, delay: 1700 });
-    });
-
-    // outline glow flare on each beat
-    guard(function () {
-      A({ targets: outline, keyframes: [
-        { strokeOpacity: 1, strokeWidth: 22, duration: 120, easing: 'easeOutQuad' },
-        { strokeOpacity: 0.5, strokeWidth: 14, duration: 200 },
-        { strokeOpacity: 0.78, strokeWidth: 17, duration: 100 },
-        { strokeOpacity: 0.45, strokeWidth: 14, duration: 580 } ], loop: true, delay: 1700 });
-    });
-
-    // energy pulse courses UP through the silhouette — the phoenix's real veins light up
-    guard(function () {
-      A({ targets: energy, keyframes: [
-        { translateY: 60, opacity: 0, duration: 0 },
-        { translateY: -40, opacity: 0.95, duration: 150, easing: 'easeOutQuad' },
-        { translateY: -300, opacity: 0, duration: 360, easing: 'easeInQuad' },
-        { translateY: 60, opacity: 0, duration: 490 } ], loop: true, delay: 1700 });
-    });
-
-    // (5) HEAT-SHIFT — body flashes ember-warm on each systole, cools in diastole
-    guard(function () {
-      A({ targets: body, keyframes: [
-        { filter: 'hue-rotate(16deg) brightness(1.28) saturate(1.25)', duration: 130, easing: 'easeOutQuad' },
-        { filter: 'hue-rotate(0deg) brightness(1) saturate(1)', duration: 300 },
-        { filter: 'hue-rotate(8deg) brightness(1.12) saturate(1.1)', duration: 100 },
-        { filter: 'hue-rotate(0deg) brightness(1) saturate(1)', duration: 470 } ], loop: true, delay: 1700 });
-    });
-
-    // (3) MOTION-PATH ENERGY DOTS — glowing dots travel along wing/head/tail channels
-    guard(function () {
-      var chans = ['chanL', 'chanR', 'chanH', 'chanT'];
-      chans.forEach(function (id, ci) {
-        if (!q('#' + id)) return;
-        var p = A.path('#' + id);
-        for (var i = 0; i < 3; i++) {
-          var c = ns('circle'); c.setAttribute('r', 2.6); c.setAttribute('opacity', 0); dotsG.appendChild(c);
-          A({ targets: c, translateX: p('x'), translateY: p('y'),
-              opacity: [{ value: 0, duration: 0 }, { value: 0.95, duration: 160 }, { value: 0.95, duration: 500 }, { value: 0, duration: 340 }],
-              r: [2.2, 3.4], duration: 1000, loop: true, easing: 'easeInOutSine',
-              delay: 1700 + ci * 120 + i * 333 });
-        }
-      });
-    });
-
-    // (2) RISING EMBERS — sparks spawn from the wings on each beat and drift up + fade
-    guard(function () {
-      function spawnEmbers() {
-        var n = 3;
-        for (var i = 0; i < n; i++) {
-          var e = ns('circle');
-          var x = A.random(120, 742), y = A.random(200, 360);
-          e.setAttribute('cx', x); e.setAttribute('cy', y); e.setAttribute('r', A.random(10, 22) / 10);
-          e.setAttribute('opacity', 0); embG.appendChild(e);
-          A({ targets: e, translateY: -A.random(90, 190), translateX: A.random(-30, 30),
-              opacity: [{ value: A.random(6, 9) / 10, duration: 160 }, { value: 0, duration: A.random(700, 1100) }],
-              r: [e.getAttribute('r'), 0.2],
-              duration: A.random(900, 1400), easing: 'easeOutQuad',
-              complete: function (a) { a.animatables[0].target.remove(); } });
-        }
-      }
-      A({ targets: { v: 0 }, v: 1, duration: 1000, loop: true, delay: 1700, loopBegin: spawnEmbers });
-    });
-
-    // (4) WORDMARK — underscore synaptic flicker on each beat
-    guard(function () {
-      if (!us) return;
-      A({ targets: us, keyframes: [
-        { opacity: 1, scale: 1.28, duration: 90, easing: 'easeOutQuad' },
-        { opacity: 0.55, scale: 1, duration: 160 },
-        { opacity: 1, scale: 1.12, duration: 80 },
-        { opacity: 0.85, scale: 1, duration: 670 } ], loop: true, delay: 1900 });
-    });
-
-    // (8) DUAL-RHYTHM AMBIENT GLOW — slow breathe under the fast heartbeat
-    guard(function () {
-      A({ targets: logo, filter: ['drop-shadow(0 0 26px rgba(150,15,15,.55))', 'drop-shadow(0 0 58px rgba(200,35,35,.72))'],
-          direction: 'alternate', loop: true, duration: 2600, easing: 'easeInOutSine', delay: 1700 });
-    });
-
-    // (7) POINTER PARALLAX — phoenix leans toward the cursor (on the wrapper, so it
-    // never fights the pulse which owns the SVG's own transform)
-    guard(function () {
-      if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-      var tx = 0, ty = 0, cxp = 0, cyp = 0, raf;
-      function loop() { cxp += (tx - cxp) * 0.08; cyp += (ty - cyp) * 0.08; logo.style.transform = 'perspective(760px) translate3d(' + cxp + 'px,' + cyp + 'px,0) rotateX(' + (-cyp * 0.55) + 'deg) rotateY(' + (cxp * 0.55) + 'deg)'; raf = requestAnimationFrame(loop); }
-      window.addEventListener('pointermove', function (ev) {
-        var r = logo.getBoundingClientRect(); tx = ((ev.clientX - (r.left + r.width / 2)) / r.width) * 16; ty = ((ev.clientY - (r.top + r.height / 2)) / r.height) * 12;
-      }, { passive: true });
-      window.addEventListener('pointerleave', function () { tx = 0; ty = 0; });
-      loop();
-    });
+    var A = window.anime, logo = document.querySelector('.hero-logo');
+    if (!logo) return;
+    var svg = logo.querySelector('.phx-svg'), outline = logo.querySelector('.phx-outline');
+    A({ targets: logo, opacity: [0, 1], scale: [0.97, 1], duration: 800, easing: 'easeOutQuad' });
+    // one calm heartbeat pulse — 1s cycle, phase-aligned to the background bpm=60
+    A({ targets: svg, scale: [
+      { value: 1.04, duration: 210, easing: 'easeOutQuad' },
+      { value: 1.00, duration: 790, easing: 'easeInOutSine' } ], loop: true });
+    if (outline) A({ targets: outline, strokeOpacity: [
+      { value: 0.85, duration: 210, easing: 'easeOutQuad' },
+      { value: 0.42, duration: 790, easing: 'easeInOutSine' } ], loop: true });
   }
   (document.readyState === 'loading') ? document.addEventListener('DOMContentLoaded', start) : start();
 })();

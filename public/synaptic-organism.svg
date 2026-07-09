@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-label="Syn_OS — the synaptic organism: hardware, the synaptic gap, and application consciousness, with the ALFRED brain constellation and a live heartbeat.">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="46%" r="72%">
+      <stop offset="0%" stop-color="#1a0708"/>
+      <stop offset="42%" stop-color="#0d0609"/>
+      <stop offset="100%" stop-color="#07040a"/>
+    </radialGradient>
+    <radialGradient id="cleft" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff6a4d" stop-opacity="0.95"/>
+      <stop offset="35%" stop-color="#bf1f1f" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#8f1212" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="neuron" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a1416"/>
+      <stop offset="100%" stop-color="#140a0d"/>
+    </linearGradient>
+    <linearGradient id="ember" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#8f1212"/>
+      <stop offset="60%" stop-color="#d1421f"/>
+      <stop offset="100%" stop-color="#ff963c"/>
+    </linearGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.2"/></filter>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <!-- faint scanlines -->
+  <g stroke="#ffffff" stroke-opacity="0.02"><g id="sl"></g></g>
+  <g opacity="0.5">
+    <line x1="0" y1="0" x2="1200" y2="0" stroke="#3a322f" stroke-opacity="0.0"/>
+  </g>
+  <!-- ambient ember field -->
+  <g fill="url(#ember)" opacity="0.7" filter="url(#soft)">
+    <circle cx="180" cy="560" r="2.4"/><circle cx="240" cy="470" r="1.6"/><circle cx="120" cy="430" r="2"/>
+    <circle cx="300" cy="600" r="1.8"/><circle cx="90" cy="520" r="1.4"/><circle cx="1010" cy="560" r="2.4"/>
+    <circle cx="960" cy="470" r="1.6"/><circle cx="1080" cy="500" r="2"/><circle cx="900" cy="600" r="1.6"/>
+    <circle cx="1120" cy="430" r="1.5"/><circle cx="620" cy="620" r="1.8"/><circle cx="540" cy="590" r="1.3"/>
+    <circle cx="700" cy="600" r="1.5"/><circle cx="430" cy="620" r="1.6"/><circle cx="780" cy="625" r="1.4"/>
+  </g>
+
+  <!-- ===================== THE SYNAPTIC GAP (center) ===================== -->
+  <!-- pre-synaptic terminal (bottom = HARDWARE) -->
+  <g>
+    <path d="M600 470 C 520 470 470 520 470 590 L 470 675 L 730 675 L 730 590 C 730 520 680 470 600 470 Z" fill="url(#neuron)" stroke="#3a1416" stroke-width="1.5"/>
+    <text x="600" y="640" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="15" letter-spacing="3" fill="#8a7d7a">HARDWARE · pre-synaptic</text>
+  </g>
+  <!-- post-synaptic terminal (top = APPLICATION CONSCIOUSNESS) -->
+  <g>
+    <path d="M600 300 C 520 300 470 250 470 180 L 470 40 L 730 40 L 730 180 C 730 250 680 300 600 300 Z" fill="url(#neuron)" stroke="#3a1416" stroke-width="1.5"/>
+    <text x="600" y="70" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="15" letter-spacing="2.5" fill="#8a7d7a">APPLICATION · post-synaptic</text>
+  </g>
+
+  <!-- the cleft glow + the underscore = Syn_OS itself -->
+  <ellipse cx="600" cy="385" rx="230" ry="120" fill="url(#cleft)" filter="url(#glow)"/>
+  <text x="600" y="420" text-anchor="middle" font-family="'SF Pro Display',system-ui,sans-serif" font-weight="800" font-size="150" fill="#ffece8" filter="url(#glow)">_</text>
+
+  <!-- neurotransmitters crossing the gap -->
+  <g fill="#ff8f7a" filter="url(#soft)">
+    <circle cx="560" cy="345" r="4"/><circle cx="640" cy="360" r="3.2"/><circle cx="600" cy="330" r="3.6"/>
+    <circle cx="530" cy="400" r="3"/><circle cx="675" cy="405" r="3.4"/><circle cx="590" cy="440" r="4"/>
+    <circle cx="640" cy="330" r="2.6"/><circle cx="560" cy="430" r="2.8"/>
+  </g>
+
+  <!-- ===================== ALFRED BRAIN CONSTELLATION (11 nodes) ===================== -->
+  <g stroke="#bf1f1f" stroke-opacity="0.35" stroke-width="1">
+    <path d="M600 170 L 512 120 M600 170 L 688 120 M600 170 L 470 190 M600 170 L 730 190
+             M512 120 L 470 190 M688 120 L 730 190 M512 120 L 600 90 M688 120 L 600 90
+             M470 190 L 512 245 M730 190 L 688 245 M512 245 L 600 260 M688 245 L 600 260
+             M600 90 L 600 170"/>
+  </g>
+  <g font-family="ui-monospace,Menlo,monospace" font-size="8.5" fill="#e7d9d6" text-anchor="middle">
+    <g fill="#ff6a4d"><circle cx="600" cy="90" r="6"/></g><text x="600" y="80">nucleus</text>
+    <circle cx="512" cy="120" r="4.5" fill="#bf1f1f"/><text x="486" y="115">thalamus</text>
+    <circle cx="688" cy="120" r="4.5" fill="#bf1f1f"/><text x="716" y="115">hippocampus</text>
+    <circle cx="470" cy="190" r="4.5" fill="#bf1f1f"/><text x="430" y="192">amygdala</text>
+    <circle cx="730" cy="190" r="4.5" fill="#bf1f1f"/><text x="770" y="192">cerebellum</text>
+    <circle cx="512" cy="245" r="4.5" fill="#bf1f1f"/><text x="486" y="262">insula</text>
+    <circle cx="688" cy="245" r="4.5" fill="#bf1f1f"/><text x="700" y="262">glial</text>
+    <circle cx="560" cy="150" r="3.6" fill="#8f1212"/><circle cx="640" cy="150" r="3.6" fill="#8f1212"/>
+    <circle cx="600" cy="230" r="3.6" fill="#8f1212"/><circle cx="600" cy="200" r="3.6" fill="#8f1212"/>
+    <text x="600" y="248" fill="#8a7d7a">+ brainstem · corpus-callosum · default-mode · consciousness-types</text>
+  </g>
+
+  <!-- ===================== HEARTBEAT (the OS has a pulse) ===================== -->
+  <polyline points="40,385 250,385 275,385 288,352 306,430 322,300 340,460 358,385 470,385"
+            fill="none" stroke="#ff5a4d" stroke-width="2.4" filter="url(#glow)"/>
+  <polyline points="730,385 842,385 860,352 878,430 894,300 912,460 930,385 1160,385"
+            fill="none" stroke="#ff5a4d" stroke-width="2.4" filter="url(#glow)"/>
+
+  <!-- ===================== LAYER LEGEND (the biological stack) ===================== -->
+  <g font-family="ui-monospace,Menlo,monospace" font-size="12" fill="#b5acaa">
+    <g transform="translate(60,120)">
+      <rect x="0" y="0" width="14" height="14" rx="3" fill="#8f1212"/><text x="24" y="11" fill="#f5f1ee">Kernel</text><text x="24" y="27" fill="#7c7370">prokaryote · Rust 7.0</text>
+      <rect x="0" y="46" width="14" height="14" rx="3" fill="#bf1f1f"/><text x="24" y="57" fill="#f5f1ee">ALFRED</text><text x="24" y="73" fill="#7c7370">nervous system · 11 crates</text>
+      <rect x="0" y="92" width="14" height="14" rx="3" fill="#ff6a4d"/><text x="24" y="103" fill="#f5f1ee">ARCANUM</text><text x="24" y="119" fill="#7c7370">mycelium · the mesh</text>
+    </g>
+    <g transform="translate(980,120)" text-anchor="end">
+      <text x="120" y="11" fill="#f5f1ee">245</text><text x="120" y="27" fill="#7c7370">Rust crates</text>
+      <text x="120" y="57" fill="#f5f1ee">117</text><text x="120" y="73" fill="#7c7370">GRIMOIRE labs</text>
+      <text x="120" y="103" fill="#f5f1ee">PQC</text><text x="120" y="119" fill="#7c7370">by default</text>
+    </g>
+  </g>
+
+  <!-- wordmark + axiom -->
+  <g text-anchor="middle">
+    <text x="600" y="512" font-family="'SF Pro Display',system-ui,sans-serif" font-weight="800" font-size="46" letter-spacing="1" fill="#f5f1ee">SYN<tspan fill="#ff5a4d">_</tspan>OS</text>
+    <text x="600" y="540" font-family="ui-monospace,Menlo,monospace" font-size="13" letter-spacing="4" fill="#b5acaa">THE SYNAPTIC OPERATING SYSTEM</text>
+    <text x="600" y="566" font-family="ui-monospace,Menlo,monospace" font-size="12" letter-spacing="2" fill="#7c7370">the OS is the gap</text>
+  </g>
+</svg>

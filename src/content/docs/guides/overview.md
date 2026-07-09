@@ -15,16 +15,16 @@ Three reinforcing missions drive every architectural decision:
 2. **Competitive cybersecurity mastery through gameplay** — Blue, Purple, and Red team coverage. Certification study paths (OSCP, OSEP, GIAC, CISSP, CEH and others) materialised as GRIMOIRE progression tracks. War-game scenarios. Cross-player leaderboards and reputation economics for tracking who is the best hacker in the game.
 3. **AI-enhanced security DNA at the OS layer** — the ALFRED v6.0 consciousness fusion engine is wired to an 11-crate brainstem pipeline (thalamus → amygdala → hippocampus → insula → cerebellum → corpus-callosum → default-mode-network → glial → nucleus → brainstem → cortex). A capability-gated, signed Rust kernel-module interface exposes AI and observability state directly at the kernel boundary. Fragment Field IDS treats attack patterns as physics-layer energy signatures.
 
-## v80 status
+## v111 status
 
 | Field | Value |
 |-------|-------|
 | **Release line** | v111.0.0 "Last Light" — **1.0 GA release** |
-| **Codename umbrella** | v61→v80 campaign — code-complete |
+| **Codename umbrella** | v101→v111 "Rust Everything" campaign — code-complete |
 | **Base OS** | Arch Linux (`mkarchiso` + `pacstrap`, Docker-based on sanctum oracle) |
-| **Rust workspace** | **209 active crates**, 0 compile errors |
-| **Kernel** | 6.19-synos-ai (LLVM + `CONFIG_RUST=y`), 12 `CONFIG_SYNOS_*` knobs, capability-gated signed Rust kernel modules |
-| **Kernel AI interface** | Capability-gated, signed Rust kernel-module interface (root-only, `CAP_SYS_ADMIN`-gated, `0600` device nodes via udev); replaces the dead syscall approach (upstream 6.19 collision) |
+| **Rust workspace** | **245 crates**, 0 compile errors |
+| **Kernel** | 7.0-synos-ai (LLVM + `CONFIG_RUST=y`), 12 `CONFIG_SYNOS_*` knobs, capability-gated signed Rust kernel modules |
+| **Kernel AI interface** | Capability-gated, signed Rust kernel-module interface (root-only, `CAP_SYS_ADMIN`-gated, `0600` device nodes via udev); replaces the dead syscall approach (upstream 7.0 collision) |
 | **ALFRED** | **v6.0** — Rust daemon, brainstem-wired consciousness fusion (Traditional + Neuromorphic + Quantum + TNGS + MPS cortex) |
 | **GRIMOIRE** | **117 labs across 13 categories** (catalog **1.0**), 110+ game modules, ~53k LOC of gamification |
 | **synos-bevy** | Bevy 0.14, **8 plugins** (Cutscene, Mindmap, RetroFilter, Cyberspace, SkillTree, FactionHQ, Rehoboam, Twin) |
@@ -39,15 +39,15 @@ Three reinforcing missions drive every architectural decision:
 
 Syn_OS ships as a **three-image family** so the same codebase serves very different audiences without exposing sensitive capabilities:
 
-- **Master** — developer-only image with every capability enabled from first boot. The DevOps environment for building Syn_OS itself; bedrock of LumOs commercial contracts.
+- **Enterprise Edition** — the licensed commercial product: GoodLife's full sovereign capability at organizational scale, plus multi-tenant ARCANUM federation, fleet management, and a FedRAMP Moderate / CMMC L2 / SOC2 compliance posture with evidence packs. By customer agreement; not a public download.
 - **GRIMOIRE Public** — progressive-unlock cybersecurity training platform. Players start with a 10-tool starter kit and unlock capabilities by completing labs, earning XP, progressing through faction quests, and building personal hardware meshes from reclaimed machines.
 - **GoodLife** — AI-research image with analytical tooling and the local LLM stack. No offensive tooling.
 
-All three share the same kernel, Rust userspace, and GRIMOIRE engine, but a build-time **Curtain** (ELF symbol scanner + feature audit + lab integrity manifests) plus a runtime capability ceiling enforces that **GRIMOIRE can never become operationally equivalent to Master** no matter how far a player progresses. See [Curtain Capability Tokens →](/architecture/curtain/)
+All three share the same kernel, Rust userspace, and GRIMOIRE engine, but a build-time **Curtain** (ELF symbol scanner + feature audit + lab integrity manifests) plus a runtime capability ceiling enforces that **GRIMOIRE can never escalate to the licensed Enterprise Edition** no matter how far a player progresses. See [Curtain Capability Tokens →](/architecture/curtain/)
 
 ## Who Syn_OS is for
 
-- **Cybersecurity students** — GRIMOIRE provides 108 hands-on labs with gamified progression and certification mapping.
+- **Cybersecurity students** — GRIMOIRE provides 117 hands-on labs with gamified progression and certification mapping.
 - **Security researchers** — Post-quantum crypto by default, custom kernel, eBPF tooling, kernel-level observability interface.
 - **AI researchers** — GoodLife ISO with pre-configured local AI stack and `research-mode` cargo feature.
 - **Salvage operators** — ARCANUM Hive turns discarded laptops into a distributed inference mesh.

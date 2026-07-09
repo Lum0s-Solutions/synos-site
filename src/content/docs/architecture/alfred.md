@@ -60,9 +60,9 @@ external event (or kernel push via synos_consciousness read_iter)
 
 The brainstem `VALIDATION.md` documents 17 critical API corrections applied across the crate interfaces.
 
-## Kernel push-channel (v80 Last Light)
+## Kernel push-channel (v111 Last Light)
 
-In v80, the kernel wakes ALFRED directly. The `synos_consciousness` kernel module exposes a **blocking `read()`** path on `/dev/synos_consciousness` that yields `synos_stimulus_record` structs (4112 bytes each) as they arrive from the kernel. ALFRED runs a dedicated `synos-stimulus` consumer thread that reads these structs and injects them as `BrainSignal::RawEvent` with `Taint::KernelTelemetry` into the thalamus gate.
+In v111, the kernel wakes ALFRED directly. The `synos_consciousness` kernel module exposes a **blocking `read()`** path on `/dev/synos_consciousness` that yields `synos_stimulus_record` structs (4112 bytes each) as they arrive from the kernel. ALFRED runs a dedicated `synos-stimulus` consumer thread that reads these structs and injects them as `BrainSignal::RawEvent` with `Taint::KernelTelemetry` into the thalamus gate.
 
 There is no polling. No timer. No userspace scheduler waking up on a fixed interval to ask "anything new?" — the kernel signals ALFRED exactly when an event occurs, and not before.
 
@@ -89,7 +89,7 @@ Outputs are weighted by `ConsciousnessState` (coherence, activity, mode, decisio
 |--------------|---------------------|------------------------------------------------------|----------------------------------------|
 | **Advisory** | Read-only           | Default. System inspection, recommendation only      | Full read-only ACLs                    |
 | **GameMode** | Lab-scoped          | GRIMOIRE lab execution, contained per lab            | AppArmor `synos.grimoire.lab` + seccomp 18-syscall deny |
-| **Master**   | Full execution      | Master ISO operators, C2 integration, fleet telemetry| No guardrails — Curtain v4 admin token required |
+| **Enterprise** | Full execution    | Enterprise Edition operators, fleet telemetry        | Operator-controlled under a commercial license; Curtain v4 admin token required |
 | **Mesh**     | Distributed         | Gossip protocol, distributed consciousness across ARCANUM | Tenant-scoped per peer       |
 
 Mode switching:
@@ -97,7 +97,7 @@ Mode switching:
 ```bash
 synos-alfred-mode set advisory       # default
 synos-alfred-mode set gamemode       # for labs
-synos-alfred-mode set master         # full execution (Master ISO only)
+synos-alfred-mode set enterprise     # full execution (Enterprise Edition only)
 synos-alfred-mode set mesh           # mesh consciousness
 ```
 
@@ -118,7 +118,7 @@ Eleven endpoints exposed on `http://localhost:7437/v4/`:
 | `GET  /amygdala`          | Active threat signatures                           |
 | `GET  /cerebellum`        | Latency report                                     |
 | `GET  /dmn`               | Default Mode Network status                        |
-| `POST /mode`              | Set operating mode (Advisory/GameMode/Master/Mesh) |
+| `POST /mode`              | Set operating mode (Advisory/GameMode/Enterprise/Mesh) |
 | `GET  /godmode`           | Aggregate dashboard data                           |
 
 ## How to talk to ALFRED

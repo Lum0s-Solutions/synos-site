@@ -107,9 +107,9 @@ The **FactionHQ** plugin is disabled on GoodLife (no GRIMOIRE faction system on 
 ## What's *not* installed (by design)
 
 - offensive security tooling (metasploit, aircrack, the C2 frameworks)
-- Distrobox/BlackArch on-demand expansion (Master only)
+- Distrobox/BlackArch on-demand expansion (Enterprise Edition only)
 - the GRIMOIRE lab catalogue
-- the Master-tier RaaS engine + finding ranker + digest renderer
+- operational offensive tooling — no live C2, no operations engine (scrubbed from the public images)
 
 If you want any of these, you're in the wrong profile — see [Three ISOs](/guides/download/).
 

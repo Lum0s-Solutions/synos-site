@@ -25,17 +25,17 @@ Syn_OS is structured as a six-layer stack from silicon to story, with strict sep
 ║  Security Arsenal (600+ tools + 3,400+ Distrobox)           ║
 ║  spider-web intel dashboard, grimoire-mobile companion      ║
 ╠══════════════════════════════════════════════════════════════╣
-║  CORE PLATFORM — 239 Rust Crates                            ║
-║  ALFRED + 9 brain crates + nucleus root-of-trust            ║
+║  CORE PLATFORM — 245 Rust Crates                            ║
+║  ALFRED + 11 brain crates (nucleus root-of-trust)           ║
 ║  Arcanum Hive (controller, attestor, profiler, tests)       ║
 ║  synos-fragment-field (energy IDS pipeline, 3,002 LOC)      ║
 ║  synos-icarus (ML-KEM, ML-DSA, SLH-DSA)                     ║
 ║  synos-tenant, synos-audit-trail, synos-bevy                ║
 ║  synos-attest, synos-build-attest, synos-curtain-tokens     ║
-║  synos-federation, synos-raas-engine, synos-cortex-q (MPS)  ║
+║  synos-federation, synos-datalake, synos-cortex-q (MPS)     ║
 ║  + ~140 more supporting crates                              ║
 ╠══════════════════════════════════════════════════════════════╣
-║  CUSTOM LINUX KERNEL — 6.19-synos-ai                        ║
+║  CUSTOM LINUX KERNEL — 7.0-synos-ai                         ║
 ║  CONFIG_RUST=y · KSPP hardening · 12 CONFIG_SYNOS_* knobs   ║
 ║  Capability-gated, signed Rust kernel-module interface      ║
 ║  Loadable Rust kernel modules (CAP_SYS_ADMIN-gated, signed) ║
@@ -58,7 +58,7 @@ Underneath the six-layer stack is a **four-layer biological organism** that expl
 ```
 ┌──────────────────────────────────────────────────────────────┐
 │  MAMMALIAN CNS                                               │
-│  ALFRED consciousness layer (9 brain crates)                 │
+│  ALFRED consciousness layer (11 brain crates)                │
 │  Higher cognition, decision-making, memory consolidation     │
 ├──────────────────────────────────────────────────────────────┤
 │  FUNGAL MYCELIUM                                             │
@@ -117,7 +117,7 @@ The fusion engine is not aspirational. Path 1 runs on every event. Path 2 runs o
 
 - **Hardware** — Physical substrate. Nothing application-specific lives here.
 - **Kernel** — Ring 0. The custom syscalls, kernel modules, eBPF programs, and LSM integration. Everything here is *cycles per operation*; if a feature can live in userspace, it does.
-- **Core Platform** — The 239-crate Rust workspace. The actual product. ALFRED v6.0, Icarus, Fragment Field, Curtain, Forge, RaaS, federation, the brain crates, and the supporting infrastructure.
+- **Core Platform** — The 245-crate Rust workspace. The actual product. ALFRED v6.0, Icarus, Fragment Field, Curtain, Forge, federation, the brain crates, and the supporting infrastructure.
 - **Application** — Things you run *on* Syn_OS. GRIMOIRE labs, security arsenal tools, the spider-web intelligence dashboard, the mobile companion.
 - **Experience** — The shell. Bevy desktop plugins, the synos-ops TUI, Cinnamon DE customisation, branding assets.
 - **Narrative** — The story that makes the rest cohere. Faction lore, RICO contracts, boss-contract chains, the Sovereign Operator Path.
@@ -130,5 +130,5 @@ When in doubt: code goes in Core Platform; rendering goes in Experience; lore go
 - **[Custom Kernel →](/architecture/kernel/)** — syscalls, modules, eBPF
 - **[Icarus →](/architecture/icarus/)** — post-quantum cryptography
 - **[ARCANUM Mesh →](/architecture/arcanum/)** — the distributed nervous system
-- **[Curtain →](/architecture/curtain/)** — capability tokens & weaponization ceiling
+- **[Curtain →](/architecture/curtain/)** — capability tokens & capability ceiling
 - **[Forge →](/architecture/forge/)** — reproducible builds & supply chain

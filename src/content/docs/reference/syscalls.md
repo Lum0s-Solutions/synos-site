@@ -3,8 +3,8 @@ title: Kernel Interface Reference
 description: The Syn_OS capability-gated Rust kernel-module interface — exposes AI/observability state to userspace. Root-only, CAP_SYS_ADMIN-gated, signed modules. Replaces the retired custom-syscall approach.
 ---
 
-:::note[Interface re-architecture — v80]
-The old "17 custom syscalls 469–485" approach is **retired**. Those numbers collide with upstream Linux 6.19 (`file_setattr`, `listns`, …) and the original stubs were empty shells with no real handler bodies. Syn_OS v80 ships a **capability-gated, signed Rust kernel-module interface** instead — real, loadable, QEMU-boot-validated modules using the misc device + ioctl pattern.
+:::note[Interface re-architecture — v111]
+The old "17 custom syscalls 469–485" approach is **retired**. Those numbers collide with upstream Linux 7.0 (`file_setattr`, `listns`, …) and the original stubs were empty shells with no real handler bodies. Syn_OS v111 ships a **capability-gated, signed Rust kernel-module interface** instead — real, loadable, QEMU-boot-validated modules using the misc device + ioctl pattern.
 :::
 
 ## The interface model
@@ -37,7 +37,7 @@ The kernel-module interface covers the following domains:
 
 The Curtain v4 LSM hook intercepts each interface call and consults the calling process's capability token before dispatching:
 
-| Operation domain | grimoire-public | goodlife | master |
+| Operation domain | grimoire-public | goodlife | enterprise |
 |------------------|-----------------|----------|--------|
 | Consciousness state (read-only) | allowed (read-only) | allowed (read-only) | allowed |
 | AI dispatch / memory update | `ENOSYS` | allowed (research-mode) | allowed |
@@ -53,7 +53,7 @@ Read more: [Curtain Capability Tokens →](/architecture/curtain/)
 | errno | Meaning |
 |-------|---------|
 | `ENOSYS` | Operation denied by Curtain v4 capability token for this tier |
-| `EPERM` | The kernel taint flag is set; Master claims revoked |
+| `EPERM` | The kernel taint flag is set; Enterprise Edition claims revoked |
 | `EAGAIN` | The fusion pipeline is at capacity — back off and retry |
 | `EINVAL` | Argument structure failed validation |
 | `EFAULT` | `copy_from_user` / `copy_to_user` failed |

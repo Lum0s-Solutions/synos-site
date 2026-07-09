@@ -56,7 +56,7 @@ The progression system organises content into **five tiers**. Each tier requires
 | **2 — Journeyman**| 6,000 XP | "Pivot or Perish" Intermediate gate        | `metasploit-framework`, `crackmapexec`, `bloodhound`, web app labs |
 | **3 — Master Class**| 18,000 XP | Advanced certification-aligned challenge  | RE labs, malware sandbox, cloud labs, full Purple Team track |
 | **4 — Expert**   | 50,000 XP | Expert-tier boss contract                  | AI security labs, blockchain labs, war-game participation |
-| **5 — Sovereign**| 150,000 XP | Salvage Yard chapter complete + peer-verified solution | Full ALFRED Master mode (where allowed by Curtain), mesh node leadership |
+| **5 — Sovereign**| 150,000 XP | Salvage Yard chapter complete + peer-verified solution | Full ALFRED full-execution mode (where allowed by Curtain), mesh node leadership |
 
 ## Certification mapping
 
@@ -89,13 +89,13 @@ Sovereign-tier players can host their own GRIMOIRE instances, federate (within t
 
 ## What XP does *not* unlock
 
-XP does not promote you to Master. It cannot. Curtain v4 enforces a hard ceiling regardless of progression:
+XP does not escalate you to the Enterprise Edition. It cannot. Curtain v4 enforces a hard capability ceiling regardless of progression:
 
 - AI dispatch operations always return `ENOSYS` (Curtain v4 capability-token enforcement)
 - LLM federation stays tier-isolated to GRIMOIRE peers
 - Audit chain HMAC roots stay separated
-- Fragment Field IDS kernel-side detection stays Master-only
+- Fragment Field IDS kernel-side detection stays limited to the licensed Enterprise Edition
 
-This is by design: GRIMOIRE produces operators; Master is what gets sold to customers who need the actual weapon for actual work.
+This is by design: GRIMOIRE produces operators; the Enterprise Edition is the licensed commercial product for organizations that need Syn_OS's full capability at scale.
 
 ## Next: [Competition Mode →](/grimoire/competition/)

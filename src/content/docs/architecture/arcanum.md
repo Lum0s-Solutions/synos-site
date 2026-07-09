@@ -34,7 +34,7 @@ Three reasons:
         │       │                                  │
    ┌────▼──┐ ┌──▼───┐ ┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐
    │ Node1 │ │ Node2│ │ Node3│ │ Node4│ │ Node5│ │ Node6│ │ Node7│ ...
-   │ i5-3337│ │ Pi 5 │ │laptop│ │laptop│ │ Mac  │ │ NUC  │ │ ...  │
+   │  i5    │ │ Pi 5 │ │laptop│ │laptop│ │ Mac  │ │ NUC  │ │ ...  │
    │  oracle│ │      │ │      │ │      │ │      │ │      │ │      │
    └────────┘ └──────┘ └──────┘ └──────┘ └──────┘ └──────┘ └──────┘
 ```
@@ -82,7 +82,7 @@ A typical deployment runs `qwen2.5:7b` sharded across 3 nodes for chat workloads
 
 ## Federated consciousness
 
-Distinct from inference, **consciousness** federation is the gossip-protocol layer where ALFRED's nine brain crates aggregate state across peers:
+Distinct from inference, **consciousness** federation is the gossip-protocol layer where ALFRED's 11 brain crates aggregate state across peers:
 
 - **Hippocampus** — long-term memory consolidation across the fleet (lab solutions, threat sightings, novel attack patterns)
 - **Amygdala** — threat-signature gossip (a sighting on one node propagates to all peers within ~2 seconds)
@@ -97,7 +97,7 @@ Multi-tenant federation runs above the mesh layer. Each Sanctum is a tenant boun
 
 - **Replica join** — bring a new Sanctum online and join the federation with cryptographic enrolment
 - **Federation health endpoint** — peer reachability matrix exposed for Mission Control dashboards
-- **Tier isolation** — GRIMOIRE-tier Sanctums federate only with GRIMOIRE peers; Master tenants federate freely; cross-tier traffic is gated by Curtain v4
+- **Tier isolation** — GRIMOIRE-tier Sanctums federate only with GRIMOIRE peers; Enterprise Edition tenants federate freely; cross-tier traffic is gated by Curtain v4
 
 ## Failure modes
 
@@ -110,15 +110,14 @@ The mesh is designed to lose nodes gracefully:
 
 ## Hardware reality check
 
-The reference deployment (active production):
+The mesh is validated on a heterogeneous fleet of reclaimed, commodity hardware — no new gear, no GPUs required:
 
-- **<build-oracle>** — sanctum oracle (Intel i5-3337U, 11 GiB RAM, 281 GiB free) — primary build oracle
-- **<admin-node>** — Windows admin / WSL Parrot, warm-spare oracle
-- **the-void-of-ty** — Tailscale relay, ARCANUM gossip aggregator
-- **Hive workers (4× Lenovo)** — sharded inference + lab hosting
-- **PS3, Minecraft server, NOC node** — auxiliary mesh participants
+- a primary build/inference oracle (i5-class laptop, ~11 GiB RAM)
+- a warm-spare oracle for active-passive failover
+- a relay / gossip-aggregator node
+- several worker nodes for sharded inference + lab hosting
 
-VLAN 66 carries the in-LAN portion of the mesh; Tailscale glues the off-LAN nodes.
+An in-LAN segment carries the local portion of the mesh; Tailscale glues the off-LAN nodes. The point stands: none of it is new, none of it is expensive, and it still runs the full stack.
 
 ## Related
 

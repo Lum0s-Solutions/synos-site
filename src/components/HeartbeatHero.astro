@@ -1,0 +1,184 @@
+---
+/*
+  HeartbeatHero — shared crimson cardiac-heartbeat background.
+  Renders the WebGL canvas + legibility overlay and inlines the shader/JS
+  (WebGL → 2D-canvas → static-CSS fallback chain, prefers-reduced-motion aware).
+  Reused by HomeLanding.astro and DownloadLanding.astro so the shader lives once.
+  Place inside a positioned .hbhero wrapper; the canvas absolutely fills it.
+  bpm / intensity are read from data-attributes by the inline script.
+*/
+interface Props {
+  bpm?: number;
+  intensity?: number;
+}
+const { bpm = 60, intensity = 0.7 } = Astro.props;
+---
+<canvas
+  id="hb-canvas"
+  class="hb-canvas"
+  aria-hidden="true"
+  data-bpm={bpm}
+  data-intensity={intensity}
+></canvas>
+<div class="hb-legibility" aria-hidden="true"></div>
+
+<style>
+  .hb-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    display: block;
+    background: radial-gradient(60% 55% at 50% 46%, rgba(120, 8, 8, 0.26), rgba(120, 8, 8, 0.08) 40%, rgba(8, 6, 10, 0) 74%), var(--ground);
+  }
+  .hb-legibility {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: radial-gradient(70% 62% at 50% 44%, rgba(8, 6, 10, 0.12), rgba(8, 6, 10, 0.66) 80%);
+    pointer-events: none;
+  }
+</style>
+
+<script is:inline>
+/* ===== CRIMSON CARDIAC HEARTBEAT (WebGL → 2D canvas → static CSS) — oxblood ===== */
+(function () {
+  if (window.__synHeartbeat) return;
+  window.__synHeartbeat = true;
+
+  const HB_VERT = "attribute vec2 aPos;void main(){gl_Position=vec4(aPos,0.0,1.0);}";
+  const HB_FRAG = `precision highp float;
+uniform vec2 uRes;uniform float uTime,uBpm,uIntensity,uReduced;
+uniform vec3 uGround,uCrimson,uHot,uEmber;
+float hash(vec2 p){p=fract(p*vec2(123.34,345.45));p+=dot(p,p+34.345);return fract(p.x*p.y);}
+float adPulse(float x,float a,float d){if(x<0.0)return 0.0;return (1.0-exp(-x/a))*exp(-x/d);}
+float heartbeat(float t){float per=60.0/uBpm;float ph=mod(t,per);
+  float lub=adPulse(ph,0.11,0.24)*1.0;float dub=adPulse(ph-0.27,0.11,0.17)*0.5;return clamp(lub+dub,0.0,1.2);}
+float systolic(float t){float per=60.0/uBpm;return adPulse(mod(t,per),0.11,0.24);}
+float rings(float r,float t){float per=60.0/uBpm;float sb=mod(t,per);float acc=0.0;
+  for(int k=0;k<2;k++){float age=sb+float(k)*per;float rad=age*0.85;
+    float band=smoothstep(0.035,0.0,abs(r-rad));float life=exp(-age*2.3);acc+=band*life;}return acc;}
+float emberLayer(vec2 uv,float t,float sc,float sp,float sd){vec2 p=uv*sc;p.y+=t*sp;vec2 id=floor(p);vec2 gv=fract(p)-0.5;
+  float h=hash(id+sd);if(h<0.55)return 0.0;vec2 c=vec2(hash(id+sd+7.3)-0.5,hash(id+sd+3.1)-0.5)*0.7;
+  float d=length(gv-c);float tw=0.5+0.5*sin(t*3.0+h*40.0);return smoothstep(0.09,0.0,d)*tw*(h-0.55)/0.45;}
+void main(){vec2 uv=(gl_FragCoord.xy-0.5*uRes)/uRes.y;float r=length(uv);
+  float t=mix(uTime,3.30,uReduced);float env=mix(heartbeat(t),0.32,uReduced);float sys=mix(systolic(t),0.0,uReduced);float I=uIntensity;
+  float glowR=0.64+env*0.07;float glow=smoothstep(glowR,0.0,r);glow*=(0.38+env*0.40)*I;
+  float core=smoothstep(0.24,0.0,r)*env*0.32*I;float ring=rings(r,t)*(0.20+I*0.22)*(1.0-uReduced);
+  float em=0.0;float et=t*(1.0-uReduced);em+=emberLayer(uv,et,9.0,0.30,11.0)*0.7;em+=emberLayer(uv,et,15.0,0.48,41.0)*0.45;em*=smoothstep(0.75,-0.35,uv.y);
+  vec3 col=uGround;col=mix(col,uCrimson,clamp(glow,0.0,1.0));col=mix(col,uHot,clamp(core+ring*0.5,0.0,1.0));
+  col+=uCrimson*ring*0.4;col+=mix(uCrimson,uEmber,0.6)*em*0.8;
+  float scan=0.985+0.015*sin(gl_FragCoord.y*1.6);col*=scan;col*=1.0-smoothstep(0.55,1.15,r)*0.6;col=max(col,uGround*0.92);
+  gl_FragColor=vec4(col,1.0);}`;
+
+  const Heartbeat = (function () {
+    const CAP = 2;
+    function cssColor(n) {
+      let s = getComputedStyle(document.documentElement).getPropertyValue(n).trim().replace('#', '');
+      if (s.length === 3) s = s.split('').map(c => c + c).join('');
+      const v = parseInt(s, 16);
+      return [((v >> 16) & 255) / 255, ((v >> 8) & 255) / 255, (v & 255) / 255];
+    }
+    function reducedM() { return window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; }
+    function mount(canvas, opts) {
+      opts = opts || {};
+      const cfg = { bpm: opts.bpm || 60, intensity: opts.intensity || 0.7 };
+      const pal = { ground: cssColor('--hb-ground'), crimson: cssColor('--hb-crimson'), hot: cssColor('--hb-hot'), ember: cssColor('--hb-ember') };
+      const red = reducedM();
+      const gl = tryGL(canvas); if (gl) return runGL(canvas, gl, cfg, pal, red);
+      const c2 = tryC2(canvas); if (c2) return runC2(canvas, c2, cfg, pal, red);
+      return { mode: 'static-css', destroy() {} };
+    }
+    function tryGL(c) {
+      try {
+        const a = { antialias: false, alpha: false, depth: false, stencil: false, powerPreference: 'low-power' };
+        return c.getContext('webgl', a) || c.getContext('experimental-webgl', a);
+      } catch (e) { return null; }
+    }
+    function tryC2(c) { try { return c.getContext('2d'); } catch (e) { return null; } }
+    function runGL(canvas, gl, cfg, pal, red) {
+      function cc(t, s) {
+        const sh = gl.createShader(t); gl.shaderSource(sh, s); gl.compileShader(sh);
+        if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) { console.warn('[hb]', gl.getShaderInfoLog(sh)); gl.deleteShader(sh); return null; }
+        return sh;
+      }
+      const vs = cc(gl.VERTEX_SHADER, HB_VERT), fs = cc(gl.FRAGMENT_SHADER, HB_FRAG);
+      if (!vs || !fs) { const c2 = tryC2(canvas); return c2 ? runC2(canvas, c2, cfg, pal, red) : { mode: 'static-css', destroy() {} }; }
+      const pr = gl.createProgram(); gl.attachShader(pr, vs); gl.attachShader(pr, fs); gl.linkProgram(pr); gl.deleteShader(vs); gl.deleteShader(fs);
+      if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) { const c2 = tryC2(canvas); return c2 ? runC2(canvas, c2, cfg, pal, red) : { mode: 'static-css', destroy() {} }; }
+      gl.useProgram(pr); const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+      const aP = gl.getAttribLocation(pr, 'aPos'); gl.enableVertexAttribArray(aP); gl.vertexAttribPointer(aP, 2, gl.FLOAT, false, 0, 0);
+      const U = n => gl.getUniformLocation(pr, n);
+      const uRes = U('uRes'), uTime = U('uTime');
+      gl.uniform1f(U('uBpm'), cfg.bpm); gl.uniform1f(U('uIntensity'), cfg.intensity); gl.uniform1f(U('uReduced'), red ? 1 : 0);
+      gl.uniform3fv(U('uGround'), pal.ground); gl.uniform3fv(U('uCrimson'), pal.crimson); gl.uniform3fv(U('uHot'), pal.hot); gl.uniform3fv(U('uEmber'), pal.ember);
+      let raf = 0, run = false, start = performance.now();
+      function resize() {
+        const d = Math.min(devicePixelRatio || 1, CAP);
+        const w = Math.max(1, Math.round(canvas.clientWidth * d)), h = Math.max(1, Math.round(canvas.clientHeight * d));
+        if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; } gl.viewport(0, 0, w, h); gl.uniform2f(uRes, w, h);
+      }
+      function draw(now) { gl.uniform1f(uTime, (now - start) / 1000); gl.drawArrays(gl.TRIANGLES, 0, 3); }
+      function loop(now) { if (!run) return; draw(now); raf = requestAnimationFrame(loop); }
+      function play() { if (run || red) return; run = true; raf = requestAnimationFrame(loop); }
+      function stop() { run = false; if (raf) cancelAnimationFrame(raf); raf = 0; }
+      function vis() { document.hidden ? stop() : play(); }
+      resize(); addEventListener('resize', resize, { passive: true }); document.addEventListener('visibilitychange', vis);
+      if (red) draw(start + 3300); else play();
+      return { mode: 'webgl', destroy() { stop(); removeEventListener('resize', resize); document.removeEventListener('visibilitychange', vis);
+        gl.deleteBuffer(buf); gl.deleteProgram(pr); const x = gl.getExtension('WEBGL_lose_context'); if (x) x.loseContext(); } };
+    }
+    function runC2(canvas, ctx, cfg, pal, red) {
+      const rgb = c => `${Math.round(c[0] * 255)},${Math.round(c[1] * 255)},${Math.round(c[2] * 255)}`;
+      const GND = rgb(pal.ground), CRM = rgb(pal.crimson), HOT = rgb(pal.hot), EMB = rgb(pal.ember);
+      function ad(x, a, d) { if (x < 0) return 0; return (1 - Math.exp(-x / a)) * Math.exp(-x / d); }
+      function hb(t) { const p = 60 / cfg.bpm, ph = t % p; return Math.min(ad(ph, 0.11, 0.24) + ad(ph - 0.27, 0.11, 0.17) * 0.5, 1.2); }
+      const em = Array.from({ length: 26 }, (_, i) => ({ x: (i * 0.61803398875) % 1, phase: (i * 0.7548776662) % 1, speed: 0.02 + ((i * 0.13) % 1) * 0.05, size: 0.6 + ((i * 0.29) % 1) * 1.8 }));
+      let raf = 0, run = false, start = performance.now(), W = 0, H = 0;
+      function resize() { const d = Math.min(devicePixelRatio || 1, CAP); W = Math.max(1, Math.round(canvas.clientWidth * d)); H = Math.max(1, Math.round(canvas.clientHeight * d)); canvas.width = W; canvas.height = H; }
+      function frame(t, env) {
+        ctx.globalCompositeOperation = 'source-over'; ctx.fillStyle = `rgb(${GND})`; ctx.fillRect(0, 0, W, H);
+        const cx = W / 2, cy = H * 0.48, bR = Math.min(W, H) * (0.55 + env * 0.06); const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, bR); const a = 0.20 + env * 0.34;
+        g.addColorStop(0, `rgba(${HOT},${Math.min(0.9, a * 0.9)})`); g.addColorStop(0.25, `rgba(${CRM},${a})`); g.addColorStop(0.6, `rgba(${CRM},${a * 0.28})`); g.addColorStop(1, `rgba(${GND},0)`);
+        ctx.globalCompositeOperation = 'lighter'; ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+        for (const e of em) {
+          const life = ((t * e.speed + e.phase) % 1); const ey = H - life * H * 1.05; const ex = e.x * W + Math.sin((life + e.phase) * 6.28) * W * 0.02;
+          const al = Math.sin(life * Math.PI) * 0.5; if (al <= 0) continue; ctx.fillStyle = `rgba(${EMB},${al})`; ctx.beginPath(); ctx.arc(ex, ey, e.size * (Math.min(W, H) / 900 + 0.6), 0, 6.2832); ctx.fill();
+        }
+        ctx.globalCompositeOperation = 'source-over'; const v = ctx.createRadialGradient(cx, cy, bR * 0.6, cx, cy, Math.max(W, H) * 0.75);
+        v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,0.55)'); ctx.fillStyle = v; ctx.fillRect(0, 0, W, H);
+      }
+      function loop(now) { if (!run) return; const t = (now - start) / 1000; frame(t, hb(t)); raf = requestAnimationFrame(loop); }
+      function play() { if (run || red) return; run = true; raf = requestAnimationFrame(loop); }
+      function stop() { run = false; if (raf) cancelAnimationFrame(raf); raf = 0; }
+      function vis() { document.hidden ? stop() : play(); }
+      resize(); addEventListener('resize', () => { resize(); if (red) frame(3.3, 0.32); }, { passive: true }); document.addEventListener('visibilitychange', vis);
+      if (red) frame(3.3, 0.32); else play();
+      return { mode: 'canvas2d', destroy() { stop(); document.removeEventListener('visibilitychange', vis); } };
+    }
+    return { mount, reducedM };
+  })();
+
+  function boot() {
+    const cv = document.getElementById('hb-canvas');
+    if (cv) {
+      const bpm = parseFloat(cv.dataset.bpm) || 60;
+      const intensity = parseFloat(cv.dataset.intensity) || 0.7;
+      try { Heartbeat.mount(cv, { bpm: bpm, intensity: intensity }); } catch (e) { console.warn('[hb] mount failed', e); }
+    }
+    /* reveal-on-scroll */
+    const els = [].slice.call(document.querySelectorAll('.reveal'));
+    if (Heartbeat.reducedM() || !('IntersectionObserver' in window)) { els.forEach(e => e.classList.add('in')); return; }
+    const io = new IntersectionObserver((ents) => {
+      ents.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { threshold: 0.14 });
+    els.forEach(e => io.observe(e));
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})();
+</script>

@@ -10,7 +10,7 @@ The first boot of an installed Syn_OS system runs the v43.2 first-boot wizard (r
 ```
 GRUB (Phoenix-themed)
   ↓
-6.19-synos-ai kernel + signed Rust kernel modules load
+7.0-synos-ai kernel + signed Rust kernel modules load
   ↓
 Plymouth — Phoenix decay sequence (decay_000 → decay_002 → neural-node sigil)
   ↓
@@ -27,8 +27,8 @@ Boot time on a modest SSD lands at ~30 seconds to login prompt; ~86 seconds to a
 
 After the first login, the **Syn_OS Onboarding Wizard** appears — a Bevy-rendered fullscreen UI with the Cutscene plugin's typewriter dialogue.
 
-1. **ALFRED introduction** — the daemon introduces itself, asks for consent to operate in Advisory mode, and explains the four operating modes (Advisory / GameMode / Master / Mesh).
-2. **Profile confirmation** — the ISO profile is read from `/etc/synos/brand-meta.toml`. You cannot cross-promote here; promotion to Master requires a customer agreement and a fresh image.
+1. **ALFRED introduction** — the daemon introduces itself, asks for consent to operate in Advisory mode, and explains the four operating modes (Advisory / GameMode / Enterprise / Mesh).
+2. **Profile confirmation** — the ISO profile is read from `/etc/synos/brand-meta.toml`. You cannot cross-promote here; promotion to the Enterprise Edition requires a commercial license and a fresh image.
 3. **Security baseline** — the Sanctum hardening profile is applied: AppArmor enforce, seccomp filters, kernel lockdown, eBPF monitor enable.
 4. **Network setup** — optional **ARCANUM Hive** enrollment via Tailscale + WireGuard. If you skip, you can re-run `synos-hive-bootstrap` later.
 5. **GRIMOIRE onboarding** *(GRIMOIRE Public only)* — pick your faction (Crimson Spire / Neon Collective / The Warden), accept the Sovereign Operator Path agreement, receive the 10-tool starter kit and your first lab assignment.
@@ -42,12 +42,12 @@ ALFRED runs as a **two-layer architecture**:
 - **Rust daemon (v6.0)** — system intelligence: CPU/memory optimization, kernel bridge via the capability-gated kernel module interface, an 11-endpoint REST API, NATS event bus, the God Mode dashboard aggregator, and the consciousness fusion engine.
 - **Python layer (v2.1.0)** — user-facing assistant: LLM integration, voice, RAG, TUI, and the privacy-first job-hunt mode.
 
-On first boot ALFRED starts in **Advisory mode**: read-only system inspection, no command execution. You can promote it to GameMode (lab sandboxing) or Master (full execution) via:
+On first boot ALFRED starts in **Advisory mode**: read-only system inspection, no command execution. You can promote it to GameMode (lab sandboxing) or Enterprise (full execution) via:
 
 ```bash
 synos-alfred-mode set advisory   # default
 synos-alfred-mode set gamemode   # for GRIMOIRE labs
-synos-alfred-mode set master     # full execution (Master ISO only)
+synos-alfred-mode set enterprise # full execution (Enterprise Edition only)
 synos-alfred-mode set mesh       # gossip-protocol distributed consciousness
 ```
 

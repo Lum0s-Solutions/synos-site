@@ -23,7 +23,7 @@ GRIMOIRE is a **playable shared-world hacking MMO** — spawn into the Weave, wa
 
 | Metric                   | Value                                                                |
 |--------------------------|----------------------------------------------------------------------|
-| **Labs**                 | **108 across 13 categories** (catalog **1.0**) — 71+ with full Docker overlays |
+| **Labs**                 | **117 across 13 categories** (catalog **1.0**) — 71+ with full Docker overlays |
 | **Game modules**         | 110+ (~53,000 LOC of `synos-gamification`)                           |
 | **Engine**               | Bevy 0.14 — `synos-bevy` 7,129+ LOC                                  |
 | **Bevy plugins**         | 8 — Cutscene, Mindmap, RetroFilter, Cyberspace, SkillTree, FactionHQ, Rehoboam, Twin |
@@ -57,17 +57,17 @@ The `synos-progression` crate (57 tests, 111-entry seed catalog) drives all of t
 
 Faction choice affects RICO contract dispersal, available boss-contract chains, mission board priorities, and faction reputation economics.
 
-## The weaponization ceiling
+## The capability ceiling
 
-GRIMOIRE Public **cannot** become operationally equivalent to Master, no matter how far a player progresses. The **Curtain v4** runtime ceiling enforces:
+GRIMOIRE Public **cannot** escalate to the licensed Enterprise Edition, no matter how far a player progresses, and it carries no operational offensive tooling. The **Curtain v4** runtime ceiling enforces:
 
 - AI dispatch operations return `ENOSYS` on GRIMOIRE (capability-token enforcement)
 - LLM federation is tier-isolated (GRIMOIRE nodes federate only with GRIMOIRE peers)
-- Audit chain HMAC roots are separated between GRIMOIRE and Master
-- Fragment Field IDS kernel detection is Master-only; GRIMOIRE gets userspace-only access
+- Audit chain HMAC roots are separated between GRIMOIRE and the Enterprise Edition
+- Fragment Field IDS kernel detection is enabled only in the licensed Enterprise Edition; GRIMOIRE gets userspace-only access
 - C2 framework binaries (cobalt-strike, empire, covenant, sliver) are scrubbed at build time
 
-This is the bedrock of the LumOs commercial model: GRIMOIRE is the talent funnel that produces the best cybersecurity operators in the world; Master is the product LumOs sells to customers who need the actual weapon for actual work.
+This is the bedrock of the LumOs commercial model: GRIMOIRE is the talent funnel that produces the best cybersecurity operators in the world; the Enterprise Edition is the commercial product LumOs sells to organizations that need Syn_OS's full capability at scale, with multi-tenant federation and a compliance posture, under a license.
 
 [Read the Curtain Capability Tokens deep dive →](/architecture/curtain/)
 

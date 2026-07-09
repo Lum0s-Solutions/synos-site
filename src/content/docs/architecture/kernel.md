@@ -1,16 +1,16 @@
 ---
 title: Custom Kernel
-description: Linux 6.19-synos-ai with CONFIG_RUST=y, a capability-gated signed Rust kernel-module interface, loadable Rust modules, eBPF monitors, and LSM attestation.
+description: Linux 7.0-synos-ai with CONFIG_RUST=y, a capability-gated signed Rust kernel-module interface, loadable Rust modules, eBPF monitors, and LSM attestation.
 ---
 
-The Syn_OS kernel is built from upstream Linux **6.19** with the `CONFIG_RUST=y` toolchain enabled, hardened with KSPP defaults, and extended with a **capability-gated, signed Rust kernel-module interface**, loadable Rust kernel modules, an LSM attestation hook, and eBPF monitors. It is the prokaryotic-cell layer of the biological model — primitive, fast, always-on; the mitochondria for the whole organism.
+The Syn_OS kernel is built from upstream Linux **7.0** (the launch base; a **7.2 bump is planned** as the next upgrade) with the `CONFIG_RUST=y` toolchain enabled, hardened with KSPP defaults, and extended with a **capability-gated, signed Rust kernel-module interface**, loadable Rust kernel modules, an LSM attestation hook, and eBPF monitors. It is the prokaryotic-cell layer of the biological model — primitive, fast, always-on; the mitochondria for the whole organism.
 
 ## Build configuration
 
 | Setting | Value |
 |---------|-------|
-| **Upstream version** | Linux 6.19 |
-| **Build target** | `6.19-synos-ai` |
+| **Upstream version** | Linux 7.0 (7.2 planned) |
+| **Build target** | `7.0-synos-ai` |
 | **Toolchain** | LLVM/Clang + Rust (no GCC) |
 | **`CONFIG_RUST`** | `y` |
 | **`CONFIG_MODVERSIONS`** | `n` (disabled — Rust modules don't use it) |
@@ -20,7 +20,7 @@ The Syn_OS kernel is built from upstream Linux **6.19** with the `CONFIG_RUST=y`
 
 ## Kernel AI interface
 
-The v80 kernel interface is a **capability-gated, signed Rust kernel-module interface** that exposes AI state and observability data to userspace. The old custom-syscall approach is retired — those syscall numbers now collide with upstream Linux 6.19 and the old stubs were empty shells with no real handlers.
+The v111 kernel interface is a **capability-gated, signed Rust kernel-module interface** that exposes AI state and observability data to userspace. The old custom-syscall approach is retired — those syscall numbers now collide with upstream Linux 7.0 and the old stubs were empty shells with no real handlers.
 
 Key design decisions:
 
@@ -33,7 +33,7 @@ The interface exposes: consciousness fusion state, AI stimulus and memory update
 
 ## Loadable Rust modules
 
-Syn_OS ships **28 real, loadable, QEMU-boot-validated Rust kernel modules** (65/65 PASS). All live in `fruit/core/src/linux-kernel/rust-modules/`, register a root-only (`0600`) `/dev/synos_*` device node with a `CAP_SYS_ADMIN`-gated ioctl ABI, and are signed at build stage `02b`.
+Syn_OS ships **33 signed Rust kernel modules — 28 of them real, loadable, and QEMU-boot-validated** (65/65 PASS). All live in `fruit/core/src/linux-kernel/rust-modules/`, register a root-only (`0600`) `/dev/synos_*` device node with a `CAP_SYS_ADMIN`-gated ioctl ABI, and are signed at build stage `02b`.
 
 ### AI Char-Device Interface (8)
 
@@ -76,7 +76,7 @@ Syn_OS ships **28 real, loadable, QEMU-boot-validated Rust kernel modules** (65/
 | Module              | Role |
 |---------------------|------|
 | `synos_forensics`   | Volatile memory snapshot |
-| `synos_detect`      | Posture detection — blue-team pair for `synos_rootkit` |
+| `synos_detect`      | Kernel-integrity posture detection — tamper and hidden-object detection (blue-team) |
 | `synos_lsm`         | Caller capability + lockdown posture |
 | `synos_audit_bridge`| Emits real kernel audit records via `audit_log_start`/`audit_log_end` |
 | `synos_pcap`        | Netfilter packet counter (`NF_ACCEPT`-only) |
@@ -86,12 +86,6 @@ Syn_OS ships **28 real, loadable, QEMU-boot-validated Rust kernel modules** (65/
 | Module            | Role |
 |-------------------|------|
 | `synos_modverify` | kprobe on `__x64_sys_finit_module` + blocking notifier; monitor or enforce mode (`NOTIFY_BAD` → `EPERM`). PROVEN: 27/27 synos module loads counted; deny path returns `EPERM`. |
-
-### Offensive (1 — Master + ChurchOfMalware only)
-
-| Module          | Role |
-|-----------------|------|
-| `synos_rootkit` | RESOLVE (kallsyms via kprobe), PRIVESC (`commit_creds` + `prepare_kernel_cred(&init_task)`), HOOK (live kprobe on `__x64_sys_getdents64`; `hits=1` PROVEN). Always paired with `synos_detect`. CAP_SYS_ADMIN-gated, `0600`. |
 
 ## eBPF monitors
 

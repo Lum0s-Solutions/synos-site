@@ -1,0 +1,12 @@
+# Syn_OS / Lumos Solutions — security contact & coordinated disclosure (RFC 9116)
+# Canonical: https://synos-linux.pro/.well-known/security.txt
+
+Contact: mailto:security@lumossolutions.io
+Expires: 2027-07-07T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://synos-linux.pro/.well-known/security.txt
+Policy: https://github.com/Lum0s-Solutions/Syn_OS/blob/main/SECURITY.md
+Acknowledgments: https://github.com/Lum0s-Solutions/Syn_OS/blob/main/SECURITY.md
+
+# Please report vulnerabilities responsibly. We do not pursue good-faith
+# researchers who follow coordinated disclosure. PGP key + full policy: see SECURITY.md.

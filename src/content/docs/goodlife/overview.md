@@ -1,16 +1,16 @@
 ---
-title: GoodLife AI Research ISO
-description: GoodLife — the AI-research profile of Syn_OS. Same kernel, same Rust workspace, ALFRED in research-mode, Ollama pre-configured, no offensive tooling, no internet-facing services by default.
+title: GoodLife Sovereign ISO
+description: GoodLife — the full sovereign build of Syn_OS. Full ALFRED, full AI cortex, full ARCANUM mesh, the complete 245-crate stack, and a dedicated Research Division. Operational offensive tooling is not included. No telemetry, air-gap capable, local models.
 ---
 
-**GoodLife** is the AI-research profile of Syn_OS. Same custom 6.19-synos-ai kernel, same 239-crate Rust workspace, same Sanctum federation — but ALFRED is built with the `research-mode` cargo feature, Ollama is pre-configured offline-capable, and the offensive security tooling is gone. It is the right profile if you want a sovereign local AI lab without becoming a target by accident.
+**GoodLife** is the **full sovereign build** of Syn_OS. Same custom 7.0-synos-ai kernel, same 245-crate Rust workspace, the full ALFRED v6.0 daemon, the full AI cortex and dispatch, the complete ARCANUM mesh, and a dedicated **Research Division** (Jupyter, local models, ML lab) layered on top. **Operational offensive tooling is simply not included** — GoodLife is a complete AI-and-development platform, not an offensive-operations profile. It keeps Syn_OS's sovereign values — no telemetry, air-gap capable, local models by default — so you get a complete, self-owned platform without becoming a target by accident. Free for personal and sovereign use; commercial or organizational deployment requires a license.
 
 ## What's in the box
 
 | Component | What you get |
 |-----------|--------------|
-| **Kernel** | 6.19-synos-ai with `CONFIG_RUST=y`, capability-gated signed Rust kernel modules — same as every other profile |
-| **ALFRED** | v6.0, built with `research-mode` cargo feature; loads `ResearchModeSettings` from `~/.config/alfred/research.toml` |
+| **Kernel** | 7.0-synos-ai with `CONFIG_RUST=y`, capability-gated signed Rust kernel modules — same as every other profile |
+| **ALFRED** | v6.0, full daemon — full AI cortex, dispatch, and consciousness fusion, with a dedicated Research Division workspace added (not a capability-restricted build) |
 | **Local LLMs** | Ollama pre-configured with `qwen2.5:7b` + `llama3.2:3b` (~6.5 GB pre-pulled in stage 12); ISO is offline-capable |
 | **Notebook stack** | Jupyter Lab + JupyterText + Quarto, all locally hosted |
 | **ML tooling** | PyTorch, TensorFlow, scikit-learn, polars, duckdb, sentence-transformers, transformers |
@@ -22,24 +22,20 @@ description: GoodLife — the AI-research profile of Syn_OS. Same kernel, same R
 
 ## What's not in the box (by design)
 
-GoodLife is a research profile, not an offensive tools distro:
+GoodLife is the full sovereign build, but it is **not** the offensive-operations profile. Operational offensive tooling is simply not part of the image:
 
-- **No GRIMOIRE labs** — the gamification stack is built but the lab catalogue is excluded
-- **No offensive security tools** — no metasploit, no aircrack, no C2 frameworks
+- **No operational offensive tooling** — no live C2, no offensive kernel modules, no operations engine. The public images carry none of it; C2 framework binaries are scrubbed at build time.
+- **No GRIMOIRE gamified lab catalogue** — the gamification stack is built, but the sandboxed lab catalogue and faction MMO ship on the GRIMOIRE Public profile, not here
 - **No internet-facing services** — sshd is disabled by default, Sanctum federation is opt-in
 - **No telemetry** — local-first by construction; nothing leaves your machine without explicit consent
 - **No cloud LLM defaults** — Ollama is the default; cloud backends (Claude / OpenAI / Gemini / DeepSeek) are off until you configure keys
 
-## Sandbox model
+## The Research Division
 
-GoodLife treats the ALFRED daemon as a **research participant**, not an admin tool. Mode is locked to **Advisory** by default:
+GoodLife adds a dedicated **Research Division** — a Jupyter/local-model/ML workspace layered on top of the full ALFRED daemon. This is an **added workspace, not a capability restriction**: ALFRED runs at full capability on GoodLife (full AI cortex, dispatch, and consciousness fusion), and the Research Division is where you drive local models, notebooks, and experiments. Sovereign defaults keep everything local:
 
 ```toml
 # ~/.config/alfred/research.toml
-[mode]
-default = "advisory"
-allow_promotion = false       # cannot escalate to GameMode/Master/Mesh
-
 [backends]
 default = "ollama"            # cloud backends optional, off by default
 [[backends.allowed]]
@@ -52,7 +48,7 @@ job_hunt_mode = true          # privacy-first, no cross-context bleed
 context_isolation = "tenant"  # each conversation is its own tenant
 ```
 
-Curtain v4 enforces this from the kernel side: research-mode tokens cannot acquire claims for offensive syscalls or cross-tier federation peering.
+What GoodLife does **not** ship is operational offensive tooling. Curtain v4 holds the public images to a capability ceiling from the kernel side: GoodLife tokens cannot acquire the claims that would escalate the image to the licensed Enterprise Edition. Everything else Syn_OS can do is on the table.
 
 ## Salvaged-hardware mesh
 
@@ -69,23 +65,24 @@ A 4-node i5-class mesh outperforms a single mid-range workstation on memory-boun
 
 ## What GoodLife is for
 
+- **A complete sovereign platform** — the full 245-crate stack, full ALFRED, and the full AI cortex + dispatch, all self-owned
 - **Local AI research** — sovereign LLM inference, no cloud bills, no telemetry
 - **Federated inference experiments** — the mesh is the substrate
 - **RAG / embedding pipelines** against your own corpus
 - **Privacy-first job hunt / writing / chat** — context isolation by tenant
-- **Teaching environment** for AI labs (Cognitive Warfare, AI Security in GRIMOIRE are not here, but `synos-bevy` and `synos-nlp-pipeline` are open for inspection)
+- **The Research Division** — Jupyter, local models, and the ML lab as a first-class workspace
 - **Salvage operators** building a sustainable home/office AI stack
 
 ## What GoodLife is *not* for
 
-- **Offensive cybersecurity work** — boot GRIMOIRE Public for that
-- **Production multi-tenant SaaS** — boot Master with a customer agreement
-- **Compliance-evidence generation** — Master ships the FedRAMP / CMMC / SOC2 control maps; GoodLife is research-only
+- **Operational offensive tooling** — GoodLife ships none of it; sandboxed offensive *training* lives on GRIMOIRE Public
+- **Production multi-tenant deployment** — multi-tenant ARCANUM federation and fleet management are **Enterprise Edition** capabilities, available under a commercial license
+- **Compliance-evidence generation** — the **Enterprise Edition** ships the FedRAMP / CMMC / SOC2 control maps and ConMon evidence collector
 
 ## Getting started
 
 1. Boot GoodLife (live or installed)
-2. First-boot wizard runs ALFRED introduction in Advisory mode
+2. First-boot wizard runs the ALFRED introduction and sets up the Research Division
 3. Open Jupyter from the desktop, or `ollama run qwen2.5:7b` in a terminal
 4. Optional: `synos-hive-bootstrap --tier goodlife` to add a second node
 

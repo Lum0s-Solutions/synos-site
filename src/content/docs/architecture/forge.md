@@ -27,7 +27,7 @@ The result: two oracle nodes, building from the same commit, produce ISOs whose 
 synos-rebuild-verify.sh \
     --release v111.0.0 \
     --commit 8fee198a \
-    --reference https://releases.synos-linux.pro/v111.0.0/synos-master-v111.0.0.iso.sha256
+    --reference https://releases.synos-linux.pro/v111.0.0/synos-goodlife-v111.0.0.iso.sha256
 
 # →   PASS — local digest matches reference
 #     Sigstore Rekor entry verified
@@ -42,13 +42,13 @@ Every release artefact is signed with **cosign** and the signature is published 
 
 ```bash
 cosign verify-blob \
-    --certificate synos-master-v111.0.0.iso.cert \
-    --signature  synos-master-v111.0.0.iso.sig \
+    --certificate synos-goodlife-v111.0.0.iso.cert \
+    --signature  synos-goodlife-v111.0.0.iso.sig \
     --certificate-identity-regexp '.*@lumossolutions\.io$' \
     --certificate-oidc-issuer https://github.com/login/oauth \
-    synos-master-v111.0.0.iso
+    synos-goodlife-v111.0.0.iso
 
-rekor-cli search --artifact synos-master-v111.0.0.iso
+rekor-cli search --artifact synos-goodlife-v111.0.0.iso
 ```
 
 Public Rekor index entries make every release independently verifiable forever, even if Lumos goes dark — the transparency log is operated by Sigstore, not by Lumos.
@@ -82,7 +82,7 @@ Each control points to the technical mechanism that satisfies it (e.g. SI-7 *Sof
 
 ## Module signing
 
-Kernel modules are signed via cosign-attested keys (v41 Wave 9). The v43.2 fix matrix added sudo escalation for the `openssl`-based module signer when the signing key is root-readable — closing a build failure that hit on certain oracle configurations.
+Kernel modules are signed via cosign-attested keys (v41 Wave 9), applied during the sealed module-signing build stage. Signing material stays on the build oracle and is never included in the released image.
 
 The signing chain is:
 

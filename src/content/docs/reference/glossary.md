@@ -37,23 +37,19 @@ The Syn_OS codebase has accumulated its own vocabulary. This is the canonical re
 
 **Storm Glass** — Digital-twin substrate. v51. Kernel snapshot crate + Bevy Twin plugin.
 
-**Tenfold** — RaaS engine v1. v50. Subscription billing, finding ranker, digest renderer.
-
-**Phoenix Eye** — LLM red-team SaaS tier. v57. `LlmHardeningSimulation` in the RaaS scheduler.
-
 **Stagehand** — GRIMOIRE Public Wave 2. v58. Classroom + cohort + lab generator.
 
 **Doublecross** — FedRAMP Moderate readiness. v59. NIST SP 800-53 Rev 5 control map + daily ConMon collector.
 
-**Sun & Salt** — IPO / Series-A readiness package. v60 (prior release).
+**Sun & Salt** — Commercial-readiness & business-hardening package. v60 (prior release).
 
-**Last Light** — The 1.0 GA release. **v111.0.0 (current).** Completes the v61→v80 software campaign. ALFRED v6.0, GRIMOIRE 1.0 (117 labs), 209 active crates, post-quantum by default.
+**Last Light** — The 1.0 GA release. **v111.0.0 (current).** Completes the v101→v111 "Rust Everything" software campaign. ALFRED v6.0, GRIMOIRE 1.0 (117 labs), 245 crates, post-quantum by default.
 
 ## Kernel & interface
 
-**6.19-synos-ai** — The Syn_OS kernel build target. Linux 6.19 + `CONFIG_RUST=y` + 12 `CONFIG_SYNOS_*` knobs + capability-gated signed loadable Rust modules.
+**7.0-synos-ai** — The Syn_OS kernel build target. Linux 7.0 (launch base; 7.2 bump planned) + `CONFIG_RUST=y` + 12 `CONFIG_SYNOS_*` knobs + capability-gated signed loadable Rust modules.
 
-**Kernel AI interface** — The capability-gated, signed Rust kernel-module interface that exposes AI/observability state to userspace (root-only, `CAP_SYS_ADMIN`-gated, `0600` device nodes). Replaced the retired custom-syscall approach (v80). See [Kernel Interface Reference →](/reference/syscalls/).
+**Kernel AI interface** — The capability-gated, signed Rust kernel-module interface that exposes AI/observability state to userspace (root-only, `CAP_SYS_ADMIN`-gated, `0600` device nodes). Replaced the retired custom-syscall approach (v111). See [Kernel Interface Reference →](/reference/syscalls/).
 
 **LSM hook** — Linux Security Module hook in `synos-security` that consults Curtain v4 capability tokens before privileged operations.
 
@@ -79,7 +75,7 @@ The Syn_OS codebase has accumulated its own vocabulary. This is the canonical re
 
 **synos-glial** — Adaptive caching, memory pruning. `MyelinCache::get()`.
 
-**synos-brainstem** — Pipeline runtime. Wires the 10 peer crates into the live signal loop.
+**synos-brainstem** — Pipeline runtime. Wires the 11 brain crates into the live signal loop.
 
 **synos-nucleus** — Root-of-trust governance. Identity, attestation, Curtain token chain validation.
 
@@ -101,7 +97,7 @@ The Syn_OS codebase has accumulated its own vocabulary. This is the canonical re
 
 **Tenant** — A multi-tenant boundary (`synos-tenant` crate). Each Sanctum is a tenant boundary.
 
-**Master Generation Run Kit** — Single-command pre-flight + ISO kickoff for cutting a Master release.
+**Master Generation Run Kit** — Single-command pre-flight + ISO kickoff for cutting a full-capability release. (Internal build-tooling name.)
 
 **synos-doctor** — 41-stage post-install validation wizard.
 
@@ -127,7 +123,7 @@ The Syn_OS codebase has accumulated its own vocabulary. This is the canonical re
 
 ## ISO profiles
 
-**Master** — Operator profile. Every capability enabled. Bedrock of LumOs commercial contracts. **Not for public distribution.**
+**Enterprise Edition** — Licensed commercial product. GoodLife's full sovereign capability at organizational scale, plus multi-tenant ARCANUM federation, fleet management, and a FedRAMP Moderate / CMMC L2 / SOC2 compliance posture. **Not a public download** — by customer agreement.
 
 **GRIMOIRE Public** — Progressive-unlock training profile. Public release.
 
@@ -137,7 +133,7 @@ The Syn_OS codebase has accumulated its own vocabulary. This is the canonical re
 
 **Operation Warp Speed** — Umbrella codename for the v44 → v60 codesprint. Code-complete on `feat/operation-warp-speed`.
 
-**v61→v80 campaign** — The 20-version codesprint that delivered the 1.0 GA milestone. Completes with v111.0.0 "Last Light".
+**v101→v111 "Rust Everything" campaign** — The 11-version codesprint that delivered the 1.0 GA milestone. Completes with v111.0.0 "Last Light".
 
 **SYNOS_STRICT** — Build-orchestrator flag. When `=1`, any stage failure aborts the entire build (fail-loud).
 

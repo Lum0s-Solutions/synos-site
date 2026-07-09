@@ -1,0 +1,190 @@
+---
+/*
+  HomeLanding — approved heartbeat homepage (splash surface).
+  Full-bleed hero + "Three images. One codebase." teaser + "Built different"
+  grid + synaptic-gap close. Styles are Astro-scoped and namespaced under
+  .synland so they win over (and never leak into) Starlight's markdown CSS.
+*/
+import HeartbeatHero from './HeartbeatHero.astro';
+---
+<div class="synland">
+  <!-- HERO -->
+  <section class="hbhero">
+    <HeartbeatHero bpm={60} intensity={0.7} />
+    <div class="hbwrap">
+      <span class="pulsechip"><span class="hb"></span> v111.0.0 · Last Light · the OS has a pulse</span>
+      <h1 class="wordmark">SYN<i>_</i>OS</h1>
+      <p class="htag">The <b>Synaptic Operating System</b> — an AI-aware Rust-for-Linux kernel, post-quantum crypto by default, and a gamified cybersecurity training platform. <b>Engineered as one cohesive product</b>, not a tool collection.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="/guides/download/"><span>Download</span><span class="arw">→</span></a>
+        <a class="btn btn-ghost" href="/guides/overview/">What is Syn_OS?</a>
+        <a class="btn btn-ghost" href="https://synos-linux.pro/play/">▶ Play GRIMOIRE</a>
+        <a class="btn btn-ghost" href="https://github.com/Lum0s-Solutions/Syn_OS">GitHub</a>
+      </div>
+      <div class="statrow">
+        <span><b>245</b> Rust crates</span><span><b>117</b> labs</span>
+        <span><b>33</b> signed kernel modules</span><span>kernel <b>Linux 7.0</b></span>
+        <span><b>PQC</b> by default</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- THREE IMAGES TEASER -->
+  <section class="band">
+    <div class="hbwrap">
+      <div class="sechead reveal">
+        <h2>Three images<span class="u">.</span> One codebase.</h2>
+        <p>// same kernel, same 245-crate workspace — split by a build-time Curtain</p>
+      </div>
+      <div class="imgs">
+        <a class="icard grim reveal" href="/guides/download/">
+          <div class="k">Public · Free</div>
+          <h3>GRIMOIRE</h3>
+          <p>Learn to hack for real — a shared-world hacking MMO. 117 progressive labs, faction wars, cert-path mapping. Play in the browser or boot the image.</p>
+          <span class="go">Get GRIMOIRE →</span>
+        </a>
+        <a class="icard reveal" href="/guides/download/">
+          <div class="k">Sovereign · Free personal</div>
+          <h3>GoodLife</h3>
+          <p>The full sovereign build — everything except operational offensive tooling. Full ALFRED, full mesh, the whole stack, plus a dedicated Research Division.</p>
+          <span class="go">Get GoodLife →</span>
+        </a>
+        <a class="icard ent reveal" href="/guides/download/">
+          <div class="k">Enterprise · Licensed</div>
+          <h3>Enterprise Edition</h3>
+          <p>The commercial build for teams and regulated environments — multi-tenant federation, FedRAMP / CMMC / SOC2 posture, fleet management, priority support.</p>
+          <span class="go">Talk to us →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUILT DIFFERENT -->
+  <section class="band bordered">
+    <div class="hbwrap">
+      <div class="sechead reveal">
+        <h2>Built different<span class="u">.</span></h2>
+        <p>// the OS is the security product, not a tool collection on top of one</p>
+      </div>
+      <div class="feats">
+        <div class="feat reveal"><h4><span class="d"></span>Capability-gated Rust kernel</h4><p>Linux 7.0 with <b>CONFIG_RUST=y</b>, KSPP-hardened, and a signed, root-only Rust kernel-module interface. The AI cortex talks to the kernel directly — no userspace shim.</p></div>
+        <div class="feat reveal"><h4><span class="d"></span>Post-quantum by default</h4><p><b>ML-KEM, ML-DSA, SLH-DSA</b> (FIPS 203/204/205) across every transport, signing path, and audit trail. Hybrid mode pairs each with a classical counterpart. Not an opt-in flag.</p></div>
+        <div class="feat reveal"><h4><span class="d"></span>ALFRED consciousness fusion</h4><p>11 neuroanatomical brain crates wired into a four-path fusion engine. Woken by a kernel push-channel on <b>/dev/synos_consciousness</b> — no polling.</p></div>
+        <div class="feat reveal"><h4><span class="d"></span>The Curtain</h4><p>A signed, capability-token ceiling that keeps the public images in their lane — no operational offensive tooling, no in-band escalation to the licensed tier. Mechanical, not best-effort.</p></div>
+        <div class="feat reveal"><h4><span class="d"></span>ARCANUM Hive mesh</h4><p>Tailscale + WireGuard + a Kubernetes operator turn reclaimed laptops into a distributed inference mesh. The floor drops from <b>"$2,000 GPU"</b> to "a working laptop."</p></div>
+        <div class="feat reveal"><h4><span class="d"></span>Reproducible &amp; signed</h4><p><b>SLSA-3</b> reproducible builds, cosign + Sigstore Rekor, CycloneDX SBOM, cross-oracle verify. FedRAMP Moderate / CMMC L2 / SOC2 control maps ship in the box.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SYNAPTIC GAP -->
+  <section class="gap">
+    <blockquote>
+      <p>The underscore in <span class="mono synaccent">Syn_OS</span> is the synaptic gap — the cleft where electrical signal jumps into chemical meaning. Hardware is the pre-synaptic neuron; application consciousness the post-synaptic. Syn_OS is the cleft between.</p>
+      <div class="punch">The OS is the <span class="u">gap</span>.</div>
+    </blockquote>
+  </section>
+</div>
+
+<style>
+  /* full-bleed out of the splash content column */
+  .synland {
+    margin-inline: calc(50% - 50vw);
+    font-family: var(--sans);
+    color: var(--text);
+    line-height: 1.5;
+    text-align: left;
+  }
+  .synland .hbwrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+  .synland .mono { font-family: var(--mono); }
+  .synland .synaccent { color: var(--text); }
+
+  /* neutralise inherited Starlight markdown heading/paragraph/quote styling */
+  .synland h1, .synland h2, .synland h3, .synland h4 {
+    -webkit-text-fill-color: currentColor;
+    background: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+  .synland a { color: inherit; text-decoration: none; }
+
+  /* HERO */
+  .hbhero {
+    position: relative;
+    min-height: 96vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+  }
+  .hbhero .hbwrap { position: relative; z-index: 2; text-align: center; display: flex; flex-direction: column; align-items: center; }
+  .pulsechip {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted); border: 1px solid var(--line-hi); border-radius: 999px; padding: 7px 14px; background: rgba(13, 9, 11, 0.6);
+  }
+  .pulsechip .hb { width: 7px; height: 7px; border-radius: 50%; background: var(--crimson-hi); box-shadow: 0 0 9px var(--crimson-hi); animation: hbpulse 2s cubic-bezier(.3, .6, .4, 1) infinite; }
+  @keyframes hbpulse { 0%, 100% { transform: scale(1); opacity: .72 } 10% { transform: scale(1.35); opacity: .95 } 22% { transform: scale(1); opacity: .74 } 30% { transform: scale(1.16); opacity: .85 } 40% { transform: scale(1); opacity: .7 } }
+  .wordmark { font-size: clamp(58px, 13vw, 150px); font-weight: 800; letter-spacing: -0.04em; line-height: 0.9; margin: 26px 0 0; color: var(--text); text-shadow: 0 6px 70px rgba(0, 0, 0, .6); }
+  .wordmark i { color: var(--crimson-hi); font-style: normal; text-shadow: 0 0 50px var(--crimson-glow); }
+  .htag { margin-top: 26px; max-width: 60ch; font-size: clamp(16px, 2.15vw, 21px); color: var(--muted); text-shadow: 0 2px 20px rgba(0, 0, 0, .6); }
+  .htag b { color: var(--text); font-weight: 600; }
+  .cta-row { margin-top: 38px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+  .btn { display: inline-flex; align-items: center; gap: 9px; padding: 13px 22px; border-radius: 11px; font-family: var(--mono); font-weight: 600; font-size: 13.5px; letter-spacing: 0.03em; border: 1px solid transparent; transition: .2s; }
+  .btn .arw { transition: transform .2s; } .btn:hover .arw { transform: translateX(3px); }
+  .btn-primary { background: linear-gradient(180deg, var(--crimson-hi), var(--crimson)); color: #fff; box-shadow: 0 10px 30px -12px var(--crimson-glow); }
+  .btn-primary:hover { filter: brightness(1.1); box-shadow: 0 16px 42px -12px var(--crimson-glow); }
+  .btn-ghost { border-color: var(--line-hi); color: var(--muted); }
+  .btn-ghost:hover { border-color: var(--crimson-hi); color: var(--text); }
+  .btn:focus-visible { outline: 2px solid var(--crimson-hi); outline-offset: 3px; }
+  .statrow { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 8px 30px; justify-content: center; font-family: var(--mono); font-size: 12.5px; color: var(--dim); }
+  .statrow b { color: var(--muted); font-weight: 600; }
+
+  /* reveal-on-scroll */
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s cubic-bezier(.2, .7, .3, 1), transform .7s cubic-bezier(.2, .7, .3, 1); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  section.band { padding: 78px 0; }
+  section.band.bordered { border-top: 1px solid var(--line); }
+  .sechead { text-align: center; margin-bottom: 40px; }
+  .sechead h2 { font-size: clamp(26px, 3.8vw, 40px); font-weight: 800; letter-spacing: -0.025em; color: var(--text); }
+  .sechead h2 .u { color: var(--crimson-hi); }
+  .sechead p { color: var(--muted); margin-top: 12px; font-family: var(--mono); font-size: 13px; max-width: none; }
+
+  /* three images teaser */
+  .imgs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 840px) { .imgs { grid-template-columns: 1fr; } }
+  .icard { position: relative; border: 1px solid var(--line); border-radius: 15px; background: linear-gradient(180deg, var(--surface), var(--ground2)); padding: 24px 22px; transition: .25s; overflow: hidden; }
+  .icard:hover { transform: translateY(-4px); border-color: var(--line-hi); }
+  .icard .k { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim); }
+  .icard h3 { font-size: 23px; font-weight: 800; margin: 12px 0 8px; letter-spacing: -0.02em; color: var(--text); }
+  .icard p { color: var(--muted); font-size: 14px; min-height: 66px; max-width: none; line-height: 1.5; }
+  .icard .go { margin-top: 14px; font-family: var(--mono); font-size: 12.5px; color: var(--crimson-hi); display: inline-flex; gap: 7px; align-items: center; }
+  .icard.grim { border-color: rgba(143, 18, 18, 0.34); } .icard.grim:hover { box-shadow: 0 24px 60px -28px var(--crimson-glow); }
+  .icard.grim h3 { color: #fff; } .icard.grim .k { color: var(--crimson-hi); }
+  .icard.ent .k { color: var(--gold); } .icard.ent .go { color: var(--gold-hi); }
+
+  /* built different */
+  .feats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 840px) { .feats { grid-template-columns: 1fr; } }
+  .feat { border: 1px solid var(--line); border-radius: 14px; background: var(--ground2); padding: 22px 20px; }
+  .feat h4 { font-size: 15.5px; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 9px; color: var(--text); }
+  .feat h4 .d { width: 7px; height: 7px; border-radius: 50%; background: var(--crimson-hi); box-shadow: 0 0 8px var(--crimson-glow); flex: none; }
+  .feat p { color: var(--muted); font-size: 13.5px; max-width: none; line-height: 1.55; }
+  .feat p b { color: var(--text); font-weight: 600; }
+
+  /* synaptic gap */
+  .gap { border-top: 1px solid var(--line); background: var(--ground2); padding: 70px 24px; }
+  .gap blockquote { max-width: 60ch; margin: 0 auto; text-align: center; border: 0 !important; background: none !important; padding: 0 !important; border-radius: 0 !important; }
+  .gap blockquote p { font-size: clamp(17px, 2.4vw, 23px); color: var(--muted); line-height: 1.5; opacity: 1; max-width: none; }
+  .gap .punch { margin-top: 22px; font-size: clamp(20px, 3vw, 30px); font-weight: 800; color: var(--text); letter-spacing: -0.02em; }
+  .gap .punch .u { color: var(--crimson-hi); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .synland *, .hbhero * { animation: none !important; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+</style>

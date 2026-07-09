@@ -1,0 +1,276 @@
+---
+/*
+  DownloadLanding — approved "Three images. One fire." download surface (splash).
+  Full-bleed heartbeat hero + three image panels (GRIMOIRE / GoodLife / Enterprise)
+  + Church of Malware members-only band + signed-integrity strip.
+  GoodLife/Enterprise copy uses the reconciled non-offensive framing (no "weapon",
+  no public "Master" image). Styles scoped + namespaced under .synland.
+*/
+import HeartbeatHero from './HeartbeatHero.astro';
+---
+<div class="synland">
+  <!-- HERO -->
+  <section class="hbhero">
+    <HeartbeatHero bpm={60} intensity={0.7} />
+    <div class="hbwrap">
+      <span class="pulsechip"><span class="hb"></span> v111.0.0 · Last Light · the OS has a pulse</span>
+      <h1 class="title">Three images.<br>One <span class="fire">fire</span>.</h1>
+      <p class="lede">One Rust-for-Linux kernel, one Rust userspace, one GRIMOIRE engine — split into distinct images by a build-time Curtain and a runtime capability ceiling. <b>Pick the way in that fits you.</b></p>
+      <div class="herometa">
+        <span>arch <b>x86-64</b></span><span>kernel <b>Linux 7.0 · Rust</b></span>
+        <span>write to <b>USB ≥ 8 GB</b></span><span>boot <b>UEFI</b></span>
+      </div>
+      <a href="#images" class="scrollcue">Choose your image <span class="caret">↓</span></a>
+    </div>
+  </section>
+
+  <!-- IMAGES -->
+  <section class="images" id="images">
+    <div class="hbwrap">
+      <div class="sechead reveal">
+        <h2>Choose your image</h2>
+        <p>// same codebase — the Curtain<span class="u">.</span> keeps each image in its lane; the free tiers can never escalate to the licensed one.</p>
+      </div>
+
+      <div class="grid">
+        <!-- GRIMOIRE -->
+        <article class="panel p-grim reveal">
+          <div class="ptop"><span class="pbadge">Public</span><span class="status free">Free · Beta</span></div>
+          <div class="pname">GRIMOIRE</div>
+          <div class="ptag">Learn to hack. For real — a shared-world hacking MMO where the exploit <em>is</em> the objective.</div>
+          <ul class="specs">
+            <li>117 labs across 13 categories — pre-bundled, unlock by progression</li>
+            <li>Faction wars: Crimson Spire · Neon Collective · The Warden</li>
+            <li>Cert paths: eJPT · OSCP · OSEP · GIAC · CEH</li>
+            <li>ALFRED GameMode · sandboxed · optional AI-research unlock late-game</li>
+          </ul>
+          <div class="pfoot">
+            <div class="dl"><span>synos-grimoire-v111.iso</span> · <b>x86-64 · UEFI</b></div>
+            <a class="cta" href="#"><span>Download image</span><span class="arw">→</span></a>
+            <a class="cta-secondary" href="https://synos-linux.pro/play/">▶ Or play it in your browser</a>
+          </div>
+        </article>
+
+        <!-- GoodLife -->
+        <article class="panel p-good reveal">
+          <div class="ptop"><span class="pbadge">Sovereign</span><span class="status free">Free personal · Beta</span></div>
+          <div class="pname">GoodLife</div>
+          <div class="ptag">The full sovereign build — everything except operational offensive tooling. Your own AI, your own mesh, your own research lab.</div>
+          <ul class="specs">
+            <li>Full ALFRED v6.0 · full AI cortex + dispatch</li>
+            <li>Full ARCANUM mesh · the complete 245-crate stack</li>
+            <li>Dedicated Research Division — Jupyter, local models, ML lab</li>
+            <li>No operational offensive tooling — simply not included</li>
+          </ul>
+          <div class="pfoot">
+            <div class="dl"><span>synos-goodlife-v111.iso</span> · <b>free personal · licensed commercial</b></div>
+            <a class="cta" href="#"><span>Download image</span><span class="arw">→</span></a>
+          </div>
+        </article>
+
+        <!-- Enterprise Edition -->
+        <article class="panel p-master reveal">
+          <div class="ptop"><span class="pbadge">Enterprise</span><span class="status locked">◆ Licensed</span></div>
+          <div class="pname">Enterprise Edition</div>
+          <div class="ptag">The commercial build for teams and regulated environments — the full stack, multi-tenant, compliant, supported.</div>
+          <ul class="specs">
+            <li>Everything in GoodLife, at organizational scale</li>
+            <li>Multi-tenant ARCANUM federation + fleet management</li>
+            <li>FedRAMP Moderate · CMMC L2 · SOC2 posture with evidence packs</li>
+            <li>Priority support &amp; SLAs · by customer agreement</li>
+          </ul>
+          <div class="pfoot">
+            <div class="lockrow">🔒 licensed · customer agreement</div>
+            <a class="cta" href="#"><span>Talk to us</span><span class="arw">→</span></a>
+          </div>
+        </article>
+      </div>
+
+      <!-- CHURCH OF MALWARE — members-only beta -->
+      <div class="comband reveal" id="church">
+        <div class="comgrid">
+          <div>
+            <div class="comeyebrow"><span class="sigil">⛧</span> Church of Malware · Beta Access</div>
+            <div class="comtitle">Enter through the <b>Church</b>.</div>
+            <p>A community edition forged <em>with</em> the <a href="https://churchofmalware.org">Church of Malware</a>. Verified members boot green-on-black into the CoM faction — a baked-in loadout, an XP head-start, and member-exclusive labs the public build never sees. This is the soft-launch door for public beta.</p>
+            <div class="comscript">// code is scripture · exploitation is sermon · members only</div>
+            <a class="combtn" href="https://churchofmalware.org"><span>Request CoM Beta Access</span><span class="arw">→</span></a>
+            <div class="commeta">membership is audited in the CoM Discord — access is device-bound and single-use</div>
+          </div>
+          <ol class="comflow">
+            <li><span class="n">1</span><span>Join the <b class="comwhite">Church of Malware</b> Discord via <code>churchofmalware.org</code></span></li>
+            <li><span class="n">2</span><span>Get <b class="comwhite">verified</b> — your role is audited to confirm membership</span></li>
+            <li><span class="n">3</span><span>Run <code>/claim</code> in Discord → receive a single-use claim code</span></li>
+            <li><span class="n">4</span><span>Redeem with <code>synos-claim &lt;code&gt;</code> and boot your token-gated beta</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTEGRITY -->
+  <section class="integrity" id="verify">
+    <div class="hbwrap">
+      <div class="reveal">
+        <h3>Every image is signed.</h3>
+        <p>Reproducible from source across independent build oracles, cosign-signed, and logged to a public transparency record. Trust the fire, verify the ash.</p>
+        <div class="chips">
+          <span class="chip"><b>SHA-256</b> per image</span>
+          <span class="chip"><b>SLSA-3</b> reproducible</span>
+          <span class="chip"><b>cosign</b> + Sigstore Rekor</span>
+          <span class="chip"><b>CycloneDX</b> SBOM</span>
+        </div>
+      </div>
+      <div class="term reveal">
+        <div class="bar"><span class="b r"></span><span class="b"></span><span class="b"></span> verify.sh</div>
+<pre><span class="c"># confirm the ISO is the one we built</span>
+<span class="p">$</span> cosign verify-blob \
+    --certificate synos-grimoire-v111.iso.cert \
+    --signature   synos-grimoire-v111.iso.sig \
+    synos-grimoire-v111.iso
+<span class="g">Verified OK</span>  <span class="c">— logged in Sigstore Rekor</span>
+<span class="p">$</span> sha256sum -c synos-grimoire-v111.iso.sha256
+<span class="g">synos-grimoire-v111.iso: OK</span></pre>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .synland {
+    margin-inline: calc(50% - 50vw);
+    font-family: var(--sans);
+    color: var(--text);
+    line-height: 1.5;
+    text-align: left;
+  }
+  .synland .hbwrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+  .synland h1, .synland h2, .synland h3, .synland h4 {
+    -webkit-text-fill-color: currentColor;
+    background: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+  .synland a { color: inherit; text-decoration: none; }
+  .comwhite { color: #eafff0; }
+
+  /* HERO */
+  .hbhero { position: relative; min-height: 92vh; display: flex; flex-direction: column; justify-content: center; overflow: hidden; border-bottom: 1px solid var(--line); }
+  .hbhero .hbwrap { position: relative; z-index: 2; }
+  .pulsechip {
+    display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--muted); border: 1px solid var(--line-hi); border-radius: 999px; padding: 7px 14px; background: rgba(13, 9, 11, 0.6);
+  }
+  .pulsechip .hb { width: 7px; height: 7px; border-radius: 50%; background: var(--crimson-hi); box-shadow: 0 0 9px var(--crimson-hi); animation: hbpulse 2s cubic-bezier(.3, .6, .4, 1) infinite; }
+  @keyframes hbpulse { 0%, 100% { transform: scale(1); opacity: .72 } 10% { transform: scale(1.35); opacity: .95 } 22% { transform: scale(1); opacity: .74 } 30% { transform: scale(1.16); opacity: .85 } 40% { transform: scale(1); opacity: .7 } }
+  h1.title { font-size: clamp(46px, 9vw, 116px); line-height: 0.92; font-weight: 800; letter-spacing: -0.035em; margin: 26px 0 0; text-wrap: balance; color: var(--text); text-shadow: 0 4px 60px rgba(0, 0, 0, .55); }
+  h1.title .fire { color: var(--crimson-hi); position: relative; text-shadow: 0 0 44px var(--crimson-glow); }
+  .lede { margin-top: 24px; max-width: 60ch; font-size: clamp(16px, 2.1vw, 20px); color: var(--muted); text-shadow: 0 2px 20px rgba(0, 0, 0, .6); }
+  .lede b { color: var(--text); font-weight: 600; }
+  .herometa { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 10px 26px; align-items: center; font-family: var(--mono); font-size: 12.5px; color: var(--dim); }
+  .herometa span b { color: var(--muted); font-weight: 600; }
+  .scrollcue { margin-top: 42px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.18em; color: var(--dim); text-transform: uppercase; display: inline-flex; align-items: center; gap: 10px; }
+  .scrollcue .caret { animation: bob 1.6s ease-in-out infinite; }
+  @keyframes bob { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(4px) } }
+
+  /* reveal-on-scroll */
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s cubic-bezier(.2, .7, .3, 1), transform .7s cubic-bezier(.2, .7, .3, 1); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* IMAGES */
+  .images { padding: 78px 0 44px; }
+  .sechead { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: 36px; }
+  .sechead h2 { font-size: clamp(24px, 3.6vw, 36px); font-weight: 800; letter-spacing: -0.025em; color: var(--text); }
+  .sechead h2 .u { color: var(--crimson); }
+  .sechead p { color: var(--muted); font-family: var(--mono); font-size: 13px; max-width: 42ch; }
+
+  .grid { display: grid; grid-template-columns: 1.35fr 1fr 1fr; gap: 18px; }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+
+  .panel { position: relative; border: 1px solid var(--line); border-radius: 16px; background: linear-gradient(180deg, var(--surface), var(--ground2)); padding: 26px 24px 24px; display: flex; flex-direction: column; min-height: 452px; overflow: hidden; transition: border-color .25s, transform .25s, box-shadow .25s; }
+  .panel:hover { transform: translateY(-4px); }
+  .panel .ptop { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .pbadge { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; }
+  .status { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 9px; border-radius: 999px; border: 1px solid var(--line-hi); color: var(--muted); white-space: nowrap; }
+  .status.free { color: var(--ok); border-color: rgba(63, 185, 80, 0.35); }
+  .status.locked { color: var(--gold); border-color: rgba(201, 162, 39, 0.4); }
+  .pname { font-size: 30px; font-weight: 800; letter-spacing: -0.02em; margin: 18px 0 5px; color: var(--text); }
+  .ptag { color: var(--muted); font-size: 14.5px; min-height: 44px; max-width: none; }
+  .specs { list-style: none; padding: 0; margin: 20px 0 0; display: flex; flex-direction: column; gap: 9px; font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+  .specs li { display: flex; gap: 10px; align-items: baseline; padding-left: 0; }
+  .specs li::before { content: "▸"; color: var(--dim); font-size: 10px; flex: none; background: none; position: static; width: auto; height: auto; }
+  .pfoot { margin-top: auto; padding-top: 22px; }
+  .dl { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 12px; color: var(--dim); margin-bottom: 14px; }
+  .dl b { color: var(--muted); font-weight: 600; }
+  .cta { position: relative; display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 14px 18px; border-radius: 11px; font-family: var(--mono); font-weight: 600; font-size: 13.5px; letter-spacing: 0.03em; cursor: pointer; border: 1px solid transparent; transition: .2s; overflow: hidden; }
+  .cta .arw { transition: transform .2s; }
+  .cta:hover .arw { transform: translateX(4px); }
+  .cta-secondary { margin-top: 9px; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 11px; border-radius: 11px; font-family: var(--mono); font-size: 12.5px; color: var(--muted); border: 1px solid var(--line); transition: .2s; }
+  .cta-secondary:hover { border-color: var(--line-hi); color: var(--text); }
+  .cta:focus-visible, .cta-secondary:focus-visible, .combtn:focus-visible { outline: 2px solid var(--crimson-hi); outline-offset: 3px; }
+
+  /* GRIMOIRE — crimson, featured */
+  .p-grim { border-color: rgba(191, 31, 31, 0.32); background: linear-gradient(180deg, #1c1113, var(--ground2)); }
+  .p-grim:hover { box-shadow: 0 26px 70px -26px var(--crimson-glow); border-color: rgba(191, 31, 31, 0.55); }
+  .p-grim .pname { color: #fff; } .p-grim .pbadge { color: var(--crimson-hi); }
+  .p-grim .cta { background: linear-gradient(180deg, var(--crimson-hi), var(--crimson)); color: #fff; box-shadow: 0 10px 30px -12px var(--crimson-glow); }
+  .p-grim .cta:hover { filter: brightness(1.08); box-shadow: 0 16px 42px -12px var(--crimson-glow); }
+  .p-grim::after { content: ""; position: absolute; top: -40%; right: -30%; width: 62%; height: 82%; background: radial-gradient(closest-side, var(--crimson-glow), transparent 70%); opacity: .2; pointer-events: none; }
+
+  /* GoodLife — quiet, cool */
+  .p-good:hover { box-shadow: 0 22px 60px -28px rgba(139, 150, 158, 0.32); border-color: var(--line-hi); }
+  .p-good .pbadge { color: #8b969e; }
+  .p-good .cta { background: var(--surface2); color: var(--text); border-color: var(--line-hi); }
+  .p-good .cta:hover { background: #26201f; border-color: #8b969e; }
+
+  /* Enterprise — gold, gated */
+  .p-master { background: linear-gradient(180deg, #17130c, var(--ground2)); }
+  .p-master:hover { box-shadow: 0 22px 60px -28px rgba(201, 162, 39, 0.28); border-color: rgba(201, 162, 39, 0.5); }
+  .p-master .pbadge { color: var(--gold); }
+  .p-master .cta { background: transparent; color: var(--gold-hi); border-color: rgba(201, 162, 39, 0.5); }
+  .p-master .cta:hover { background: rgba(201, 162, 39, 0.1); border-color: var(--gold); }
+  .lockrow { font-family: var(--mono); font-size: 11.5px; color: var(--gold); opacity: .85; display: flex; gap: 8px; align-items: center; margin-bottom: 12px; }
+
+  /* CHURCH OF MALWARE band */
+  .comband { position: relative; margin-top: 44px; border: 1px solid rgba(57, 211, 83, 0.28); border-radius: 18px; overflow: hidden; background: linear-gradient(180deg, #0a1410, #080b09); padding: 40px 34px; }
+  .comband::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5; background: radial-gradient(60% 120% at 12% 0%, rgba(57, 211, 83, 0.14), transparent 60%); }
+  .comgrid { position: relative; display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: center; }
+  @media (max-width: 840px) { .comgrid { grid-template-columns: 1fr; gap: 26px; } }
+  .comeyebrow { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--com); display: flex; align-items: center; gap: 9px; }
+  .comeyebrow .sigil { font-size: 15px; filter: drop-shadow(0 0 6px rgba(57, 211, 83, 0.6)); }
+  .comtitle { font-size: clamp(26px, 3.6vw, 38px); font-weight: 800; letter-spacing: -0.02em; margin: 14px 0 12px; color: #eafff0; }
+  .comtitle b { color: var(--com-hi); }
+  .comband p { color: #a9c7b3; font-size: 15px; max-width: 52ch; }
+  .comband p a { color: var(--com-hi); border-bottom: 1px solid rgba(95, 240, 122, 0.4); }
+  .comscript { margin-top: 16px; font-family: var(--mono); font-size: 12px; color: #6f9a7d; letter-spacing: 0.04em; }
+  .comflow { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; counter-reset: none; }
+  .comflow li { display: flex; gap: 14px; align-items: flex-start; font-family: var(--mono); font-size: 13px; color: #c7e6d1; padding-left: 0; counter-increment: none; }
+  .comflow li::before { content: none !important; display: none !important; }
+  .comflow .n { flex: none; width: 26px; height: 26px; border-radius: 7px; border: 1px solid rgba(57, 211, 83, 0.4); color: var(--com-hi); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; background: rgba(57, 211, 83, 0.08); position: static; top: auto; left: auto; }
+  .comband code { color: var(--com-hi) !important; background: rgba(57, 211, 83, 0.1) !important; border: 1px solid rgba(57, 211, 83, 0.2) !important; padding: 1px 5px !important; border-radius: 4px; font-family: var(--mono); }
+  .combtn { margin-top: 26px; display: inline-flex; align-items: center; gap: 10px; padding: 14px 24px; border-radius: 11px; font-family: var(--mono); font-weight: 700; font-size: 13px; letter-spacing: 0.04em; color: #04120a; background: linear-gradient(180deg, var(--com-hi), var(--com)); box-shadow: 0 12px 34px -14px rgba(57, 211, 83, 0.5); transition: .2s; }
+  .combtn:hover { filter: brightness(1.08); box-shadow: 0 16px 44px -14px rgba(57, 211, 83, 0.6); }
+  .combtn .arw { transition: transform .2s; } .combtn:hover .arw { transform: translateX(4px); }
+  .commeta { margin-top: 14px; font-family: var(--mono); font-size: 11px; color: #5f8a6d; }
+
+  /* INTEGRITY STRIP */
+  .integrity { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--ground2); padding: 56px 0; margin-top: 52px; }
+  .integrity .hbwrap { display: grid; grid-template-columns: 1fr 1.15fr; gap: 44px; align-items: center; }
+  @media (max-width: 820px) { .integrity .hbwrap { grid-template-columns: 1fr; gap: 26px; } }
+  .integrity h3 { font-size: clamp(22px, 3vw, 30px); font-weight: 800; letter-spacing: -0.02em; color: var(--text); }
+  .integrity p { color: var(--muted); margin-top: 12px; max-width: 44ch; font-size: 15px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .chip { font-family: var(--mono); font-size: 11.5px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px; }
+  .chip b { color: var(--crimson-hi); font-weight: 600; }
+  .term { background: #0a0709; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; font-family: var(--mono); font-size: 12.5px; }
+  .term .bar { display: flex; align-items: center; gap: 7px; padding: 10px 14px; border-bottom: 1px solid var(--line); color: var(--dim); font-size: 11px; }
+  .term .bar .b { width: 9px; height: 9px; border-radius: 50%; background: #39302e; } .term .bar .b.r { background: #c94b3f; }
+  .term pre { margin: 0 !important; padding: 16px !important; overflow-x: auto; line-height: 1.7; color: var(--muted); background: transparent !important; background-image: none !important; border: none !important; border-radius: 0 !important; box-shadow: none !important; }
+  .term .p { color: var(--crimson-hi); } .term .g { color: var(--ok); } .term .c { color: var(--dim); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .synland *, .hbhero * { animation: none !important; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+</style>

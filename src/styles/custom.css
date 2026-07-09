@@ -34,9 +34,8 @@
    COLOR TOKENS — Phoenix Red & Obsidian
    ============================================================ */
 
-@font-face { font-family:'Chakra Petch'; font-style:normal; font-weight:500; font-display:swap; src:url('/fonts/chakra-petch-500.woff2') format('woff2'); }
-@font-face { font-family:'Chakra Petch'; font-style:normal; font-weight:600; font-display:swap; src:url('/fonts/chakra-petch-600.woff2') format('woff2'); }
-@font-face { font-family:'Chakra Petch'; font-style:normal; font-weight:700; font-display:swap; src:url('/fonts/chakra-petch-700.woff2') format('woff2'); }
+
+@font-face { font-family:'Audiowide'; font-style:normal; font-weight:400; font-display:swap; src:url('/fonts/audiowide-400.woff2') format('woff2'); }
 
 :root,
 :root[data-theme='dark'],
@@ -100,7 +99,7 @@
 	--com:#2fae46; --com-hi:#54d46c; --com-deep:#08160c;
 	--hb-ground:#07040a; --hb-crimson:#640a0a; --hb-hot:#9c1515; --hb-ember:#6e1c12; --hb-text:#f5f1ee;
 	--sans:'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-	--display:'Chakra Petch', 'Rajdhani', var(--sans);
+	--display:'Audiowide', 'Rajdhani', var(--sans);
 	--mono:'JetBrains Mono', ui-monospace, 'SF Mono', 'Cascadia Code', 'Menlo', monospace;
 	--maxw:1140px;
 }

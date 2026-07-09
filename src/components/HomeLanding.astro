@@ -219,10 +219,10 @@ import HeartbeatHero from './HeartbeatHero.astro';
       A({
         targets: '.hero-logo .phoenix-img',
         keyframes: [
-          { scale: 1.05, filter: 'brightness(1.32) drop-shadow(0 0 12px rgba(191,31,31,.5))', duration: 150, easing: 'easeOutQuad' },
-          { scale: 1.00, filter: 'brightness(1.00)', duration: 250, easing: 'easeInQuad' },
-          { scale: 1.03, filter: 'brightness(1.16)', duration: 120, easing: 'easeOutQuad' },
-          { scale: 1.00, filter: 'brightness(1.00)', duration: 1480, easing: 'easeInOutSine' }
+          { scale: 1.05, filter: 'brightness(1.32) drop-shadow(0 0 12px rgba(191,31,31,.5))', duration: 120, easing: 'easeOutQuad' },
+          { scale: 1.00, filter: 'brightness(1.00)', duration: 180, easing: 'easeInQuad' },
+          { scale: 1.03, filter: 'brightness(1.16)', duration: 100, easing: 'easeOutQuad' },
+          { scale: 1.00, filter: 'brightness(1.00)', duration: 600, easing: 'easeInOutSine' }
         ],
         loop: true
       });
@@ -233,13 +233,13 @@ import HeartbeatHero from './HeartbeatHero.astro';
         targets: '.hero-logo .veins path',
         strokeDashoffset: [A.setDashoffset, 0],
         opacity: [
-          { value: 0.92, duration: 200, easing: 'easeOutQuad' },
-          { value: 0.14, duration: 600, easing: 'easeInQuad' },
-          { value: 0.55, duration: 150 },
-          { value: 0.06, duration: 1050 }
+          { value: 0.92, duration: 120, easing: 'easeOutQuad' },
+          { value: 0.14, duration: 280, easing: 'easeInQuad' },
+          { value: 0.55, duration: 100 },
+          { value: 0.06, duration: 500 }
         ],
         delay: A.stagger(70),
-        duration: 2000,
+        duration: 1000,
         loop: true,
         easing: 'easeInOutSine'
       });

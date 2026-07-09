@@ -13,6 +13,21 @@ import HeartbeatHero from './HeartbeatHero.astro';
     <HeartbeatHero bpm={60} intensity={0.7} />
     <div class="hbwrap">
       <span class="pulsechip"><span class="hb"></span> v111.0.0 · Last Light · the OS has a pulse</span>
+      <div class="hero-logo" aria-hidden="true">
+        <svg class="veins" viewBox="0 0 460 260" preserveAspectRatio="xMidYMid meet">
+          <g>
+            <path d="M230,120 C170,96 120,104 34,80"/>
+            <path d="M230,120 C290,96 340,104 426,80"/>
+            <path d="M230,132 C158,140 104,142 20,140"/>
+            <path d="M230,132 C302,140 356,142 440,140"/>
+            <path d="M230,146 C176,176 138,198 96,220"/>
+            <path d="M230,146 C284,176 322,198 364,220"/>
+            <path d="M230,150 C214,196 210,224 206,250"/>
+            <path d="M230,150 C246,196 250,224 254,250"/>
+          </g>
+        </svg>
+        <img class="phoenix-img" src="/phoenix-hero.png" alt="Syn_OS phoenix" width="230" height="128" fetchpriority="high"/>
+      </div>
       <h1 class="wordmark">SYN<i>_</i>OS</h1>
       <p class="htag">The <b>Synaptic Operating System</b> — an AI-aware Rust-for-Linux kernel, post-quantum crypto by default, and a gamified cybersecurity training platform. <b>Engineered as one cohesive product</b>, not a tool collection.</p>
       <div class="cta-row">
@@ -128,8 +143,12 @@ import HeartbeatHero from './HeartbeatHero.astro';
   }
   .pulsechip .hb { width: 7px; height: 7px; border-radius: 50%; background: var(--crimson-hi); box-shadow: 0 0 9px var(--crimson-hi); animation: hbpulse 2s cubic-bezier(.3, .6, .4, 1) infinite; }
   @keyframes hbpulse { 0%, 100% { transform: scale(1); opacity: .72 } 10% { transform: scale(1.35); opacity: .95 } 22% { transform: scale(1); opacity: .74 } 30% { transform: scale(1.16); opacity: .85 } 40% { transform: scale(1); opacity: .7 } }
-  .wordmark { font-size: clamp(58px, 13vw, 150px); font-weight: 800; letter-spacing: -0.04em; line-height: 0.9; margin: 26px 0 0; color: var(--text); text-shadow: 0 6px 70px rgba(0, 0, 0, .6); }
+  .wordmark { font-family: var(--display); font-size: clamp(54px, 12vw, 138px); font-weight: 700; letter-spacing: -0.04em; line-height: 0.9; margin: 26px 0 0; color: var(--text); text-shadow: 0 6px 70px rgba(0, 0, 0, .6); }
   .wordmark i { color: var(--crimson-hi); font-style: normal; text-shadow: 0 0 50px var(--crimson-glow); }
+  .hero-logo { position: relative; width: min(300px, 60vw); margin: 4px auto -6px; filter: drop-shadow(0 0 34px var(--crimson-glow)); }
+  .hero-logo .phoenix-img { position: relative; z-index: 2; width: 100%; height: auto; display: block; will-change: transform, filter; transform-origin: 50% 58%; }
+  .hero-logo .veins { position: absolute; left: -18%; top: -14%; width: 136%; height: 128%; z-index: 1; overflow: visible; pointer-events: none; }
+  .hero-logo .veins path { fill: none; stroke: var(--crimson-hi); stroke-width: 1.5; stroke-linecap: round; opacity: 0; filter: drop-shadow(0 0 5px var(--crimson-hi)); }
   .htag { margin-top: 26px; max-width: 60ch; font-size: clamp(16px, 2.15vw, 21px); color: var(--muted); text-shadow: 0 2px 20px rgba(0, 0, 0, .6); }
   .htag b { color: var(--text); font-weight: 600; }
   .cta-row { margin-top: 38px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
@@ -188,3 +207,43 @@ import HeartbeatHero from './HeartbeatHero.astro';
     .reveal { opacity: 1; transform: none; transition: none; }
   }
 </style>
+
+<script is:inline src="/vendor/anime.min.js"></script>
+<script is:inline>
+  (function () {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    function start() {
+      if (!window.anime) { return void setTimeout(start, 60); }
+      var A = window.anime;
+      // Red phoenix — cardiac lub-dub over 2s, synced to the HeartbeatHero background.
+      A({
+        targets: '.hero-logo .phoenix-img',
+        keyframes: [
+          { scale: 1.05, filter: 'brightness(1.32) drop-shadow(0 0 12px rgba(191,31,31,.5))', duration: 150, easing: 'easeOutQuad' },
+          { scale: 1.00, filter: 'brightness(1.00)', duration: 250, easing: 'easeInQuad' },
+          { scale: 1.03, filter: 'brightness(1.16)', duration: 120, easing: 'easeOutQuad' },
+          { scale: 1.00, filter: 'brightness(1.00)', duration: 1480, easing: 'easeInOutSine' }
+        ],
+        loop: true
+      });
+      // Coursing cybernetic veins — energy flows out on each beat, then dims.
+      var veins = document.querySelectorAll('.hero-logo .veins path');
+      veins.forEach(function (p) { var l = p.getTotalLength(); p.style.strokeDasharray = l; p.style.strokeDashoffset = l; });
+      A({
+        targets: '.hero-logo .veins path',
+        strokeDashoffset: [A.setDashoffset, 0],
+        opacity: [
+          { value: 0.92, duration: 200, easing: 'easeOutQuad' },
+          { value: 0.14, duration: 600, easing: 'easeInQuad' },
+          { value: 0.55, duration: 150 },
+          { value: 0.06, duration: 1050 }
+        ],
+        delay: A.stagger(70),
+        duration: 2000,
+        loop: true,
+        easing: 'easeInOutSine'
+      });
+    }
+    (document.readyState === 'loading') ? document.addEventListener('DOMContentLoaded', start) : start();
+  })();
+</script>

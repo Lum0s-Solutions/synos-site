@@ -17,10 +17,12 @@ export default defineConfig({
 			},
 			favicon: '/favicon.svg',
 			social: [
-				{ icon: 'github',  label: 'GitHub',  href: 'https://github.com/Lum0s-Solutions/Syn_OS' },
 				{ icon: 'discord', label: 'Discord', href: 'https://discord.gg/synos' },
 			],
 			customCss: ['./src/styles/custom.css'],
+			components: {
+				Footer: './src/components/Footer.astro',
+			},
 			head: [
 				// Open Graph
 				{ tag: 'meta', attrs: { property: 'og:title',        content: 'Syn_OS — Synaptic Operating System' } },
@@ -38,7 +40,7 @@ export default defineConfig({
 				{ tag: 'meta', attrs: { name: 'twitter:image',       content: 'https://synos-linux.pro/og-image.svg' } },
 
 				// Theme
-				{ tag: 'meta', attrs: { name: 'theme-color',  content: '#8f1212' } },
+				{ tag: 'meta', attrs: { name: 'theme-color',  content: '#08060a' } },
 				{ tag: 'meta', attrs: { name: 'color-scheme', content: 'dark' } },
 
 				// Apple touch icon
@@ -48,18 +50,16 @@ export default defineConfig({
 				// I1 — preload self-hosted fonts (eliminates Google Fonts DNS round-trip)
 				{ tag: 'link', attrs: { rel: 'preload', href: '/fonts/jetbrains-mono-latin.woff2', as: 'font', type: 'font/woff2', crossorigin: 'anonymous' } },
 				{ tag: 'link', attrs: { rel: 'preload', href: '/fonts/inter-latin.woff2',         as: 'font', type: 'font/woff2', crossorigin: 'anonymous' } },
+				{ tag: 'link', attrs: { rel: 'preload', href: '/fonts/saira-latin.woff2',         as: 'font', type: 'font/woff2', crossorigin: 'anonymous' } },
 			],
-			editLink: {
-				baseUrl: 'https://github.com/Lum0s-Solutions/Syn_OS/edit/main/growth/LumOs-Repos/site/',
-			},
 			lastUpdated: true,
 			pagination: true,
 			tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 3 },
 			sidebar: [
 				{
-					label: '🎮 Play GRIMOIRE',
-					link: '/play/',
-					attrs: { target: '_blank', style: 'font-weight:700' },
+					label: '◈ LumOs Solutions',
+					link: 'https://solutions.synos-linux.pro/',
+					attrs: { target: '_blank', rel: 'noopener' },
 				},
 				{
 					label: '▶ Getting Started',

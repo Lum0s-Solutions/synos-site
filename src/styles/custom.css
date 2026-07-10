@@ -39,6 +39,9 @@
 @font-face { font-family:'Rajdhani'; font-style:normal; font-weight:600; font-display:swap; src:url('/fonts/rajdhani-600.woff2') format('woff2'); }
 @font-face { font-family:'Rajdhani'; font-style:normal; font-weight:700; font-display:swap; src:url('/fonts/rajdhani-700.woff2') format('woff2'); }
 
+/* v5 wordmark display face — self-hosted variable Saira (latin subset, 400–700) */
+@font-face { font-family:'Saira'; font-style:normal; font-weight:400 700; font-display:swap; src:url('/fonts/saira-latin.woff2') format('woff2'); }
+
 :root,
 :root[data-theme='dark'],
 :root[data-theme='light'] {
@@ -101,7 +104,7 @@
 	--com:#2fae46; --com-hi:#54d46c; --com-deep:#08160c;
 	--hb-ground:#07040a; --hb-crimson:#640a0a; --hb-hot:#9c1515; --hb-ember:#6e1c12; --hb-text:#f5f1ee;
 	--sans:'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-	--display:'Rajdhani', var(--sans);
+	--display:'Saira', var(--sans);
 	--mono:'JetBrains Mono', ui-monospace, 'SF Mono', 'Cascadia Code', 'Menlo', monospace;
 	--maxw:1140px;
 }
@@ -243,18 +246,7 @@ nav .group-label .large {
 	overflow: hidden;
 }
 
-/* Animated grid overlay */
-.hero::before {
-	content: '';
-	position: absolute;
-	inset: 0;
-	background-image:
-		linear-gradient(rgba(191, 31, 31, 0.04) 1px, transparent 1px),
-		linear-gradient(90deg, rgba(191, 31, 31, 0.04) 1px, transparent 1px);
-	background-size: 48px 48px;
-	mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
-	pointer-events: none;
-}
+/* Grid lattice overlay removed (v5 tightening — hero backdrop is the phoenix layer system) */
 
 /* B5 — gradient separator: visual paragraph break below hero */
 .hero::after {
@@ -321,7 +313,7 @@ nav .group-label .large {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-	.hero img { animation: ember-pulse 4s ease-in-out infinite; }
+	/* B3 ember-pulse animation removed (v5 de-strobe) — static glow retained above */
 
 	/* B4 — CTA glow pulse; animation-play-state: paused on hover lets transition take over */
 	.hero .actions a[data-variant='primary'],

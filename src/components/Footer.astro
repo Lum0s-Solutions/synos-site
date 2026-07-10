@@ -1,0 +1,17 @@
+---
+import Default from '@astrojs/starlight/components/Footer.astro';
+---
+<Default><slot /></Default>
+<div class="bmc-support">
+  <a href="https://buymeacoffee.com/mogeem33e" target="_blank" rel="noopener">&#9749; buy me a coffee</a>
+</div>
+<style>
+  .bmc-support{ text-align:center; padding:.35rem 0 1.4rem; }
+  .bmc-support a{
+    font-family:var(--sl-font-system-mono, ui-monospace, monospace);
+    font-size:.72rem; letter-spacing:.05em;
+    color:var(--sl-color-gray-3); text-decoration:none;
+    opacity:.65; transition:opacity .2s ease, color .2s ease;
+  }
+  .bmc-support a:hover{ opacity:1; color:var(--phoenix-ember, #d94a4a); }
+</style>

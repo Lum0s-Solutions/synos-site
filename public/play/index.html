@@ -1,117 +1,179 @@
-<!doctype html><html><head><meta charset="utf-8"><title>GRIMOIRE — Neon Divide</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GRIMOIRE — Syn_OS</title>
 <style>
-  :root{--bg:#0a0a0b;--panel:#16161a;--edge:#2b2b31;--txt:#ececee;
-    --dark:#ff2b4e;--azure:#3aa0ff;--gray:#a855f7;--ok:#22e39a;--bad:#ff3b5c;--acc:#f5c518;--dim:#7c7c86;--brand:#e11d2a;--brandhi:#ff2436;--white:#f2f2f4}
-  *{box-sizing:border-box;margin:0;font-family:ui-monospace,"JetBrains Mono",Menlo,monospace}
-  body{background:var(--bg);color:var(--txt);height:100vh;display:flex;flex-direction:column;overflow:hidden}
-  header{display:flex;align-items:center;gap:13px;padding:7px 14px;background:linear-gradient(180deg,#16161a,#0c0c0e);border-bottom:1px solid var(--edge);font-size:13px;flex-wrap:wrap}
+  /* Self-hosted brand faces (same files the crimson-phoenix homepage uses) */
+  @font-face{font-family:'Saira';font-style:normal;font-weight:400 700;font-display:swap;src:url('/fonts/saira-latin.woff2') format('woff2')}
+  @font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;src:url('/fonts/inter-latin.woff2') format('woff2')}
+  @font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:100 800;font-display:swap;src:url('/fonts/jetbrains-mono-latin.woff2') format('woff2')}
+  :root{
+    /* Phoenix Red & Obsidian — mirrors src/styles/custom.css tokens */
+    --bg:#0a0908;--ground2:#0d090b;--panel:#141010;--panel2:#1c1614;--edge:#2a2220;--edge-hi:#3a2a28;
+    --txt:#f0ebe8;--dim:#8a7f7c;--white:#f5f1ee;
+    --brand:#bf1f1f;--brandhi:#d94a4a;--blood:#8f1212;
+    --ok:#3fb950;--bad:#ff4d4d;--acc:#d9b24e;--acc-deep:#b8901f;
+    /* interactive accent (replaces the old neon-blue accent everywhere) */
+    --ui:#d94a4a;--ui-deep:#8f1212;
+    /* factions — recolored off the neon palette; NO blue anywhere but the spark */
+    --dark:#e0403f;   /* DarkArmy — crimson  */
+    --azure:#cbd3da;  /* AzureWatch — cold steel-white (detection/defense), not blue */
+    --gray:#d0a23e;   /* GraySyndicate — gold */
+    /* the ONE sanctioned blue: the frayed-wire electric arc */
+    --spark:#4aa8ff;
+    --font-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    --font-sans:'Inter',system-ui,-apple-system,sans-serif;
+    --font-display:'Saira',var(--font-sans);
+  }
+  *{box-sizing:border-box;margin:0;font-family:var(--font-mono)}
+  body{background:var(--bg);color:var(--txt);height:100vh;display:flex;flex-direction:column;overflow:hidden;
+    background-image:radial-gradient(ellipse 1000px 520px at 82% -12%,rgba(191,31,31,.10),transparent 60%),radial-gradient(ellipse 720px 380px at -5% 100%,rgba(139,0,0,.12),transparent 60%)}
+  header{display:flex;align-items:center;gap:13px;padding:7px 14px;background:linear-gradient(180deg,#140f0f,#0a0807);border-bottom:1px solid var(--edge);font-size:13px;flex-wrap:wrap;letter-spacing:.01em}
   header b{color:var(--acc);letter-spacing:1px}
-  .logo{color:var(--white);letter-spacing:3px;font-weight:800}
-    .brandmark{color:var(--white);font-weight:800;letter-spacing:1px;font-size:12px;opacity:.9;padding-right:2px}
+  .logo{font-family:var(--font-display);color:var(--white);letter-spacing:3px;font-weight:700}
+    .brandmark{color:var(--white);font-weight:700;letter-spacing:1px;font-size:12px;opacity:.92;padding-right:2px}
+    .brandmark .u{color:var(--brandhi)}
   #dot{width:11px;height:11px;border-radius:50%;background:var(--bad);box-shadow:0 0 8px var(--bad);transition:.3s}
   #dot.on{background:var(--ok);box-shadow:0 0 10px var(--ok)}
   .kv{color:var(--dim)}.kv b{color:var(--txt)}
-  .phase{padding:1px 8px;border-radius:3px;background:#2b2b31;color:var(--acc);font-weight:bold}
+  .phase{padding:1px 8px;border-radius:3px;background:#241a19;color:var(--acc);font-weight:bold}
   .sc{padding:1px 7px;border-radius:3px;font-weight:bold}
-  .sc-DarkArmy{background:rgba(255,43,78,.16);color:var(--dark)}
-  .sc-AzureWatch{background:rgba(225,29,42,.16);color:var(--azure)}
-  .sc-GraySyndicate{background:rgba(168,85,247,.16);color:var(--gray)}
+  .sc-DarkArmy{background:rgba(224,64,63,.16);color:var(--dark)}
+  .sc-AzureWatch{background:rgba(203,211,218,.14);color:var(--azure)}
+  .sc-GraySyndicate{background:rgba(208,162,62,.16);color:var(--gray)}
   main{flex:1;display:flex;min-height:0}
   #wrap{flex:1;position:relative}
-  #world{width:100%;height:100%;display:block;background:radial-gradient(ellipse at 50% 40%,#151517,#08080a 75%);cursor:default}
-  #hint{position:absolute;left:12px;top:10px;font-size:11px;color:var(--dim);background:rgba(7,10,18,.7);padding:5px 9px;border-radius:5px;border:1px solid var(--edge)}
+  #world{width:100%;height:100%;display:block;background:radial-gradient(ellipse at 50% 42%,#141010,#070506 74%);cursor:default}
+  #hint{position:absolute;left:12px;top:10px;font-size:11px;color:var(--dim);background:rgba(10,8,8,.72);padding:5px 9px;border-radius:5px;border:1px solid var(--edge)}
   #hint b{color:var(--txt)}
   #hotbar{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);display:flex;gap:7px;transition:opacity .4s,transform .4s}
     #hotbar.combat-hidden{opacity:.14;transform:translate(-50%,26px);pointer-events:none}
-  .slot{width:52px;height:52px;background:#16161a;border:1px solid var(--edge);border-radius:7px;position:relative;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:.12s}
-  .slot:hover{border-color:var(--azure)}
+  .slot{width:52px;height:52px;background:var(--panel);border:1px solid var(--edge);border-radius:7px;position:relative;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:.12s}
+  .slot:hover{border-color:var(--ui);box-shadow:0 0 12px rgba(217,74,74,.25)}
   .slot .k{position:absolute;top:2px;left:4px;font-size:9px;color:var(--acc);font-weight:bold}
   .slot .nm{font-size:8.5px;color:var(--dim);text-align:center;line-height:1.1;padding:0 2px}
   .slot .ic{font-size:17px}
-  .slot .cd{position:absolute;inset:0;background:rgba(7,10,18,.78);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:bold;color:#fff}
+  .slot .cd{position:absolute;inset:0;background:rgba(8,6,6,.8);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:bold;color:#fff}
   .slot.ult{border-color:var(--acc)}
-  #tip{position:fixed;transform:translate(-50%,-100%);background:#16161a;border:1px solid var(--azure);border-radius:7px;padding:8px 11px;font-size:12px;pointer-events:none;z-index:30;box-shadow:0 0 16px rgba(225,29,42,.25);white-space:nowrap}
+  #tip{position:fixed;transform:translate(-50%,-100%);background:var(--panel2);border:1px solid var(--ui);border-radius:7px;padding:8px 11px;font-size:12px;pointer-events:none;z-index:30;box-shadow:0 0 16px rgba(191,31,31,.3);white-space:nowrap}
   #tip.hidden{display:none}
-  #tip b{color:var(--azure)}#tip .ult{color:var(--acc);font-size:10px;font-weight:bold}
+  #tip b{color:var(--brandhi)}#tip .ult{color:var(--acc);font-size:10px;font-weight:bold}
   #tip .tf{color:var(--txt);margin-top:3px}#tip .tm{color:var(--dim);font-size:10.5px;margin-top:2px}
   aside{width:292px;background:var(--panel);border-left:1px solid var(--edge);display:flex;flex-direction:column;min-height:0}
   .sec{padding:8px 12px;border-bottom:1px solid var(--edge)}
   .sec h3{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
   #target{font-size:12px}#target .none{color:var(--dim);font-style:italic}
   .plist{max-height:26vh;overflow:auto}.prow{display:flex;justify-content:space-between;font-size:12px;padding:2px 0;cursor:pointer;border-radius:3px}
-  .prow:hover{background:#132033}.prow.tgt{background:rgba(245,197,24,.13)}
+  .prow:hover{background:rgba(191,31,31,.08)}.prow.tgt{background:rgba(217,178,78,.14)}
   .fac-DarkArmy{color:var(--dark)}.fac-AzureWatch{color:var(--azure)}.fac-GraySyndicate{color:var(--gray)}
   #chatbox{flex:1;display:flex;flex-direction:column;min-height:0}
   #chat{flex:1;overflow:auto;font-size:11px;line-height:1.5;margin-bottom:5px}#chat .cm{padding:1px 0}
-  #chatin{width:100%;background:#0a0a0b;border:1px solid var(--edge);color:var(--txt);padding:5px 7px;font-size:12px;border-radius:4px;font-family:inherit}
+  #chatin{width:100%;background:var(--ground2);border:1px solid var(--edge);color:var(--txt);padding:5px 7px;font-size:12px;border-radius:4px;font-family:inherit}
+  #chatin:focus{outline:none;border-color:var(--ui)}
   #raw{overflow:auto;font-size:10px;color:var(--dim);white-space:pre-wrap;word-break:break-all;max-height:14vh}
   .empty{color:var(--dim);font-style:italic;font-size:11px}
-  #join{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(5,8,15,.94);z-index:10}
+  /* ── Login / enter-the-world card on the phoenix ground ── */
+  #join{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden;
+    background:radial-gradient(ellipse 90% 70% at 50% 0%,rgba(191,31,31,.14),transparent 68%),radial-gradient(ellipse 60% 60% at 82% 108%,rgba(139,0,0,.16),transparent 70%),linear-gradient(180deg,#120a0b 0%,#08060a 100%);z-index:10}
   #join.hidden{display:none}
-  .card{background:var(--panel);border:1px solid var(--edge);border-radius:12px;padding:28px 32px;width:360px;text-align:center;box-shadow:0 0 40px rgba(225,29,42,.08)}
-  .card h1{color:var(--azure);letter-spacing:5px;margin-bottom:2px;font-size:26px;text-shadow:0 0 14px rgba(225,29,42,.4)}
-  .card .sub{color:var(--acc);letter-spacing:3px;font-size:11px;margin-bottom:4px}
-  .card p{color:var(--dim);font-size:11px;margin-bottom:18px}
-  .card input{width:100%;background:#0a0a0b;border:1px solid var(--edge);color:var(--txt);padding:10px 12px;font-size:15px;border-radius:6px;margin-bottom:12px;font-family:inherit}
-  .card button{width:100%;background:linear-gradient(90deg,var(--azure),#0ea5c4);color:#04121a;border:0;padding:12px;font-size:15px;font-weight:bold;border-radius:6px;cursor:pointer;letter-spacing:2px}
-  .card button:hover{filter:brightness(1.12)}
+  #spark{position:absolute;top:0;left:0;width:150px;height:108px;z-index:12;pointer-events:none;opacity:.92}
+  .card{position:relative;z-index:11;background:linear-gradient(180deg,rgba(20,14,14,.94),rgba(10,7,9,.9));border:1px solid rgba(120,20,20,.28);border-radius:18px;padding:26px 30px 24px;width:376px;max-width:92vw;text-align:center;box-shadow:0 26px 70px -24px rgba(0,0,0,.85),0 0 40px rgba(191,31,31,.08);-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px)}
+  /* layered phoenix — reuses the homepage PNG stack */
+  .phoenix{position:relative;width:min(260px,58vw);aspect-ratio:722/397;margin:0 auto -6px;
+    --p-body:url('/hero/phoenix-body.png');--p-veins:url('/hero/phoenix-veins.png');--p-edge:url('/hero/phoenix-edge.png')}
+  .phoenix .pl{position:absolute;inset:0;background-repeat:no-repeat;background-position:center;background-size:contain}
+  .phoenix .p-body{background-image:var(--p-body);filter:brightness(.98) drop-shadow(0 0 16px rgba(191,31,31,.45))}
+  .phoenix .p-veins{background-image:var(--p-veins);mix-blend-mode:screen;opacity:.36}
+  .phoenix .p-edge{background-image:var(--p-edge);mix-blend-mode:screen;opacity:.5;filter:drop-shadow(0 0 5px rgba(191,31,31,.6))}
+  .card h1{font-family:var(--font-display);color:var(--white);letter-spacing:6px;margin:6px 0 2px;font-size:30px;font-weight:700;text-shadow:0 0 22px rgba(191,31,31,.4)}
+  .card .sub{color:var(--acc);letter-spacing:3px;font-size:10.5px;text-transform:uppercase;margin-bottom:14px}
+  .card p{color:var(--dim);font-size:11.5px;margin-bottom:16px;line-height:1.55}
+  .card p b{color:var(--txt)}
+  .fld{display:block;text-align:left;margin-bottom:11px}
+  .fld>span{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:4px}
+  .card input{width:100%;background:var(--ground2);border:1px solid var(--edge);color:var(--txt);padding:10px 12px;font-size:15px;border-radius:8px;font-family:var(--font-sans)}
+  .card input:focus{outline:none;border-color:var(--ui);box-shadow:0 0 0 3px rgba(217,74,74,.18)}
+  .btnrow{display:flex;gap:9px;margin-top:2px}
+  .card button{font-family:inherit;cursor:pointer;border-radius:9px}
+  .btn-primary{flex:1;background:linear-gradient(180deg,var(--brandhi),var(--brand));color:#fff;border:1px solid var(--brand);padding:11px 14px;font-size:14px;font-weight:700;letter-spacing:.04em;box-shadow:0 10px 30px -12px rgba(120,8,8,.5)}
+  .btn-primary:hover{filter:brightness(1.1);box-shadow:0 16px 42px -12px rgba(120,8,8,.6)}
+  .btn-block{width:100%;margin-top:12px;padding:13px}
+  .btn-ghost{flex:1;background:rgba(11,8,8,.6);color:var(--txt);border:1px solid var(--edge-hi);padding:11px 14px;font-size:14px;font-weight:600}
+  .btn-ghost:hover{border-color:var(--brandhi);color:var(--white)}
+  .btn-oauth{width:100%;margin-top:10px;background:rgba(88,101,242,.10);color:#c9cffb;border:1px solid rgba(88,101,242,.4);padding:10px;font-size:13px;font-weight:600}
+  .btn-oauth:hover{background:rgba(88,101,242,.18);color:#fff}
+  .linkbtn{background:none;border:0;color:var(--dim);font-size:11px;text-decoration:underline;text-underline-offset:3px;margin-top:12px;cursor:pointer}
+  .linkbtn:hover{color:var(--brandhi)}
+  .jmsg{font-size:11.5px;color:var(--acc);min-height:16px;margin-top:12px;line-height:1.5}
+  .jmsg.err{color:var(--bad)}
+  .jnote{color:var(--dim);font-size:11.5px;margin-bottom:16px;line-height:1.55}
+  .srvlbl{font-size:10px;color:var(--dim);margin-top:12px;font-family:var(--font-mono);opacity:.7}
   .facpick{display:flex;gap:6px;margin-bottom:8px}
   #facdesc{font-size:10.5px;color:var(--dim);min-height:22px;margin-bottom:10px;line-height:1.4;text-align:center}
-  .facpick label{flex:1;padding:9px 0;border:1px solid var(--edge);border-radius:6px;font-size:11px;cursor:pointer;opacity:.5}
-  .facpick input{display:none}
+  .facpick label{flex:1;padding:9px 0;border:1px solid var(--edge);border-radius:6px;font-size:11px;cursor:pointer;opacity:.5;transition:.15s}
+  .facpick input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
   .facpick label:has(input:checked){opacity:1;border-color:currentColor;font-weight:bold;box-shadow:0 0 12px currentColor}
+  .facpick label:focus-within{outline:2px solid var(--ui);outline-offset:2px}
+  .hidden{display:none}
   /* ── GRIMOIRE HUB (RPG: profile/labs/quests/leaderboard via same-origin daemon) ── */
-  #hubbtn{background:#2b2b31;color:var(--azure);border:1px solid var(--azure);border-radius:4px;padding:3px 10px;cursor:pointer;font-family:inherit;font-size:12px;font-weight:bold}
-  #hub{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(5,8,15,.9);z-index:20}
+  #hubbtn{background:#241a19;color:var(--brandhi);border:1px solid var(--ui);border-radius:4px;padding:3px 10px;cursor:pointer;font-family:inherit;font-size:12px;font-weight:bold}
+  #hubbtn:hover{background:var(--ui);color:#fff}
+  #hub{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(6,4,6,.9);z-index:20}
   #hub.hidden{display:none}
-  .hubcard{background:var(--panel);border:1px solid var(--edge);border-radius:12px;width:640px;max-width:94vw;max-height:88vh;display:flex;flex-direction:column;box-shadow:0 0 50px rgba(225,29,42,.1)}
+  .hubcard{background:var(--panel);border:1px solid var(--edge);border-radius:12px;width:640px;max-width:94vw;max-height:88vh;display:flex;flex-direction:column;box-shadow:0 0 50px rgba(191,31,31,.12)}
   .hubhead{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--edge)}
-  .hubhead b{color:var(--azure);letter-spacing:2px}.hubhead .who{color:var(--acc);font-size:12px}
+  .hubhead b{font-family:var(--font-display);color:var(--brandhi);letter-spacing:2px}.hubhead .who{color:var(--acc);font-size:12px}
   .hubhead .x{margin-left:auto;background:none;border:0;color:var(--dim);font-size:18px;cursor:pointer}
+  .hubhead .x:hover{color:var(--brandhi)}
   .hubtabs{display:flex;gap:4px;padding:8px 12px 0;flex-wrap:wrap}
-  .hubtabs button{background:#16161a;border:1px solid var(--edge);border-bottom:0;color:var(--dim);padding:6px 14px;border-radius:6px 6px 0 0;cursor:pointer;font-family:inherit;font-size:12px}
-  .hubtabs button.on{color:var(--azure);border-color:var(--azure);background:#0f1a2c}
+  .hubtabs button{background:var(--panel2);border:1px solid var(--edge);border-bottom:0;color:var(--dim);padding:6px 14px;border-radius:6px 6px 0 0;cursor:pointer;font-family:inherit;font-size:12px}
+  .hubtabs button.on{color:var(--brandhi);border-color:var(--ui);background:#1a0e0e}
   #hubbody{flex:1;overflow:auto;padding:14px 16px;min-height:220px}
   #hubauth{padding:22px 26px;text-align:center}
-  #hubauth input{width:100%;background:#0a0a0b;border:1px solid var(--edge);color:var(--txt);padding:9px 11px;font-size:14px;border-radius:6px;margin-bottom:10px;font-family:inherit}
-  #hubauth button{background:linear-gradient(90deg,var(--azure),#0ea5c4);color:#04121a;border:0;padding:10px 20px;font-weight:bold;border-radius:6px;cursor:pointer;letter-spacing:1px;margin:4px}
+  #hubauth input{width:100%;background:var(--ground2);border:1px solid var(--edge);color:var(--txt);padding:9px 11px;font-size:14px;border-radius:6px;margin-bottom:10px;font-family:var(--font-sans)}
+  #hubauth input:focus{outline:none;border-color:var(--ui)}
+  #hubauth button{background:linear-gradient(180deg,var(--brandhi),var(--brand));color:#fff;border:0;padding:10px 20px;font-weight:bold;border-radius:6px;cursor:pointer;letter-spacing:1px;margin:4px}
   #hubauth .alt{background:none;color:var(--dim);border:1px solid var(--edge)}
-  .stat{display:inline-block;background:#16161a;border:1px solid var(--edge);border-radius:7px;padding:9px 14px;margin:4px;text-align:center;min-width:78px}
+  .stat{display:inline-block;background:var(--panel2);border:1px solid var(--edge);border-radius:7px;padding:9px 14px;margin:4px;text-align:center;min-width:78px}
   .stat .v{font-size:19px;font-weight:bold;color:var(--acc)}.stat .l{font-size:10px;color:var(--dim);text-transform:uppercase}
   .row{display:flex;justify-content:space-between;align-items:center;padding:7px 10px;border:1px solid var(--edge);border-radius:6px;margin-bottom:6px;font-size:12px}
   .row .nm{font-weight:bold}.row .meta{color:var(--dim);font-size:11px}
   .badge{padding:1px 7px;border-radius:3px;font-size:10px;font-weight:bold}
-  .d-Beginner,.d-Easy{background:rgba(34,227,154,.15);color:var(--ok)}
-  .d-Medium{background:rgba(245,197,24,.15);color:var(--acc)}
-  .d-Hard,.d-Expert{background:rgba(255,59,92,.15);color:var(--bad)}
+  .d-Beginner,.d-Easy{background:rgba(63,185,80,.15);color:var(--ok)}
+  .d-Medium{background:rgba(217,178,78,.15);color:var(--acc)}
+  .d-Hard,.d-Expert{background:rgba(255,77,77,.15);color:var(--bad)}
   .huberr{color:var(--dim);font-style:italic;font-size:12px;text-align:center;padding:20px}
-  .labhdr{font-size:11px;color:var(--acc);background:rgba(245,197,24,.08);border:1px solid rgba(245,197,24,.25);border-radius:6px;padding:8px 11px;margin-bottom:10px;line-height:1.4}
-  .lab{border:1px solid var(--edge);border-radius:7px;padding:9px 11px;margin-bottom:8px;background:#0b1220}
-  .lab:hover{border-color:var(--azure)}
+  .labhdr{font-size:11px;color:var(--acc);background:rgba(217,178,78,.08);border:1px solid rgba(217,178,78,.25);border-radius:6px;padding:8px 11px;margin-bottom:10px;line-height:1.4}
+  .lab{border:1px solid var(--edge);border-radius:7px;padding:9px 11px;margin-bottom:8px;background:var(--ground2)}
+  .lab:hover{border-color:var(--ui)}
   .labtop{display:flex;justify-content:space-between;align-items:center}
   .labtop .nm{font-weight:bold;color:var(--txt);font-size:13px}
   .labdesc{color:var(--dim);font-size:11px;margin:5px 0;line-height:1.45}
   .labfoot{display:flex;justify-content:space-between;align-items:center;margin-top:5px}
   .labfoot .meta{color:var(--dim);font-size:10.5px}
-  .launch{background:#2b2b31;color:var(--azure);border:1px solid var(--azure);border-radius:5px;padding:4px 10px;font-family:inherit;font-size:11px;font-weight:bold;cursor:pointer}
-  .launch:hover{background:var(--azure);color:#04121a}
-  .launch.on{background:rgba(34,227,154,.15);color:var(--ok);border-color:var(--ok)}
+  .launch{background:#241a19;color:var(--brandhi);border:1px solid var(--ui);border-radius:5px;padding:4px 10px;font-family:inherit;font-size:11px;font-weight:bold;cursor:pointer}
+  .launch:hover{background:var(--ui);color:#fff}
+  .launch.on{background:rgba(63,185,80,.15);color:var(--ok);border-color:var(--ok)}
   .launch:disabled{opacity:.7;cursor:default}
   .flagrow{display:flex;gap:6px;margin-top:7px}
-  .flaginput{flex:1;background:#0a0a0b;border:1px solid var(--edge);color:var(--txt);padding:5px 8px;font-size:12px;border-radius:5px;font-family:inherit}
+  .flaginput{flex:1;background:var(--ground2);border:1px solid var(--edge);color:var(--txt);padding:5px 8px;font-size:12px;border-radius:5px;font-family:var(--font-sans)}
   .flaginput:focus{outline:none;border-color:var(--acc)}
-  .flagbtn{background:#2b2b31;color:var(--acc);border:1px solid var(--acc);border-radius:5px;padding:5px 12px;font-family:inherit;font-size:11px;font-weight:bold;cursor:pointer}
-  .flagbtn:hover{background:var(--acc);color:#04121a}
+  .flagbtn{background:#241a19;color:var(--acc);border:1px solid var(--acc);border-radius:5px;padding:5px 12px;font-family:inherit;font-size:11px;font-weight:bold;cursor:pointer}
+  .flagbtn:hover{background:var(--acc);color:#0a0807}
   .flagres{font-size:11px;margin-top:5px;min-height:14px}
   .flagok{color:var(--ok);font-weight:bold}.flagno{color:var(--bad)}
   .qsec{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin:10px 0 5px}
-  .qbtn{background:#2b2b31;color:var(--azure);border:1px solid var(--azure);border-radius:5px;padding:3px 9px;font-family:inherit;font-size:11px;font-weight:bold;cursor:pointer}
-  .qbtn:hover{background:var(--azure);color:#04121a}
+  .qbtn{background:#241a19;color:var(--brandhi);border:1px solid var(--ui);border-radius:5px;padding:3px 9px;font-family:inherit;font-size:11px;font-weight:bold;cursor:pointer}
+  .qbtn:hover{background:var(--ui);color:#fff}
   .qbtn.alt{color:var(--bad);border-color:var(--bad)}.qbtn.alt:hover{background:var(--bad);color:#fff}
   .qbtn:disabled{opacity:.6;cursor:default}
+  :focus-visible{outline:2px solid var(--ui);outline-offset:2px;border-radius:3px}
+  @media (prefers-reduced-motion:no-preference){
+    .phoenix .p-edge{animation:phx-edge 2.8s cubic-bezier(.4,.05,.35,1) infinite}
+    .phoenix .p-veins{animation:phx-veins 2.8s cubic-bezier(.4,.05,.35,1) infinite}
+  }
+  @keyframes phx-edge{0%,100%{opacity:.42}12%{opacity:.9}30%{opacity:.44}}
+  @keyframes phx-veins{0%,100%{opacity:.3}12%{opacity:.58}26%{opacity:.34}}
 </style></head><body>
 <header>
-  <div id="dot"></div><span class="brandmark">SYN<span style="color:var(--brand)">_</span>OS</span><b class="logo">GRIMOIRE</b><span class="kv" style="color:var(--dim);letter-spacing:1px">THE WEAVE</span>
+  <div id="dot"></div><span class="brandmark">SYN<span class="u">_</span>OS</span><b class="logo">GRIMOIRE</b><span class="kv" style="color:var(--dim);letter-spacing:1px">THE WEAVE</span>
   <span class="phase" id="phase">—</span>
   <span class="kv">⏱ <b id="timer">—</b></span>
   <span class="kv" id="scores"></span>
@@ -127,18 +189,43 @@
     <div id="hotbar"></div>
     <div id="tip" class="hidden"></div>
     <div id="join">
+      <canvas id="spark" width="300" height="216" aria-hidden="true"></canvas>
       <div class="card">
-        <div class="brandmark" style="font-size:13px;letter-spacing:2px">SYN<span style="color:var(--brand)">_</span>OS</div><h1>GRIMOIRE</h1>
-          <div class="sub">THE WEAVE · shared-world hacking MMO</div>
-        <p style="color:var(--dim);margin:9px 0 13px;line-height:1.55">Walk to a contested node, solve its lab, capture the territory for your faction.<br><b style="color:var(--white)">The exploit is the objective.</b><span id="srvlbl" style="font-size:11px;display:block;margin-top:6px"></span></p>
-        <input id="jname" maxlength="20" placeholder="callsign" autocomplete="off">
-        <div class="facpick">
-          <label class="fac-DarkArmy"><input type="radio" name="fac" value="DarkArmy">DarkArmy</label>
-          <label class="fac-AzureWatch"><input type="radio" name="fac" value="AzureWatch" checked>AzureWatch</label>
-          <label class="fac-GraySyndicate"><input type="radio" name="fac" value="GraySyndicate">GraySyndicate</label>
+        <div class="phoenix" role="img" aria-label="Syn_OS phoenix">
+          <div class="pl p-veins"></div><div class="pl p-body"></div><div class="pl p-edge"></div>
         </div>
-        <div id="facdesc"></div>
-          <button id="jgo">JACK IN</button>
+        <div class="brandmark" style="font-size:13px;letter-spacing:2px">SYN<span class="u">_</span>OS</div>
+        <h1>GRIMOIRE</h1>
+        <div class="sub">The Weave · members-only hacking MMO</div>
+
+        <!-- STAGE A — sign in (member token is issued invisibly by the daemon) -->
+        <div id="j_auth">
+          <p class="jnote">Sign in with your <b>Church of Malware</b> account to enter the Weave.</p>
+          <label class="fld" for="j_user"><span>Username</span></label>
+          <input id="j_user" autocomplete="username" placeholder="username" aria-label="Username">
+          <label class="fld" for="j_pass"><span>Password</span></label>
+          <input id="j_pass" type="password" autocomplete="current-password" placeholder="password" aria-label="Password">
+          <div class="btnrow"><button id="j_login" class="btn-primary" type="button">Log in</button><button id="j_reg" class="btn-ghost" type="button">Register</button></div>
+          <button id="j_oauth" class="btn-oauth" type="button">Continue with Discord</button>
+          <div id="j_msg" class="jmsg" role="status" aria-live="polite"></div>
+        </div>
+
+        <!-- STAGE B — choose faction & jack in -->
+        <div id="j_enter" class="hidden">
+          <p class="jnote">Signed in as <b id="j_who">—</b>.<br>Walk to a contested node, solve its lab, capture the territory for your faction. <b>The exploit is the objective.</b></p>
+          <label class="fld" for="jname"><span>Callsign</span></label>
+          <input id="jname" maxlength="20" placeholder="callsign" autocomplete="off" aria-label="Callsign">
+          <div class="facpick">
+            <label class="fac-DarkArmy"><input type="radio" name="fac" value="DarkArmy">DarkArmy</label>
+            <label class="fac-AzureWatch"><input type="radio" name="fac" value="AzureWatch" checked>AzureWatch</label>
+            <label class="fac-GraySyndicate"><input type="radio" name="fac" value="GraySyndicate">GraySyndicate</label>
+          </div>
+          <div id="facdesc"></div>
+          <button id="jgo" class="btn-primary btn-block" type="button">Jack in →</button>
+          <div id="j_msg2" class="jmsg" role="status" aria-live="polite"></div>
+          <button id="j_signout" class="linkbtn" type="button">Sign out</button>
+          <div class="srvlbl"><span id="srvlbl"></span></div>
+        </div>
       </div>
     </div>
     <div id="hub" class="hidden">
@@ -183,7 +270,7 @@ const _P=new URLSearchParams(location.search);
 const URL=((_P.get("server")||window.SYNOS_WORLD_SERVER||"wss://world.synos-linux.pro").replace(/\/+$/,""))+"/";
 const NIL="00000000-0000-0000-0000-000000000000";
 const $=id=>document.getElementById(id), cv=$("world"), cx=cv.getContext("2d");
-const FCOL={DarkArmy:"#ff2b4e",AzureWatch:"#e11d2a",GraySyndicate:"#a855f7"};
+const FCOL={DarkArmy:"#e0403f",AzureWatch:"#cbd3da",GraySyndicate:"#d0a23e"};
 // ability catalog — mirrors server combat.rs ABILITY_CATALOG (content-as-code)
 const ABIL=[
   {id:101,name:"Strike",ic:"⚔",kind:"enemy",range:2.5,cd:0.8,fx:"15 damage"},
@@ -251,6 +338,19 @@ let actx; function sfx(f,d=0.08,type="square",v=0.05){ try{ actx=actx||new (wind
 let ws,me=null,cseq=1,players=new Map(),tick=0,phase="—",scale=6,log=[],target=null,floaters=[],cds={},beams=[],motes=[],fr=0,killfeed=[],lastHit={},lastScores=[];
 let NAME="",FAC="AzureWatch",hotbar=ABIL.slice();
 const keys={};
+// ── Member-token auth state (INVISIBLE flow) ──
+// The world server (P0-1 gate) rejects any ClientHello without a signed CoM
+// Member Token. Token ISSUANCE/CLAIM is owned by a separate flow (Discord key
+// system / daemon) — this client only CONSUMES it: it reads whatever
+// `member_token` (+ optional `device_id`) the existing auth response/session
+// already exposes, stashes it, and forwards it in the handshake. The player
+// never sees or handles it. Field names match protocol.rs ClientHello.
+// HOOK: if the current auth response doesn't yet include `member_token`, this
+// stays "" and the server will reject with auth_err until issuance is wired.
+let memberToken=sessionStorage.getItem("grim_member_token")||"";
+let memberDeviceId=sessionStorage.getItem("grim_member_device")||null;
+let authedUser=sessionStorage.getItem("grim_user")||"";
+let authFailed=false; // set on WireMessage::AuthErr → stop the reconnect loop
 $("jname").value="Op-"+Math.floor(Math.random()*900+100);
 function rz(){cv.width=cv.clientWidth;cv.height=cv.clientHeight}
 addEventListener("resize",rz);rz();
@@ -287,10 +387,16 @@ function onNodeUpdate(m){ const id=m.node_id, ns=nodeState[id]; if(!ns)return;
 function connect(){
   wlog("connecting…");
   ws=new WebSocket(URL);
-  ws.onopen=()=>{ $("dot").classList.add("on"); send({type:"client_hello",display_name:NAME,faction:FAC});
+  ws.onopen=()=>{ $("dot").classList.add("on");
+    // P0-1 connect gate — forward the invisibly-issued Member Token (+ device_id
+    // if the daemon bound one). Field names/shape match protocol.rs ClientHello.
+    const hello={type:"client_hello",display_name:NAME,faction:FAC,member_token:memberToken};
+    if(memberDeviceId) hello.device_id=memberDeviceId;
+    send(hello);
     wlog("jacked in as "+NAME+" ("+FAC+")"); setInterval(()=>action({type:"heartbeat"}),12000);
     fetchNodes(); };
-  ws.onclose=()=>{ $("dot").classList.remove("on"); wlog("disconnected — retrying"); setTimeout(connect,1500); };
+  ws.onclose=()=>{ $("dot").classList.remove("on"); if(authFailed)return;
+    wlog("disconnected — retrying"); setTimeout(connect,1500); };
   ws.onerror=()=>wlog("socket error");
   ws.onmessage=e=>{ let m; try{m=JSON.parse(e.data)}catch{return} route(m); };
 }
@@ -308,8 +414,16 @@ function route(raw){
   else if(t=="node_update"){ onNodeUpdate(m); }
   else if(t=="input_rejected"){ wlog("✗ "+(m.reason||"rejected")); }
   else if(t=="kicked"){ wlog("KICKED: "+(m.reason||"")); }
+  else if(t=="auth_err"){ onAuthErr(m); }
   else if(t=="error"){ wlog("✗ "+(m.message||"")); }
 }
+// P0-1 — server rejected the Member Token (missing/expired/wrong org/etc.).
+// Stop the reconnect loop, drop the stale token, and return to sign-in.
+function onAuthErr(m){ authFailed=true; try{ws.close();}catch(e){}
+  const why=m.reason||"member token rejected";
+  wlog("✗ AUTH: "+why);
+  memberToken=""; sessionStorage.removeItem("grim_member_token");
+  showJoin(); joinMsg2("World access denied: "+why+". Sign in again — if this persists your account may not be provisioned for the Weave yet.",true); }
 function ingest(m){
   tick=m.tick??tick; $("tick"); phase=m.phase||phase; $("phase").textContent=phase;
   $("timer").textContent=(m.time_remaining_secs!=null)?Math.ceil(m.time_remaining_secs)+"s":"—";
@@ -426,13 +540,12 @@ function draw(){
   let enemyNear=false;
   if(meP&&meP.alive){ for(const p of players.values()){ if(p.id!==me&&p.alive&&p.fac!==meP.fac&&Math.hypot(p.rx-meP.rx,p.rz-meP.rz)<16){ enemyNear=true; break; } } }
   const _hb=$("hotbar"); if(_hb) _hb.classList.toggle("combat-hidden", !enemyNear);
-  // ── neon grid ──
-  cx.lineWidth=1;
-  for(let g=-60;g<=60;g+=10){ cx.strokeStyle=`rgba(120,120,132,${g%20===0?0.5:0.2})`;
-    cx.beginPath();cx.moveTo(ox+g*scale,oy-60*scale);cx.lineTo(ox+g*scale,oy+60*scale);
-    cx.moveTo(ox-60*scale,oy+g*scale);cx.lineTo(ox+60*scale,oy+g*scale);cx.stroke(); }
-  cx.strokeStyle=`rgba(225,29,42,${0.4+0.3*pulse})`; cx.lineWidth=2; cx.shadowColor="#e11d2a"; cx.shadowBlur=14;
-  cx.strokeRect(ox-55*scale,oy-55*scale,110*scale,110*scale); cx.shadowBlur=0;
+  // ── obsidian ground: faint ember dot-matrix + soft crimson arena ring (no neon grid) ──
+  cx.fillStyle="rgba(150,120,116,0.05)";
+  for(let gx=-60;gx<=60;gx+=10){ for(let gz=-60;gz<=60;gz+=10){
+    cx.fillRect(ox+gx*scale-0.5,oy+gz*scale-0.5,1.4,1.4); } }
+  cx.strokeStyle=`rgba(191,31,31,${0.16+0.12*pulse})`; cx.lineWidth=2; cx.shadowColor="#8f1212"; cx.shadowBlur=12;
+  cx.beginPath(); cx.arc(ox,oy,55*scale,0,7); cx.stroke(); cx.shadowBlur=0;
   // ── v88 Fusion: territory floor tint (captured nodes stain the ground their faction color) ──
   for(const n of NODES){ const ns=nodeState[n.id]; if(!ns||ns.state!="Captured")continue;
     const nx=ox+n.pos[0]*scale, ny=oy+n.pos[2]*scale, col=FCOL[facNorm(ns.faction)]||"#f5c518";
@@ -444,7 +557,7 @@ function draw(){
   for(const n of NODES){
     const nx=ox+n.pos[0]*scale, ny=oy+n.pos[2]*scale, ns=nodeState[n.id];
     const cap=ns.state=="Captured", act=(ns.state=="LabActive"||ns.state=="Contesting"||activeCapture==n.id);
-    const col=cap?(FCOL[facNorm(ns.faction)]||"#f5c518"):act?"#f5c518":"#8aa0c0";
+    const col=cap?(FCOL[facNorm(ns.faction)]||"#f5c518"):act?"#f5c518":"#9a8f86";
     const d=meP?Math.hypot(n.pos[0]-meP.rx,n.pos[2]-meP.rz):999;
     if(d<NRADIUS&&!cap) nearNode=n.id;
     const R=(24+(act?4*pulse:0))*(scale/6);
@@ -463,9 +576,9 @@ function draw(){
     // labels: name · state/lab · bonus
     cx.fillStyle=col; cx.font="bold 11px monospace"; cx.textAlign="center";
     cx.fillText(n.name,nx,ny-R-10);
-    cx.fillStyle="#9aa8bd"; cx.font="8.5px monospace";
+    cx.fillStyle="#a89a90"; cx.font="8.5px monospace";
     cx.fillText(cap?("◈ HELD · "+(facNorm(ns.faction)||ns.faction)):act?("SOLVE: "+n.lab):("◇ "+n.lab),nx,ny+R+13);
-    if(n.bonus){ cx.fillStyle="#6b7686"; cx.font="7.5px monospace"; cx.fillText(n.bonus,nx,ny+R+23); }
+    if(n.bonus){ cx.fillStyle="#7c7370"; cx.font="7.5px monospace"; cx.fillText(n.bonus,nx,ny+R+23); }
   }
   // ── my attack-range ring (basic reach = 12) ──
   if(meP&&meP.alive){ cx.strokeStyle="rgba(225,29,42,0.16)"; cx.setLineDash([3,6]); cx.lineWidth=1;
@@ -540,7 +653,7 @@ function draw(){
       cx.beginPath(); cx.arc(cxm+p.rx*hs,cym+p.rz*hs,1.5,0,7); cx.fill(); } cx.globalAlpha=1;
     for(const n of NODES){ const ns=nodeState[n.id], px=cxm+n.pos[0]*hs, py=cym+n.pos[2]*hs;
       const cap=ns&&ns.state=="Captured", act=ns&&(ns.state=="LabActive"||ns.state=="Contesting");
-      cx.fillStyle=cap?(FCOL[facNorm(ns.faction)]||"#f5c518"):act?"#f5c518":"#8aa0c0";
+      cx.fillStyle=cap?(FCOL[facNorm(ns.faction)]||"#f5c518"):act?"#f5c518":"#9a8f86";
       cx.beginPath(); cx.arc(px,py,cap?3.4:2.6,0,7); cx.fill();
       if(cap){ cx.strokeStyle=cx.fillStyle; cx.lineWidth=1; cx.beginPath(); cx.arc(px,py,5,0,7); cx.stroke(); } }
     if(meP){ cx.fillStyle="#fff"; cx.strokeStyle="#e11d2a"; cx.lineWidth=1.5;
@@ -574,8 +687,56 @@ function draw(){
   requestAnimationFrame(draw);
 }
 $("jgo").onclick=()=>{ NAME=($("jname").value||"Op").trim().slice(0,20);
-  FAC=document.querySelector('input[name=fac]:checked').value; $("join").classList.add("hidden"); connect(); };
+  FAC=document.querySelector('input[name=fac]:checked').value; authFailed=false; $("join").classList.add("hidden"); connect(); };
 $("jname").addEventListener("keydown",e=>{ if(e.key=="Enter")$("jgo").click(); });
+// ── Login-card helpers: sign-in (stage A) ⇄ enter-world (stage B) ──
+function joinMsg(s,err){ const e=$("j_msg"); if(!e)return; e.textContent=s||""; e.classList.toggle("err",!!err); }
+function joinMsg2(s,err){ const e=$("j_msg2"); if(!e)return; e.textContent=s||""; e.classList.toggle("err",!!err); }
+function showAuthStage(){ $("j_auth").classList.remove("hidden"); $("j_enter").classList.add("hidden"); joinMsg(""); }
+function showEnterStage(){ $("j_auth").classList.add("hidden"); $("j_enter").classList.remove("hidden");
+  $("j_who").textContent=authedUser||"operator";
+  const jn=$("jname"); if(jn&&(!jn.value||/^Op-\d+$/.test(jn.value))) jn.value=(authedUser?authedUser.slice(0,20):jn.value);
+  updFacDesc&&updFacDesc(); }
+function showJoin(){ $("join").classList.remove("hidden"); authFailed=false; memberToken?showEnterStage():showAuthStage(); }
+// Authenticate against the EXISTING daemon auth routes (unchanged). We store the
+// daemon JWT for the HUB API and, if the response happens to expose a world
+// Member Token, we consume it for the handshake. We do NOT define/require a new
+// issuance contract here — issuance/claim is owned elsewhere; `r.member_token`
+// is simply read if present (empty otherwise, see the HOOK note above).
+async function worldAuth(reg,u,p){
+  if(reg) await hapi("/api/v1/auth/register",{method:"POST",body:JSON.stringify({username:u,password:p})});
+  const r=await hapi("/api/v1/auth/login",{method:"POST",body:JSON.stringify({username:u,password:p})});
+  token=r.access_token||r.token||""; localStorage.setItem("grim_token",token);
+  memberToken=r.member_token||"";            // consumed if the auth flow provides it (see connect())
+  memberDeviceId=(r.device_id!=null?r.device_id:null); // null/absent for web (not device-bound)
+  if(memberToken) sessionStorage.setItem("grim_member_token",memberToken); else sessionStorage.removeItem("grim_member_token");
+  if(memberDeviceId) sessionStorage.setItem("grim_member_device",memberDeviceId); else sessionStorage.removeItem("grim_member_device");
+  authedUser=u; sessionStorage.setItem("grim_user",u);
+  return r;
+}
+async function doJoinAuth(reg){ const u=$("j_user").value.trim(),p=$("j_pass").value;
+  if(!u||!p){ joinMsg("Enter your username and password.",true); return; }
+  if(RPG===null){ joinMsg("Sign-in needs the client served by the GRIMOIRE daemon (same-origin), not a file:// path.",true); return; }
+  joinMsg("Authenticating…"); $("j_login").disabled=$("j_reg").disabled=true;
+  try{ await worldAuth(reg,u,p); joinMsg(""); showEnterStage();
+    if(!memberToken) joinMsg2("Signed in — your world-access token is being provisioned by the daemon. You can try to jack in; if it isn’t ready yet the server will say so.");
+  }catch(e){ joinMsg((reg?"Registration":"Login")+" failed: "+e.message,true); }
+  finally{ $("j_login").disabled=$("j_reg").disabled=false; } }
+function startOAuth(){ if(RPG===null){ joinMsg("Discord sign-in needs the daemon-served client (same-origin).",true); return; }
+  // HOOK (owned by the auth flow, not defined here): kick off the daemon's
+  // Discord OAuth start route. On return, whatever member_token the callback
+  // carries in the URL is consumed by captureOAuthCallback() below. If this
+  // route isn't wired yet, the auth owner supplies the correct start path.
+  const back=encodeURIComponent(location.pathname);
+  location.href=RPG+"/api/v1/auth/oauth/discord/start?redirect="+back; }
+$("j_login").onclick=()=>doJoinAuth(false);
+$("j_reg").onclick=()=>doJoinAuth(true);
+$("j_oauth").onclick=startOAuth;
+$("j_signout").onclick=()=>{ memberToken="";token="";authedUser="";
+  sessionStorage.removeItem("grim_member_token");sessionStorage.removeItem("grim_member_device");sessionStorage.removeItem("grim_user");localStorage.removeItem("grim_token");
+  joinMsg2(""); showAuthStage(); $("j_user").focus(); };
+$("j_user").addEventListener("keydown",e=>{ e.stopPropagation(); if(e.key=="Enter")$("j_pass").focus(); });
+$("j_pass").addEventListener("keydown",e=>{ e.stopPropagation(); if(e.key=="Enter")doJoinAuth(false); });
 // lobby — faction blurbs to help the player pick
 const FACDESC={DarkArmy:"⚔ Offense-first — the Recon Outpost & The Armory reward aggression.",AzureWatch:"🛡 Defense & detection — hold The Citadel, deny the enemy.",GraySyndicate:"💰 The market runs on you — The Vault & The Exchange stack credits."};
 function updFacDesc(){ const f=document.querySelector('input[name="fac"]:checked'), d=$("facdesc"); if(f&&d)d.textContent=FACDESC[f.value]||""; }
@@ -598,9 +759,7 @@ function showAuth(){ $("hubauth").style.display=""; $("hubmain").classList.add("
 function showHubMain(){ $("hubauth").style.display="none"; $("hubmain").classList.remove("hidden"); tab("profile"); }
 async function doAuth(reg){ const u=$("au_user").value.trim(),p=$("au_pass").value;
   if(!u||!p){ $("au_msg").textContent="enter username + password"; return; }
-  try{ if(reg) await hapi("/api/v1/auth/register",{method:"POST",body:JSON.stringify({username:u,password:p})});
-    const r=await hapi("/api/v1/auth/login",{method:"POST",body:JSON.stringify({username:u,password:p})});
-    token=r.access_token||r.token||""; localStorage.setItem("grim_token",token);
+  try{ await worldAuth(reg,u,p);   // also captures the invisible member_token
     $("hubwho").textContent=u; showHubMain(); wlog("hub: authed as "+u);
   }catch(e){ $("au_msg").textContent=(reg?"register":"login")+" failed: "+e.message; } }
 function tab(name){ document.querySelectorAll(".hubtabs button").forEach(b=>b.classList.toggle("on",b.dataset.t===name)); loadTab(name); }
@@ -722,5 +881,86 @@ document.querySelectorAll(".hubtabs button").forEach(btn=>btn.onclick=()=>tab(bt
 addEventListener("keydown",e=>{ if(e.key=="Tab"&&!/INPUT|TEXTAREA/.test(document.activeElement?.tagName||"")){ e.preventDefault(); hubHidden()?openHub():closeHub(); } },true);
 
 $("srvlbl").textContent=URL.replace(/\/$/,"");
+
+// ── OAuth callback carrier: daemon redirects back to /play with the issued
+//    member_token (per the invisible-auth contract). Capture, then scrub the URL. ──
+(function captureOAuthCallback(){ try{
+  const q=new URLSearchParams(location.search); const mt=q.get("member_token");
+  if(!mt)return;
+  memberToken=mt; sessionStorage.setItem("grim_member_token",mt);
+  const did=q.get("device_id"); if(did){ memberDeviceId=did; sessionStorage.setItem("grim_member_device",did); }
+  const jt=q.get("access_token"); if(jt){ token=jt; localStorage.setItem("grim_token",jt); }
+  const us=q.get("user"); if(us){ authedUser=us; sessionStorage.setItem("grim_user",us); }
+  // strip the token out of the address bar / history
+  const clean=new URLSearchParams(location.search); ["member_token","device_id","access_token","user"].forEach(k=>clean.delete(k));
+  history.replaceState(null,"",location.pathname+(clean.toString()?("?"+clean.toString()):"")+location.hash);
+}catch(e){} })();
+
+// ── Frayed-wire spark: the ONE sanctioned blue — a thin electric arc jumping
+//    between two frayed copper strands in the top corner. Reduced-motion → a
+//    single static arc, no animation. ──
+(function frayedWireSpark(){
+  const sc=$("spark"); if(!sc)return; const g=sc.getContext("2d"); if(!g)return;
+  const W=sc.width,H=sc.height;
+  const reduce=matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // three frayed copper strands fanning out from the corner
+  const strands=[
+    [[2,10],[42,26],[78,20],[120,40]],
+    [[2,30],[40,52],[86,46],[132,74]],
+    [[2,54],[38,86],[74,80],[118,104]],
+  ];
+  function bez(p,t){ const mt=1-t;
+    const x=mt*mt*mt*p[0][0]+3*mt*mt*t*p[1][0]+3*mt*t*t*p[2][0]+t*t*t*p[3][0];
+    const y=mt*mt*mt*p[0][1]+3*mt*mt*t*p[1][1]+3*mt*t*t*p[2][1]+t*t*t*p[3][1];
+    return [x,y]; }
+  function drawWires(){
+    for(const p of strands){
+      // copper core
+      g.strokeStyle="#5a2a1e"; g.lineWidth=3; g.lineCap="round"; g.beginPath();
+      g.moveTo(p[0][0],p[0][1]); g.bezierCurveTo(p[1][0],p[1][1],p[2][0],p[2][1],p[3][0],p[3][1]); g.stroke();
+      // crimson sheath highlight
+      g.strokeStyle="rgba(191,31,31,.55)"; g.lineWidth=1.2; g.stroke();
+      // frayed copper filaments at the exposed end
+      const end=p[3], pen=bez(p,0.86);
+      const ang=Math.atan2(end[1]-pen[1],end[0]-pen[0]);
+      for(let f=-1;f<=1;f++){ const a=ang+f*0.5;
+        g.strokeStyle="#8a4a2e"; g.lineWidth=0.9; g.beginPath();
+        g.moveTo(end[0],end[1]); g.lineTo(end[0]+Math.cos(a)*7,end[1]+Math.sin(a)*7); g.stroke(); }
+    }
+  }
+  function arc(a,b,amp,seg){
+    g.save(); g.strokeStyle="#4aa8ff"; g.shadowColor="#4aa8ff"; g.shadowBlur=8; g.lineWidth=1.4;
+    g.globalCompositeOperation="lighter"; g.beginPath(); g.moveTo(a[0],a[1]);
+    for(let i=1;i<seg;i++){ const t=i/seg;
+      const x=a[0]+(b[0]-a[0])*t+(Math.random()-.5)*amp;
+      const y=a[1]+(b[1]-a[1])*t+(Math.random()-.5)*amp;
+      g.lineTo(x,y); }
+    g.lineTo(b[0],b[1]); g.stroke();
+    // bright core
+    g.strokeStyle="#eaf4ff"; g.shadowBlur=4; g.lineWidth=0.6; g.stroke(); g.restore();
+  }
+  function endpoints(){ // the three exposed frayed tips
+    return strands.map(p=>p[3]); }
+  function frame(spark){
+    g.clearRect(0,0,W,H); drawWires();
+    if(spark){ const tips=endpoints();
+      // arc between two of the frayed tips
+      const i=Math.floor(Math.random()*tips.length); let j=Math.floor(Math.random()*tips.length);
+      if(j===i)j=(j+1)%tips.length;
+      arc(tips[i],tips[j],6,7);
+      // occasional stray micro-arc off a tip
+      if(Math.random()<0.5){ const k=Math.floor(Math.random()*tips.length),tp=tips[k];
+        arc(tp,[tp[0]+ (Math.random()*16-4), tp[1]+ (Math.random()*16-8)],4,5); }
+    }
+  }
+  if(reduce){ frame(true); return; } // static single arc, no loop
+  let next=0;
+  (function loop(ts){ if(ts>=next){ const on=Math.random()<0.55; frame(on);
+      next=ts+(on? 60+Math.random()*90 : 140+Math.random()*260); }
+    requestAnimationFrame(loop); })(0);
+})();
+
+// initial login stage (respects a captured OAuth / prior-session token)
+showJoin();
 buildHotbar(); draw();
 </script></body></html>

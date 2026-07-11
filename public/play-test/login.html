@@ -1,0 +1,110 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>play-test // admin sign-in</title>
+<style>
+  @font-face{font-family:'Saira';font-weight:400 700;font-display:swap;src:url('/fonts/saira-latin.woff2') format('woff2')}
+  @font-face{font-family:'JetBrains Mono';font-weight:100 800;font-display:swap;src:url('/fonts/jetbrains-mono-latin.woff2') format('woff2')}
+  :root{--bg:#08060a;--panel:#141014;--edge:#2c2126;--edge-hi:#3a2a30;--txt:#f5f1ee;--dim:#8a807d;
+    --crimson:#8f1212;--hot:#bf1f1f;--ember:#d94a4a;--ok:#3fb950;--bad:#e0564f;
+    --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;--display:'Saira',system-ui,sans-serif}
+  *{box-sizing:border-box;margin:0}
+  body{background:var(--bg);color:var(--txt);font-family:var(--mono);min-height:100vh;display:grid;place-items:center;padding:1.2rem;
+    background-image:radial-gradient(ellipse 900px 460px at 82% -12%,rgba(191,31,31,.10),transparent 60%),radial-gradient(ellipse 620px 340px at -5% 104%,rgba(139,0,0,.12),transparent 60%)}
+  .card{width:100%;max-width:440px;background:linear-gradient(180deg,#16100f,#0d0809);border:1px solid var(--edge);border-radius:14px;padding:2rem 1.8rem;box-shadow:0 20px 50px -20px #000}
+  .eyebrow{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ember);display:flex;align-items:center;gap:.55rem;margin-bottom:1rem}
+  .eyebrow::before{content:'';width:24px;height:1px;background:var(--hot)}
+  h1{font-family:var(--display);font-weight:700;font-size:1.7rem;letter-spacing:-.01em;line-height:1.1;margin-bottom:.4rem}
+  p.sub{color:var(--dim);font-size:.86rem;line-height:1.55;margin-bottom:1.5rem}
+  button{width:100%;font-family:var(--mono);font-weight:700;font-size:.92rem;letter-spacing:.02em;padding:.85em 1em;border-radius:9px;cursor:pointer;border:1px solid var(--hot);
+    background:linear-gradient(180deg,var(--hot),var(--crimson));color:#fff;transition:transform .12s ease,box-shadow .12s ease}
+  button:hover{transform:translateY(-1px);box-shadow:0 0 20px -6px rgba(191,31,31,.6)}
+  button:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+  button.ghost{background:transparent;color:var(--dim);border-color:var(--edge-hi);margin-top:.7rem}
+  button.ghost:hover{color:var(--txt);border-color:var(--hot);box-shadow:none}
+  .msg{margin-top:1.1rem;font-size:.8rem;line-height:1.5;padding:.7em .85em;border-radius:8px;border:1px solid var(--edge-hi);display:none;white-space:pre-wrap;word-break:break-word}
+  .msg.show{display:block}
+  .msg.err{border-color:rgba(224,86,79,.5);color:var(--bad);background:rgba(224,86,79,.08)}
+  .msg.ok{border-color:rgba(63,185,80,.4);color:var(--ok);background:rgba(63,185,80,.07)}
+  .msg.info{color:var(--dim)}
+  code{color:var(--ember);font-size:.78rem}
+  .cred{margin-top:.8rem;font-size:.68rem;color:var(--dim);background:#0a0405;border:1px solid var(--edge);border-radius:6px;padding:.6em;max-height:160px;overflow:auto;display:none}
+  .cred.show{display:block}
+  .foot{margin-top:1.4rem;font-size:.66rem;color:var(--dim);letter-spacing:.04em;text-align:center}
+</style></head><body>
+<div class="card">
+  <div class="eyebrow">Syn_OS · GRIMOIRE</div>
+  <h1>play-test admin</h1>
+  <p class="sub">Cloudflare Access has verified you. Confirm with your <b>passkey</b> to open the live test client.</p>
+  <button id="login" type="button">Sign in with passkey</button>
+  <button id="enrol" class="ghost" type="button">Enrol a passkey (first-time setup)</button>
+  <div id="msg" class="msg"></div>
+  <pre id="cred" class="cred"></pre>
+  <div class="foot">Second factor · WebAuthn · <span id="rp"></span></div>
+</div>
+<script>
+const RP_ID = 'synos-linux.pro';
+document.getElementById('rp').textContent = RP_ID;
+const $ = id => document.getElementById(id);
+const msg = (t, cls) => { const m = $('msg'); m.textContent = t; m.className = 'msg show ' + (cls||'info'); };
+const b64uToBuf = s => { s = s.replace(/-/g,'+').replace(/_/g,'/'); const pad = s.length%4?'='.repeat(4-s.length%4):''; const bin = atob(s+pad); const u = new Uint8Array(bin.length); for (let i=0;i<bin.length;i++) u[i]=bin.charCodeAt(i); return u.buffer; };
+const bufToB64u = b => { const u = new Uint8Array(b); let s=''; for (let i=0;i<u.length;i++) s+=String.fromCharCode(u[i]); return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,''); };
+const nextUrl = () => { const n = new URLSearchParams(location.search).get('next'); return (n && n.startsWith('/play-test/')) ? n : '/play-test/'; };
+
+async function post(url, body) {
+  const r = await fetch(url, { method:'POST', headers: body?{'content-type':'application/json'}:{}, body: body?JSON.stringify(body):undefined, credentials:'same-origin' });
+  let data = null; try { data = await r.json(); } catch {}
+  return { ok: r.ok, status: r.status, data };
+}
+
+$('login').onclick = async () => {
+  if (!window.PublicKeyCredential) return msg('This browser has no WebAuthn / passkey support.', 'err');
+  $('login').disabled = true;
+  try {
+    const b = await post('/play-test/auth/login/begin');
+    if (!b.ok) { msg((b.data&&b.data.message)||('login/begin failed ('+b.status+')'), 'err'); return; }
+    const o = b.data;
+    const cred = await navigator.credentials.get({ publicKey: {
+      challenge: b64uToBuf(o.challenge), rpId: o.rpId, timeout: o.timeout,
+      userVerification: o.userVerification,
+      allowCredentials: (o.allowCredentials||[]).map(c => ({ type:'public-key', id: b64uToBuf(c.id), transports: c.transports }))
+    }});
+    const f = await post('/play-test/auth/login/finish', {
+      id: cred.id, type: cred.type,
+      response: {
+        clientDataJSON: bufToB64u(cred.response.clientDataJSON),
+        authenticatorData: bufToB64u(cred.response.authenticatorData),
+        signature: bufToB64u(cred.response.signature),
+        userHandle: cred.response.userHandle ? bufToB64u(cred.response.userHandle) : null,
+      }
+    });
+    if (f.ok) { msg('Verified. Opening the test client…', 'ok'); location.href = nextUrl(); }
+    else msg('Sign-in rejected: ' + ((f.data&&f.data.error)||f.status), 'err');
+  } catch (e) { msg('Passkey ceremony cancelled or failed: ' + e.message, 'err'); }
+  finally { $('login').disabled = false; }
+};
+
+$('enrol').onclick = async () => {
+  if (!window.PublicKeyCredential) return msg('This browser has no WebAuthn / passkey support.', 'err');
+  $('enrol').disabled = true;
+  try {
+    const b = await post('/play-test/auth/register/begin');
+    if (!b.ok) { msg((b.data&&b.data.message)||('register/begin failed ('+b.status+')'), 'err'); return; }
+    const o = b.data;
+    const cred = await navigator.credentials.create({ publicKey: {
+      rp: o.rp, user: { id: b64uToBuf(o.user.id), name: o.user.name, displayName: o.user.displayName },
+      challenge: b64uToBuf(o.challenge), pubKeyCredParams: o.pubKeyCredParams,
+      authenticatorSelection: o.authenticatorSelection, attestation: o.attestation, timeout: o.timeout,
+    }});
+    const f = await post('/play-test/auth/register/finish', {
+      id: cred.id, type: cred.type,
+      response: { clientDataJSON: bufToB64u(cred.response.clientDataJSON), attestationObject: bufToB64u(cred.response.attestationObject) }
+    });
+    if (f.ok && f.data.ok) {
+      msg('Passkey enrolled and you are signed in. IMPORTANT: paste the credential below into the PLAYTEST_ADMIN_CREDENTIAL env var, then set PLAYTEST_ALLOW_REGISTER=0 and redeploy.', 'ok');
+      const c = $('cred'); c.textContent = JSON.stringify(f.data.credential); c.className = 'cred show';
+    } else msg('Enrolment failed: ' + ((f.data&&f.data.error)||f.status), 'err');
+  } catch (e) { msg('Enrolment cancelled or failed: ' + e.message, 'err'); }
+  finally { $('enrol').disabled = false; }
+};
+</script></body></html>

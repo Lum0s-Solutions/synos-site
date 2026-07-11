@@ -19,3 +19,6 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+# generated at build by scripts/gen-play-test.mjs (derived from public/play/index.html)
+public/play-test/index.html

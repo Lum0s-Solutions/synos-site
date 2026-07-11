@@ -8,8 +8,11 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
+    "gen:play-test": "node scripts/gen-play-test.mjs",
+    "prebuild": "node scripts/gen-play-test.mjs",
     "build": "astro build",
     "preview": "astro preview",
+    "test": "node --test tests/",
     "astro": "astro"
   },
   "dependencies": {

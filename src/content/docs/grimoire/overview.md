@@ -6,7 +6,7 @@ description: GRIMOIRE — the competitive hacker training platform built into Sy
 **GRIMOIRE** — Gamified Reconnaissance, Intelligence, Malware Operations, Intrusion Response & Exploitation — is the cybersecurity training layer of Syn_OS. It is not a tool collection bolted onto a distro; it is a complete **progression system** for mastering offensive, defensive, and purple-team cybersecurity, preparing for industry certifications, and competing globally to be the best hacker in the game.
 
 :::tip[Play GRIMOIRE now]
-GRIMOIRE is a **playable shared-world hacking MMO** — spawn into the Weave, walk to a contested world-node, solve its real lab, and capture that territory for your faction. **The exploit *is* the objective**, and rivals can interrupt you mid-hack. [▶ Play in your browser →](/play/)
+GRIMOIRE is a **playable shared-world hacking MMO** — spawn into the Weave, walk to a contested world-node, solve its real lab, and capture that territory for your faction. **The exploit *is* the objective**, and rivals can interrupt you mid-hack. GRIMOIRE ships with the Syn_OS desktop; there is no public browser build.
 :::
 
 ## What GRIMOIRE covers

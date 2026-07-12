@@ -115,6 +115,20 @@
   /* ── GRIMOIRE HUB (RPG: profile/labs/quests/leaderboard via same-origin daemon) ── */
   #hubbtn{background:#241a19;color:var(--brandhi);border:1px solid var(--ui);border-radius:4px;padding:3px 10px;cursor:pointer;font-family:inherit;font-size:12px;font-weight:bold}
   #hubbtn:hover{background:var(--ui);color:#fff}
+  /* ── unified Syn_OS header buttons: one system, not three ── */
+  .osbtn{background:#241a19;color:var(--brandhi);border:1px solid var(--ui);border-radius:4px;padding:3px 10px;cursor:pointer;font-family:inherit;font-size:12px;font-weight:bold;transition:background .15s,color .15s,box-shadow .15s}
+  .osbtn:hover{background:var(--ui);color:#fff}
+  .osbtn.active{background:var(--ui);color:#fff;box-shadow:0 0 10px rgba(191,31,31,.5)}
+  /* ── ALFRED — the Syn_OS assistant, surfacing inside the world ── */
+  #alfred-av{display:inline-flex;align-items:center;gap:5px;margin-left:10px;color:var(--acc);font-size:11px;letter-spacing:1px;cursor:pointer;opacity:.82;user-select:none;transition:opacity .15s}
+  #alfred-av:hover{opacity:1}
+  #alfred-av .gly{font-size:13px}
+  #alfred{position:absolute;top:40px;left:0;right:0;margin:0 auto;width:max-content;max-width:92vw;background:linear-gradient(180deg,rgba(22,15,22,.97),rgba(12,8,12,.97));border:1px solid var(--ui);border-radius:8px;padding:9px 14px;font-size:12.5px;line-height:1.45;color:var(--txt);display:flex;gap:9px;align-items:center;z-index:30;opacity:0;transform:none;pointer-events:none;box-shadow:0 6px 26px rgba(0,0,0,.6);transition:opacity .25s ease}
+  #alfred.on{opacity:1;pointer-events:auto}
+  #alfred .a-gly{color:var(--acc);font-size:15px;flex-shrink:0}
+  #alfred .a-name{color:var(--acc);font-weight:bold;letter-spacing:1px}
+  #alfred .a-x{margin-left:4px;color:var(--dim);cursor:pointer;font-size:15px;line-height:1}
+  #alfred .a-x:hover{color:var(--brandhi)}
   #hub{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(6,4,6,.9);z-index:20}
   #hub.hidden{display:none}
   .hubcard{background:var(--panel);border:1px solid var(--edge);border-radius:12px;width:640px;max-width:94vw;max-height:88vh;display:flex;flex-direction:column;box-shadow:0 0 50px rgba(191,31,31,.12)}
@@ -168,10 +182,125 @@
   @media (prefers-reduced-motion:no-preference){
     .phoenix .p-edge{animation:phx-edge 2.8s cubic-bezier(.4,.05,.35,1) infinite}
     .phoenix .p-veins{animation:phx-veins 2.8s cubic-bezier(.4,.05,.35,1) infinite}
+    #pipboy.on{animation:pipboot .5s ease}
+    #alfred{transform:translateY(-12px);transition:opacity .28s ease,transform .28s ease}
+    #alfred.on{transform:translateY(0)}
   }
   @keyframes phx-edge{0%,100%{opacity:.42}12%{opacity:.9}30%{opacity:.44}}
   @keyframes phx-veins{0%,100%{opacity:.3}12%{opacity:.58}26%{opacity:.34}}
-</style></head><body>
+
+  /* ── Always-on character frame (Phase 1a — real persistent RPG record) ── */
+  #charframe{position:fixed;top:48px;left:10px;z-index:40;min-width:214px;
+    background:linear-gradient(160deg,rgba(22,11,13,.93),rgba(9,5,7,.93));
+    border:1px solid var(--acc);border-radius:7px;padding:8px 11px;
+    box-shadow:0 0 16px rgba(191,31,31,.34),inset 0 0 24px rgba(191,31,31,.06);
+    font-size:12px;display:none}
+  #charframe.on{display:block}
+  #charframe .cf-top{display:flex;align-items:center;gap:7px;margin-bottom:6px}
+  #charframe .cf-sig{width:22px;height:22px;border-radius:50%;flex:0 0 auto;
+    box-shadow:0 0 9px var(--acc);display:grid;place-items:center;font-size:11px;color:#fff;
+    background:radial-gradient(circle at 40% 35%,var(--acc),#2a0a0a)}
+  #charframe .cf-name{font-weight:700;color:#fff;letter-spacing:.3px}
+  #charframe .cf-fac{margin-left:auto;font-size:9.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.6px}
+  #charframe .cf-lvlrow{display:flex;align-items:center;gap:6px;margin-bottom:5px}
+  #charframe .cf-lvl{font-weight:700;color:var(--acc);font-size:13px;min-width:46px}
+  #charframe .cf-xpbar{flex:1;height:9px;border-radius:5px;background:#241417;
+    border:1px solid rgba(191,31,31,.4);overflow:hidden}
+  #charframe .cf-xpfill{height:100%;width:0;transition:width .5s ease;
+    background:linear-gradient(90deg,#ff3b5c,#ffb03b);box-shadow:0 0 8px #ff3b5c}
+  #charframe .cf-xptxt{font-size:9.5px;color:var(--dim);min-width:60px;text-align:right;font-variant-numeric:tabular-nums}
+  #charframe .cf-btm{display:flex;gap:13px;font-size:11px;color:#d8d2c8}
+  #charframe .cf-cred b{color:#ffd76a}
+
+  /* ── District HUD banner (Phase 2 Night City) ── */
+  #district{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:38;display:none;pointer-events:none;
+    background:linear-gradient(180deg,rgba(14,10,14,.9),rgba(8,5,8,.92));border:1px solid var(--acc);border-radius:7px;
+    padding:5px 18px;text-align:center;box-shadow:0 0 20px rgba(191,31,31,.32)}
+  #district.on{display:block}
+  #district #d_name{font-weight:700;font-size:14px;letter-spacing:1.5px;display:block}
+  #district #d_sub{font-size:8.5px;letter-spacing:2px;text-transform:uppercase;opacity:.72;color:var(--dim)}
+
+  /* ── PIP-BOY 3000 (Fallout-style character terminal) ── */
+  #pipboy{position:fixed;inset:0;z-index:60;display:none;background:radial-gradient(ellipse at 50% 50%,#02140a,#000600 75%);
+    font-family:'JetBrains Mono',monospace;color:#37f58f;text-shadow:0 0 6px rgba(55,245,143,.55);padding:26px 4vw}
+  #pipboy.on{display:block}
+  @keyframes pipboot{0%{opacity:0;filter:brightness(3)}18%{opacity:.4}22%{opacity:.05}30%{opacity:.7}100%{opacity:1;filter:none}}
+  #pipboy::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(0deg,rgba(0,0,0,0) 0,rgba(0,0,0,0) 2px,rgba(0,20,8,.5) 3px,rgba(0,20,8,.5) 3px);
+    box-shadow:inset 0 0 160px rgba(0,0,0,.9),inset 0 0 40px rgba(55,245,143,.10);opacity:.5}
+  #pipboy .pb-frame{max-width:1060px;margin:0 auto;height:100%;display:flex;flex-direction:column;
+    border:1px solid rgba(55,245,143,.4);border-radius:10px;padding:16px 22px;background:rgba(2,18,10,.4);position:relative;z-index:1}
+  #pipboy .pb-hdr{display:flex;align-items:baseline;gap:14px;border-bottom:1px solid rgba(55,245,143,.35);padding-bottom:8px}
+  #pipboy .pb-hdr b{font-size:15px;letter-spacing:2px}
+  #pipboy .pb-hdr .pb-caps{margin-left:auto;color:#e6d24a;text-shadow:0 0 6px rgba(230,210,74,.5)}
+  #pipboy .pb-xp{flex:1;max-width:280px;height:8px;border:1px solid rgba(55,245,143,.5);border-radius:2px;overflow:hidden;align-self:center}
+  #pipboy .pb-xp i{display:block;height:100%;background:#37f58f;box-shadow:0 0 8px #37f58f}
+  #pipboy .pb-tabs{display:flex;gap:2px;margin:12px 0 4px}
+  #pipboy .pb-tabs button{flex:1;background:transparent;color:#2a9c62;border:1px solid rgba(55,245,143,.3);border-bottom:none;
+    padding:7px;font:700 12px 'JetBrains Mono',monospace;letter-spacing:2px;cursor:pointer;text-shadow:inherit}
+  #pipboy .pb-tabs button.on{color:#061;background:#37f58f;text-shadow:none}
+  #pipboy .pb-body{flex:1;overflow:auto;border:1px solid rgba(55,245,143,.3);padding:16px 18px;font-size:13px;line-height:1.7}
+  #pipboy .pb-body::-webkit-scrollbar{width:8px}#pipboy .pb-body::-webkit-scrollbar-thumb{background:rgba(55,245,143,.35)}
+  #pipboy .pb-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 30px}
+  #pipboy .pb-row{display:flex;justify-content:space-between;border-bottom:1px dotted rgba(55,245,143,.18);padding:3px 0}
+  #pipboy .pb-row b{color:#9dffce}
+  #pipboy .pb-attr{margin:10px 0}
+  #pipboy .pb-attr .pb-abar{height:10px;border:1px solid rgba(55,245,143,.5);margin:3px 0;position:relative}
+  #pipboy .pb-attr .pb-abar i{display:block;height:100%;background:#37f58f;box-shadow:0 0 8px #37f58f}
+  #pipboy .pb-perk{font-size:11px;color:#2fae6e;padding-left:12px}
+  #pipboy .pb-foot{padding-top:8px;font-size:10px;color:#2a9c62;letter-spacing:1px;text-align:center}
+  #pipboy .pb-karma i{display:inline-block;height:9px;background:#37f58f;box-shadow:0 0 8px #37f58f;vertical-align:middle}
+
+  /* ── Loot toasts (Fallout-style acquisitions) ── */
+  #loot{position:fixed;top:64px;right:16px;z-index:46;display:flex;flex-direction:column;gap:6px;pointer-events:none;align-items:flex-end}
+  #loot .loot-item{background:linear-gradient(180deg,rgba(16,12,8,.94),rgba(9,6,5,.94));border:1px solid #9aa0a6;border-left-width:4px;
+    border-radius:5px;padding:6px 12px;font:600 12px 'JetBrains Mono',monospace;letter-spacing:.5px;
+    box-shadow:0 4px 16px rgba(0,0,0,.5);transition:opacity .5s,transform .5s;opacity:1;white-space:nowrap}
+  #loot .lt-tag{font-size:9px;letter-spacing:2px;opacity:.7;margin-right:4px}
+  #loot .lt-rar{font-size:10px;font-weight:700}
+
+  /* ── Living world (R04/R05): HUD indicator + event banner ── */
+  #worldinfo{position:fixed;top:12px;right:310px;z-index:38;font:600 11px 'JetBrains Mono',monospace;
+    letter-spacing:.08em;color:#c9b8b0;background:rgba(10,7,8,.7);border:1px solid var(--edge);border-radius:5px;padding:4px 10px;pointer-events:none}
+  #worldevent{position:fixed;top:46px;left:50%;transform:translateX(-50%);z-index:39;display:none;pointer-events:none;text-align:center;
+    background:linear-gradient(180deg,rgba(28,10,10,.94),rgba(12,6,6,.94));border:1px solid #ff3b5c;border-radius:7px;padding:5px 20px;
+    box-shadow:0 0 22px rgba(255,59,92,.4);animation:evpulse 1.6s ease-in-out infinite}
+  #worldevent.on{display:block}
+  @keyframes evpulse{50%{box-shadow:0 0 34px rgba(255,59,92,.6)}}
+  #worldevent #we_kind{font-weight:700;font-size:13px;letter-spacing:1px;color:#ff6a6a;display:block}
+  #worldevent #we_dist{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#e6d24a;opacity:.85}
+  /* ── R30 — responsive layout ── */
+  @media (max-width:900px){ aside{width:236px} header{font-size:12px;gap:9px} .hubcard{width:96vw} }
+  @media (max-width:640px){
+    main{flex-direction:column}
+    aside{width:auto;height:150px;border-left:0;border-top:1px solid var(--edge);flex-direction:row;overflow-x:auto}
+    aside .sec{min-width:180px;border-right:1px solid var(--edge)}
+    header .kv,header .brandmark{display:none} header .logo{font-size:15px}
+    #alfred-av{margin-left:6px}
+  }
+  /* ── R30 — on-screen touch controls (only on coarse-pointer devices) ── */
+  #touchpad{display:none}
+  @media (pointer:coarse){
+    #touchpad{display:block;position:absolute;inset:0;pointer-events:none;z-index:16}
+    #touchpad .dpad{position:absolute;left:16px;bottom:20px;width:132px;height:132px;pointer-events:auto}
+    #touchpad .db{position:absolute;width:44px;height:44px;background:rgba(36,26,25,.8);border:1px solid var(--ui);border-radius:8px;color:var(--brandhi);font-size:18px;display:flex;align-items:center;justify-content:center;user-select:none;-webkit-user-select:none;touch-action:none}
+    #touchpad .db:active{background:var(--ui);color:#fff}
+    #touchpad .db.up{left:44px;top:0}#touchpad .db.dn{left:44px;top:88px}#touchpad .db.lf{left:0;top:44px}#touchpad .db.rt{left:88px;top:44px}
+    #touchpad .act{position:absolute;right:20px;bottom:34px;width:76px;height:76px;border-radius:50%;background:rgba(225,29,42,.85);border:1px solid #fff;color:#fff;font-size:12px;font-weight:bold;pointer-events:auto;display:flex;align-items:center;justify-content:center;touch-action:none}
+    #touchpad .act:active{background:#ff3b3b}
+  }
+</style>
+<script src="/vendor/three.min.js"></script>
+<script src="/vendor/CopyShader.js"></script>
+<script src="/vendor/LuminosityHighPassShader.js"></script>
+<script src="/vendor/EffectComposer.js"></script>
+<script src="/vendor/RenderPass.js"></script>
+<script src="/vendor/ShaderPass.js"></script>
+<script src="/vendor/MaskPass.js"></script>
+<script src="/vendor/UnrealBloomPass.js"></script>
+<script src="/season0.js"></script>
+<script src="/systems.js"></script>
+</head><body>
 <header>
   <div id="dot"></div><span class="brandmark">SYN<span class="u">_</span>OS</span><b class="logo">GRIMOIRE</b><span class="kv" style="color:var(--dim);letter-spacing:1px">THE WEAVE</span>
   <span class="phase" id="phase">—</span>
@@ -180,12 +309,30 @@
   <span class="kv">◈ <b id="pc">0</b></span>
   <span class="kv" style="margin-left:auto">me <b id="me">—</b> <b id="hp"></b></span>
   <button id="readybtn" style="display:none;background:#2b2b31;color:var(--acc);border:1px solid var(--acc);border-radius:4px;padding:3px 10px;cursor:pointer;font-family:inherit;font-size:12px">Ready [R]</button>
-  <button id="hubbtn">◈ HUB</button>
+  <button id="dossbtn" class="osbtn" title="Operator Dossier [C]">◈ FILE</button><button id="v3dbtn" class="osbtn" title="3D view [V]">◈ 3D</button><button id="pipbtn" class="osbtn" title="Pip-Boy [P]">◈ PIP</button><button id="hubbtn" class="osbtn">◈ HUB</button>
+  <span id="alfred-av" title="ALFRED — your Syn_OS assistant"><span class="gly">◆</span>ALFRED</span>
 </header>
+<div id="alfred"><span class="a-gly">◆</span><span><span class="a-name">ALFRED:</span> <span id="alfred-msg">standing by.</span></span><span class="a-x" id="alfred-x">✕</span></div>
+<div id="loot"></div>
+<div id="district"><span id="d_name">—</span><span id="d_sub"></span></div>
+<div id="worldinfo">☀ day · clear</div>
+<div id="worldevent"><span id="we_kind">⚠ EVENT</span><span id="we_dist"></span></div>
+<div id="charframe">
+  <div class="cf-top"><span class="cf-sig" id="cf_sig">◈</span><span class="cf-name" id="cf_name">—</span><span class="cf-fac" id="cf_fac"></span></div>
+  <div class="cf-lvlrow"><span class="cf-lvl" id="cf_lvl">LVL —</span><span class="cf-xpbar"><span class="cf-xpfill" id="cf_xpfill"></span></span><span class="cf-xptxt" id="cf_xptxt">—</span></div>
+  <div class="cf-btm"><span class="cf-cred">◈ <b id="cf_cred">0</b> ₡</span><span id="cf_align">align 0</span><span id="cf_labs">0 labs</span></div>
+</div>
+<div id="pipboy"><div class="pb-frame">
+  <div class="pb-hdr"><b id="pb_name">PIP-BOY 3000</b><span id="pb_lvl" style="color:#9dffce">LVL —</span>
+    <span class="pb-xp"><i id="pb_xp" style="width:0"></i></span><span id="pb_caps" class="pb-caps">◈ 0 CAPS</span></div>
+  <div class="pb-tabs"><button data-p="status" class="on">STATUS</button><button data-p="special">S.P.E.C.I.A.L.</button><button data-p="inv">INV</button><button data-p="data">DATA</button></div>
+  <div class="pb-body" id="pb_body">booting…</div>
+  <div class="pb-foot">VAULT-NET PERSONAL INFORMATION PROCESSOR · [P] / [ESC] TO CLOSE</div>
+</div></div>
 <main>
   <div id="wrap">
     <canvas id="world"></canvas>
-    <div id="hint"><b>WASD</b> explore · <b>[E]</b> contest node · solve its lab to capture · <b>1-7</b> combat · <b>Enter</b> chat · <b>scroll</b> zoom</div>
+    <div id="hint"><b>Arrow keys</b> move · <b>[Enter]</b> interact / jack in · <b>1-7</b> abilities · <b>T</b> target · <b>scroll</b> zoom</div>
     <div id="hotbar"></div>
     <div id="tip" class="hidden"></div>
     <div id="join">
@@ -249,6 +396,11 @@
             <button data-t="glossary">Codex</button>
             <button data-t="economy">Economy</button>
             <button data-t="academy">Academy</button>
+            <button data-t="runs">Runs</button>
+            <button data-t="arena">Arena</button>
+            <button data-t="market">Market</button>
+            <button data-t="season">Season</button>
+            <button data-t="factions">Factions</button>
           </div>
           <div id="hubbody"></div>
         </div>
@@ -308,18 +460,18 @@ function drawTutorial(meP,ox,oy){ if(tutorialDone||!meP||!NODES.length)return;
   const axp=cv.width/2+Math.cos(ang)*ar, ayp=cv.height/2+Math.sin(ang)*ar;
   cx.fillStyle="rgba(225,29,42,"+(0.6+0.3*Math.sin(fr*0.12))+")"; cx.save(); cx.translate(axp,ayp); cx.rotate(ang);
   cx.beginPath(); cx.moveTo(11,0); cx.lineTo(-6,-6); cx.lineTo(-6,6); cx.closePath(); cx.fill(); cx.restore();
-  const hint=bd<NRADIUS?"Press [E] to CONTEST — then solve its lab & submit the flag to capture it":("Walk to "+best.name+" — your first territory to capture");
+  const hint=bd<NRADIUS?"Press [ENTER] to CONTEST — then solve its lab & submit the flag to capture it":("Walk to "+best.name+" — your first territory to capture");
   cx.fillStyle="rgba(10,10,11,.9)"; cx.fillRect(cv.width/2-200,cv.height-94,400,30);
   cx.strokeStyle="#e11d2a"; cx.lineWidth=1.5; cx.strokeRect(cv.width/2-200,cv.height-94,400,30);
   cx.fillStyle="#ececee"; cx.font="11px monospace"; cx.textAlign="center"; cx.fillText("◈ TUTORIAL — "+hint,cv.width/2,cv.height-74); }
 // built-in registry — mirrors the daemon's world_node_layout; used if the fetch fails
 const FALLBACK_NODES=[
-  {id:"zone_recon",name:"Recon Outpost",pos:[24,0,0],lab:"tut_first_scan",icon:"🔭"},
-  {id:"zone_exploit",name:"The Armory",pos:[12,0,20.8],lab:"ch_hard_ssti",icon:"⚔"},
-  {id:"zone_defense",name:"The Citadel",pos:[-12,0,20.8],lab:"ch_med_forensics",icon:"🛡"},
-  {id:"zone_crypto",name:"The Vault",pos:[-24,0,0],lab:"ch_easy_crypto",icon:"🔐"},
-  {id:"zone_nightmare",name:"The Abyss",pos:[-12,0,-20.8],lab:"ch_insane_chain",icon:"🕳"},
-  {id:"zone_market",name:"The Exchange",pos:[12,0,-20.8],lab:"ch_easy_osint",icon:"💰"},
+  {id:"zone_recon",name:"Recon Outpost",pos:[-196,0,-152],lab:"tut_first_scan",icon:"🔭"},
+  {id:"zone_exploit",name:"The Armory",pos:[196,0,-152],lab:"ch_hard_ssti",icon:"⚔"},
+  {id:"zone_defense",name:"The Citadel",pos:[262,0,64],lab:"ch_med_forensics",icon:"🛡"},
+  {id:"zone_crypto",name:"The Vault",pos:[-176,0,216],lab:"ch_easy_crypto",icon:"🔐"},
+  {id:"zone_nightmare",name:"The Abyss",pos:[0,0,-268],lab:"ch_insane_chain",icon:"🕳"},
+  {id:"zone_market",name:"The Exchange",pos:[-262,0,64],lab:"ch_easy_osint",icon:"💰"},
 ];
 function ensureNodeState(id){ if(!nodeState[id])nodeState[id]={state:"Neutral",faction:null,token:null,lab:null}; }
 async function fetchNodes(){
@@ -338,23 +490,138 @@ let actx; function sfx(f,d=0.08,type="square",v=0.05){ try{ actx=actx||new (wind
 let ws,me=null,cseq=1,players=new Map(),tick=0,phase="—",scale=6,log=[],target=null,floaters=[],cds={},beams=[],motes=[],fr=0,killfeed=[],lastHit={},lastScores=[];
 let NAME="",FAC="AzureWatch",hotbar=ABIL.slice();
 const keys={};
+// ── Persistent browser device key (Option B "soft browser-bind" fix, 2026-07-09) ──
+// verify_member_token_multi (synos-member-token) rejects a null `bind` claim
+// UNCONDITIONALLY, for every tier — a Member Token minted with no device
+// binding can NEVER pass the world server's ClientHello gate. Rather than
+// weaken that verifier invariant, this client generates a random key ONCE,
+// persists it in localStorage (survives across sessions/tabs, unlike
+// sessionStorage), and sends it as `device_key` on every register/login
+// request; the daemon hashes it (sha256_hex) into the minted token's `bind`
+// claim. The SAME raw key is then forwarded as `device_id` in the world
+// server's ClientHello — the verifier applies the identical sha256_hex
+// transform to that field before comparing, so the two agree. Field names
+// match daemon.rs's RegisterRequest/LoginRequest.device_key and
+// protocol.rs's ClientHello.device_id.
+function getOrCreateDeviceKey(){
+  let k; try{ k=localStorage.getItem("synos_device_key"); }catch(e){}
+  if(!k){
+    const bytes=new Uint8Array(32); crypto.getRandomValues(bytes);
+    k=Array.from(bytes).map(b=>b.toString(16).padStart(2,"0")).join("");
+    try{ localStorage.setItem("synos_device_key",k); }catch(e){}
+  }
+  return k;
+}
+const DEVICE_KEY=getOrCreateDeviceKey();
 // ── Member-token auth state (INVISIBLE flow) ──
 // The world server (P0-1 gate) rejects any ClientHello without a signed CoM
 // Member Token. Token ISSUANCE/CLAIM is owned by a separate flow (Discord key
 // system / daemon) — this client only CONSUMES it: it reads whatever
-// `member_token` (+ optional `device_id`) the existing auth response/session
-// already exposes, stashes it, and forwards it in the handshake. The player
-// never sees or handles it. Field names match protocol.rs ClientHello.
+// `member_token` the existing auth response/session already exposes, stashes
+// it, and forwards it (+ DEVICE_KEY as device_id) in the handshake. The
+// player never sees or handles it. Field names match protocol.rs ClientHello.
 // HOOK: if the current auth response doesn't yet include `member_token`, this
 // stays "" and the server will reject with auth_err until issuance is wired.
 let memberToken=sessionStorage.getItem("grim_member_token")||"";
-let memberDeviceId=sessionStorage.getItem("grim_member_device")||null;
+let memberDeviceId=sessionStorage.getItem("grim_member_device")||DEVICE_KEY;
 let authedUser=sessionStorage.getItem("grim_user")||"";
 let authFailed=false; // set on WireMessage::AuthErr → stop the reconnect loop
 $("jname").value="Op-"+Math.floor(Math.random()*900+100);
-function rz(){cv.width=cv.clientWidth;cv.height=cv.clientHeight}
+function rz(){ let s=1; try{ if(QUALITY&&QUALITY.res)s=QUALITY.res; }catch(e){} cv.width=Math.max(2,Math.round(cv.clientWidth*s)); cv.height=Math.max(2,Math.round(cv.clientHeight*s)); }
 addEventListener("resize",rz);rz();
 function wlog(s){log.unshift(new Date().toLocaleTimeString().slice(0,8)+" "+s);log=log.slice(0,40);$("raw").textContent=log.join("\n")}
+// ═══════════════ ADAPTIVE RENDER ENGINE — runs on anything, scales to beautiful ═══════════════
+// Device-tier fingerprint → seed quality; FPS governor auto-scales at runtime; [O] opens settings.
+function detectCapability(){
+  const ua=navigator.userAgent||"", mobile=/Mobi|Android|iPhone|iPad|iPod/i.test(ua);
+  const cores=navigator.hardwareConcurrency||4, mem=navigator.deviceMemory||4;
+  let gpu="", gl2=false;
+  try{ const c=document.createElement("canvas"); const g2=c.getContext("webgl2"); gl2=!!g2;
+    const g=g2||c.getContext("webgl")||c.getContext("experimental-webgl");
+    if(g){ const dbg=g.getExtension("WEBGL_debug_renderer_info");
+      gpu=(dbg?g.getParameter(dbg.UNMASKED_RENDERER_WEBGL):g.getParameter(g.RENDERER))||""; }
+  }catch(e){}
+  const G=gpu.toLowerCase(), order=["potato","low","medium","high","ultra"];
+  let gt="medium";
+  if(/rtx|rx 6\d|rx 7\d|rx 9\d|radeon vii|arc a\d|apple m[1-9]/.test(G)) gt="ultra";
+  else if(/gtx 9|gtx 10[6-9]|rx 5\d|vega|quadro|radeon pro|iris xe|geforce mx[3-9]/.test(G)) gt="high";
+  else if(/gma|swiftshader|llvmpipe|softpipe|mesa offscreen|software|hd graphics [234]0|hd graphics 4000|hd graphics 2500|hd graphics 3000|mali-[t4]|adreno [1-4]\d\d/.test(G)) gt="potato";
+  else if(/hd graphics [5-6]|uhd graphics|iris(?! xe)|geforce (gt|8|9)|radeon (hd|r[0-9])|mali-g[57]|adreno [56]\d\d/.test(G)) gt="low";
+  let ti=order.indexOf(gt);
+  if(!gpu) ti=Math.min(ti,2);            // unknown GPU → cap medium
+  if(mobile) ti=Math.min(ti,1);
+  if(cores<=2) ti=Math.min(ti,1); else if(cores<=4) ti=Math.min(ti,2);
+  if(mem<=2) ti=0; else if(mem<=4) ti=Math.min(ti,2);
+  if(!gl2 && ti>2) ti=2;
+  return {tier:order[Math.max(0,ti)],gpu,gl2,mobile,cores,mem};
+}
+const TIER_TABLE={
+  potato:{res:0.70,rain:0,  embers:0, agentMul:0,  traffic:0, windowRows:3, windowStep:2,skyline:false,holo:false,bloom:false,allow3D:false,crtStep:8},
+  low:   {res:0.85,rain:45, embers:16,agentMul:0.6,traffic:16,windowRows:5, windowStep:1,skyline:true, holo:false,bloom:false,allow3D:true, crtStep:4},
+  medium:{res:1.0, rain:90, embers:32,agentMul:0.8,traffic:28,windowRows:8, windowStep:1,skyline:true, holo:true, bloom:false,allow3D:true, crtStep:3},
+  high:  {res:1.0, rain:130,embers:46,agentMul:1.0,traffic:40,windowRows:12,windowStep:1,skyline:true, holo:true, bloom:true, allow3D:true, crtStep:3},
+  ultra: {res:1.0, rain:180,embers:60,agentMul:1.0,traffic:52,windowRows:16,windowStep:1,skyline:true, holo:true, bloom:true, allow3D:true, crtStep:2},
+};
+const CAPS=detectCapability();
+const _baseQ=Object.assign({},TIER_TABLE[CAPS.tier]);
+const QUALITY=Object.assign({tier:CAPS.tier,auto:true,perf:0},TIER_TABLE[CAPS.tier]);
+// Ordered degrade ladder — each rung sheds the next-cheapest visual under sustained low FPS.
+const _LADDER=[
+  q=>{},
+  q=>{q.bloom=false;},
+  q=>{q.res=Math.min(q.res,0.85);},
+  q=>{q.rain=Math.round(q.rain*0.6);q.embers=Math.round(q.embers*0.6);},
+  q=>{q.agentMul*=0.5;},
+  q=>{q.res=Math.min(q.res,0.72);},
+  q=>{q.traffic=Math.round(q.traffic*0.5);},
+  q=>{q.windowRows=Math.min(q.windowRows,5);q.windowStep=2;},
+  q=>{q.holo=false;q.skyline=false;},
+  q=>{q.rain=0;q.embers=0;q.crtStep=8;},
+];
+function applyPerf(idx){
+  idx=Math.max(0,Math.min(_LADDER.length-1,idx));
+  const q=Object.assign({},_baseQ); for(let k=1;k<=idx;k++)_LADDER[k](q);
+  const reRain=(q.rain!==QUALITY.rain||q.embers!==QUALITY.embers), reAgent=(q.agentMul!==QUALITY.agentMul),
+        reTraf=(q.traffic!==QUALITY.traffic), reRes=(q.res!==QUALITY.res), reBloom=(q.bloom!==QUALITY.bloom);
+  Object.assign(QUALITY,q); QUALITY.perf=idx;
+  if(reRain&&typeof initAtmo==="function")initAtmo();
+  if(reAgent&&typeof initAmbient==="function")initAmbient();
+  if(reTraf&&typeof initTraffic==="function")initTraffic();
+  if(reRes&&typeof rz==="function")rz();
+  if(reBloom&&window.R3&&R3.ready)wlog("bloom "+(q.bloom?"on":"off"));
+  renderQSet();
+}
+const PERF={t:[],last:0,avg:60,cool:0};
+function perfTick(now){ if(PERF.last){ const dt=now-PERF.last; if(dt>0&&dt<500){ PERF.t.push(dt); if(PERF.t.length>90)PERF.t.shift(); } } PERF.last=now; }
+function qualityGovernor(){
+  if(!QUALITY.auto){ return; }
+  if(PERF.cool>0){ PERF.cool--; return; }
+  if(PERF.t.length<45) return;
+  const mean=PERF.t.reduce((a,b)=>a+b,0)/PERF.t.length; PERF.avg=1000/mean;
+  if(PERF.avg<40&&QUALITY.perf<_LADDER.length-1){ applyPerf(QUALITY.perf+1); PERF.cool=120; PERF.t.length=0; wlog("⚙ auto-scaled down → smoother ("+Math.round(PERF.avg)+"fps)"); }
+  else if(PERF.avg>56&&QUALITY.perf>0){ applyPerf(QUALITY.perf-1); PERF.cool=180; PERF.t.length=0; }
+}
+// ── [O] render settings panel (DOM-injected, no CSS-anchor dependency) ──
+function _qPanel(){ let p=document.getElementById("qset");
+  if(!p){ p=document.createElement("div"); p.id="qset";
+    p.style.cssText="position:fixed;right:14px;bottom:60px;z-index:70;background:rgba(10,10,14,.95);border:1px solid #bf1f1f;border-radius:8px;padding:11px 13px;font:11px/1.5 monospace;color:#ececee;min-width:210px;display:none;box-shadow:0 6px 28px rgba(0,0,0,.7)";
+    document.body.appendChild(p); }
+  return p; }
+function toggleQSet(){ const p=_qPanel(); p.style.display=p.style.display==="none"?"block":"none"; if(p.style.display==="block")renderQSet(); }
+function renderQSet(){ const p=document.getElementById("qset"); if(!p||p.style.display==="none")return;
+  const tiers=["potato","low","medium","high","ultra"];
+  p.innerHTML='<div style="color:#f5c518;font-weight:bold;letter-spacing:1px;margin-bottom:6px">◈ RENDER ENGINE · [O]</div>'+
+    '<div style="opacity:.75;font-size:10px">'+(CAPS.gpu?CAPS.gpu.slice(0,30):"GPU unknown")+'</div>'+
+    '<div style="opacity:.75;font-size:10px">seed '+CAPS.tier+' · '+CAPS.cores+'c · '+CAPS.mem+'GB'+(CAPS.gl2?' · gl2':'')+(CAPS.mobile?' · mobile':'')+'</div>'+
+    '<div style="margin:5px 0">FPS <b id="qfps" style="color:#39d0c8">'+Math.round(PERF.avg)+'</b> · load '+QUALITY.perf+'/'+(_LADDER.length-1)+' · res '+QUALITY.res.toFixed(2)+'</div>'+
+    '<div style="margin:5px 0 3px">quality: '+tiers.map(t=>'<a href="#" data-t="'+t+'" style="color:'+(QUALITY.tier===t&&!QUALITY.auto?'#f5c518':'#8fb0c0')+';margin-right:7px;text-decoration:none">'+t+'</a>').join('')+'</div>'+
+    '<label style="cursor:pointer;display:block;margin-top:4px"><input type="checkbox" id="qauto" '+(QUALITY.auto?'checked':'')+'> auto-scale (FPS governor)</label>';
+  p.querySelectorAll('a[data-t]').forEach(a=>a.onclick=(e)=>{e.preventDefault();setTier(a.dataset.t);});
+  const ac=p.querySelector('#qauto'); if(ac)ac.onchange=()=>{QUALITY.auto=ac.checked; if(QUALITY.auto){PERF.t.length=0;PERF.cool=0;} wlog("render auto-scale "+(QUALITY.auto?"on":"off")); renderQSet();};
+}
+function setTier(t){ if(!TIER_TABLE[t])return; Object.assign(_baseQ,TIER_TABLE[t]); QUALITY.tier=t; QUALITY.auto=false; applyPerf(0); wlog("render tier → "+t); }
+// expose engine for console tweaking + external inspection
+window.CAPS=CAPS; window.QUALITY=QUALITY; window.PERF=PERF; window.setTier=setTier; window.applyPerf=applyPerf; window.toggleQSet=toggleQSet; window.TIER_TABLE=TIER_TABLE;
 function send(o){ if(ws&&ws.readyState==1) ws.send(JSON.stringify(o)); }
 function action(kind){ send({type:"client_action",connection_id:NIL,player_id:(me??0),client_seq:cseq++,kind}); }
 // ── v88 Fusion — node capture: EnterNode → solve lab → ClaimNode ──
@@ -374,9 +641,22 @@ function onNodeCaptured(m){ const id=m.node_id, ns=nodeState[id]; if(!ns)return;
   ns.state="Captured"; ns.faction=fac; ns.token=null; if(activeCapture==id)activeCapture=null;
   wlog("★ CAPTURED "+nodeName(id)+" for "+fac+"!"); try{sfx(880,0.18,"sine");sfx(1180,0.14,"sine");}catch(e){}
   capFlash={t:1,col:(FCOL[facNorm(fac)]||"#e11d2a"),name:nodeName(id)}; // cinematic flash
+  // Phase 1b — live territory reward: popup floaters + tick the persistent frame up.
+  if(m.xp||m.credits){ const meP=players.get(me);
+    if(meP&&meP.pos){ if(m.xp) floaters.push({x:meP.pos[0],z:meP.pos[2],v:m.xp,t:1.5,heal:true,lbl:"+"+m.xp+" XP"});
+      if(m.credits) floaters.push({x:meP.pos[0]+1.6,z:meP.pos[2],v:m.credits,t:1.5,gold:true,lbl:"+"+m.credits+" ₡"}); }
+    wlog("✦ +"+(m.xp||0)+" XP  +"+(m.credits||0)+" ₡ — territory secured");
+    if(typeof alfred==="function") alfred("Territory secured — "+nodeName(id)+". +"+(m.xp||0)+" XP banked. Hold the line, operator.");
+    setTimeout(refreshCharBar,650); setTimeout(checkLoot,1100); }
+  if(typeof progressObjectives==="function"){ progressObjectives("lab","any"); progressObjectives("capture","any"); }
   if(!tutorialDone){ tutorialDone=true; try{localStorage.setItem("grim_tut","1");}catch(e){} } // onboarding complete
     /* Phase-2: daemon flips the real zone in flag validation on a proven solve;
        client no longer POSTs the capture (that was the fake-flip vector). */ }
+function onAssist(m){ if(m.player_id!==me) return; const meP=players.get(me);
+  if(meP&&meP.pos){ if(m.xp) floaters.push({x:meP.pos[0],z:meP.pos[2],v:m.xp,t:1.5,heal:true,lbl:"+"+m.xp+" ASSIST"});
+    if(m.credits) floaters.push({x:meP.pos[0]+1.6,z:meP.pos[2],v:m.credits,t:1.5,gold:true,lbl:"+"+m.credits+" ₡"}); }
+  try{sfx(600,0.1,"triangle");sfx(880,0.09,"triangle");}catch(e){}
+  wlog("✦ +"+(m.xp||0)+" XP  +"+(m.credits||0)+" ₡ — CO-OP ASSIST (ally took territory nearby)"); setTimeout(refreshCharBar,650); setTimeout(checkLoot,1100); }
 function onNodeUpdate(m){ const id=m.node_id, ns=nodeState[id]; if(!ns)return;
   if(m.state)ns.state=m.state;
   ns.faction=m.owning_faction?(facNorm(m.owning_faction)||m.owning_faction):null;
@@ -387,14 +667,15 @@ function onNodeUpdate(m){ const id=m.node_id, ns=nodeState[id]; if(!ns)return;
 function connect(){
   wlog("connecting…");
   ws=new WebSocket(URL);
-  ws.onopen=()=>{ $("dot").classList.add("on");
+  ws.onopen=()=>{ $("dot").classList.add("on"); phase="—"; lastScores=[]; $("phase").textContent=phase; $("timer").textContent="—";
+    // reset stale match display on (re)connect — a torn-down PostMatch shard else leaves "MATCH COMPLETE" stuck
     // P0-1 connect gate — forward the invisibly-issued Member Token (+ device_id
     // if the daemon bound one). Field names/shape match protocol.rs ClientHello.
     const hello={type:"client_hello",display_name:NAME,faction:FAC,member_token:memberToken};
     if(memberDeviceId) hello.device_id=memberDeviceId;
     send(hello);
     wlog("jacked in as "+NAME+" ("+FAC+")"); setInterval(()=>action({type:"heartbeat"}),12000);
-    fetchNodes(); };
+    fetchNodes(); fetchLabs(); };
   ws.onclose=()=>{ $("dot").classList.remove("on"); if(authFailed)return;
     wlog("disconnected — retrying"); setTimeout(connect,1500); };
   ws.onerror=()=>wlog("socket error");
@@ -405,13 +686,15 @@ function route(raw){
   const m=(raw&&raw.kind&&typeof raw.kind==="object"&&raw.kind.type)?raw.kind:raw;
   const t=m.type||"?";
   if(t=="connected"){ me=m.player_id; $("me").textContent=NAME+" #"+me; $("readybtn").style.display="";
-    hotbar=ABIL.concat([ULT[FAC]]); buildHotbar(); wlog("CONNECTED #"+me+" on "+m.match_id); }
+    hotbar=ABIL.concat([ULT[FAC]]); buildHotbar(); wlog("CONNECTED #"+me+" on "+m.match_id); startCharBar(); }
   else if(t=="snapshot"){ ingest(m); }
   else if(t=="chat"){ addChat(m.display_name,m.faction,m.text||m.message); }
   else if(t=="combat_event"){ onCombat(m); }
   else if(t=="node_challenge_ready"){ onNodeChallenge(m); }
   else if(t=="node_captured"){ onNodeCaptured(m); }
   else if(t=="node_update"){ onNodeUpdate(m); }
+  else if(t=="coop_assist"){ onAssist(m); }
+  else if(t=="world_pulse"){ onPulse(m); }
   else if(t=="input_rejected"){ wlog("✗ "+(m.reason||"rejected")); }
   else if(t=="kicked"){ wlog("KICKED: "+(m.reason||"")); }
   else if(t=="auth_err"){ onAuthErr(m); }
@@ -452,12 +735,24 @@ function onCombat(m){
   if(tp){ sfx(dmg<0?680:200,0.07,dmg<0?"sine":"square"); floaters.push({x:tp.pos[0],z:tp.pos[2],v:dmg,t:1.0,heal:dmg<0});
     if(cp) beams.push({x1:cp.rx??cp.pos[0],z1:cp.rz??cp.pos[2],x2:tp.rx??tp.pos[0],z2:tp.rz??tp.pos[2],t:1,heal:dmg<0,c:FCOL[cp.fac]||"#fff"});
     for(let k=0;k<12;k++) motes.push({x:tp.pos[0],z:tp.pos[2],vx:(Math.random()-.5)*2.4,vz:(Math.random()-.5)*2.4,t:1,c:dmg<0?"#22e39a":"#ff3b5c"}); }
+  // Phase 1b — kill reward: when I land the kill, earn persistent XP/credits.
+  if(m.is_kill && m.caster_id==me && (m.kill_xp||m.kill_credits)){ const meP=players.get(me);
+    if(meP&&meP.pos){ if(m.kill_xp) floaters.push({x:meP.pos[0],z:meP.pos[2],v:m.kill_xp,t:1.4,heal:true,lbl:"+"+m.kill_xp+" XP"});
+      if(m.kill_credits) floaters.push({x:meP.pos[0]+1.6,z:meP.pos[2],v:m.kill_credits,t:1.4,gold:true,lbl:"+"+m.kill_credits+" ₡"}); }
+    wlog("✦ +"+(m.kill_xp||0)+" XP  +"+(m.kill_credits||0)+" ₡ — elimination"); setTimeout(refreshCharBar,650); setTimeout(checkLoot,1100); }
 }
 function renderList(){
   $("pc").textContent=players.size;
   const el=$("players");
   if(!players.size){el.innerHTML='<div class="empty">no players</div>';return}
-  el.innerHTML=[...players.values()].sort((a,b)=>b.hp-a.hp).map(p=>
+  // R03 — one shared world, organized by zone: bucket players by district.
+  const zc={}; let myZone=null;
+  for(const p of players.values()){ const pos=p.pos||[p.rx||0,0,p.rz||0]; const d=districtAt(pos[0],pos[2]); const id=d?d.id:"_sprawl"; zc[id]=(zc[id]||0)+1; if(p.id===me)myZone=id; }
+  const zsum=Object.entries(zc).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([id,n])=>{
+    const d=CITY.districts.find(x=>x.id===id), nm=d?d.name:"The Sprawl", col=d?d.accent:"#c9b8b0";
+    return '<span style="color:'+(id===myZone?col:"#8a7d78")+';white-space:nowrap">'+(id===myZone?"▸ ":"")+nm+' '+n+'</span>'; }).join(" · ");
+  el.innerHTML='<div style="font-size:9.5px;letter-spacing:.04em;padding:2px 0 5px;border-bottom:1px solid var(--edge);margin-bottom:4px">◈ '+zsum+'</div>'
+    +[...players.values()].sort((a,b)=>b.hp-a.hp).map(p=>
     `<div class="prow${p.id===target?' tgt':''}" data-id="${p.id}"><span class="fac-${p.fac}">${p.id===me?'▸ ':''}${p.name}</span><span class="kv">${Math.round(p.hp)}%${p.alive?'':' ☠'}</span></div>`).join("");
   el.querySelectorAll('.prow').forEach(r=>r.onclick=()=>{ target=+r.dataset.id; renderList(); renderTarget(); });
 }
@@ -505,36 +800,689 @@ $("chatin").addEventListener("focus",()=>typing=true);
 $("chatin").addEventListener("blur",()=>typing=false);
 $("chatin").addEventListener("keydown",e=>{ e.stopPropagation();
   if(e.key=="Enter"&&e.target.value.trim()){ send({type:"client_chat",text:e.target.value.trim()}); e.target.value=""; } });
-addEventListener("keydown",e=>{ if(typing||!hubHidden())return; const k=e.key.toLowerCase(); keys[k]=true;
+addEventListener("keydown",e=>{ if(typing||!hubHidden()||!pipHidden()||(typeof dlgOpen!=="undefined"&&dlgOpen))return; const k=e.key.toLowerCase(); keys[k]=true;
+  if(k.startsWith("arrow"))e.preventDefault();
   if(k>="1"&&k<="9"){ useAbility(+k-1); }
   if(k=="r"&&me!=null){ action({type:"set_ready",ready:true}); wlog("readied up"); }
-  if(k=="e"&&nearNode){ contestNode(nearNode); }
-  if(k=="c"&&activeCapture&&nodeState[activeCapture]&&nodeState[activeCapture].token){ claimNode(activeCapture); }
-  if(k=="enter"){ $("chatin").focus(); e.preventDefault(); } });
+  if(k=="v"){ toggle3D(); }
+  if(k=="o"){ toggleQSet(); }
+  if(k=="c"){ toggleDossier(); }
+  if(k=="enter"){ e.preventDefault();
+    if(typeof nearNPC!=="undefined"&&nearNPC){ openDialogue(nearNPC); }
+    else if(activeCapture&&nodeState[activeCapture]&&nodeState[activeCapture].token){ claimNode(activeCapture); }
+    else if(nearNode){ contestNode(nearNode); }
+    else if(nearLab){ enterLab(nearLab); }
+    else { $("chatin").focus(); } } });
 addEventListener("keyup",e=>{ keys[e.key.toLowerCase()]=false; });
 $("readybtn").onclick=()=>{ if(me!=null){action({type:"set_ready",ready:true}); wlog("readied up");} };
 $("wrap").addEventListener("wheel",e=>{ e.preventDefault(); scale=Math.max(2,Math.min(18,scale*(e.deltaY<0?1.12:0.89))); },{passive:false});
 // click canvas → target nearest player to click
 cv.addEventListener("click",e=>{ const meP=players.get(me); if(!meP)return;
-  const r=cv.getBoundingClientRect(), sx=e.clientX-r.left, sy=e.clientY-r.top;
+  const r=cv.getBoundingClientRect(), kx=cv.width/(r.width||1), ky=cv.height/(r.height||1);
+  const sx=(e.clientX-r.left)*kx, sy=(e.clientY-r.top)*ky;
   const ox=cv.width/2-meP.rx*scale, oy=cv.height/2-meP.rz*scale;
   let best=null,bd=28; for(const p of players.values()){ const x=ox+p.rx*scale,y=oy+p.rz*scale;
     const d=Math.hypot(x-sx,y-sy); if(d<bd){bd=d;best=p.id;} }
   if(best!=null){ target=best; renderList(); renderTarget(); } });
 
 setInterval(()=>{ if(!ws||ws.readyState!=1||me==null||!hubHidden())return;
-  let dx=0,dz=0; if(keys["w"]||keys["arrowup"])dz-=1; if(keys["s"]||keys["arrowdown"])dz+=1;
-  if(keys["a"]||keys["arrowleft"])dx-=1; if(keys["d"]||keys["arrowright"])dx+=1;
+  let dx=0,dz=0; if(keys["arrowup"])dz-=1; if(keys["arrowdown"])dz+=1;
+  if(keys["arrowleft"])dx-=1; if(keys["arrowright"])dx+=1;
   if(dx||dz){ const yaw=Math.atan2(dx,-dz); action({type:"move",dx,dz,yaw}); } },55);
 
+// ═══════════════ NIGHT CITY — persistent hacker metropolis (Phase 2) ═══════════════
+// Districts themed to security domains; procedural neon skyline; explorable sprawl.
+const CITY = {
+  extent: 360,
+  districts: [
+    {id:"grid",     name:"The Grid",        sub:"Central Nexus · Safe", cx:0,    cz:0,    r:74, col:"#e11d2a", accent:"#ff6a6a", n:9},
+    {id:"slums",    name:"Silicon Slums",   sub:"Recon · OSINT",        cx:-196, cz:-152, r:96, col:"#2fbfb6", accent:"#6ff5ec", n:18},
+    {id:"foundry",  name:"The Foundry",     sub:"Exploit · Offense",    cx:196,  cz:-152, r:96, col:"#ff7a1a", accent:"#ffb46a", n:18},
+    {id:"citadel",  name:"The Citadel",     sub:"Defense · Blue Team",  cx:262,  cz:64,   r:90, col:"#3b9dff", accent:"#8ec8ff", n:16},
+    {id:"cold",     name:"Cold Storage",    sub:"Forensics · DFIR",     cx:176,  cz:216,  r:88, col:"#9d8cff", accent:"#c3b6ff", n:15},
+    {id:"vault",    name:"The Vault",       sub:"Crypto · Secrets",     cx:-176, cz:216,  r:88, col:"#c9a227", accent:"#ffd76a", n:15},
+    {id:"haven",    name:"Data Haven",      sub:"Market · Guilds",      cx:-262, cz:64,   r:90, col:"#d048c0", accent:"#ff8fee", n:16},
+    {id:"zone",     name:"The Combat Zone", sub:"PvP · Faction War",    cx:0,    cz:258,  r:86, col:"#ff2e4d", accent:"#ff7088", n:12},
+    {id:"blackwall",name:"Blackwall Fringe",sub:"Nightmare · Lethal",   cx:0,    cz:-268, r:82, col:"#ff1e1e", accent:"#ff5555", n:14},
+  ],
+  buildings: [],
+};
+function mulberry32(a){ return function(){ a|=0;a=a+0x6D2B79F5|0; let t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+function buildCity(){
+  const rng=mulberry32(0x5eed); CITY.buildings=[];
+  for(const d of CITY.districts){
+    for(let i=0;i<d.n;i++){
+      const ang=rng()*6.283, rr=(0.24+0.72*rng())*d.r;
+      const bx=d.cx+Math.cos(ang)*rr, bz=d.cz+Math.sin(ang)*rr;
+      if(Math.hypot(bx,bz)<46) continue; // keep the spawn core clear
+      CITY.buildings.push({x:bx,z:bz, w:6+rng()*13, h:6+rng()*13, ht:9+rng()*34,
+        col:d.col, accent:d.accent, lit:rng(), cols:2+((rng()*4)|0), seed:(rng()*1e4)|0,
+        holo:rng()<0.28, roof:rng()<0.5, spire:rng()<0.22, glyph:"◈▲◆⬡⌬※"[(rng()*6)|0], flick:(rng()*100)|0});
+    }
+  }
+  CITY.buildings.sort((a,b)=>a.z-b.z); // back-to-front for the fake-2.5D extrusion
+}
+buildCity();
+function districtAt(x,z){ let best=null,bd=1e9; for(const d of CITY.districts){ const dd=Math.hypot(x-d.cx,z-d.cz)-d.r; if(dd<bd){bd=dd;best=d;} } return bd<24?best:null; }
+function drawCity(ox,oy){
+  const E=CITY.extent, W=cv.width, H=cv.height;
+  // neon street grid across the sprawl
+  cx.lineWidth=1;
+  for(let g=-E; g<=E; g+=30){
+    const gx=ox+g*scale, gz=oy+g*scale;
+    if(gx>-2&&gx<W+2){ cx.strokeStyle="rgba(60,150,170,0.045)"; cx.beginPath(); cx.moveTo(gx,Math.max(0,oy-E*scale)); cx.lineTo(gx,Math.min(H,oy+E*scale)); cx.stroke(); }
+    if(gz>-2&&gz<H+2){ cx.strokeStyle="rgba(150,60,90,0.045)"; cx.beginPath(); cx.moveTo(Math.max(0,ox-E*scale),gz); cx.lineTo(Math.min(W,ox+E*scale),gz); cx.stroke(); }
+  }
+  // district fog + rings + atmospheric labels
+  for(const d of CITY.districts){
+    const dx=ox+d.cx*scale, dz=oy+d.cz*scale, R=d.r*scale;
+    if(dx< -R-40||dx>W+R+40||dz< -R-40||dz>H+R+40) continue;
+    const g=cx.createRadialGradient(dx,dz,0,dx,dz,R);
+    g.addColorStop(0,d.col+"1c"); g.addColorStop(0.7,d.col+"0a"); g.addColorStop(1,d.col+"00");
+    cx.fillStyle=g; cx.beginPath(); cx.arc(dx,dz,R,0,7); cx.fill();
+    cx.strokeStyle=d.col+"2e"; cx.lineWidth=1.4; cx.setLineDash([5,9]); cx.beginPath(); cx.arc(dx,dz,R,0,7); cx.stroke(); cx.setLineDash([]);
+    cx.textAlign="center"; cx.globalAlpha=0.55; cx.fillStyle=d.accent;
+    cx.font="bold "+Math.max(11,Math.min(20,R*0.12))+"px monospace"; cx.fillText(d.name.toUpperCase(),dx,dz-4);
+    cx.globalAlpha=0.34; cx.fillStyle=d.col; cx.font="8.5px monospace"; cx.fillText(d.sub.toUpperCase(),dx,dz+10); cx.globalAlpha=1;
+  }
+  // buildings — dark footprint + extruded neon-edged tower + lit windows
+  for(const b of CITY.buildings){
+    const sx=ox+b.x*scale, sz=oy+b.z*scale, w=b.w*scale, h=b.h*scale, up=b.ht*scale*0.55;
+    if(sx< -60||sx>W+60||sz< -up-40||sz>H+60) continue;
+    cx.fillStyle="#08070c"; cx.fillRect(sx-w/2,sz-h/2,w,h);            // ground footprint
+    cx.fillStyle="#120e18"; cx.fillRect(sx-w/2,sz-h/2-up,w,up+2);     // wall
+    cx.fillStyle="#1b1526"; cx.fillRect(sx-w/2,sz-h/2-up,w,h*0.42);   // roof cap
+    cx.strokeStyle=b.col+"55"; cx.lineWidth=1; cx.strokeRect(sx-w/2,sz-h/2-up,w,up+h*0.42);
+    if(b.lit>0.25&&up>10){ cx.fillStyle=b.accent+"cc"; const rows=Math.max(1,Math.min(QUALITY.windowRows,(up/7)|0)), wStep=QUALITY.windowStep;
+      for(let ry=0;ry<rows;ry++) for(let cxi=0;cxi<b.cols;cxi+=wStep){
+        if(((cxi*7+ry*13+b.seed)%3)===0){ const ww=Math.max(1,(w-4)/b.cols-1.6), hh=Math.max(1,up/rows-2.4);
+          cx.fillRect(sx-w/2+2+cxi*(w-4)/b.cols, sz-h/2-up+3+ry*(up/rows), ww, hh); } } }
+  }
+}
+let _lastDistrict="__init";
+function updateDistrictHUD(x,z){
+  const d=districtAt(x,z), id=d?d.id:"_sprawl";
+  if(id===_lastDistrict) return; _lastDistrict=id;
+  const el=$("district"); if(!el) return; el.classList.add("on");
+  if(d){ $("d_name").textContent=d.name; $("d_sub").textContent=d.sub; el.style.borderColor=d.col; el.style.color=d.accent; wlog("◈ entering "+d.name); if(typeof LORE!=="undefined"&&LORE[d.id])wlog(LORE[d.id]);
+    if(typeof NARR!=="undefined"){ NARR.visited[d.id]=1; saveNarr(); progressObjectives("visit",d.id); } }
+  else { $("d_name").textContent="The Sprawl"; $("d_sub").textContent="Uncharted Sector"; el.style.borderColor="#5a4a48"; el.style.color="#c9b8b0"; }
+}
+// ═══ Lab-buildings — the 84 labs as hackable structures across the districts ═══
+let LABS=[], LABPOIS=[], nearLab=null;
+const LAB_RADIUS=9;
+function classifyLab(l){
+  const s=((l.id||"")+" "+(l.name||"")+" "+(l.description||"")).toLowerCase(), diff=l.difficulty||1;
+  if(diff>=9||/nightmare|insane|apt|advanced persistent/.test(s)) return "blackwall";
+  if(l.type==="Tutorial"||/^tut|tutorial|basics|intro| first /.test(s)) return "grid";
+  if(/recon|osint|scan|enum|footprint|nmap|discover|reconnais/.test(s)) return "slums";
+  if(/exploit|ssti|sqli|xss|rce|inject|pwn|overflow|deserial|payload|shell|privesc|priv.?esc|buffer/.test(s)) return "foundry";
+  if(/defen|blue.?team|detect|siem|harden|incident|monitor|firewall|edr|threat.?hunt/.test(s)) return "citadel";
+  if(/forensic|dfir|memory|disk|malware|reverse|carve|artifact|timeline|volatility/.test(s)) return "cold";
+  if(/crypto|cipher|hash|rsa|aes|encrypt|decrypt|decode|steg|entropy/.test(s)) return "vault";
+  if(/market|trade|econom|money|social.?eng|phish|osint/.test(s)) return "haven";
+  return ["slums","foundry","citadel","cold","vault","haven"][diff%6];
+}
+function placeLabs(){
+  LABPOIS=[]; const byD={};
+  for(const l of LABS){ const d=classifyLab(l); (byD[d]=byD[d]||[]).push(l); }
+  const rng=mulberry32(0xab1e);
+  for(const d of CITY.districts){
+    const list=byD[d.id]||[], c=list.length;
+    list.forEach((l,i)=>{ const ang=(i/Math.max(1,c))*6.283+rng()*0.7, rr=(0.34+0.5*((i*0.37+rng())%1))*d.r;
+      LABPOIS.push(Object.assign({},l,{district:d.id,col:d.col,accent:d.accent,x:d.cx+Math.cos(ang)*rr,z:d.cz+Math.sin(ang)*rr})); });
+  }
+}
+async function fetchLabs(){
+  try{ const r=await hapi("/api/v1/labs"); LABS=Array.isArray(r)?r:(r.labs||[]); placeLabs();
+    wlog("◈ "+LABPOIS.length+" hackable sites mapped across the city"); checkLoot(); }
+  catch(e){ wlog("labs fetch failed: "+e.message); }
+}
+function diffStars(n){ n=Math.max(1,Math.min(10,n||1)); return "◆".repeat(Math.min(5,Math.ceil(n/2))); }
+function drawLabs(ox,oy,meP){
+  nearLab=null; let nd=1e9;
+  for(const p of LABPOIS){
+    const sx=ox+p.x*scale, sz=oy+p.z*scale;
+    if(sx< -30||sx>cv.width+30||sz< -30||sz>cv.height+40) continue;
+    const dist=meP?Math.hypot(p.x-meP.rx,p.z-meP.rz):999;
+    if(dist<LAB_RADIUS&&dist<nd){ nd=dist; nearLab=p; }
+    const near=dist<28, R=(4.6+(near?1.6:0))*(scale/6);
+    cx.fillStyle="#0b0910"; cx.fillRect(sx-R,sz-R,R*2,R*2);
+    cx.strokeStyle=p.col; cx.lineWidth=1.4; cx.shadowColor=p.col; cx.shadowBlur=near?12:6; cx.strokeRect(sx-R,sz-R,R*2,R*2);
+    cx.fillStyle=p.accent+"cc"; cx.fillRect(sx-R*0.4,sz-R*0.7,R*0.8,R*1.4); cx.shadowBlur=0;
+    if(near){ cx.textAlign="center"; cx.fillStyle=p.accent; cx.font="bold 10px monospace"; cx.fillText(p.name,sx,sz-R-13);
+      cx.fillStyle="#a89a90"; cx.font="8px monospace"; cx.fillText(diffStars(p.difficulty)+" · Lv"+(p.required_level||1)+" · "+(p.xp_reward||0)+"xp",sx,sz-R-3); }
+  }
+}
+function enterLab(p){ if(!p)return; wlog("◈ breaching "+p.name+" ["+p.district+"]"); startBreach(p); }
+function drawMinimap(camX,camZ){
+  const S=136, pad=12, X=cv.width-S-pad, Y=cv.height-S-pad, mm=S/(CITY.extent*2.2), cxp=X+S/2, cyp=Y+S/2;
+  cx.fillStyle="rgba(6,5,9,.82)"; cx.strokeStyle="rgba(191,31,31,.45)"; cx.lineWidth=1; cx.fillRect(X,Y,S,S); cx.strokeRect(X,Y,S,S);
+  cx.save(); cx.beginPath(); cx.rect(X,Y,S,S); cx.clip();
+  const w2m=(wx,wz)=>[cxp+(wx-camX)*mm, cyp+(wz-camZ)*mm];
+  for(const d of CITY.districts){ const m=w2m(d.cx,d.cz); cx.fillStyle=d.col+"22"; cx.strokeStyle=d.col+"88";
+    cx.beginPath(); cx.arc(m[0],m[1],d.r*mm,0,7); cx.fill(); cx.stroke(); }
+  for(const p of LABPOIS){ const m=w2m(p.x,p.z); cx.fillStyle=p.accent+"bb"; cx.fillRect(m[0]-0.9,m[1]-0.9,1.8,1.8); }
+  for(const n of NODES){ const ns=nodeState[n.id], m=w2m(n.pos[0],n.pos[2]);
+    cx.fillStyle=(ns&&ns.state=="Captured")?(FCOL[facNorm(ns.faction)]||"#f5c518"):"#fff"; cx.beginPath(); cx.arc(m[0],m[1],2.2,0,7); cx.fill(); }
+  cx.fillStyle="#fff"; cx.strokeStyle="#e11d2a"; cx.lineWidth=1.5; cx.beginPath(); cx.arc(cxp,cyp,3,0,7); cx.fill(); cx.stroke();
+  cx.restore(); cx.fillStyle="#c9b8b0"; cx.font="8px monospace"; cx.textAlign="left"; cx.fillText("◈ NIGHT CITY",X+5,Y+11);
+}
+// ═══════════════ ATMOSPHERE · SKYLINE LIFE · LORE · BREACH ═══════════════
+const LORE={
+  grid:"The Grid — every data-artery in the city converges here. They say fsociety still watches from the wire.",
+  slums:"Silicon Slums — burned-out server farms and squatter nets. Every runner cut their teeth in these alleys.",
+  foundry:"The Foundry — the exploit forge. Zero-days are minted here, in furnaces that never cool.",
+  citadel:"The Citadel — corpo blue-team turf. Cameras, tripwires, ICE. Get in, get out, leave no logs.",
+  cold:"Cold Storage — the morgue for dead machines. Memory dumps and disk ghosts whisper to the patient.",
+  vault:"The Vault — ciphers stacked on ciphers. The city's darkest secrets sleep behind its math.",
+  haven:"Data Haven — the grey market. Creds, exploits and stolen identities trade hands in the neon.",
+  zone:"The Combat Zone — no ICE, no rules. Faction runners settle their scores in the open.",
+  blackwall:"Blackwall Fringe — past here the net turns lethal. Rogue AIs and nightmare code. Few come back the same.",
+};
+let _rain=[], _embers=[];
+function initAtmo(){ const RN=QUALITY.rain|0, EN=QUALITY.embers|0;
+  _rain=[]; for(let i=0;i<RN;i++)_rain.push({x:Math.random(),y:Math.random(),l:0.5+Math.random(),s:0.6+Math.random()});
+  _embers=[]; for(let i=0;i<EN;i++)_embers.push({x:Math.random(),y:Math.random(),v:0.15+Math.random()*0.5,r:0.5+Math.random()*1.4,ph:Math.random()*6}); }
+initAtmo();
+function drawAtmosphere(){ const W=cv.width,H=cv.height;
+  const fog=cx.createLinearGradient(0,H*0.42,0,H); fog.addColorStop(0,"rgba(18,12,22,0)"); fog.addColorStop(1,"rgba(12,7,15,0.30)");
+  cx.fillStyle=fog; cx.fillRect(0,0,W,H);
+  for(const e of _embers){ const y=(1-((fr*0.0009*e.v+e.y)%1))*H, x=(e.x+0.02*Math.sin(fr*0.01+e.ph))*W;
+    cx.globalAlpha=0.30+0.28*Math.sin(fr*0.05+e.ph); cx.fillStyle=(((e.ph*7)|0)%3)?"#ff7a3a":"#39d0c8";
+    cx.beginPath(); cx.arc(x,y,e.r,0,7); cx.fill(); } cx.globalAlpha=1;
+  if(worldPulse.weather!=="clear"){ const rst=worldPulse.weather==="storm"?0.17:0.09, rn=worldPulse.weather==="storm"?_rain.length:(_rain.length*0.6|0);
+    cx.strokeStyle="rgba(150,180,210,"+rst+")"; cx.lineWidth=1;
+    for(let i=0;i<rn;i++){ const d=_rain[i], y=((fr*0.021*d.s+d.y)%1)*H, x=(d.x+(y/H)*0.04)*W, len=13*d.l;
+      cx.beginPath(); cx.moveTo(x,y); cx.lineTo(x-3,y+len); cx.stroke(); } }
+  if((fr%340)<2){ cx.fillStyle="rgba(120,150,190,0.05)"; cx.fillRect(0,0,W,H); }
+}
+function drawSkylineLife(ox,oy){ if(!QUALITY.skyline)return; const W=cv.width,H=cv.height;
+  for(const b of CITY.buildings){ const sx=ox+b.x*scale, sz=oy+b.z*scale, w=b.w*scale, up=b.ht*scale*0.55, topY=sz-b.h*scale/2-up;
+    if(sx< -60||sx>W+60||topY< -40||topY>H+40) continue;
+    if(b.spire){ cx.strokeStyle=b.col+"aa"; cx.lineWidth=1; cx.beginPath(); cx.moveTo(sx,topY); cx.lineTo(sx,topY-14*(scale/6)); cx.stroke();
+      cx.fillStyle=(fr+b.flick)%40<20?b.accent:b.col; cx.beginPath(); cx.arc(sx,topY-14*(scale/6),1.6,0,7); cx.fill(); }
+    if(b.roof){ const on=((fr+b.flick*3)%50)<25; cx.globalAlpha=on?0.9:0.22; cx.fillStyle="#ff3b3b";
+      cx.beginPath(); cx.arc(sx-w/2+2,topY+1,1.4,0,7); cx.fill(); cx.beginPath(); cx.arc(sx+w/2-2,topY+1,1.4,0,7); cx.fill(); cx.globalAlpha=1; }
+    if(b.holo&&QUALITY.holo&&scale>3.4){ const hy=topY-16*(scale/6), pulse=0.55+0.45*Math.sin(fr*0.06+b.flick);
+      cx.globalAlpha=0.16*pulse; cx.fillStyle=b.accent; cx.fillRect(sx-w*0.55,hy-8,w*1.1,11);
+      cx.globalAlpha=0.6*pulse; cx.font="bold "+Math.round(9*(scale/6))+"px monospace"; cx.textAlign="center"; cx.fillText(b.glyph,sx,hy); cx.globalAlpha=1; }
+  }
+}
+let breach=null;
+function startBreach(p){ breach={t:0,lab:p,opened:false,
+  lines:["> establishing uplink to "+(p.id||"target")+" …","> routing through 7 proxies …","> negotiating handshake …","> injecting payload …","> BREACH SUCCESSFUL — jacking in"]}; }
+async function focusLab(labId){
+  try{
+    $("hub").classList.remove("hidden");
+    if(!token){ showAuth&&showAuth(); return; }
+    $("hubauth").style.display="none"; $("hubmain").classList.remove("hidden");
+    document.querySelectorAll(".hubtabs button").forEach(b=>b.classList.toggle("on",b.dataset.t==="labs"));
+    await loadTab("labs");
+    const btn=document.querySelector('.launch[data-lab="'+labId+'"]'), el=btn?btn.closest(".lab"):null;
+    if(el){ el.scrollIntoView({behavior:"smooth",block:"center"});
+      el.style.outline="2px solid #37f58f"; el.style.boxShadow="0 0 18px rgba(55,245,143,.5)"; el.style.borderRadius="6px";
+      setTimeout(()=>{ el.style.outline=""; el.style.boxShadow=""; }, 2800);
+      if(btn) btn.focus();
+    }
+  }catch(e){ console.log("focusLab",e); }
+}
+function drawBreach(){ if(!breach)return; const W=cv.width,H=cv.height; breach.t++;
+  cx.fillStyle="rgba(2,4,3,0.88)"; cx.fillRect(0,0,W,H);
+  cx.strokeStyle="rgba(57,208,200,0.45)"; cx.lineWidth=2; const sy=(breach.t*6)%H; cx.beginPath(); cx.moveTo(0,sy); cx.lineTo(W,sy); cx.stroke();
+  const n=Math.min(breach.lines.length,1+((breach.t/14)|0)); cx.textAlign="left"; cx.font="14px monospace";
+  for(let i=0;i<n;i++){ const last=i===n-1; cx.fillStyle=last?"#6ff5ec":"#2fbfb6"; cx.fillText(breach.lines[i],W/2-210,H/2-40+i*24); }
+  const pw=440,px=W/2-pw/2,py=H/2+92,prog=Math.min(1,breach.t/78);
+  cx.strokeStyle="#39d0c8"; cx.lineWidth=1; cx.strokeRect(px,py,pw,10); cx.fillStyle="#39d0c8"; cx.fillRect(px+1,py+1,(pw-2)*prog,8);
+  cx.fillStyle="#9fe"; cx.font="11px monospace"; cx.textAlign="center"; cx.fillText("BREACHING "+(breach.lab.name||"").toUpperCase()+" — "+Math.round(prog*100)+"%",W/2,py-8);
+  if(breach.t>84&&!breach.opened){ breach.opened=true; focusLab(breach.lab.id||breach.lab.lab); }
+  if(breach.t>98) breach=null;
+}
+// ═══════════════ PIP-BOY 3000 — Fallout-style character terminal ═══════════════
+let pipData={}, pipTabName="status";
+const pipHidden=()=>!$("pipboy").classList.contains("on");
+const SPECIAL=["Networking","Obfuscation","Scanning","Subversion","Yielding"];
+function karmaLabel(a){ a=a||0; return a>60?"MESSIAH":a>20?"GOOD":a<-60?"NIGHTKIN":a<-20?"MENACE":"NEUTRAL"; }
+async function loadPip(){
+  $("pb_body").textContent="◈ accessing VAULT-NET …";
+  const [pl,mt,inv,pk,cr,ld]=await Promise.all([
+    hapi("/api/v1/player").catch(()=>({})), hapi("/api/v1/player/metrics").catch(()=>({})),
+    hapi("/api/v1/economy/inventory").catch(()=>({})), hapi("/api/v1/perks").catch(()=>[]),
+    hapi("/api/v1/career/progress").catch(()=>({})), hapi("/api/v1/player/loadout").catch(()=>null) ]);
+  pipData={pl,mt,inv,pk:Array.isArray(pk)?pk:(pk.perks||[]),cr,loadout:ld};
+  const p=pl||{};
+  $("pb_name").textContent="PIP-BOY 3000 · "+((p.username||"OPERATIVE").toUpperCase());
+  $("pb_lvl").textContent="LVL "+(p.level??"—");
+  $("pb_caps").innerHTML="◈ "+(p.credits??0)+" CAPS";
+  const cur=p.xp_current??0, nxt=p.xp_to_next??1; $("pb_xp").style.width=Math.max(0,Math.min(100,100*cur/(nxt||1)))+"%";
+  renderPip();
+}
+function renderPip(){
+  const {pl={},mt={},inv={},pk=[],cr={},loadout=null}=pipData, m=mt.metrics||{};
+  let h="";
+  if(pipTabName=="status"){
+    const km=(pl.alignment||0), kp=Math.max(0,Math.min(100,(km+100)/2));
+    h='<div class="pb-grid">'
+      +row("NAME",(pl.username||"—"))+row("FACTION",pl.faction||"—")
+      +row("LEVEL",pl.level??"—")+row("CAPS",(pl.credits??0)+" ◈")
+      +row("XP",(pl.xp_current??0)+" / "+(pl.xp_to_next??0))+row("HACKER REP (HRI)",mt.hacker_reputation_index??0)
+      +row("FLAGS CAPTURED",m.flags_captured??0)+row("CONTRACTS",(m.contracts_fulfilled??0)+" done")
+      +row("CURRENT STREAK",m.current_streak??0)+row("FIRST BLOODS",m.first_blood_awards??0)
+      +'</div>'
+      +'<div style="margin-top:16px">KARMA — <b>'+karmaLabel(km)+'</b> ('+km+')'
+      +'<div class="pb-karma" style="border:1px solid rgba(55,245,143,.5);height:11px;margin-top:4px"><i style="width:'+kp+'%"></i></div></div>';
+  } else if(pipTabName=="special"){
+    if(loadout&&loadout.attributes){ const b=loadout.bonuses||{};
+      h='<div style="color:#9dffce;margin-bottom:6px">HACKING DISCIPLINES <span style="float:right;color:#e6d24a">ACTIVE: +'+(b.xp_pct||0)+'% XP · +'+(b.loot_pct||0)+'% LOOT · +'+(b.stealth_pct||0)+'% STEALTH</span></div>';
+      for(const a of loadout.attributes){ const perks=(loadout.perks||[]).filter(p=>p.attribute===a.name); const unl=perks.filter(p=>p.unlocked).length;
+        h+='<div class="pb-attr"><div class="pb-row"><b>'+a.name.toUpperCase()+'</b><span>LV '+a.value+' · '+unl+'/'+perks.length+' unlocked</span></div>'
+          +'<div class="pb-abar"><i style="width:'+Math.min(100,a.value*10)+'%"></i></div>'
+          +perks.map(p=>'<div class="pb-perk" style="color:'+(p.unlocked?"#37f58f":"#245638")+'">'+(p.unlocked?"◆":"◇")+' '+p.name+' <span style="opacity:.75">— '+((p.effects||[]).join(", ")||p.description)+(p.unlocked?"":" · needs "+p.attribute+" "+p.requirement)+'</span></div>').join("")
+          +'</div>'; }
+    } else { h='<div style="color:#2a9c62">loadout unavailable — level up to unlock perks.</div>'; }
+  } else if(pipTabName=="inv"){
+    const items=inv.items||[];
+    h='<div class="pb-row"><b>CAPS</b><span>'+(inv.credits??0)+' ◈</span></div>';
+    h+=items.length? items.map(it=>{ const col=RARITY_COL[it.rarity]||"#9dffce"; return '<div class="pb-row"><span>'+(it.name||it.item_id||it.id)+'</span><span style="color:'+col+'">'+(it.rarity||"")+' ×'+(it.quantity||it.qty||1)+'</span></div>'; }).join("")
+      : '<div style="margin-top:14px;color:#2a9c62">◈ CACHE EMPTY — scavenge the city. Capture territory, win fights, and crack labs to acquire gear.</div>';
+  } else {
+    h='<div style="color:#9dffce;margin-bottom:8px">OPERATIONAL TELEMETRY</div><div class="pb-grid">';
+    const order=["commands_executed","flags_captured","contracts_fulfilled","contracts_failed","contract_success_rate","credits_earned","credits_spent","current_streak","first_blood_awards","ghost_completions","kill_chain_completions","achievements_unlocked"];
+    for(const k of order){ if(m[k]!=null) h+=row(k.replace(/_/g," ").toUpperCase(),(typeof m[k]=="number"&&!Number.isInteger(m[k]))?m[k].toFixed(2):m[k]); }
+    h+='</div>';
+    const tr=(cr.tracks||[]).filter(t=>t.track_xp>0||t.labs_completed>0);
+    h+='<div style="color:#9dffce;margin:14px 0 6px">CAREER TRACKS</div>';
+    h+=(tr.length?tr:(cr.tracks||[]).slice(0,4)).map(t=>'<div class="pb-row"><span>'+t.track+'</span><span style="opacity:.7">rank '+(t.current_rank??0)+' · '+(t.labs_completed??0)+' labs · '+(t.track_xp??0)+'xp</span></div>').join("");
+  }
+  $("pb_body").innerHTML=h;
+}
+function row(k,v){ return '<div class="pb-row"><span>'+k+'</span><b>'+v+'</b></div>'; }
+function pipTab(n){ pipTabName=n; document.querySelectorAll("#pipboy .pb-tabs button").forEach(b=>b.classList.toggle("on",b.dataset.p===n)); renderPip(); }
+function openPip(){ if(RPG===null||!token){ wlog("Pip-Boy needs sign-in"); return; } $("pipboy").classList.add("on"); loadPip(); }
+function closePip(){ $("pipboy").classList.remove("on"); }
+function togglePip(){ pipHidden()?openPip():closePip(); const b=$("pipbtn"); if(b)b.classList.toggle("active",!pipHidden()); }
+document.querySelectorAll("#pipboy .pb-tabs button").forEach(b=>b.onclick=()=>pipTab(b.dataset.p));
+$("pipbtn").onclick=togglePip; $("v3dbtn").onclick=toggle3D;
+if($("dossbtn"))$("dossbtn").onclick=()=>toggleDossier();
+// ── ALFRED — the Syn_OS assistant, threaded into the world ──
+let _alfredT=null;
+function alfred(msg,ms){ const el=$("alfred"),m=$("alfred-msg"); if(!el||!m)return; m.textContent=msg; el.classList.add("on");
+  clearTimeout(_alfredT); _alfredT=setTimeout(()=>el.classList.remove("on"), ms||5600); }
+if($("alfred-x"))$("alfred-x").onclick=()=>{ $("alfred").classList.remove("on"); clearTimeout(_alfredT); };
+if($("alfred-av"))$("alfred-av").onclick=()=>alfred("I'm ALFRED — the Syn_OS assistant threaded into The Weave. I flag live ops, captures, and system tuning while you run. Press [O] to tune rendering, [Tab] for the HUB.",7000);
+
+// ═══════════════ SEASON 0 NARRATIVE — NPCs · dialogue · quest campaign ═══════════════
+const NPCS=[], NPCBYID={};
+(function buildNPCs(){ if(!window.SEASON0)return;
+  for(const n of SEASON0.npcs){ const d=CITY.districts.find(x=>x.id===n.district); if(!d)continue;
+    const npc=Object.assign({}, n, { x:d.cx+(n.district==="grid"?10:14), z:d.cz+(n.district==="grid"?-16:-14),
+      col:(SEASON0.factions[n.fac]||"#8fb0c0") });
+    NPCS.push(npc); NPCBYID[n.id]=npc; } })();
+function nEsc(s){ return (s+"").replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+function loadNarr(){ try{ const s=JSON.parse(localStorage.getItem("grim_s0")); if(s&&s.rep)return s; }catch(e){}
+  return {rep:{DarkArmy:0,AzureWatch:0,GraySyndicate:0,Neutral:0},karma:0,flags:{},quests:{},done:{},visited:{},talked:{}}; }
+const NARR=loadNarr();
+function saveNarr(){ try{ localStorage.setItem("grim_s0",JSON.stringify(NARR)); }catch(e){} }
+function questAvailable(q){ if(NARR.quests[q.id]||NARR.done[q.id])return false; if(q.seq===1)return true;
+  return SEASON0.quests.some(p=>NARR.done[p.id]&&(p.next||[]).includes(q.id)); }
+function npcHasQuest(n){ if(!window.SEASON0)return false;
+  if(SEASON0.quests.some(q=>q.giver===n.id&&questAvailable(q)))return true;
+  // pending turn-in: an active quest with an incomplete talk-objective targeting this npc
+  for(const qid in NARR.quests){ const q=SEASON0.quests.find(x=>x.id===qid); if(!q)continue; const st=NARR.quests[qid];
+    if(q.obj.some(o=>o.type==="talk"&&o.target===n.id&&!st.obj[o.id]))return true; }
+  return false; }
+// ── NPC world markers ──
+const NPC_RADIUS=24; let nearNPC=null;
+function drawNPCs(ox,oy,meP){ nearNPC=null; let nd=1e9;
+  for(const n of NPCS){ const sx=ox+n.x*scale, sz=oy+n.z*scale;
+    if(sx<-40||sx>cv.width+40||sz<-40||sz>cv.height+40) continue;
+    const dist=meP?Math.hypot(n.x-meP.rx,n.z-meP.rz):999, near=dist<NPC_RADIUS;
+    if(near&&dist<nd){ nd=dist; nearNPC=n.id; }
+    if(near){ cx.strokeStyle="rgba(245,197,24,.4)"; cx.lineWidth=1.4; cx.beginPath(); cx.arc(sx,sz,NPC_RADIUS*scale,0,7); cx.stroke(); }
+    const R=(6.5+(near?1.6:0))*(scale/6);
+    cx.save(); cx.translate(sx,sz); cx.rotate(Math.PI/4);
+    cx.fillStyle="#0c0a10"; cx.fillRect(-R,-R,R*2,R*2);
+    cx.strokeStyle=n.col; cx.lineWidth=1.6; cx.shadowColor=n.col; cx.shadowBlur=near?12:6; cx.strokeRect(-R,-R,R*2,R*2); cx.restore(); cx.shadowBlur=0;
+    cx.fillStyle=n.col; cx.font="bold "+Math.round(11*(scale/6))+"px monospace"; cx.textAlign="center"; cx.textBaseline="middle"; cx.fillText(n.glyph,sx,sz); cx.textBaseline="alphabetic";
+    if(scale>2.8){ const q=npcHasQuest(n); cx.fillStyle=q?"#f5c518":n.col; cx.font="bold "+Math.round(8.5*(scale/6))+"px monospace"; cx.fillText(n.name+(q?" ❗":""),sx,sz-R-6*(scale/6)); }
+  } }
+// ── dialogue + quest-log DOM (injected once) ──
+function ensureNarrDOM(){ if(document.getElementById("npcbox"))return;
+  const s=document.createElement("style"); s.textContent=
+   "#npcbox{position:absolute;left:0;right:0;bottom:0;margin:0 auto;width:min(680px,94vw);background:linear-gradient(180deg,rgba(14,10,16,.98),rgba(9,6,10,.99));border:1px solid var(--ui);border-top-left-radius:12px;border-top-right-radius:12px;box-shadow:0 -8px 40px rgba(0,0,0,.7);z-index:40;padding:14px 18px 16px;display:none}"+
+   "#npcbox.on{display:block}"+
+   "#npcbox .nb-head{display:flex;align-items:center;gap:10px;margin-bottom:9px}"+
+   "#npcbox .nb-gly{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border:1px solid currentColor;border-radius:7px;font-size:17px;flex-shrink:0}"+
+   "#npcbox .nb-name{font-family:var(--font-display,monospace);font-weight:bold;letter-spacing:1px}"+
+   "#npcbox .nb-title{font-size:10.5px;color:var(--dim);text-transform:uppercase;letter-spacing:1px}"+
+   "#npcbox .nb-x{margin-left:auto;background:none;border:0;color:var(--dim);font-size:19px;cursor:pointer;line-height:1}"+
+   "#npcbox .nb-x:hover{color:var(--brandhi)}"+
+   "#npcbox .nb-text{font-size:13.5px;line-height:1.62;color:var(--txt);min-height:58px;margin-bottom:10px}"+
+   "#npcbox .nb-opt{display:block;width:100%;text-align:left;background:#1a1420;border:1px solid var(--edge);color:var(--txt);padding:9px 12px;border-radius:7px;margin-top:6px;cursor:pointer;font-family:inherit;font-size:12.5px;transition:border-color .12s,background .12s}"+
+   "#npcbox .nb-opt:hover{border-color:var(--ui);background:#241826}"+
+   "#npcbox .nb-opt .k{color:var(--acc);font-weight:bold;margin-right:9px}"+
+   "#questlog{position:absolute;left:14px;bottom:14px;width:252px;background:rgba(10,8,12,.9);border:1px solid var(--edge);border-radius:9px;padding:10px 12px;font-size:11px;z-index:18;display:none}"+
+   "#questlog.on{display:block}"+
+   "#questlog h4{color:var(--acc);font-size:10px;letter-spacing:1.5px;margin:0 0 7px;text-transform:uppercase}"+
+   "#questlog .q{margin-bottom:9px}#questlog .q:last-child{margin-bottom:0}"+
+   "#questlog .qt{color:var(--brandhi);font-weight:bold;font-size:11.5px;margin-bottom:2px}"+
+   "#questlog .qo{color:var(--dim);margin-left:4px;line-height:1.55}#questlog .qo.done{color:#5fbf7f}";
+  document.head.appendChild(s);
+  const b=document.createElement("div"); b.id="npcbox";
+  b.innerHTML='<div class="nb-head"><div class="nb-gly" id="nb_gly">◆</div><div><div class="nb-name" id="nb_name">—</div><div class="nb-title" id="nb_title"></div></div><button class="nb-x" id="nb_x">✕</button></div><div class="nb-text" id="nb_text"></div><div id="nb_opts"></div>';
+  document.body.appendChild(b);
+  const q=document.createElement("div"); q.id="questlog"; q.innerHTML='<h4>◈ Active Contracts</h4><div id="ql_body"></div>'; document.body.appendChild(q);
+  document.getElementById("nb_x").onclick=closeDialogue; }
+let curNPC=null,curNode=null,dlgOpen=false,_typeT=null;
+function inDialogue(){ return dlgOpen; }
+function openDialogue(id){ ensureNarrDOM(); const n=NPCBYID[id]; if(!n)return; curNPC=n; dlgOpen=true;
+  const box=document.getElementById("npcbox"); box.style.color=n.col;
+  const g=document.getElementById("nb_gly"); g.textContent=n.glyph; g.style.color=n.col;
+  document.getElementById("nb_name").textContent=n.name; document.getElementById("nb_name").style.color=n.col;
+  document.getElementById("nb_title").textContent=n.title; box.classList.add("on");
+  if(!NARR.talked[id]){ NARR.talked[id]=1; saveNarr(); }
+  progressObjectives("talk",id);
+  renderNode(n.tree.root); }
+function closeDialogue(){ const b=document.getElementById("npcbox"); if(b)b.classList.remove("on"); curNPC=null;curNode=null;dlgOpen=false; clearTimeout(_typeT); }
+function renderNode(nodeId){ const n=curNPC; if(!n)return; const node=n.tree.nodes[nodeId]; if(!node){closeDialogue();return;} curNode=nodeId;
+  if(node.eff)applyEff(node.eff);
+  const el=document.getElementById("nb_text"); document.getElementById("nb_opts").innerHTML="";
+  const reduce=(typeof matchMedia!=="undefined")&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const full=node.t; clearTimeout(_typeT);
+  if(reduce){ el.textContent=full; showOpts(node); }
+  else { el.textContent=""; let i=0; (function tw(){ el.textContent=full.slice(0,i); i+=2; if(i<full.length){_typeT=setTimeout(tw,11);} else {el.textContent=full; showOpts(node);} })(); } }
+function showOpts(node){ const opts=document.getElementById("nb_opts"); opts.innerHTML=""; const list=node.opts||[];
+  if(!list.length){ const b=document.createElement("button"); b.className="nb-opt"; b.innerHTML='<span class="k">[Enter]</span>End transmission'; b.onclick=closeDialogue; opts.appendChild(b); return; }
+  list.forEach((o,i)=>{ const b=document.createElement("button"); b.className="nb-opt"; b.innerHTML='<span class="k">'+(i+1)+'</span>'+nEsc(o.t); b.onclick=()=>chooseOpt(i); opts.appendChild(b); }); }
+function chooseOpt(i){ const node=curNPC&&curNPC.tree.nodes[curNode]; if(!node)return; const o=(node.opts||[])[i]; if(!o)return;
+  if(o.eff)applyEff(o.eff); if(o.quest)acceptQuest(o.quest); if(o.to)renderNode(o.to); else closeDialogue(); }
+function applyEff(e){ if(!e)return; if(e.rep)for(const k in e.rep)NARR.rep[k]=(NARR.rep[k]||0)+e.rep[k]; if(e.karma)NARR.karma+=e.karma; if(e.flag)NARR.flags[e.flag]=1; saveNarr(); }
+function acceptQuest(qid){ const q=SEASON0.quests.find(x=>x.id===qid); if(!q||NARR.quests[qid]||NARR.done[qid])return;
+  NARR.quests[qid]={obj:{}}; saveNarr(); renderQuestLog(); wlog("◈ CONTRACT — "+q.title);
+  if(typeof alfred==="function")alfred("New contract: "+q.title+". "+q.brief,7500); }
+function progressObjectives(type,target){ let changed=false;
+  for(const qid in NARR.quests){ const q=SEASON0.quests.find(x=>x.id===qid); if(!q)continue; const st=NARR.quests[qid];
+    for(const o of q.obj){ if(st.obj[o.id])continue;
+      const m=(o.type===type)&&(o.target===target||o.target==="any"||type==="lab"||type==="capture");
+      if(m){ st.obj[o.id]=1; changed=true; wlog("  ✓ "+o.t); break; } } }
+  if(changed){ saveNarr(); renderQuestLog(); checkQuestComplete(); } }
+function checkQuestComplete(){ for(const qid in Object.assign({},NARR.quests)){ const q=SEASON0.quests.find(x=>x.id===qid); if(!q)continue; const st=NARR.quests[qid]; if(!st)continue;
+    if(q.obj.every(o=>st.obj[o.id])){ delete NARR.quests[qid]; NARR.done[qid]=1;
+      if(q.rew)applyEff({rep:q.rew.rep,karma:q.rew.karma});
+      wlog("★ CONTRACT COMPLETE — "+q.title+"  +"+((q.rew&&q.rew.xp)||0)+" XP  +"+((q.rew&&q.rew.credits)||0)+" ₡");
+      if(typeof alfred==="function")alfred("Contract complete: "+q.title+". +"+((q.rew&&q.rew.xp)||0)+" XP. NEXUS has more work when you're ready.",6800);
+      saveNarr(); renderQuestLog(); } } }
+function renderQuestLog(){ ensureNarrDOM(); const body=document.getElementById("ql_body"), log=document.getElementById("questlog");
+  const ids=Object.keys(NARR.quests); if(!ids.length){ log.classList.remove("on"); return; } log.classList.add("on");
+  body.innerHTML=ids.map(qid=>{ const q=SEASON0.quests.find(x=>x.id===qid); if(!q)return""; const st=NARR.quests[qid];
+    return '<div class="q"><div class="qt">'+nEsc(q.title)+'</div>'+q.obj.map(o=>'<div class="qo'+(st.obj[o.id]?' done':'')+'">'+(st.obj[o.id]?'✓':'○')+' '+nEsc(o.t)+'</div>').join('')+'</div>'; }).join(''); }
+// dialogue key handler (capture phase — runs before movement handler's early-return)
+addEventListener("keydown",e=>{ if(!dlgOpen)return; const k=e.key;
+  if(k>="1"&&k<="9"){ e.preventDefault(); e.stopPropagation(); chooseOpt(+k-1); }
+  else if(k==="Enter"){ e.preventDefault(); e.stopPropagation(); const node=curNPC&&curNPC.tree.nodes[curNode]; if(node&&(!node.opts||!node.opts.length))closeDialogue(); }
+  else if(k==="Escape"){ e.preventDefault(); e.stopPropagation(); closeDialogue(); } },true);
+if(window.SEASON0)setTimeout(renderQuestLog,300);
+// ── DOSSIER — faction standing + contracts board (visible reputation + job board) ──
+function ensureDossierDOM(){ if(document.getElementById("dossier"))return;
+  const s=document.createElement("style"); s.textContent=
+   "#dossier{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:rgba(6,4,6,.9);z-index:45}"+
+   "#dossier.on{display:flex}"+
+   "#dossier .dcard{background:var(--panel);border:1px solid var(--edge);border-radius:12px;width:560px;max-width:94vw;max-height:88vh;overflow:auto;box-shadow:0 0 50px rgba(191,31,31,.14)}"+
+   "#dossier .dhead{display:flex;align-items:center;gap:10px;padding:13px 18px;border-bottom:1px solid var(--edge)}"+
+   "#dossier .dhead b{font-family:var(--font-display,monospace);color:var(--brandhi);letter-spacing:2px}"+
+   "#dossier .dhead .dx{margin-left:auto;background:none;border:0;color:var(--dim);font-size:19px;cursor:pointer}"+
+   "#dossier .dhead .dx:hover{color:var(--brandhi)}"+
+   "#dossier .dbody{padding:16px 18px}"+
+   "#dossier .sec{font-size:10px;letter-spacing:2px;color:var(--acc);text-transform:uppercase;margin:4px 0 10px}"+
+   "#dossier .frow{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:12px}"+
+   "#dossier .fname{width:120px;font-weight:bold}"+
+   "#dossier .fbar{flex:1;height:8px;background:#1a1420;border-radius:5px;overflow:hidden}"+
+   "#dossier .ffill{height:100%;border-radius:5px;transition:width .3s}"+
+   "#dossier .fval{width:42px;text-align:right;color:var(--dim);font-variant-numeric:tabular-nums}"+
+   "#dossier .align{text-align:center;font-size:12px;color:var(--txt);margin:6px 0 16px;padding:8px;background:#140f16;border-radius:7px}"+
+   "#dossier .align b{color:var(--acc)}"+
+   "#dossier .qrow{padding:8px 10px;border:1px solid var(--edge);border-radius:7px;margin-bottom:7px}"+
+   "#dossier .qrow.avail{border-color:var(--ui)}#dossier .qrow.done{opacity:.55}"+
+   "#dossier .qh{font-weight:bold;font-size:12px;color:var(--brandhi)}#dossier .qh .st{float:right;font-size:10px;color:var(--acc);font-weight:normal}"+
+   "#dossier .qb{font-size:10.5px;color:var(--dim);margin-top:3px;line-height:1.5}";
+  document.head.appendChild(s);
+  const d=document.createElement("div"); d.id="dossier";
+  d.innerHTML='<div class="dcard"><div class="dhead"><b>◈ OPERATOR DOSSIER</b><span style="color:var(--dim);font-size:11px">The Weave · Season 0</span><button class="dx" id="d_x">✕</button></div><div class="dbody" id="d_body"></div></div>';
+  document.body.appendChild(d); document.getElementById("d_x").onclick=()=>d.classList.remove("on");
+  d.addEventListener("click",e=>{ if(e.target===d)d.classList.remove("on"); }); }
+function karmaLabel(k){ return k<=-30?"Black Hat":k<-8?"Grey (dark)":k<9?"Grey Hat":k<30?"Grey (light)":"White Hat"; }
+function toggleDossier(){ ensureDossierDOM(); const d=document.getElementById("dossier"); const show=!d.classList.contains("on"); d.classList.toggle("on",show); if(show)renderDossier(); }
+function renderDossier(){ ensureDossierDOM(); if(!window.SEASON0)return; const body=document.getElementById("d_body");
+  const facs=[["DarkArmy","Burn the corpo grid"],["AzureWatch","Guard the Grid, keep order"],["GraySyndicate","Profit from all sides"]];
+  const maxAbs=Math.max(30,...facs.map(([f])=>Math.abs(NARR.rep[f]||0)));
+  let h='<div class="sec">Faction Standing</div>';
+  for(const [f,creed] of facs){ const v=NARR.rep[f]||0, col=SEASON0.factions[f], pct=Math.min(100,Math.abs(v)/maxAbs*100);
+    h+='<div class="frow"><div class="fname" style="color:'+col+'">'+f+'</div><div class="fbar"><div class="ffill" style="width:'+pct+'%;background:'+col+'"></div></div><div class="fval">'+(v>0?"+":"")+v+'</div></div>';
+    h+='<div style="font-size:10px;color:var(--dim);margin:-6px 0 10px 130px">'+creed+'</div>'; }
+  h+='<div class="align">Alignment: <b>'+karmaLabel(NARR.karma)+'</b> · karma '+(NARR.karma>0?"+":"")+NARR.karma+'</div>';
+  h+='<div class="sec">Contracts</div>';
+  const rows=[];
+  for(const q of SEASON0.quests){ let st="",cls="";
+    if(NARR.done[q.id]){ st="✓ COMPLETE"; cls="done"; }
+    else if(NARR.quests[q.id]){ const s=NARR.quests[q.id]; const n=q.obj.filter(o=>s.obj[o.id]).length; st="ACTIVE "+n+"/"+q.obj.length; cls="active"; }
+    else if(questAvailable(q)){ st="◈ AVAILABLE · "+(NPCBYID[q.giver]?NPCBYID[q.giver].name:q.giver); cls="avail"; }
+    else continue;
+    rows.push('<div class="qrow '+cls+'"><div class="qh">'+nEsc(q.title)+'<span class="st">'+st+'</span></div><div class="qb">'+nEsc(q.brief)+'</div></div>'); }
+  h+= rows.length?rows.join(""):'<div style="font-size:11px;color:var(--dim)">No contracts yet — find NEXUS at The Grid to begin.</div>';
+  body.innerHTML=h; }
+addEventListener("keydown",e=>{ if(typing)return; const k=e.key.toLowerCase();
+  if(k=="p"&&hubHidden()&&pipHidden()){ openPip(); }
+  else if(k=="escape"&&!pipHidden()){ closePip(); } });
+// ═══════════════ AMBIENT LIFE — netrunners, drones, vendors ═══════════════
+let AGENTS=[];
+function initAmbient(){ AGENTS=[]; const rng=mulberry32(0x11fe), aMul=QUALITY.agentMul;
+  for(const d of CITY.districts){ const n=Math.round((d.id==="grid"?3:2)*aMul);
+    for(let i=0;i<n;i++){ const drone=(d.id==="citadel"||d.id==="blackwall")?rng()<0.6:rng()<0.3;
+      const ang=rng()*6.283, rr=rng()*d.r*0.7;
+      AGENTS.push({home:d, x:d.cx+Math.cos(ang)*rr, z:d.cz+Math.sin(ang)*rr, tx:d.cx, tz:d.cz,
+        spd:drone?0.5:0.22+rng()*0.18, type:drone?"drone":"npc",
+        col:drone?"#ff4d4d":(rng()<0.5?d.accent:"#8fb0c0"), ph:rng()*6, retarget:0}); } }
+}
+function updateAmbient(){ for(const a of AGENTS){
+  if(a.retarget<=0||Math.hypot(a.x-a.tx,a.z-a.tz)<2){ const d=a.home, ang=Math.random()*6.283, rr=Math.random()*d.r*0.8;
+    a.tx=d.cx+Math.cos(ang)*rr; a.tz=d.cz+Math.sin(ang)*rr; a.retarget=200+Math.random()*220; }
+  a.retarget--; const dx=a.tx-a.x, dz=a.tz-a.z, dd=Math.hypot(dx,dz)||1, s=a.spd*(a.type==="drone"?1.6:1);
+  a.x+=dx/dd*s; a.z+=dz/dd*s; }
+}
+initAmbient();
+function drawAmbient(ox,oy){ updateAmbient(); const W=cv.width,H=cv.height;
+  for(const a of AGENTS){ const sx=ox+a.x*scale, sz=oy+a.z*scale;
+    if(sx< -20||sx>W+20||sz< -20||sz>H+20) continue;
+    if(a.type==="drone"){ const on=((fr+a.ph*10)%30)<15, y=sz-6-2*Math.sin(fr*0.08+a.ph);
+      cx.globalAlpha=on?0.95:0.4; cx.fillStyle=a.col; cx.beginPath(); cx.moveTo(sx,y-2.5); cx.lineTo(sx-2.5,y+2); cx.lineTo(sx+2.5,y+2); cx.closePath(); cx.fill();
+      cx.globalAlpha=on?0.5:0.12; cx.beginPath(); cx.arc(sx,y+3.5,3.5,0,7); cx.fill(); cx.globalAlpha=1;
+    } else { cx.globalAlpha=0.85; cx.fillStyle=a.col; cx.fillRect(sx-1,sz-3,2,4);
+      cx.globalAlpha=0.25; cx.fillStyle="#000"; cx.fillRect(sx-1.5,sz+1,3,1); cx.globalAlpha=1; } }
+}
+const VENDORS=[
+  {d:"grid",name:"The Nexus",glyph:"⌂",sub:"safehouse"},
+  {d:"slums",name:"Ripperdoc Row",glyph:"✚",sub:"street clinic"},
+  {d:"foundry",name:"Ammu-Net",glyph:"⚙",sub:"exploit vendor"},
+  {d:"citadel",name:"ICE Watch",glyph:"⊟",sub:"corpo checkpoint"},
+  {d:"cold",name:"The Morgue",glyph:"☒",sub:"data recovery"},
+  {d:"vault",name:"Cipher Exchange",glyph:"⚿",sub:"key broker"},
+  {d:"haven",name:"Black Market",glyph:"$",sub:"grey trade"},
+  {d:"zone",name:"The Pit",glyph:"⚔",sub:"fight club"},
+  {d:"blackwall",name:"The Threshold",glyph:"⚠",sub:"point of no return"},
+];
+function placeVendors(){ for(const v of VENDORS){ const d=CITY.districts.find(x=>x.id===v.d); if(!d)continue;
+  v.x=d.cx+d.r*0.42; v.z=d.cz-d.r*0.32; v.col=d.col; v.accent=d.accent; } }
+placeVendors();
+function drawVendors(ox,oy,meP){ for(const v of VENDORS){ const sx=ox+v.x*scale, sz=oy+v.z*scale;
+  if(sx< -30||sx>cv.width+30||sz< -30||sz>cv.height+40) continue;
+  const near=meP?Math.hypot(v.x-meP.rx,v.z-meP.rz)<24:false, R=6*(scale/6);
+  cx.fillStyle="#0b0910"; cx.strokeStyle="#e6d24a"; cx.lineWidth=1.3; cx.shadowColor="#e6d24a"; cx.shadowBlur=near?13:6;
+  cx.beginPath(); cx.arc(sx,sz,R,0,7); cx.fill(); cx.stroke(); cx.shadowBlur=0;
+  cx.fillStyle="#e6d24a"; cx.font=Math.round(R*1.05)+"px serif"; cx.textAlign="center"; cx.textBaseline="middle"; cx.fillText(v.glyph,sx,sz); cx.textBaseline="alphabetic";
+  if(near){ cx.fillStyle="#ffe08a"; cx.font="bold 10px monospace"; cx.fillText(v.name,sx,sz-R-12); cx.fillStyle="#a89a70"; cx.font="8px monospace"; cx.fillText(v.sub,sx,sz-R-3); } }
+}
+// ═══ Street data-traffic — packets flowing along the grid ═══
+let TRAFFIC=[];
+function initTraffic(){ TRAFFIC=[]; const rng=mulberry32(0x7ac), lanes=Math.floor(CITY.extent*2/30), TN=QUALITY.traffic|0;
+  for(let i=0;i<TN;i++){ const horiz=rng()<0.5, lane=(Math.floor(rng()*lanes)-lanes/2)*30;
+    TRAFFIC.push({horiz, lane, pos:rng()*CITY.extent*2-CITY.extent, spd:(0.5+rng()*0.9)*(rng()<0.5?1:-1),
+      col:rng()<0.5?"#39d0c8":"#ff7a3a", len:6+rng()*10}); } }
+initTraffic();
+function drawTraffic(ox,oy){ const W=cv.width,H=cv.height;
+  for(const t of TRAFFIC){ t.pos+=t.spd; if(t.pos>CITY.extent)t.pos=-CITY.extent; else if(t.pos<-CITY.extent)t.pos=CITY.extent;
+    const x=t.horiz?t.pos:t.lane, z=t.horiz?t.lane:t.pos, sx=ox+x*scale, sz=oy+z*scale;
+    if(sx< -20||sx>W+20||sz< -20||sz>H+20) continue;
+    const tl=t.len*scale/6*Math.sign(t.spd);
+    cx.strokeStyle=t.col; cx.globalAlpha=0.5; cx.lineWidth=1.5; cx.shadowColor=t.col; cx.shadowBlur=6;
+    cx.beginPath(); cx.moveTo(sx,sz); if(t.horiz) cx.lineTo(sx-tl,sz); else cx.lineTo(sx,sz-tl); cx.stroke();
+    cx.shadowBlur=0; cx.globalAlpha=1; }
+}
+// ═══ Loot — Fallout-style acquisitions from the persistent inventory ═══
+const RARITY_COL={Common:"#9aa0a6",Uncommon:"#3fb950",Rare:"#3b9dff",Epic:"#c77dff",Legendary:"#ffb03b",Mythic:"#ff3b5c"};
+let invSnap=null;
+function itemLabel(it){ return it.name||it.item_id||it.id||"unknown"; }
+function showLoot(name,rarity,qty){ const c=$("loot"); if(!c)return; const col=RARITY_COL[rarity]||"#9aa0a6";
+  const el=document.createElement("div"); el.className="loot-item"; el.style.borderColor=col; el.style.color=col;
+  el.innerHTML='<span class="lt-tag">◈ ACQUIRED</span>'+name+(qty>1?" ×"+qty:"")+' <span class="lt-rar" style="color:'+col+'">['+(rarity||"Common").toUpperCase()+']</span>';
+  c.appendChild(el); try{sfx(760,0.11,"triangle");sfx(1040,0.09,"triangle");}catch(e){}
+  wlog("◈ ACQUIRED "+name+" ["+(rarity||"Common")+"]");
+  setTimeout(()=>{ el.style.opacity="0"; el.style.transform="translateX(24px)"; setTimeout(()=>el.remove(),600); },4800); }
+async function checkLoot(){ if(RPG===null||!token)return;
+  try{ const inv=await hapi("/api/v1/economy/inventory"); const items=inv.items||[]; const snap={};
+    for(const it of items){ snap[it.item_id||it.id]=(it.quantity||it.qty||1); }
+    if(invSnap!==null){ for(const it of items){ const id=it.item_id||it.id, q=(it.quantity||it.qty||1), prev=invSnap[id]||0;
+      if(q>prev) showLoot(itemLabel(it), it.rarity||"Common", q-prev); } }
+    invSnap=snap;
+  }catch(e){} }
+// ═══════════════ 3D NIGHT CITY — Three.js renderer (toggle: V) ═══════════════
+const Tj=window.THREE; let R3={ready:false,on:false};
+function makeLabel3(text,x,y,z,color){
+  const c=document.createElement("canvas"); c.width=256; c.height=64; const g=c.getContext("2d");
+  g.fillStyle=color||"#fff"; g.font="bold 34px monospace"; g.textAlign="center"; g.textBaseline="middle";
+  g.shadowColor=color||"#fff"; g.shadowBlur=14; g.fillText(text,128,32);
+  const tex=new Tj.CanvasTexture(c), spr=new Tj.Sprite(new Tj.SpriteMaterial({map:tex,transparent:true,opacity:0.85,depthWrite:false}));
+  spr.position.set(x,y,z); spr.scale.set(46,11.5,1); return spr;
+}
+function init3D(){
+  if(!Tj||R3.ready)return;
+  const cv3=document.createElement("canvas"); cv3.id="world3d";
+  cv3.style.cssText="position:absolute;inset:0;width:100%;height:100%;display:none;z-index:1";
+  $("wrap").appendChild(cv3);
+  const rndr=new Tj.WebGLRenderer({canvas:cv3,antialias:true}); rndr.setPixelRatio(Math.min(2,devicePixelRatio||1));
+  const scene=new Tj.Scene(); scene.background=new Tj.Color(0x06040a); scene.fog=new Tj.FogExp2(0x0a0712,0.0018);
+  const cam=new Tj.PerspectiveCamera(60,1,0.5,4000);
+  scene.add(new Tj.AmbientLight(0x223044,0.75));
+  const moon=new Tj.DirectionalLight(0x4a6cae,0.55); moon.position.set(-1,2,1); scene.add(moon);
+  // ground + street grid
+  const ground=new Tj.Mesh(new Tj.PlaneGeometry(CITY.extent*2.6,CITY.extent*2.6), new Tj.MeshStandardMaterial({color:0x090910,roughness:0.85,metalness:0.25}));
+  ground.rotation.x=-Math.PI/2; scene.add(ground);
+  const gv=[],E=CITY.extent; for(let g=-E;g<=E;g+=30){ gv.push(g,0.1,-E,g,0.1,E,-E,0.1,g,E,0.1,g); }
+  const gGeo=new Tj.BufferGeometry(); gGeo.setAttribute("position",new Tj.Float32BufferAttribute(gv,3));
+  scene.add(new Tj.LineSegments(gGeo,new Tj.LineBasicMaterial({color:0x1d6f78,transparent:true,opacity:0.32})));
+  // districts
+  for(const d of CITY.districts){
+    const disc=new Tj.Mesh(new Tj.CircleGeometry(d.r,44),new Tj.MeshBasicMaterial({color:new Tj.Color(d.col),transparent:true,opacity:0.07}));
+    disc.rotation.x=-Math.PI/2; disc.position.set(d.cx,0.15,d.cz); scene.add(disc);
+    const ring=new Tj.Mesh(new Tj.RingGeometry(d.r-1.6,d.r,52),new Tj.MeshBasicMaterial({color:new Tj.Color(d.col),transparent:true,opacity:0.5,side:Tj.DoubleSide}));
+    ring.rotation.x=-Math.PI/2; ring.position.set(d.cx,0.2,d.cz); scene.add(ring);
+    scene.add(makeLabel3(d.name.toUpperCase(),d.cx,30,d.cz,d.accent));
+  }
+  // buildings: dark box + neon edge outline
+  for(const b of CITY.buildings){
+    const geo=new Tj.BoxGeometry(b.w,b.ht,b.h);
+    const mat=new Tj.MeshStandardMaterial({color:0x0a0a13,roughness:0.55,metalness:0.55,emissive:new Tj.Color(b.col),emissiveIntensity:0.13});
+    const mesh=new Tj.Mesh(geo,mat); mesh.position.set(b.x,b.ht/2,b.z); scene.add(mesh);
+    const eg=new Tj.LineSegments(new Tj.EdgesGeometry(geo),new Tj.LineBasicMaterial({color:new Tj.Color(b.accent||b.col),transparent:true,opacity:0.95}));
+    eg.position.copy(mesh.position); scene.add(eg);
+  }
+  // player
+  const pMesh=new Tj.Mesh(new Tj.CylinderGeometry(1.3,1.3,5,12),new Tj.MeshStandardMaterial({color:0xff3b5c,emissive:0xff2444,emissiveIntensity:0.8}));
+  scene.add(pMesh);
+  const pGlow=new Tj.PointLight(0xff3b5c,1.5,70); scene.add(pGlow);
+  // bloom pipeline — makes the neon actually glow
+  let composer=null,bloom=null;
+  try{ composer=new Tj.EffectComposer(rndr); composer.addPass(new Tj.RenderPass(scene,cam));
+    bloom=new Tj.UnrealBloomPass(new Tj.Vector2(cv.clientWidth||960,cv.clientHeight||600),0.9,0.6,0.5); composer.addPass(bloom);
+    console.log("bloom OK"); }catch(e){ console.log("bloom fail "+e.message); composer=null; }
+  // 3D capture-nodes: glowing hex pad + skybeam + label
+  for(const n of (NODES||[])){ const col=new Tj.Color(0xf5c518);
+    const hex=new Tj.Mesh(new Tj.CylinderGeometry(9,9,3,6),new Tj.MeshStandardMaterial({color:0x1a1508,emissive:col,emissiveIntensity:0.8}));
+    hex.position.set(n.pos[0],1.5,n.pos[2]); scene.add(hex);
+    const beam=new Tj.Mesh(new Tj.CylinderGeometry(0.7,0.7,46,8),new Tj.MeshBasicMaterial({color:col,transparent:true,opacity:0.35}));
+    beam.position.set(n.pos[0],23,n.pos[2]); scene.add(beam);
+    scene.add(makeLabel3(n.name.toUpperCase(),n.pos[0],32,n.pos[2],"#f5c518")); }
+  // 3D lab sites: glowing pillars
+  for(const p of (LABPOIS||[])){ const col=new Tj.Color(p.accent||0x39d0c8);
+    const pil=new Tj.Mesh(new Tj.BoxGeometry(3,7,3),new Tj.MeshStandardMaterial({color:0x0a0a14,emissive:col,emissiveIntensity:0.9}));
+    pil.position.set(p.x,3.5,p.z); scene.add(pil); }
+  // rain
+  const rainN=1800, rp=new Float32Array(rainN*3);
+  for(let i=0;i<rainN;i++){ rp[i*3]=(Math.random()-0.5)*640; rp[i*3+1]=Math.random()*320; rp[i*3+2]=(Math.random()-0.5)*640; }
+  const rainGeo=new Tj.BufferGeometry(); rainGeo.setAttribute("position",new Tj.Float32BufferAttribute(rp,3));
+  const rain=new Tj.Points(rainGeo,new Tj.PointsMaterial({color:0x9bb4cc,size:0.8,transparent:true,opacity:0.5})); scene.add(rain);
+  try{ console.log("3DINIT ok gl="+!!rndr.getContext()+" buildings="+CITY.buildings.length+" nodes="+(NODES||[]).length+" labs="+(LABPOIS||[]).length); }catch(e){}
+  R3={ready:true,on:false,rndr,scene,cam,cv3,pMesh,pGlow,yaw:0,err:0,first:0,composer,bloom,rain,others:{}};
+}
+function resize3D(){ if(!R3.ready)return; const w=cv.clientWidth||cv.width,h=cv.clientHeight||cv.height;
+  R3.rndr.setSize(w,h,false); R3.cam.aspect=w/Math.max(1,h); R3.cam.updateProjectionMatrix();
+  if(R3.composer)R3.composer.setSize(w,h); }
+function updateOther3D(){
+  const seen={};
+  for(const p of players.values()){ if(p.id===me)continue; seen[p.id]=1; let m=R3.others[p.id];
+    if(!m){ const col=new Tj.Color(FCOL[p.fac]||"#8fb0c0"); m=new Tj.Mesh(new Tj.CylinderGeometry(1.2,1.2,4.5,10),new Tj.MeshStandardMaterial({color:col,emissive:col,emissiveIntensity:0.6})); R3.scene.add(m); R3.others[p.id]=m; }
+    m.position.set(p.rx,2.3,p.rz); m.visible=p.alive!==false; }
+  for(const id in R3.others){ if(!seen[id]){ R3.scene.remove(R3.others[id]); delete R3.others[id]; } }
+}
+function render3D(){ if(!R3.ready||!R3.on)return;
+  const meP=players.get(me), px=meP?meP.rx:0, pz=meP?meP.rz:0;
+  R3.pMesh.position.set(px,2.5,pz); R3.pGlow.position.set(px,6,pz);
+  R3.yaw+=0.0015; const dist=80,height=48;
+  R3.cam.position.set(px-Math.sin(R3.yaw)*dist,height,pz-Math.cos(R3.yaw)*dist); R3.cam.lookAt(px,5,pz);
+  if(R3.rain){ const a=R3.rain.geometry.attributes.position.array;
+    for(let i=0;i<a.length;i+=3){ a[i+1]-=3.4; if(a[i+1]<0){ a[i+1]=320; a[i]=px+(Math.random()-0.5)*640; a[i+2]=pz+(Math.random()-0.5)*640; } }
+    R3.rain.geometry.attributes.position.needsUpdate=true; }
+  updateOther3D();
+  try{ if(R3.composer&&QUALITY.bloom)R3.composer.render(); else R3.rndr.render(R3.scene,R3.cam);
+    if(!R3.first){R3.first=1;console.log('3DRENDER ok composer='+!!R3.composer);} }
+  catch(e){ if(!R3.err){ R3.err=1; console.log('3DRENDER err '+e.message); wlog('3D render err: '+e.message); } }
+}
+function toggle3D(){ if(!Tj){ wlog("3D unavailable — three.js failed to load"); return; }
+  if(!R3.on&&!QUALITY.allow3D){ wlog("◈ 3D disabled on this device tier — raise quality in [O] to enable"); return; }
+  if(!R3.ready){ init3D(); }
+  R3.on=!R3.on; R3.cv3.style.display=R3.on?"block":"none"; cv.style.display=R3.on?"none":"block";
+  const b3=$("v3dbtn"); if(b3)b3.classList.toggle("active",R3.on);
+  if(R3.on){ resize3D(); wlog("◈ 3D VIEW — Night City rendered. Press V for 2D."); } else wlog("◈ 2D view"); }
+addEventListener("resize",()=>{ if(typeof resize3D==="function")resize3D(); });
+// ═══ Living world (R04 events / R05 time+weather) ═══
+let worldPulse={phase:"day",weather:"clear",event_kind:null,event_district:null,event_secs_left:0}, _lastEvent=null;
+function DNAME(id){ const d=CITY.districts.find(x=>x.id===id); return d?d.name:(id||"the city"); }
+function onPulse(m){ worldPulse=m;
+  const wi=$("worldinfo"); if(wi){ const ic={dawn:"◐",day:"☀",dusk:"◑",night:"☾"}[m.phase]||"·"; wi.textContent=ic+" "+m.phase+" · "+(m.weather||"clear"); }
+  const ev=$("worldevent");
+  if(m.event_kind){
+    if(ev){ $("we_kind").textContent="⚠ "+m.event_kind; $("we_dist").textContent=DNAME(m.event_district)+" · "+(m.event_secs_left||0)+"s · +50% REWARDS"; ev.classList.add("on"); }
+    if(m.event_kind+m.event_district!==_lastEvent){ _lastEvent=m.event_kind+m.event_district;
+      wlog("⚠ WORLD EVENT — "+m.event_kind+" in "+DNAME(m.event_district)+" — bonus rewards!"); try{sfx(170,0.3,"sawtooth",0.05);sfx(240,0.2,"sawtooth",0.05);}catch(e){}
+      if(typeof alfred==="function") alfred("Live op — "+m.event_kind+" breaking in "+DNAME(m.event_district)+". Rewards are up +50% while it's hot. Move.",6400); }
+  } else { if(ev) ev.classList.remove("on"); _lastEvent=null; }
+}
+function drawWorldTint(){ const p=worldPulse.phase, w=worldPulse.weather;
+  const tints={dawn:"rgba(255,140,60,0.06)",dusk:"rgba(120,60,160,0.09)",night:"rgba(18,28,78,0.15)"};
+  if(tints[p]){ cx.fillStyle=tints[p]; cx.fillRect(0,0,cv.width,cv.height); }
+  if(w==="storm"){ cx.fillStyle="rgba(8,10,20,0.20)"; cx.fillRect(0,0,cv.width,cv.height); }
+}
 function draw(){
   fr++;
+  perfTick(performance.now()); qualityGovernor();
+  if(fr%20===0){ const f=document.getElementById("qfps"); if(f&&document.getElementById("qset").style.display!=="none")f.textContent=Math.round(PERF.avg); }
   cx.clearRect(0,0,cv.width,cv.height);
   // smooth 20Hz→60fps: interpolate rendered positions toward server truth
   for(const p of players.values()){ p.rx+=(p.pos[0]-p.rx)*0.22; p.rz+=(p.pos[2]-p.rz)*0.22;
     if(p.alive){ p.trail.push([p.rx,p.rz]); if(p.trail.length>11)p.trail.shift(); } else p.trail.length=0; }
   const meP=players.get(me), camX=meP?meP.rx:0, camZ=meP?meP.rz:0;
+  if(meP&&!window._alfredHi){ window._alfredHi=1; setTimeout(()=>{ if(typeof alfred==="function") alfred("Welcome to The Weave, operator. NEXUS holds at The Grid — find the safehouse to begin your run. [O] tunes rendering to your rig.",7200); },1400); }
   const ox=cv.width/2-camX*scale, oy=cv.height/2-camZ*scale;
+  drawCity(ox,oy); drawTraffic(ox,oy); updateDistrictHUD(camX,camZ); drawLabs(ox,oy,meP); drawVendors(ox,oy,meP); drawNPCs(ox,oy,meP); drawAmbient(ox,oy); drawSkylineLife(ox,oy);
   const pulse=0.5+0.5*Math.sin(fr*0.03);
   // ── combat UI only surfaces when combat is relevant → exploration is the default lens ──
   let enemyNear=false;
@@ -592,7 +1540,8 @@ function draw(){
   // ── players ──
   for(const p of players.values()){
     const x=ox+p.rx*scale, y=oy+p.rz*scale, c=FCOL[p.fac]||"#888", meMark=p.id===me;
-    if(p.trail.length>1){ cx.strokeStyle=c; cx.lineWidth=2;
+    const tc=(meMark&&window._trailCol)?window._trailCol:c;   // R19 — equipped cosmetic trail
+    if(p.trail.length>1){ cx.strokeStyle=tc; cx.lineWidth=2;
       for(let i=1;i<p.trail.length;i++){ cx.globalAlpha=(i/p.trail.length)*0.3;
         cx.beginPath(); cx.moveTo(ox+p.trail[i-1][0]*scale,oy+p.trail[i-1][1]*scale);
         cx.lineTo(ox+p.trail[i][0]*scale,oy+p.trail[i][1]*scale); cx.stroke(); } cx.globalAlpha=1; }
@@ -621,8 +1570,8 @@ function draw(){
   // ── damage/heal floaters ──
   floaters=floaters.filter(f=>f.t>0);
   for(const f of floaters){ const x=ox+f.x*scale,y=oy+f.z*scale-(1-f.t)*34;
-    cx.globalAlpha=Math.min(1,f.t*1.6); cx.fillStyle=f.heal?"#22e39a":"#ff3b5c"; cx.font="bold 15px monospace"; cx.textAlign="center";
-    cx.shadowColor=cx.fillStyle;cx.shadowBlur=8; cx.fillText((f.heal?"+":"-")+Math.abs(Math.round(f.v)),x,y-26); cx.shadowBlur=0; cx.globalAlpha=1; f.t-=0.017; }
+    cx.globalAlpha=Math.min(1,f.t*1.6); cx.fillStyle=f.gold?"#ffd76a":(f.heal?"#22e39a":"#ff3b5c"); cx.font="bold 15px monospace"; cx.textAlign="center";
+    cx.shadowColor=cx.fillStyle;cx.shadowBlur=8; cx.fillText(f.lbl||((f.heal?"+":"-")+Math.abs(Math.round(f.v))),x,y-26); cx.shadowBlur=0; cx.globalAlpha=1; f.t-=0.017; }
   // ── v88 Fusion: capture prompt + active-capture banner ──
   if(activeCapture&&nodeState[activeCapture]){ const ns=nodeState[activeCapture];
     cx.fillStyle="rgba(7,10,18,.86)"; cx.fillRect(cv.width/2-170,10,340,30);
@@ -633,12 +1582,18 @@ function draw(){
   if(nearNode){ cx.fillStyle="rgba(7,10,18,.86)"; cx.fillRect(cv.width/2-120,cv.height-56,240,26);
     cx.strokeStyle="#e11d2a"; cx.lineWidth=1.5; cx.strokeRect(cv.width/2-120,cv.height-56,240,26);
     cx.fillStyle="#e11d2a"; cx.font="bold 12px monospace"; cx.textAlign="center";
-    cx.fillText("[E] CONTEST "+nodeName(nearNode).toUpperCase(),cv.width/2,cv.height-38); }
+    cx.fillText("[ENTER] CONTEST "+nodeName(nearNode).toUpperCase(),cv.width/2,cv.height-38); }
+  else if(nearLab){ cx.fillStyle="rgba(7,10,18,.88)"; cx.fillRect(cv.width/2-155,cv.height-56,310,26);
+    cx.strokeStyle=nearLab.col; cx.lineWidth=1.5; cx.strokeRect(cv.width/2-155,cv.height-56,310,26);
+    cx.fillStyle=nearLab.accent; cx.font="bold 12px monospace"; cx.textAlign="center";
+    cx.fillText("[ENTER] JACK IN — "+nearLab.name.toUpperCase(),cv.width/2,cv.height-38); }
+  drawAtmosphere(); drawWorldTint();
+  drawMinimap(camX,camZ);
   drawTutorial(meP,ox,oy);
   drawCaptureFlash();
   // ── CRT overlay: scanlines + vignette ──
   cx.globalAlpha=0.045; cx.fillStyle="#000";
-  for(let sy=0;sy<cv.height;sy+=3) cx.fillRect(0,sy,cv.width,1); cx.globalAlpha=1;
+  for(let sy=0;sy<cv.height;sy+=QUALITY.crtStep) cx.fillRect(0,sy,cv.width,1); cx.globalAlpha=1;
   const vg=cx.createRadialGradient(cv.width/2,cv.height/2,cv.height*0.35,cv.width/2,cv.height/2,cv.height*0.82);
   vg.addColorStop(0,"rgba(0,0,0,0)"); vg.addColorStop(1,"rgba(0,0,0,0.5)"); cx.fillStyle=vg; cx.fillRect(0,0,cv.width,cv.height);
   // ── network-topology minimap (top-right): nodes = hosts, you = your foothold ──
@@ -684,6 +1639,8 @@ function draw(){
   document.querySelectorAll('#hotbar .slot').forEach((s,i)=>{ const a=hotbar[i]; if(!a)return;
     const cd=cds[a.id]||0, el=s.querySelector('.cd');
     if(cd>0.05){ el.style.display="flex"; el.textContent=cd.toFixed(1); } else el.style.display="none"; });
+  drawBreach();
+  render3D();
   requestAnimationFrame(draw);
 }
 $("jgo").onclick=()=>{ NAME=($("jname").value||"Op").trim().slice(0,20);
@@ -704,13 +1661,20 @@ function showJoin(){ $("join").classList.remove("hidden"); authFailed=false; mem
 // issuance contract here — issuance/claim is owned elsewhere; `r.member_token`
 // is simply read if present (empty otherwise, see the HOOK note above).
 async function worldAuth(reg,u,p){
-  if(reg) await hapi("/api/v1/auth/register",{method:"POST",body:JSON.stringify({username:u,password:p})});
-  const r=await hapi("/api/v1/auth/login",{method:"POST",body:JSON.stringify({username:u,password:p})});
+  // Option B fix — DEVICE_KEY rides on BOTH register and login so the daemon
+  // can mint a non-null `bind` claim either way (registration also mints a
+  // token for the brand-new account).
+  if(reg) await hapi("/api/v1/auth/register",{method:"POST",body:JSON.stringify({username:u,password:p,device_key:DEVICE_KEY})});
+  const r=await hapi("/api/v1/auth/login",{method:"POST",body:JSON.stringify({username:u,password:p,device_key:DEVICE_KEY})});
   token=r.access_token||r.token||""; localStorage.setItem("grim_token",token);
   memberToken=r.member_token||"";            // consumed if the auth flow provides it (see connect())
-  memberDeviceId=(r.device_id!=null?r.device_id:null); // null/absent for web (not device-bound)
+  // The daemon echoes device_id back as whatever device_key it just hashed
+  // into the bind claim — which is exactly DEVICE_KEY, since that's what we
+  // sent. Using our own persisted value directly (rather than trusting
+  // r.device_id) keeps this correct even if a future auth response omits it.
+  memberDeviceId=DEVICE_KEY;
   if(memberToken) sessionStorage.setItem("grim_member_token",memberToken); else sessionStorage.removeItem("grim_member_token");
-  if(memberDeviceId) sessionStorage.setItem("grim_member_device",memberDeviceId); else sessionStorage.removeItem("grim_member_device");
+  sessionStorage.setItem("grim_member_device",memberDeviceId);
   authedUser=u; sessionStorage.setItem("grim_user",u);
   return r;
 }
@@ -732,7 +1696,7 @@ function startOAuth(){ if(RPG===null){ joinMsg("Discord sign-in needs the daemon
 $("j_login").onclick=()=>doJoinAuth(false);
 $("j_reg").onclick=()=>doJoinAuth(true);
 $("j_oauth").onclick=startOAuth;
-$("j_signout").onclick=()=>{ memberToken="";token="";authedUser="";
+$("j_signout").onclick=()=>{ $("charframe").classList.remove("on"); if(charBarTimer)clearInterval(charBarTimer); memberToken="";token="";authedUser="";
   sessionStorage.removeItem("grim_member_token");sessionStorage.removeItem("grim_member_device");sessionStorage.removeItem("grim_user");localStorage.removeItem("grim_token");
   joinMsg2(""); showAuthStage(); $("j_user").focus(); };
 $("j_user").addEventListener("keydown",e=>{ e.stopPropagation(); if(e.key=="Enter")$("j_pass").focus(); });
@@ -750,11 +1714,41 @@ async function hapi(path,opts={}){ const h=Object.assign({"Content-Type":"applic
   const r=await fetch(RPG+path,Object.assign({},opts,{headers:h}));
   if(!r.ok) throw new Error(r.status+" "+(await r.text()).slice(0,120));
   const ct=r.headers.get("content-type")||""; return ct.includes("json")?r.json():r.text(); }
+
+// ── Always-on character frame: pulls the real persistent RPG record from the
+// daemon (level / xp / credits / faction) and keeps the MMO unit-frame live. ──
+let charBarTimer=null;
+function facSig(f){ const c={DarkArmy:"#ff3b5c",AzureWatch:"#3b9dff",GraySyndicate:"#c9a227"}[f]||"var(--acc)";
+  return "radial-gradient(circle at 40% 35%,"+c+",#2a0a0a)"; }
+async function refreshCharBar(){
+  if(RPG===null||!token) return;
+  try{
+    const [p,pr]=await Promise.all([
+      hapi("/api/v1/player"),
+      hapi("/api/v1/player/progress").catch(()=>({}))
+    ]);
+    const g=(...k)=>{ for(const kk of k) if(p[kk]!=null) return p[kk]; return null; };
+    const cur=g("xp_current","xp")??0, nxt=g("xp_to_next")??0;
+    $("cf_name").textContent=p.username||authedUser||"operator";
+    const fac=g("faction","primary_faction")||"";
+    $("cf_fac").textContent=fac;
+    $("cf_sig").style.background=facSig(fac);
+    $("cf_lvl").textContent="LVL "+(g("level")??"—");
+    const pct=nxt>0?Math.max(0,Math.min(100,100*cur/nxt)):0;
+    $("cf_xpfill").style.width=pct+"%";
+    $("cf_xptxt").textContent=cur+" / "+nxt;
+    $("cf_cred").textContent=g("credits","currency")??0;
+    $("cf_align").textContent="align "+(g("alignment")??0);
+    $("cf_labs").textContent=((pr&&pr.labs_completed)??g("labs_completed")??0)+" labs";
+    $("charframe").classList.add("on");
+  }catch(e){ /* keep last-known; 401 refresh handled by the hub flow */ }
+}
+function startCharBar(){ refreshCharBar(); if(charBarTimer)clearInterval(charBarTimer); charBarTimer=setInterval(refreshCharBar,20000); }
 function openHub(){ if(RPG===null){ $("hubauth").style.display=""; $("hubmain").classList.add("hidden");
     $("hubauth").innerHTML='<div class="huberr">The RPG hub needs the client served by the GRIMOIRE daemon (same-origin).<br><br>Open <b>http://localhost:8090/</b> or run <b>grimoire-web</b> — not a file:// path.</div>';
     $("hub").classList.remove("hidden"); return; }
   $("hub").classList.remove("hidden"); token?showHubMain():showAuth(); }
-function closeHub(){ $("hub").classList.add("hidden"); }
+function closeHub(){ $("hub").classList.add("hidden"); refreshCharBar(); }
 function showAuth(){ $("hubauth").style.display=""; $("hubmain").classList.add("hidden"); $("hubwho").textContent=""; }
 function showHubMain(){ $("hubauth").style.display="none"; $("hubmain").classList.remove("hidden"); tab("profile"); }
 async function doAuth(reg){ const u=$("au_user").value.trim(),p=$("au_pass").value;
@@ -773,7 +1767,13 @@ async function loadTab(name){ const b=$("hubbody"); b.innerHTML='<div class="hub
     else if(name=="perks") b.innerHTML=renderPerks(await hapi("/api/v1/perks"));
     else if(name=="glossary") b.innerHTML=renderGlossary(await hapi("/api/v1/glossary"));
     else if(name=="economy"){ const [inv,jobs]=await Promise.all([hapi("/api/v1/economy/inventory"),hapi("/api/v1/rico/jobs").catch(()=>[])]); b.innerHTML=renderEconomy(inv,jobs); }
-    else if(name=="academy"){ const [pa,ca,pr]=await Promise.all([hapi("/api/v1/education/learning-paths"),hapi("/api/v1/career/progress").catch(()=>({tracks:[]})),hapi("/api/v1/education/progress").catch(()=>null)]); b.innerHTML=renderAcademy(pa,ca,pr); }
+    else if(name=="academy"){ const [pa,ca,pr,pl,lb]=await Promise.all([hapi("/api/v1/education/learning-paths"),hapi("/api/v1/career/progress").catch(()=>({tracks:[]})),hapi("/api/v1/education/progress").catch(()=>null),hapi("/api/v1/player").catch(()=>({})),hapi("/api/v1/labs").catch(()=>[])]);
+      b.innerHTML=(window.GSYS?GSYS.renderCurriculum(pr)+GSYS.renderClasses(ca,lb)+GSYS.renderCerts(ca,pl):"")+renderAcademy(pa,ca,pr); }
+    else if(name=="runs"){ const [labs,pl,raids]=await Promise.all([hapi("/api/v1/labs").catch(()=>[]),hapi("/api/v1/player").catch(()=>({})),hapi("/api/v1/raid/list").catch(()=>({raids:[]}))]); b.innerHTML=window.GSYS?(GSYS.renderRuns(labs)+GSYS.renderRaids(raids)+GSYS.renderPrestige(pl)):"systems.js not loaded"; }
+    else if(name=="arena"){ const [pl,ar]=await Promise.all([hapi("/api/v1/player").catch(()=>({})),hapi("/api/v1/arena/list").catch(()=>({}))]); b.innerHTML=window.GSYS?GSYS.renderArena(pl,ar):"systems.js not loaded"; }
+    else if(name=="market"){ const [inv,rec,tr]=await Promise.all([hapi("/api/v1/economy/inventory").catch(()=>({credits:0,items:[]})),hapi("/api/v1/economy/craft/recipes").catch(()=>[]),hapi("/api/v1/economy/trade/pending").catch(()=>[])]); b.innerHTML=window.GSYS?GSYS.renderMarket(inv,rec,tr):"systems.js not loaded"; }
+    else if(name=="season"){ const [pr,ev]=await Promise.all([hapi("/api/v1/education/progress").catch(()=>null),hapi("/api/v1/seasonal/events").catch(()=>({events:[]}))]); b.innerHTML=window.GSYS?(GSYS.renderSeason(pr,ev)+GSYS.renderCTF()):"systems.js not loaded"; }
+    else if(name=="factions"){ const [fx,gl,fo]=await Promise.all([hapi("/api/v1/factions").catch(()=>[]),hapi("/api/v1/guilds").catch(()=>({guilds:[]})),hapi("/api/v1/forum/threads").catch(()=>({threads:[]}))]); b.innerHTML=window.GSYS?GSYS.renderFactions(fx,gl,fo):"systems.js not loaded"; }
     else if(name=="board") b.innerHTML=renderBoard(await hapi("/api/v1/leaderboard"));
   }catch(e){ b.innerHTML='<div class="huberr">'+e.message+'</div>';
     if(e.message.startsWith("401")){ token=""; localStorage.removeItem("grim_token"); showAuth(); } } }
@@ -836,6 +1836,8 @@ async function submitFlag(labId,val,resEl){ if(!val||!val.trim())return; resEl.i
       const fbody={flag:val.trim()}; if(capNode) fbody.node_context={node_id:capNode, world_player_id:(me??0)};
       const r=await hapi("/api/v1/labs/"+labId+"/flag",{method:"POST",body:JSON.stringify(fbody)});
     if(r.correct){ resEl.innerHTML=`<span class="flagok">✓ ${r.message||'Correct!'}${r.points?' · +'+r.points+' pts':''}${r.streak_bonus?' · streak +'+r.streak_bonus:''}${r.achievement?' · 🏆 '+r.achievement:''}</span>`; sfx(660,0.14,"sine"); wlog("🚩 flag ACCEPTED: "+labId);
+      if(typeof progressObjectives==="function"){ progressObjectives("lab",labId); progressObjectives("capture","any"); }   // narrative quest hook
+      if(typeof alfred==="function") alfred("Flag accepted on "+labId+". That's real skill logged — your class rank just moved.",4800);
       // v88 Fusion — if this lab was a node-capture challenge, claim the node
       if(capNode && r.node_capture_proof){ nodeState[capNode].token=r.node_capture_proof; claimNode(capNode);
           if(r.node_captured) wlog("territory "+nodeName(capNode)+" flipped"); }
@@ -870,9 +1872,60 @@ function renderAcademy(paths,career,prog){
 $("hubbtn").onclick=openHub; $("hubx").onclick=closeHub;
 $("hubbody").addEventListener("click",e=>{
   const lb=e.target.closest(".launch"); if(lb&&lb.dataset.lab){ launchLab(lb.dataset.lab,lb); return; }
+  const sb=e.target.closest("[data-run],[data-raid],[data-raidjoin],[data-ctf],[data-prestige],[data-mentor],[data-craft],[data-craftid],[data-queue],[data-eventjoin],[data-guild],[data-buycos],[data-cos]");
+  if(sb){ gsysAction(sb); return; }
   const fb=e.target.closest(".flagbtn"); if(fb&&fb.dataset.lab){ const inp=$("hubbody").querySelector('.flaginput[data-lab="'+fb.dataset.lab+'"]'); submitFlag(fb.dataset.lab,inp?inp.value:"",document.getElementById('fr-'+fb.dataset.lab)); return; }
   const qb=e.target.closest(".qbtn"); if(qb&&qb.dataset.q){ questAction(qb.dataset.q,qb.dataset.act,qb); return; }
 });
+// ── game-systems button actions (runs / raids / prestige / market / crafting / cosmetics / ctf / mentorship) ──
+async function gsysAction(el){ const d=el.dataset;
+  // ── real daemon-backed actions ──
+  if(d.craftid){ el.textContent="⚒ crafting…"; el.disabled=true; try{ const r=await hapi("/api/v1/economy/craft",{method:"POST",body:JSON.stringify({recipe_id:d.craftid})}); const ok=r.success!==false; wlog("⚒ "+(ok?"crafted: "+(r.output_item_id||r.item_id||d.craftid):"craft failed the success roll")); el.textContent=ok?"✓ crafted":"⚒ retry"; el.disabled=!ok; if(ok&&typeof alfred==="function")alfred("Forge complete — "+(r.output_item_id||"item")+" added to your cache.",4500); loadTab("market"); }catch(e){ el.textContent="⚒ Craft"; el.disabled=false; wlog("craft failed: "+e.message.slice(0,80)); } return; }
+  if(d.queue){ el.textContent="◈ queued…"; try{ const r=await hapi("/api/v1/matchmaking/queue",{method:"POST",body:JSON.stringify({mode:d.queue,game_mode:d.queue})}); wlog("◈ ranked queue joined ("+(r.queue_id||r.status||"ok")+")"); el.textContent="✓ in queue"; if(typeof alfred==="function")alfred("You're in the ranked queue — I'll pull you into the arena when a match forms.",5000); }catch(e){ el.textContent="◈ Queue for ranked"; wlog("queue failed: "+e.message.slice(0,80)); } return; }
+  if(d.raidjoin){ try{ await hapi("/api/v1/raid/"+d.raidjoin+"/join",{method:"POST",body:"{}"}); wlog("◈ joined raid "+d.raidjoin); el.textContent="✓ joined"; el.disabled=true; loadTab("runs"); }catch(e){ wlog("raid join failed: "+e.message.slice(0,80)); } return; }
+  if(d.eventjoin){ try{ await hapi("/api/v1/seasonal/events/"+d.eventjoin+"/join",{method:"POST",body:"{}"}); wlog("◈ joined seasonal event"); el.textContent="✓ joined"; el.disabled=true; }catch(e){ wlog("event join failed: "+e.message.slice(0,80)); } return; }
+  if(d.guild){ wlog("◈ Guild — found your crew from Comms once you've picked a name + faction"); if(typeof alfred==="function")alfred("Rally a crew: name it, pick a faction, and it lists on the Factions board for others to join.",5500); return; }
+  // ── client-side game systems ──
+  if(d.run){ closeHub(); wlog("▶ Roguelike run started — daily seed, 5 floors, escalating mutators"); if(typeof alfred==="function")alfred("Run initialized. Five floors, escalating mutators, permadeath. Survive the seed — bank a score.",6200); }
+  else if(d.raid){ wlog("◈ Raid staging — "+d.raid+" (assemble a team at the Blackwall Fringe)"); if(typeof alfred==="function")alfred("Raid staged. Gather your team at the Blackwall Fringe — the Guardian doesn't wait, and death is real out there.",6200); }
+  else if(d.ctf){ wlog("◈ Registered for CTF: "+d.ctf); el.textContent="✓ registered"; el.disabled=true; if(typeof alfred==="function")alfred("You're on the CTF roster. I'll flag you the moment it goes live.",5000); }
+  else if(d.prestige){ wlog("◈ Prestige — progression reset, permanent meta-perk banked"); if(typeof alfred==="function")alfred("Prestige acknowledged. Mastery is a loop, not a ceiling — begin again, stronger.",5500); }
+  else if(d.mentor){ wlog("◈ Added to the mentorship roster"); el.textContent="✓ on roster"; el.disabled=true; if(typeof alfred==="function")alfred("You're on the mentorship board. The Weave grows its own — teach well.",5000); }
+  else if(d.craft){ wlog("⚒ Craft queued: "+d.craft+" (consumes components when the forge daemon confirms)"); el.textContent="⚒ queued"; }
+  else if(d.buycos){ const c=(GSYS.COSMETICS||[]).find(x=>x.id===d.buycos); const cos=GSYS.loadCosmetic(); cos[d.buycos]=1; GSYS.saveCosmetic(cos); wlog("◈ Acquired cosmetic: "+(c?c.name:d.buycos)); loadTab("market"); }
+  else if(d.cos){ const cos=GSYS.loadCosmetic(); cos.equipped=cos.equipped||{}; cos.equipped[d.cty]=d.cos; GSYS.saveCosmetic(cos); applyCosmetics(); wlog("◈ Equipped "+d.cos); loadTab("market"); } }
+function applyCosmetics(){ if(!window.GSYS)return; const cos=GSYS.loadCosmetic(); const t=cos.equipped&&cos.equipped.trail;
+  window._trailCol=t?((GSYS.COSMETICS.find(x=>x.id===t)||{}).col||null):null;
+  window._playerTitle=(cos.equipped&&cos.equipped.title)?((GSYS.COSMETICS.find(x=>x.id===cos.equipped.title)||{}).name||"").replace(/^Title:\s*"?|"$/g,""):null; }
+applyCosmetics();
+// ── R30 — on-screen touch controls (drive the same keys[] movement state) ──
+(function touchControls(){
+  const tp=document.createElement("div"); tp.id="touchpad";
+  tp.innerHTML='<div class="dpad"><div class="db up" data-k="arrowup">▲</div><div class="db dn" data-k="arrowdown">▼</div><div class="db lf" data-k="arrowleft">◀</div><div class="db rt" data-k="arrowright">▶</div></div><div class="act">JACK<br>IN</div>';
+  document.body.appendChild(tp);
+  tp.querySelectorAll(".db").forEach(b=>{ const k=b.dataset.k;
+    const on=e=>{ e.preventDefault(); keys[k]=true; }, off=e=>{ e.preventDefault(); keys[k]=false; };
+    b.addEventListener("touchstart",on,{passive:false}); b.addEventListener("touchend",off); b.addEventListener("touchcancel",off);
+    b.addEventListener("mousedown",on); b.addEventListener("mouseup",off); b.addEventListener("mouseleave",off); });
+  const act=tp.querySelector(".act"); const fire=e=>{ e.preventDefault(); dispatchEvent(new KeyboardEvent("keydown",{key:"Enter"})); };
+  act.addEventListener("touchstart",fire,{passive:false}); act.addEventListener("mousedown",fire);
+})();
+// ── R30 — first-run onboarding (shown once; complements NEXUS/ALFRED) ──
+(function onboarding(){ try{ if(localStorage.getItem("grim_onboard"))return; }catch(e){}
+  const o=document.createElement("div");
+  o.style.cssText="position:absolute;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;background:rgba(5,3,5,.86)";
+  o.innerHTML='<div style="background:var(--panel);border:1px solid var(--ui);border-radius:12px;max-width:440px;width:92vw;padding:22px 24px;box-shadow:0 0 50px rgba(191,31,31,.18)">'+
+    '<div style="font-family:var(--font-display,monospace);color:var(--brandhi);letter-spacing:2px;font-size:17px;margin-bottom:4px">◈ WELCOME TO THE WEAVE</div>'+
+    '<div style="color:var(--dim);font-size:11.5px;margin-bottom:14px">A persistent hacking MMO built into Syn_OS — the education engine. Every district teaches a real layer of the kill-chain; every lab is an isolated target you actually hack.</div>'+
+    '<div style="font-size:12.5px;line-height:1.9">'+
+    '<b style="color:var(--acc)">Arrows</b> move · <b style="color:var(--acc)">Enter</b> interact / talk to NPCs<br>'+
+    '<b style="color:var(--acc)">Tab</b> HUB (labs, academy, market) · <b style="color:var(--acc)">C</b> dossier<br>'+
+    '<b style="color:var(--acc)">O</b> render settings · <b style="color:var(--acc)">V</b> 3D · <b style="color:var(--acc)">P</b> Pip-Boy</div>'+
+    '<div style="color:var(--dim);font-size:11.5px;margin:14px 0 16px">Find <b style="color:#8fb0c0">NEXUS</b> at The Grid to begin your first contract.</div>'+
+    '<button id="ob_go" style="width:100%;background:linear-gradient(180deg,var(--brandhi),var(--brand));color:#fff;border:0;padding:11px;font-weight:bold;border-radius:7px;cursor:pointer;letter-spacing:1px;font-family:inherit">◈ JACK IN</button></div>';
+  document.body.appendChild(o);
+  o.querySelector("#ob_go").onclick=()=>{ try{localStorage.setItem("grim_onboard","1");}catch(e){} o.remove(); };
+})();
 $("hubbody").addEventListener("keydown",e=>{ if(e.target.classList&&e.target.classList.contains("flaginput")){ e.stopPropagation(); if(e.key=="Enter"){ const lab=e.target.dataset.lab; submitFlag(lab,e.target.value,document.getElementById('fr-'+lab)); } } });
 $("au_login").onclick=()=>doAuth(false); $("au_reg").onclick=()=>doAuth(true);
 $("au_pass").addEventListener("keydown",e=>{ e.stopPropagation(); if(e.key=="Enter")doAuth(false); });
@@ -963,4 +2016,36 @@ $("srvlbl").textContent=URL.replace(/\/$/,"");
 // initial login stage (respects a captured OAuth / prior-session token)
 showJoin();
 buildHotbar(); draw();
+// dev-only render preview (URL-gated, harmless): stage a fake runner so the
+// Night City renders for a headless screenshot without a live server.
+if(location.search.indexOf("citydemo")>=0){ try{
+  me=1; scale=2.0;
+  players.set(1,{id:1,pos:[0,0,0],rx:0,rz:0,fac:"GraySyndicate",alive:true,health_pct:100,name:"runner",trail:[],yaw:0});
+  $("join").classList.add("hidden");
+  const kw=["recon scan osint","exploit ssti inject rce","defense siem detect harden","forensic memory disk malware","crypto cipher hash rsa","market trade phish social"];
+  LABS=[]; for(let i=0;i<58;i++)LABS.push({id:"demo_"+i,name:"Node "+i,difficulty:1+(i%10),required_level:1+(i%5),xp_reward:100+i*10,type:i<12?"Tutorial":"",description:kw[i%6]});
+  placeLabs();
+  NODES=FALLBACK_NODES.map(n=>Object.assign({},n)); NODES.forEach(n=>ensureNodeState(n.id));
+  if(location.search.indexOf("nodecap")>=0){ NODES.forEach((n,i)=>{ if(i%2===0){ nodeState[n.id].state="Captured"; nodeState[n.id].faction=["DarkArmy","AzureWatch","GraySyndicate"][i%3]; } }); }
+  scale=1.5;
+  if(location.search.indexOf("view3d")>=0){ try{ toggle3D(); console.log("3DDEMO toggled on="+R3.on); }catch(e){ console.log("3DDEMO err "+e.message+" | "+e.stack); } }
+  if(location.search.indexOf("pip")>=0){
+    pipData={pl:{username:"tylimo56",faction:"GraySyndicate",level:1,credits:200,xp_current:50,xp_to_next:331,alignment:0},
+      mt:{hacker_reputation_index:0,metrics:{flags_captured:1,contracts_fulfilled:0,current_streak:0,first_blood_awards:0,commands_executed:0,credits_earned:75}},
+      inv:{items:[],credits:200},
+      pk:[{attribute:"Scanning",name:"Port Profiler",description:"Enhanced port scanning",attribute_requirement:1,max_rank:3},
+          {attribute:"Networking",name:"Packet Weaver",description:"Craft raw packets",attribute_requirement:1,max_rank:2},
+          {attribute:"Obfuscation",name:"Ghost Protocol",description:"Mask your traffic",attribute_requirement:2,max_rank:3}],
+      cr:{tracks:[{track:"PenetrationTester",current_rank:0,labs_completed:0,track_xp:0}]}};
+    $("pb_name").textContent="PIP-BOY 3000 · TYLIMO56"; $("pb_lvl").textContent="LVL 1"; $("pb_caps").innerHTML="◈ 200 CAPS"; $("pb_xp").style.width="15%";
+    $("pipboy").classList.add("on"); pipTabName="special"; renderPip();
+  }
+  if(location.search.indexOf("loot")>=0){
+    showLoot("Cracked ICEbreaker v3","Rare",1);
+    setTimeout(()=>showLoot("Zero-Day Fragment","Legendary",1),80);
+    setTimeout(()=>showLoot("Corrupted Data Shard","Common",3),160);
+    setTimeout(()=>showLoot("Neural Catalyst","Epic",1),240);
+    setTimeout(()=>showLoot("Sovereign Root Key","Mythic",1),320);
+  }
+}catch(e){ console.log("citydemo",e); } }
 </script></body></html>

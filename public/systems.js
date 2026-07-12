@@ -163,7 +163,8 @@ window.GSYS = (function(){
     // ── real player market (trade endpoint) ──
     h+='<div class="qsec">PLAYER MARKET — open trades</div>';
     const tl=(trades&&(trades.trades||trades.pending))||(Array.isArray(trades)?trades:[]);
-    h+= tl.length? tl.slice(0,20).map(t=>'<div class="row"><span class="nm">'+esc(itemName(t.item_id||t.offer||t.id))+'</span><span class="meta">'+(t.price||t.credits||'')+'₡ · '+esc(t.status||t.seller||'')+'</span></div>').join("") : '<div class="huberr">No open trades. Peer-to-peer offers you receive surface here.</div>';
+    h+= tl.length? tl.slice(0,20).map(t=>{ const tid=t.id||t.trade_id;
+      return '<div class="row"><span class="nm">'+esc(itemName(t.item_id||t.offer||t.id))+'</span><span class="meta">'+(t.price||t.credits||'')+'₡ · '+esc(t.status||t.seller||'')+(tid?' <button class="launch" data-tradeaccept="'+esc(tid)+'">accept</button>':'')+'</span></div>'; }).join("") : '<div class="huberr">No open trades. Peer-to-peer offers you receive surface here.</div>';
     return h; }
 
   // ═══ R13/R14 — ARENA LADDER + MENTORSHIP ═══

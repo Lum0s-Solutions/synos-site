@@ -72,15 +72,19 @@ export async function onRequest(context) {
     return noStore(await next());
   }
 
-  // ---- Factor 2: passkey session (required for the game shell) ----
-  const session = await verifySession(
-    parseCookies(request.headers.get('Cookie'))['pt_session'],
-    env.PLAYTEST_SESSION_SECRET
-  );
-  if (!session || session.email !== access.email) {
-    const to = new URL('/play-test/login', url);
-    to.searchParams.set('next', path);
-    return new Response(null, { status: 302, headers: { Location: to.toString(), 'cache-control': 'private, no-store' } });
+  // ---- Factor 2: passkey session (enforced only when PLAYTEST_REQUIRE_PASSKEY=1) ----
+  // Default is Access-only (single strong factor). Set PLAYTEST_REQUIRE_PASSKEY=1
+  // once a real FIDO2 authenticator is enrolled to restore full 2FA — no code change.
+  if (env.PLAYTEST_REQUIRE_PASSKEY === '1') {
+    const session = await verifySession(
+      parseCookies(request.headers.get('Cookie'))['pt_session'],
+      env.PLAYTEST_SESSION_SECRET
+    );
+    if (!session || session.email !== access.email) {
+      const to = new URL('/play-test/login', url);
+      to.searchParams.set('next', path);
+      return new Response(null, { status: 302, headers: { Location: to.toString(), 'cache-control': 'private, no-store' } });
+    }
   }
 
   return noStore(await next());

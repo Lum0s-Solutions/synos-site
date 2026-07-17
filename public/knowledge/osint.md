@@ -18,16 +18,12 @@ OSINT is the collection and analysis of information from publicly available sour
 ## Defensive angle
 Organizations run OSINT against *themselves* (attack-surface management) to find leaked credentials, exposed dashboards, and oversharing before adversaries do. Countermeasures include reducing metadata exposure, monitoring certificate transparency logs, and employee awareness training.
 
-## Seen in the community
-The **#osint** channel (top keyword `osint` ×8) discussed building a passive OSINT framework that "runs like msfconsole," plus reconnaissance tooling and geolocation workflows.
-
 ## Related
-- [[shodan]]
-- [[theharvester]]
-- [[social-engineering]]
-- [[bug-bounty-hunting]]
-- [[wireless-network-attacks]]
-- [[Discord Intel/discord-intel-MOC|Discord Intel]]
+- shodan
+- theharvester
+- social engineering
+- bug bounty hunting
+- wireless network attacks
 
 ## Sources
 - https://www.maltego.com/

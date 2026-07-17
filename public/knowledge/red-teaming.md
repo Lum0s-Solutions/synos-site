@@ -20,16 +20,12 @@ Red teaming is goal-oriented adversary emulation: an authorized team mimics a sp
 ## Defensive angle
 Red-team output is measured by *what the blue team caught*. Findings drive new detections (Sigma/YARA), logging gaps, segmentation, and IR-playbook improvements. Frameworks like ATT&CK provide a shared language for coverage.
 
-## Seen in the community
-**#pentesting-party** (keywords `c2`, `ransomware`, `bypass`) discussed C2 selection ("run Sliver or Meterpreter... even a vibe-coded C2 beats Defender"), Havoc's capabilities, and offensive tooling repos.
-
 ## Related
-- [[command-and-control]]
-- [[lateral-movement]]
-- [[kerberoasting]]
-- [[bloodhound]]
-- [[cyber-kill-chain]]
-- [[Discord Intel/discord-intel-MOC|Discord Intel]]
+- command and control
+- lateral movement
+- kerberoasting
+- bloodhound
+- cyber kill chain
 
 ## Sources
 - https://attack.mitre.org/

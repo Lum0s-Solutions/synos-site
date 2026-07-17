@@ -2,12 +2,12 @@
 
 Nessus is a widely used vulnerability scanner developed by Tenable that identifies misconfigurations, missing patches, and known CVEs across hosts and networks. It runs both credentialed and uncredentialed scans against thousands of plugins and produces prioritized, compliance-oriented reports. It is a common component of enterprise vulnerability management programs.
 
-> Part of [[cybersecurity-MOC]]
+> Part of cybersecurity MOC
 
 ## Mentioned in
 ```dataview
 LIST
-FROM [[]]
+FROM
 SORT file.name
 ```
 

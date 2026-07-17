@@ -2,12 +2,12 @@
 
 CVE (Common Vulnerabilities and Exposures) is a standardized dictionary of publicly disclosed security vulnerabilities, each assigned a unique identifier such as CVE-2021-44228 and maintained under MITRE through the CVE Numbering Authority (CNA) system. It provides a common reference so scanners, advisories, and databases can unambiguously describe the same flaw. It underpins vulnerability management and threat-intelligence workflows.
 
-> Part of [[cybersecurity-MOC]]
+> Part of cybersecurity MOC
 
 ## Mentioned in
 ```dataview
 LIST
-FROM [[]]
+FROM
 SORT file.name
 ```
 

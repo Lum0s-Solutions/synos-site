@@ -2,12 +2,12 @@
 
 Zero Trust is a security model built on the principle "never trust, always verify," eliminating implicit trust based on network location and continuously authenticating and authorizing every user, device, and request. It emphasizes least-privilege access, micro-segmentation, strong identity, and continuous monitoring. NIST SP 800-207 provides the reference architecture for Zero Trust deployments.
 
-> Part of [[cybersecurity-MOC]]
+> Part of cybersecurity MOC
 
 ## Mentioned in
 ```dataview
 LIST
-FROM [[]]
+FROM
 SORT file.name
 ```
 

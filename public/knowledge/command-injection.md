@@ -2,12 +2,12 @@
 
 Command injection is a vulnerability in which an application passes unsanitized user input into a system shell, allowing an attacker to execute arbitrary operating-system commands in the application's context. It typically arises when applications build shell commands from user-controlled data without proper validation or escaping. Prevention relies on avoiding shell calls, using parameterized APIs, and applying strict input validation.
 
-> Part of [[cybersecurity-MOC]]
+> Part of cybersecurity MOC
 
 ## Mentioned in
 ```dataview
 LIST
-FROM [[]]
+FROM
 SORT file.name
 ```
 

@@ -2,12 +2,12 @@
 
 The CIA Triad is a foundational information-security model comprising three core principles: Confidentiality (preventing unauthorized disclosure), Integrity (preventing unauthorized modification), and Availability (ensuring authorized access when needed). It provides the baseline objectives against which security controls, risks, and policies are evaluated. Extended models add complementary properties such as authenticity and non-repudiation.
 
-> Part of [[cybersecurity-MOC]]
+> Part of cybersecurity MOC
 
 ## Mentioned in
 ```dataview
 LIST
-FROM [[]]
+FROM
 SORT file.name
 ```
 

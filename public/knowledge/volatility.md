@@ -2,12 +2,12 @@
 
 Volatility is an open-source memory-forensics framework for extracting digital artifacts from RAM captures (memory dumps). Investigators use it to recover running processes, network connections, injected code, registry hives, and malware traces across Windows, Linux, and macOS. It is a cornerstone tool in incident response and malware analysis.
 
-> Part of [[cybersecurity-MOC]]
+> Part of cybersecurity MOC
 
 ## Mentioned in
 ```dataview
 LIST
-FROM [[]]
+FROM
 SORT file.name
 ```
 

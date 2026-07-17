@@ -17,16 +17,12 @@ A botnet is a network of internet-connected devices ("bots" or "zombies") infect
 ## Defensive angle
 Defenders sinkhole C2 domains, monitor for beaconing and DGA traffic, and coordinate takedowns with registrars/hosts. Network egress filtering, patching IoT firmware, changing default credentials, and rate-limiting help prevent enrollment. Threat-intel sharing of bot IPs feeds firewalls and blocklists.
 
-## Seen in the community
-The dedicated **#b0tnets** channel (284 msgs, top keyword `c2`) is where members shared C2 panels and debated botnet-vs-RAT terminology, and cross-posted honeypot captures of live worms.
-
 ## Related
-- [[command-and-control]]
-- [[malware-development]]
-- [[honeypots]]
-- [[reverse-engineering]]
-- [[red-teaming]]
-- [[Discord Intel/discord-intel-MOC|Discord Intel]]
+- command and control
+- malware development
+- honeypots
+- reverse engineering
+- red teaming
 
 ## Sources
 - https://attack.mitre.org/tactics/TA0011/

@@ -18,16 +18,12 @@ Wireless attacks target the radio layer — Wi-Fi, Bluetooth, and other RF — w
 ## Defensive angle
 Defend with WPA3/enterprise auth, strong passphrases, management-frame protection (802.11w) against deauth, wireless IDS to spot rogue APs, and disabling unused radios. Wardriving your own estate reveals rogue and misconfigured access points before attackers do.
 
-## Seen in the community
-The **#ai-surveillance-takedown** channel drove Wi-Fi recon and surveillance-camera mapping; RF and Bluetooth tooling overlapped with **#hardware-hacking**.
-
 ## Related
-- [[aircrack-ng]]
-- [[hashcat]]
-- [[hardware-hacking]]
-- [[physical-security]]
-- [[osint]]
-- [[Discord Intel/discord-intel-MOC|Discord Intel]]
+- aircrack ng
+- hashcat
+- hardware hacking
+- physical security
+- osint
 
 ## Sources
 - https://www.aircrack-ng.org/

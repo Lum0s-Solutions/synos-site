@@ -2,12 +2,12 @@
 
 OpenVAS (now part of Greenbone Vulnerability Management) is an open-source vulnerability scanner that tests hosts and services against a continuously updated feed of network vulnerability tests. It provides a free alternative to commercial scanners like Nessus for detecting missing patches, misconfigurations, and known CVEs. It is widely used in cost-conscious vulnerability management programs.
 
-> Part of [[cybersecurity-MOC]]
+> Part of cybersecurity MOC
 
 ## Mentioned in
 ```dataview
 LIST
-FROM [[]]
+FROM
 SORT file.name
 ```
 

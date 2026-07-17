@@ -18,16 +18,12 @@ Command-and-control (C2, also C&C) refers to the infrastructure and software an 
 ## Defensive angle
 C2 detection relies on spotting *beaconing* (regular, jittered callbacks), unusual JA3/TLS fingerprints, DNS tunneling volume, and known malleable profiles. Frameworks like MITRE ATT&CK map C2 sub-techniques (TA0011) so defenders can build coverage; EDR, network detection (Zeek/Suricata), and threat intel feeds on C2 IPs/domains are the standard countermeasures.
 
-## Seen in the community
-Central to **#b0tnets** (top keyword `c2` ×23) and **#pentesting-party**; members debated what technically counts as a "C2" versus a RAT/botnet, and shared login-panel screenshots and fronting experiments.
-
 ## Related
-- [[cobalt-strike]]
-- [[botnets]]
-- [[reverse-shell]]
-- [[malware-development]]
-- [[red-teaming]]
-- [[Discord Intel/discord-intel-MOC|Discord Intel]]
+- cobalt strike
+- botnets
+- reverse shell
+- malware development
+- red teaming
 
 ## Sources
 - https://attack.mitre.org/tactics/TA0011/

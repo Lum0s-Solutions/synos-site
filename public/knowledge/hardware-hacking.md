@@ -18,16 +18,12 @@ Hardware hacking is the analysis and manipulation of physical devices — embedd
 ## Defensive angle
 Manufacturers defend with secure boot, signed firmware, disabled/authenticated debug ports, encrypted storage, and RF authentication (rolling codes vs. replay). Defenders audit their own devices for exposed UART/JTAG and unsigned update paths.
 
-## Seen in the community
-**#hardware-hacking** (top keyword `firmware` ×9) shared firmware-mod projects, Bluetooth/RFID tooling, and BadUSB-style experiments; it overlaps with the **#ai-surveillance-takedown** wardriving/Wi-Fi recon work.
-
 ## Related
-- [[reverse-engineering]]
-- [[wireless-network-attacks]]
-- [[physical-security]]
-- [[malware-development]]
-- [[osint]]
-- [[Discord Intel/discord-intel-MOC|Discord Intel]]
+- reverse engineering
+- wireless network attacks
+- physical security
+- malware development
+- osint
 
 ## Sources
 - https://docs.flipper.net/

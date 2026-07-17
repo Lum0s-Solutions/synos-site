@@ -2,12 +2,12 @@
 
 Netcat (nc) is a lightweight networking utility that reads and writes data across TCP and UDP connections, often called the "Swiss Army knife" of networking. Penetration testers use it for port scanning, banner grabbing, transferring files, and setting up bind or reverse shells. Common variants include Ncat (from the Nmap project) and the OpenBSD nc implementation.
 
-> Part of [[cybersecurity-MOC]]
+> Part of cybersecurity MOC
 
 ## Mentioned in
 ```dataview
 LIST
-FROM [[]]
+FROM
 SORT file.name
 ```
 

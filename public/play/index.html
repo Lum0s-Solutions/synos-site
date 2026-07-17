@@ -299,7 +299,7 @@
 <script src="/vendor/MaskPass.js"></script>
 <script src="/vendor/UnrealBloomPass.js"></script>
 <script src="/season0.js"></script>
-<script src="/systems.js"></script><script src="/knowledge.js"></script><script src="/knowledge-codex.js"></script>
+<script src="/systems.js"></script><script src="/knowledge.js"></script><script src="/knowledge-codex.js"></script><script src="/knowledge-collection.js"></script>
 </head><body>
 <header>
   <div id="dot"></div><span class="brandmark">SYN<span class="u">_</span>OS</span><b class="logo">GRIMOIRE</b><span class="kv" style="color:var(--dim);letter-spacing:1px">THE WEAVE</span>
@@ -2151,4 +2151,16 @@ if(location.search.indexOf("citydemo")>=0){ try{
     setTimeout(()=>showLoot("Sovereign Root Key","Mythic",1),320);
   }
 }catch(e){ console.log("citydemo",e); } }
+// ── Knowledge-collection: server-authoritative wiring (recs #43/#44/#45) ──
+// Reuses the game's hapi (Bearer + same-origin daemon). Manifest is public;
+// collection syncs once logged in and refreshes when the V panel opens.
+try{
+  if(window.KnowledgeCollection){
+    KnowledgeCollection.useServer(hapi);
+    KnowledgeCollection.loadManifestFromServer().catch(function(){});
+    var _kcSync=function(){ try{ if(token) KnowledgeCollection.syncFromServer().catch(function(){}); }catch(e){} };
+    _kcSync();
+    window.addEventListener("keydown",function(e){ if((e.key==="v"||e.key==="V")&&!e.ctrlKey&&!e.metaKey&&!e.altKey&&token) _kcSync(); });
+  }
+}catch(e){ console.log("kc-wire",e); }
 </script></body></html>

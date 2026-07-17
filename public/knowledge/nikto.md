@@ -2,12 +2,12 @@
 
 Nikto is an open-source web server scanner that tests for thousands of potentially dangerous files, outdated server components, and common misconfigurations. It performs fast, high-volume checks against HTTP/HTTPS services and is often used early in web-application reconnaissance. Because its scans are noisy and easily detected, it is intended for authorized assessments.
 
-> Part of [[cybersecurity-MOC]]
+> Part of cybersecurity MOC
 
 ## Mentioned in
 ```dataview
 LIST
-FROM [[]]
+FROM
 SORT file.name
 ```
 

@@ -18,16 +18,12 @@ Physical security covers the controls that protect people, facilities, and hardw
 ## Defensive angle
 Layered defense: mantraps/turnstiles against tailgating, high-frequency encrypted smartcards (not clonable 125 kHz prox), port control / disabled USB, full-disk encryption against evil-maid, cable locks, and guard/CCTV coverage. Physical and cyber controls must be assessed together.
 
-## Seen in the community
-**#physical_sec-ftw** (268 msgs) covered entry tradecraft and RFID work; it interlocks with **#hardware-hacking** tooling and OSINT-driven site reconnaissance.
-
 ## Related
-- [[hardware-hacking]]
-- [[social-engineering]]
-- [[osint]]
-- [[wireless-network-attacks]]
-- [[reverse-engineering]]
-- [[Discord Intel/discord-intel-MOC|Discord Intel]]
+- hardware hacking
+- social engineering
+- osint
+- wireless network attacks
+- reverse engineering
 
 ## Sources
 - https://www.proxmark.com/

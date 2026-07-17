@@ -2,12 +2,12 @@
 
 sqlmap is an open-source penetration-testing tool that automates the detection and exploitation of SQL injection vulnerabilities. It supports many database backends and injection techniques (boolean- and time-based blind, error-based, UNION query, and stacked queries) and can enumerate databases, dump data, read and write files, and gain OS-level command execution. It is the standard automated SQL injection tool.
 
-> Part of [[cybersecurity-MOC]]
+> Part of cybersecurity MOC
 
 ## Mentioned in
 ```dataview
 LIST
-FROM [[]]
+FROM
 SORT file.name
 ```
 

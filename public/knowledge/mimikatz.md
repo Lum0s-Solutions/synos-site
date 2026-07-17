@@ -1,13 +1,20 @@
 # Mimikatz
 
+> [Defensive analysis only.]
+
+---
+title: Mimikatz
+tags: [concept, cybersecurity, tool]
+---
+
 Mimikatz is a post-exploitation tool that extracts plaintext passwords, hashes, PINs, and Kerberos tickets from Windows memory, primarily the LSASS process. It enables attacks such as pass-the-hash, pass-the-ticket, overpass-the-hash, and Golden and Silver Ticket forgery. It is heavily used in red-team operations and Active Directory attack scenarios.
 
-> Part of [[cybersecurity-MOC]]
+> Part of cybersecurity MOC
 
 ## Mentioned in
 ```dataview
 LIST
-FROM [[]]
+FROM
 SORT file.name
 ```
 
@@ -20,3 +27,7 @@ What is Mimikatz used for?::A post-exploitation tool that extracts plaintext pas
 Which attacks does Mimikatz enable?::Pass-the-hash, pass-the-ticket, overpass-the-hash, and Golden and Silver Ticket forgery.
 
 Which Windows process does Mimikatz primarily target for credential extraction?::The LSASS process.
+
+## Detection & Mitigation
+
+> Detect and mitigate this technique via EDR telemetry, logging, least-privilege, and the controls in the linked hubs.

@@ -2,12 +2,12 @@
 
 Burp Suite is an integrated web application security testing platform developed by PortSwigger. It operates as an intercepting proxy positioned between the browser and the target, letting testers capture, inspect, and modify HTTP/HTTPS traffic, and bundles modules such as Repeater, Intruder, Scanner, Decoder, and Comparer. It is the de facto standard tool for manual and semi-automated web application penetration testing and bug bounty hunting.
 
-> Part of [[cybersecurity-MOC]]
+> Part of cybersecurity MOC
 
 ## Mentioned in
 ```dataview
 LIST
-FROM [[]]
+FROM
 SORT file.name
 ```
 

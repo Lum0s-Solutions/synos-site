@@ -2,12 +2,12 @@
 
 Hashcat is a high-performance, GPU-accelerated password-recovery tool that cracks hashes using dictionary, brute-force, mask, rule-based, and combinator attacks. It supports hundreds of hash algorithms and is regarded as one of the fastest offline crackers available. It is commonly used alongside John the Ripper in credential-assessment work.
 
-> Part of [[cybersecurity-MOC]]
+> Part of cybersecurity MOC
 
 ## Mentioned in
 ```dataview
 LIST
-FROM [[]]
+FROM
 SORT file.name
 ```
 

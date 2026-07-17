@@ -17,16 +17,12 @@ A honeypot is a deliberately exposed, monitored decoy system designed to attract
 ## Defensive angle
 Honeypots deliver early warning, threat intelligence (fresh IOCs and IPs), and malware samples for signature development. The captured C2 IPs and droppers feed blocklists and YARA rules. Care is required: a poorly isolated high-interaction honeypot can leak real credentials — a lesson members shared firsthand.
 
-## Seen in the community
-**#honeypot-palace** members ran SSH/Pi honeypots, caught live worms and "the whole botnet," extracted C2 IPs via `strings`, and offered binaries for group static analysis.
-
 ## Related
-- [[botnets]]
-- [[malware-development]]
-- [[reverse-engineering]]
-- [[command-and-control]]
-- [[threat-hunting-MOC]]
-- [[Discord Intel/discord-intel-MOC|Discord Intel]]
+- botnets
+- malware development
+- reverse engineering
+- command and control
+- threat hunting MOC
 
 ## Sources
 - https://github.com/cowrie/cowrie

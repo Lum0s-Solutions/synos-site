@@ -2,12 +2,12 @@
 
 Hydra (THC-Hydra) is a fast, parallelized network login brute-forcer that performs online password-guessing attacks against many protocols, including SSH, FTP, HTTP(S), RDP, SMB, and databases. Testers use it to assess credential strength and to detect weak or default logins on live services. Unlike offline crackers, it attacks running network services directly.
 
-> Part of [[cybersecurity-MOC]]
+> Part of cybersecurity MOC
 
 ## Mentioned in
 ```dataview
 LIST
-FROM [[]]
+FROM
 SORT file.name
 ```
 

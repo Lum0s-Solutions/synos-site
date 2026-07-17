@@ -18,16 +18,12 @@ Bug bounty hunting is the practice of finding and responsibly reporting security
 ## Defensive angle
 Bug bounties are a defensive control: crowd-sourced, continuous testing that surfaces real exploitable issues before criminals do. Programs pair with a **vulnerability disclosure policy (VDP)**, clear scope, and fast remediation SLAs. The same recon that finds bugs (e.g., an auth-bypass CVE exposing an RTSP stream in client-side JS) shows defenders what they leak.
 
-## Seen in the community
-**#bug-bounty-city** shared recon/exploitation tooling and CVE-hunting workflows, overlapping with **#exploit-dev-talk** disclosure discussions.
-
 ## Related
-- [[burp-suite]]
-- [[sqlmap]]
-- [[osint]]
-- [[exploit-development]]
-- [[cve]]
-- [[Discord Intel/discord-intel-MOC|Discord Intel]]
+- burp suite
+- sqlmap
+- osint
+- exploit development
+- cve
 
 ## Sources
 - https://owasp.org/www-project-top-ten/

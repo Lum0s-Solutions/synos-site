@@ -19,16 +19,12 @@ Reverse engineering (RE) is the process of analyzing a compiled program, firmwar
 ## Defensive angle
 RE turns unknown binaries into signatures (YARA), IOCs, and ATT&CK mappings. Malware authors respond with packing, anti-debug, anti-VM, and obfuscation, so RE is an arms race. Always analyze in an isolated, network-controlled lab.
 
-## Seen in the community
-The **#reverse-engineering** channel (top keyword `malware`) hosted static-analysis requests — e.g., a worm pulled off an SSH honeypot offered up for group binary analysis.
-
 ## Related
-- [[malware-development]]
-- [[exploit-development]]
-- [[volatility]]
-- [[honeypots]]
-- [[hardware-hacking]]
-- [[Discord Intel/discord-intel-MOC|Discord Intel]]
+- malware development
+- exploit development
+- volatility
+- honeypots
+- hardware hacking
 
 ## Sources
 - https://ghidra-sre.org/

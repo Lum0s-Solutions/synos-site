@@ -2,12 +2,12 @@
 
 BloodHound is a reconnaissance and attack-path-mapping tool that uses graph theory to reveal hidden relationships and privilege-escalation paths within Active Directory and Azure AD environments. Collectors gather session, ACL, group, and trust data, which BloodHound visualizes to find routes to Domain Admin. It is a staple of both Active Directory penetration testing and defensive hardening.
 
-> Part of [[cybersecurity-MOC]]
+> Part of cybersecurity MOC
 
 ## Mentioned in
 ```dataview
 LIST
-FROM [[]]
+FROM
 SORT file.name
 ```
 

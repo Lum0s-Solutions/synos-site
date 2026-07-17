@@ -2,12 +2,12 @@
 
 theHarvester is an OSINT reconnaissance tool that gathers emails, subdomains, hosts, employee names, and open ports from public sources such as search engines, PGP key servers, and certificate transparency logs. Penetration testers use it during the passive information-gathering phase to map an organization's external footprint. It is a standard early-stage reconnaissance utility.
 
-> Part of [[cybersecurity-MOC]]
+> Part of cybersecurity MOC
 
 ## Mentioned in
 ```dataview
 LIST
-FROM [[]]
+FROM
 SORT file.name
 ```
 

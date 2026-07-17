@@ -2,12 +2,12 @@
 
 STRIDE is a threat-modeling framework developed at Microsoft that classifies threats into six categories: Spoofing, Tampering, Repudiation, Information disclosure, Denial of service, and Elevation of privilege. Analysts apply it, often against data-flow diagrams, to systematically identify how a system could be attacked. Each category maps to a desired security property such as authentication, integrity, non-repudiation, confidentiality, availability, and authorization.
 
-> Part of [[cybersecurity-MOC]]
+> Part of cybersecurity MOC
 
 ## Mentioned in
 ```dataview
 LIST
-FROM [[]]
+FROM
 SORT file.name
 ```
 

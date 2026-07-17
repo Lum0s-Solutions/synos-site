@@ -2,12 +2,12 @@
 
 Directory traversal (path traversal) is a web vulnerability that lets an attacker access files and directories outside the intended web root by manipulating file-path input with sequences such as `../`. Successful exploitation can expose sensitive files like /etc/passwd, configuration files, credentials, or source code. It is mitigated through input validation, path canonicalization, and least-privilege file access.
 
-> Part of [[cybersecurity-MOC]]
+> Part of cybersecurity MOC
 
 ## Mentioned in
 ```dataview
 LIST
-FROM [[]]
+FROM
 SORT file.name
 ```
 

@@ -2,12 +2,12 @@
 
 ARP spoofing (ARP poisoning) is a man-in-the-middle attack in which an attacker sends forged ARP messages on a local network to associate their MAC address with another host's IP, redirecting that host's traffic through the attacker's machine. It enables interception, modification, or denial of traffic between victims on the same LAN. Defenses include dynamic ARP inspection, static ARP entries, and end-to-end encryption.
 
-> Part of [[cybersecurity-MOC]]
+> Part of cybersecurity MOC
 
 ## Mentioned in
 ```dataview
 LIST
-FROM [[]]
+FROM
 SORT file.name
 ```
 

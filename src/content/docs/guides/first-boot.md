@@ -28,7 +28,7 @@ Boot time on a modest SSD lands at ~30 seconds to login prompt; ~86 seconds to a
 After the first login, the **Syn_OS Onboarding Wizard** appears — a Bevy-rendered fullscreen UI with the Cutscene plugin's typewriter dialogue.
 
 1. **ALFRED introduction** — the daemon introduces itself, asks for consent to operate in Advisory mode, and explains the four operating modes (Advisory / GameMode / Enterprise / Mesh).
-2. **Profile confirmation** — the ISO profile is read from `/etc/synos/brand-meta.toml`. You cannot cross-promote here; promotion to the Enterprise Edition requires a commercial license and a fresh image.
+2. **Profile confirmation** — the ISO profile is read from `/etc/synos/brand-meta.toml`. You cannot cross-promote here; the Enterprise Edition tier this would promote to is planned but not yet available.
 3. **Security baseline** — the Sanctum hardening profile is applied: AppArmor enforce, seccomp filters, kernel lockdown, eBPF monitor enable.
 4. **Network setup** — optional **ARCANUM Hive** enrollment via Tailscale + WireGuard. If you skip, you can re-run `synos-hive-bootstrap` later.
 5. **GRIMOIRE onboarding** *(GRIMOIRE Public only)* — pick your faction (Crimson Spire / Neon Collective / The Warden), accept the Sovereign Operator Path agreement, receive the 10-tool starter kit and your first lab assignment.
@@ -47,7 +47,7 @@ On first boot ALFRED starts in **Advisory mode**: read-only system inspection, n
 ```bash
 synos-alfred-mode set advisory   # default
 synos-alfred-mode set gamemode   # for GRIMOIRE labs
-synos-alfred-mode set enterprise # full execution (Enterprise Edition only)
+synos-alfred-mode set enterprise # full execution (Enterprise Edition tier — planned, not yet available)
 synos-alfred-mode set mesh       # gossip-protocol distributed consciousness
 ```
 

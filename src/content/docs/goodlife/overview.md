@@ -1,9 +1,9 @@
 ---
 title: GoodLife Sovereign ISO
-description: GoodLife — the full sovereign build of Syn_OS. Full ALFRED, full AI cortex, full ARCANUM mesh, the complete 245-crate stack, and a dedicated Research Division. Operational offensive tooling is not included. No telemetry, air-gap capable, local models.
+description: GoodLife — the full sovereign build of Syn_OS. Full ALFRED, full AI cortex, full ARCANUM mesh, the complete 227-crate stack, and a dedicated Research Division. Operational offensive tooling is not included. No telemetry, air-gap capable, local models.
 ---
 
-**GoodLife** is the **full sovereign build** of Syn_OS. Same custom 7.0-synos-ai kernel, same 245-crate Rust workspace, the full ALFRED v6.0 daemon, the full AI cortex and dispatch, the complete ARCANUM mesh, and a dedicated **Research Division** (Jupyter, local models, ML lab) layered on top. **Operational offensive tooling is simply not included** — GoodLife is a complete AI-and-development platform, not an offensive-operations profile. It keeps Syn_OS's sovereign values — no telemetry, air-gap capable, local models by default — so you get a complete, self-owned platform without becoming a target by accident. Free for personal and sovereign use; commercial or organizational deployment requires a license.
+**GoodLife** is the **full sovereign build** of Syn_OS. Same custom 7.0-synos-ai kernel, same 227-crate Rust workspace, the full ALFRED v6.0 daemon, the full AI cortex and dispatch, the complete ARCANUM mesh, and a dedicated **Research Division** (Jupyter, local models, ML lab) layered on top. **Operational offensive tooling is simply not included** — GoodLife is a complete AI-and-development platform, not an offensive-operations profile. It keeps Syn_OS's sovereign values — no telemetry, air-gap capable, local models by default — so you get a complete, self-owned platform without becoming a target by accident. Free for personal and sovereign use; commercial or organizational deployment is intended to require a license once the planned Enterprise Edition tier ships.
 
 ## What's in the box
 
@@ -48,7 +48,7 @@ job_hunt_mode = true          # privacy-first, no cross-context bleed
 context_isolation = "tenant"  # each conversation is its own tenant
 ```
 
-What GoodLife does **not** ship is operational offensive tooling. Curtain v4 holds the public images to a capability ceiling from the kernel side: GoodLife tokens cannot acquire the claims that would escalate the image to the licensed Enterprise Edition. Everything else Syn_OS can do is on the table.
+What GoodLife does **not** ship is operational offensive tooling. Curtain v4 holds the public images to a capability ceiling from the kernel side: GoodLife tokens cannot acquire the claims that would escalate the image to the (planned, not yet available) Enterprise Edition. Everything else Syn_OS can do is on the table.
 
 ## Salvaged-hardware mesh
 
@@ -61,11 +61,11 @@ synos-hive-add-node <mesh-ip> --role embedding
 ollama serve --hive  # automatically shards across the mesh
 ```
 
-A 4-node i5-class mesh outperforms a single mid-range workstation on memory-bound LLM workloads at near-zero hardware cost.
+The design intent is that a 4-node i5-class mesh can rival a single mid-range workstation on memory-bound LLM workloads at near-zero hardware cost; this has not been independently benchmarked.
 
 ## What GoodLife is for
 
-- **A complete sovereign platform** — the full 245-crate stack, full ALFRED, and the full AI cortex + dispatch, all self-owned
+- **A complete sovereign platform** — the full 227-crate stack, full ALFRED, and the full AI cortex + dispatch, all self-owned
 - **Local AI research** — sovereign LLM inference, no cloud bills, no telemetry
 - **Federated inference experiments** — the mesh is the substrate
 - **RAG / embedding pipelines** against your own corpus
@@ -76,8 +76,8 @@ A 4-node i5-class mesh outperforms a single mid-range workstation on memory-boun
 ## What GoodLife is *not* for
 
 - **Operational offensive tooling** — GoodLife ships none of it; sandboxed offensive *training* lives on GRIMOIRE Public
-- **Production multi-tenant deployment** — multi-tenant ARCANUM federation and fleet management are **Enterprise Edition** capabilities, available under a commercial license
-- **Compliance-evidence generation** — the **Enterprise Edition** ships the FedRAMP / CMMC / SOC2 control maps and ConMon evidence collector
+- **Production multi-tenant deployment** — multi-tenant ARCANUM federation and fleet management are planned **Enterprise Edition** capabilities; not yet available under any license
+- **Compliance-evidence generation** — the planned **Enterprise Edition** tier is where the FedRAMP / CMMC / SOC2 control maps and ConMon evidence collector would live; not yet available
 
 ## Getting started
 

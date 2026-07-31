@@ -33,7 +33,7 @@ The interface exposes: consciousness fusion state, AI stimulus and memory update
 
 ## Loadable Rust modules
 
-Syn_OS ships **33 signed Rust kernel modules — 28 of them real, loadable, and QEMU-boot-validated** (65/65 PASS). All live in `fruit/core/src/linux-kernel/rust-modules/`, register a root-only (`0600`) `/dev/synos_*` device node with a `CAP_SYS_ADMIN`-gated ioctl ABI, and are signed at build stage `02b`.
+Syn_OS ships **33 signed Rust kernel modules, 67/67 QEMU-boot-validated**. All live in `fruit/core/src/linux-kernel/rust-modules/`, register a root-only (`0600`) `/dev/synos_*` device node with a `CAP_SYS_ADMIN`-gated ioctl ABI, and are signed at build stage `02b`.
 
 ### AI Char-Device Interface (8)
 

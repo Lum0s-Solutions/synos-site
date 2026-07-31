@@ -1,21 +1,23 @@
 ---
 title: ARCANUM Mesh
-description: ARCANUM Hive — distributed Syn_OS mesh on Tailscale + WireGuard with a Kubernetes operator. 8-node Stoneglass GA. Federated consciousness, salvaged-hardware AI, multi-tenant Sanctum.
+description: ARCANUM Hive — distributed Syn_OS mesh on Tailscale + WireGuard with a Kubernetes operator. Ansible playbooks written to scale to a fleet; a small reference mesh runs today. Federated consciousness, salvaged-hardware AI, multi-tenant Sanctum.
 ---
 
-**ARCANUM Hive** is the fungal-mycelium layer of the biological model — the distributed nervous system that lets a fleet of Syn_OS nodes act as one organism. It runs on a **Tailscale** primary backbone with **WireGuard** fallback and is orchestrated by a Kubernetes operator (`synos-arcanum` — 4 crates: controller, attestor, profiler, tests).
+**ARCANUM Hive** is the fungal-mycelium layer of the biological model — the distributed nervous system meant to let a fleet of Syn_OS nodes act as one organism. It runs on a **Tailscale** primary backbone with **WireGuard** fallback and is orchestrated by a Kubernetes operator (`synos-arcanum` — 4 crates: controller, attestor, profiler, tests).
 
-The v55 **Stoneglass** release brought the full 8-node Ansible playbook set to GA. The vision behind it is described in `SALVAGED_HARDWARE_MESH_VISION.md`: turn discarded laptops and office workstations into a distributed inference mesh; drop the accessibility ceiling for sovereign AI from "needs a $2,000 GPU" to "needs a working laptop."
+The v55 **Stoneglass** release wrote the full 8-node Ansible playbook set to scale the mesh to a fleet. A small reference mesh runs today on reclaimed hardware; a large fleet has not yet been deployed. The vision behind it is described in `SALVAGED_HARDWARE_MESH_VISION.md`: turn discarded laptops and office workstations into a distributed inference mesh; drop the accessibility ceiling for sovereign AI from "needs a $2,000 GPU" to "needs a working laptop."
 
 ## Why a mesh at all
 
 Three reasons:
 
-1. **Distributed inference** — local LLMs are good but small; sharded inference across a 4-node mesh of i5-class laptops outperforms a single mid-range workstation on memory-bound models, at near-zero hardware cost.
+1. **Distributed inference** — local LLMs are good but small; the design intent is that sharded inference across a 4-node mesh of i5-class laptops can rival a single mid-range workstation on memory-bound models, at near-zero hardware cost. This has not been independently benchmarked at scale.
 2. **Federated consciousness** — ALFRED in **Mesh** mode runs gossip across peer instances, so observation, threat detection, and Fragment Field signal aggregate across the fleet.
 3. **E-waste reduction as load-bearing thesis** — Syn_OS is genuinely cheaper to deploy on five reclaimed laptops than on one new GPU box. The Salvage Yard quest arc in GRIMOIRE is the user-facing instantiation of this thesis.
 
 ## Topology
+
+**Target architecture** — the multi-Sanctum, multi-node topology below is what the Ansible playbooks are written to reach. The mesh running today is a small reference deployment, not this full fleet.
 
 ```
                   ┌──── Sanctum Federation (v49 Crystal Net) ────┐
@@ -67,7 +69,7 @@ The playbooks:
 - pull the appropriate ALFRED model fingerprints and verify ML-DSA signatures
 - register with the Hive controller and request a workload assignment
 
-A node can be brought from "freshly-imaged" to "scheduled and running its first inference" in about 4 minutes on a wired LAN.
+The playbooks are designed to bring a node from "freshly-imaged" to "scheduled and running its first inference" in a few minutes on a wired LAN; this has been exercised on the reference mesh, not at fleet scale.
 
 ## Federated inference
 
@@ -78,7 +80,7 @@ ALFRED in **Mesh** mode treats the cluster as a unified inference substrate. Mod
 - network latency to the requesting client
 - current workload pressure
 
-A typical deployment runs `qwen2.5:7b` sharded across 3 nodes for chat workloads while reserving a 4th for embedding generation, with hot-failover if any node drops.
+The design intent is a deployment running `qwen2.5:7b` sharded across 3 nodes for chat workloads while reserving a 4th for embedding generation, with hot-failover if any node drops — this is the target shape, not a benchmarked production deployment.
 
 ## Federated consciousness
 

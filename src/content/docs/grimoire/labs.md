@@ -1,13 +1,13 @@
 ---
 title: Lab Catalog
-description: 117 GRIMOIRE labs across 13 categories (catalog 1.0), every one with Docker overlays, MITRE ATT&CK + UKC tags, difficulty rating, and SHA-256 integrity manifests.
+description: 241 GRIMOIRE labs across 13 categories (catalog 1.0), every one with Docker overlays, MITRE ATT&CK + UKC tags, difficulty rating, and SHA-256 integrity manifests.
 ---
 
 Every lab in GRIMOIRE ships with a Docker overlay (the majority with full network-isolated environments), a MITRE ATT&CK tag, a Unified Kill Chain (UKC) phase tag, a difficulty rating, and an XP reward. Labs are verified by the `lab-integrity` xtask; SHA-256 manifests are regenerated on every merge to `main`. The full catalogue is **pre-bundled** in every GRIMOIRE Public ISO — unlocks just grant execution permission, never download anything.
 
 ## The 13 categories
 
-**117 labs across 13 categories** (catalog 1.0). The catalogue spans:
+**241 labs across 13 categories** (catalog 1.0). The catalogue spans:
 
 | Category                     |   Difficulty range      | Highlights                                                                |
 |------------------------------|:-----------------------:|---------------------------------------------------------------------------|
@@ -25,7 +25,7 @@ Every lab in GRIMOIRE ships with a Docker overlay (the majority with full networ
 | **Purple Team / Detection**  |  Intermediate → Expert  | Detection engineering, Sigma rule authoring, SIEM correlation             |
 | **API Security**             | Intermediate → Advanced | REST / GraphQL abuse, OAuth misconfigurations, mass assignment            |
 
-**Total: 117 labs across 13 categories (catalog 1.0), ~110+ game modules wrapping them.**
+**Total: 241 labs across 13 categories (catalog 1.0), ~110+ game modules wrapping them.**
 
 ## What every lab ships with
 
@@ -55,7 +55,7 @@ Every lab is hashed and signed during the v48 Forge reproducible-build pipeline:
 grimoire verify-lab web-sqli-blind-002
 # → SHA-256 manifest matches signed release attestation
 # → Sigstore Rekor entry: https://rekor.sigstore.dev/api/v1/log/entries/...
-# → SLSA-3 provenance: ✓
+# → SLSA build provenance (targeting L3): ✓
 ```
 
 If a lab manifest fails verification, the SkillTree plugin refuses to unlock it and the `lab-integrity` xtask flags the binary for re-extraction.

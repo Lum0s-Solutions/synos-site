@@ -98,4 +98,4 @@ The vocabulary is borrowed from neuroscience because the architecture is borrowe
 
 ## I have a question that's not here.
 
-[Open an issue](https://github.com/Lum0s-Solutions/Syn_OS/issues), drop it in [Discord](https://discord.gg/synos), or email `info@lumossolutions.io`.
+[Open an issue](https://github.com/Lum0s-Solutions/Syn_OS/issues), drop it in [Discord](https://discord.gg/synos), or email `mogeem33@gmail.com`.

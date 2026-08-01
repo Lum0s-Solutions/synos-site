@@ -78,7 +78,7 @@ The vocabulary is borrowed from neuroscience because the architecture is borrowe
 
 ## How do I report a security issue?
 
-`security@lumossolutions.io`. Our PGP key and coordinated-disclosure policy are published in `SECURITY.md` in the GitHub repo.
+`mogeem33@gmail.com`. Our PGP key and coordinated-disclosure policy are published in `SECURITY.md` in the GitHub repo.
 
 ## What does the v111 status table actually mean?
 

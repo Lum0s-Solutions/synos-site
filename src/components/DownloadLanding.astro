@@ -39,14 +39,14 @@ import HeartbeatHero from './HeartbeatHero.astro';
           <div class="pname">GRIMOIRE</div>
           <div class="ptag">Learn to hack. For real — a shared-world hacking MMO where the exploit <em>is</em> the objective.</div>
           <ul class="specs">
-            <li>117 labs across 13 categories — pre-bundled, unlock by progression</li>
+            <li>241 labs across 13 categories — pre-bundled, unlock by progression</li>
             <li>Faction wars: Crimson Spire · Neon Collective · The Warden</li>
             <li>Cert paths: eJPT · OSCP · OSEP · GIAC · CEH</li>
             <li>ALFRED GameMode · sandboxed · optional AI-research unlock late-game</li>
           </ul>
           <div class="pfoot">
             <div class="dl"><span>synos-grimoire-v111.iso</span> · <b>x86-64 · UEFI</b></div>
-            <a class="cta" href="#"><span>Download image</span><span class="arw">→</span></a>
+            <a class="cta" href="/guides/build-from-source/"><span>Build it now</span><span class="arw">→</span></a>
           </div>
         </article>
 
@@ -57,50 +57,49 @@ import HeartbeatHero from './HeartbeatHero.astro';
           <div class="ptag">The full sovereign build — everything except operational offensive tooling. Your own AI, your own mesh, your own research lab.</div>
           <ul class="specs">
             <li>Full ALFRED v6.0 · full AI cortex + dispatch</li>
-            <li>Full ARCANUM mesh · the complete 245-crate stack</li>
+            <li>Full ARCANUM mesh · the complete 226-crate stack</li>
             <li>Dedicated Research Division — Jupyter, local models, ML lab</li>
             <li>No operational offensive tooling — simply not included</li>
           </ul>
           <div class="pfoot">
             <div class="dl"><span>synos-goodlife-v111.iso</span> · <b>free personal · licensed commercial</b></div>
-            <a class="cta" href="#"><span>Download image</span><span class="arw">→</span></a>
+            <a class="cta" href="/guides/build-from-source/"><span>Build it now</span><span class="arw">→</span></a>
           </div>
         </article>
 
         <!-- Enterprise Edition -->
         <article class="panel p-master reveal">
-          <div class="ptop"><span class="pbadge">Enterprise</span><span class="status locked">◆ Licensed</span></div>
+          <div class="ptop"><span class="pbadge">Enterprise</span><span class="status locked">◆ Planned</span></div>
           <div class="pname">Enterprise Edition</div>
-          <div class="ptag">The commercial build for teams and regulated environments — the full stack, multi-tenant, compliant, supported.</div>
+          <div class="ptag">A planned commercial tier for teams and regulated environments — the full stack, multi-tenant, compliance-mapped. Not yet purchasable.</div>
           <ul class="specs">
             <li>Everything in GoodLife, at organizational scale</li>
-            <li>Multi-tenant ARCANUM federation + fleet management</li>
-            <li>FedRAMP Moderate · CMMC L2 · SOC2 posture with evidence packs</li>
-            <li>Priority support &amp; SLAs · by customer agreement</li>
+            <li>Multi-tenant ARCANUM federation + fleet management (design intent)</li>
+            <li>Compliance control maps authored against NIST 800-53 — third-party audits not yet performed</li>
           </ul>
           <div class="pfoot">
-            <div class="lockrow">🔒 licensed · customer agreement</div>
-            <a class="cta" href="#"><span>Talk to us</span><span class="arw">→</span></a>
+            <div class="lockrow">◆ planned tier · not yet available</div>
+            <a class="cta" href="mailto:info@lumossolutions.io?subject=Enterprise%20Edition%20interest"><span>Register interest</span><span class="arw">→</span></a>
           </div>
         </article>
       </div>
 
-      <!-- CHURCH OF MALWARE — members-only beta -->
+      <!-- CHURCH OF MALWARE — open forge + runtime membership -->
       <div class="comband reveal" id="church">
         <div class="comgrid">
           <div>
-            <div class="comeyebrow"><span class="sigil">⛧</span> Church of Malware · Beta Access</div>
+            <div class="comeyebrow"><span class="sigil">⛧</span> Church of Malware · Open Forge</div>
             <div class="comtitle">Enter through the <b>Church</b>.</div>
-            <p>A community edition forged <em>with</em> the <a href="https://churchofmalware.org">Church of Malware</a>. Verified members boot green-on-black into the CoM faction — a baked-in loadout, an XP head-start, and member-exclusive labs the public build never sees. This is the soft-launch door for public beta.</p>
-            <div class="comscript">// code is scripture · exploitation is sermon · members only</div>
-            <a class="combtn" href="https://churchofmalware.org"><span>Request CoM Beta Access</span><span class="arw">→</span></a>
-            <div class="commeta">membership is audited in the CoM Discord — access is device-bound and single-use</div>
+            <p>The source is open now at the <a href="https://churchofmalware.org">Church of Malware</a> forge — plaintext, no keys, no unlock step. Clone it and <code>just iso churchofmalware</code> builds the real, fully-functional image. The forge deliberately can't produce a master (internal) image: the master-only fleet-C2, fleet-OTA, and key-escrow crates simply aren't in the tree, and <code>--profile master</code> aborts before any build work runs.</p>
+            <div class="comscript">// code is scripture · exploitation is sermon</div>
+            <a class="combtn" href="/guides/build-from-source/"><span>Build from source</span><span class="arw">→</span></a>
+            <div class="commeta">runtime membership (perks, XP head-start, faction loadout) is separate — join the Discord and run <code>/claim</code></div>
           </div>
           <ol class="comflow">
-            <li><span class="n">1</span><span>Join the <b class="comwhite">Church of Malware</b> Discord via <code>churchofmalware.org</code></span></li>
-            <li><span class="n">2</span><span>Get <b class="comwhite">verified</b> — your role is audited to confirm membership</span></li>
-            <li><span class="n">3</span><span>Run <code>/claim</code> in Discord → receive a single-use claim code</span></li>
-            <li><span class="n">4</span><span>Redeem with <code>synos-claim &lt;code&gt;</code> and boot your token-gated beta</span></li>
+            <li><span class="n">1</span><span>Clone the public forge — <a href="/guides/build-from-source/">build-from-source guide →</a></span></li>
+            <li><span class="n">2</span><span>Run <code>just iso churchofmalware</code> — no keys, no unlock, the full image is yours</span></li>
+            <li><span class="n">3</span><span>Master-only fleet-C2/OTA/escrow crates aren't in this tree — <code>--profile master</code> isn't buildable here, by design</span></li>
+            <li><span class="n">4</span><span>Join the CoM Discord and run <code>/claim</code> for a runtime membership token — separate from build access</span></li>
           </ol>
         </div>
       </div>
@@ -112,10 +111,10 @@ import HeartbeatHero from './HeartbeatHero.astro';
     <div class="hbwrap">
       <div class="reveal">
         <h3>Every image is signed.</h3>
-        <p>Reproducible from source across independent build oracles, cosign-signed, and logged to a public transparency record. Trust the fire, verify the ash.</p>
+        <p>Reproducible from source, cosign-signed, and logged to a public transparency record. Cross-oracle verification lands once a second build oracle is provisioned. Trust the fire, verify the ash.</p>
         <div class="chips">
           <span class="chip"><b>SHA-256</b> per image</span>
-          <span class="chip"><b>SLSA-3</b> reproducible</span>
+          <span class="chip">build provenance <b>targeting SLSA-3</b></span>
           <span class="chip"><b>cosign</b> + Sigstore Rekor</span>
           <span class="chip"><b>CycloneDX</b> SBOM</span>
         </div>

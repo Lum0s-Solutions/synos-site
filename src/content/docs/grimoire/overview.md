@@ -1,6 +1,6 @@
 ---
 title: GRIMOIRE Overview
-description: GRIMOIRE — the competitive hacker training platform built into Syn_OS. 117 labs, 13 categories, 110+ game modules, faction wars, and a Sovereign Operator Path. Catalog 1.0.
+description: GRIMOIRE — the competitive hacker training platform built into Syn_OS. 241 labs, 13 categories, 110+ game modules, faction wars, and a Sovereign Operator Path. Catalog 1.0.
 ---
 
 **GRIMOIRE** — Gamified Reconnaissance, Intelligence, Malware Operations, Intrusion Response & Exploitation — is the cybersecurity training layer of Syn_OS. It is not a tool collection bolted onto a distro; it is a complete **progression system** for mastering offensive, defensive, and purple-team cybersecurity, preparing for industry certifications, and competing globally to be the best hacker in the game.
@@ -23,13 +23,13 @@ GRIMOIRE is a **playable shared-world hacking MMO** — spawn into the Weave, wa
 
 | Metric                   | Value                                                                |
 |--------------------------|----------------------------------------------------------------------|
-| **Labs**                 | **117 across 13 categories** (catalog **1.0**) — 71+ with full Docker overlays |
+| **Labs**                 | **241 across 13 categories** (catalog **1.0**) — 71+ with full Docker overlays |
 | **Game modules**         | 110+ (~53,000 LOC of `synos-gamification`)                           |
 | **Engine**               | Bevy 0.14 — `synos-bevy` 7,129+ LOC                                  |
 | **Bevy plugins**         | 8 — Cutscene, Mindmap, RetroFilter, Cyberspace, SkillTree, FactionHQ, Rehoboam, Twin |
 | **Factions**             | 3 — Crimson Spire, Neon Collective, The Warden                       |
 | **Cert paths mapped**    | 11+ professional credentials                                         |
-| **Engine offline**       | All 117 labs ship pre-bundled in the ISO                             |
+| **Engine offline**       | All 241 labs ship pre-bundled in the ISO                             |
 | **Lab integrity**        | SHA-256 manifests verified by `lab-integrity` xtask on every merge   |
 
 ## The progressive unlock system (v41+)
@@ -59,20 +59,20 @@ Faction choice affects RICO contract dispersal, available boss-contract chains, 
 
 ## The capability ceiling
 
-GRIMOIRE Public **cannot** escalate to the licensed Enterprise Edition, no matter how far a player progresses, and it carries no operational offensive tooling. The **Curtain v4** runtime ceiling enforces:
+GRIMOIRE Public **cannot** escalate to the (planned) Enterprise Edition, no matter how far a player progresses, and it carries no operational offensive tooling. The **Curtain v4** runtime ceiling enforces:
 
 - AI dispatch operations return `ENOSYS` on GRIMOIRE (capability-token enforcement)
 - LLM federation is tier-isolated (GRIMOIRE nodes federate only with GRIMOIRE peers)
 - Audit chain HMAC roots are separated between GRIMOIRE and the Enterprise Edition
-- Fragment Field IDS kernel detection is enabled only in the licensed Enterprise Edition; GRIMOIRE gets userspace-only access
+- Fragment Field IDS kernel detection is enabled only in the (planned) Enterprise Edition tier; GRIMOIRE gets userspace-only access
 - C2 framework binaries (cobalt-strike, empire, covenant, sliver) are scrubbed at build time
 
-This is the bedrock of the LumOs commercial model: GRIMOIRE is the talent funnel that produces the best cybersecurity operators in the world; the Enterprise Edition is the commercial product LumOs sells to organizations that need Syn_OS's full capability at scale, with multi-tenant federation and a compliance posture, under a license.
+This is the bedrock of the LumOs commercial model: GRIMOIRE is the talent funnel that produces the best cybersecurity operators in the world; the Enterprise Edition is a planned commercial tier, not yet purchasable, intended for organizations that need Syn_OS's full capability at scale, with multi-tenant federation and a compliance posture.
 
 [Read the Curtain Capability Tokens deep dive →](/architecture/curtain/)
 
 ## Where to next
 
-- **[Lab Catalog →](/grimoire/labs/)** — the 117 labs, by category
+- **[Lab Catalog →](/grimoire/labs/)** — the 241 labs, by category
 - **[XP & Progression →](/grimoire/progression/)** — how unlock works
 - **[Competition Mode →](/grimoire/competition/)** — leaderboards, war games, and the Sovereign Operator Path

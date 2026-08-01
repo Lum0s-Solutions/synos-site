@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GRIMOIRE — Syn_OS</title>
+<!doctype html><html lang="en"><head><script>window.SYNOS_PLAYTEST=true;window.SYNOS_WORLD_SERVER=window.SYNOS_WORLD_SERVER||'wss://world.synos-linux.pro';</script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GRIMOIRE · play-test (admin)</title><meta name="robots" content="noindex,nofollow">
 <style>
   /* Self-hosted brand faces (same files the crimson-phoenix homepage uses) */
   @font-face{font-family:'Saira';font-style:normal;font-weight:400 700;font-display:swap;src:url('/fonts/saira-latin.woff2') format('woff2')}
@@ -6,8 +6,17 @@
   @font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:100 800;font-display:swap;src:url('/fonts/jetbrains-mono-latin.woff2') format('woff2')}
   :root{
     /* Phoenix Red & Obsidian — mirrors src/styles/custom.css tokens */
-    --bg:#0a0908;--ground2:#0d090b;--panel:#141010;--panel2:#1c1614;--edge:#2a2220;--edge-hi:#3a2a28;
+    --bg:#0a0908;--ground2:#0d090b;--panel:#141010;--panel2:#1c1614;--edge:#3a2f2c;--edge-hi:#4a3a36;
     --txt:#f0ebe8;--dim:#8a7f7c;--white:#f5f1ee;
+    /* ── Facelift Phase 3: visible edges + inset elevation highlight ── */
+    --edge-inset:inset 0 1px 0 rgba(255,255,255,.04);
+    /* split the old single --dim into reading-copy vs chrome-only text */
+    --txt-2:#b8ada8;   /* ~7:1 — ALL secondary reading copy */
+    --txt-3:#7d7370;   /* decorative / disabled chrome ONLY, never body */
+    /* surface elevation ramp (map=s0, chips/dock=s1, panels=s2, inputs=s3) */
+    --s0:#0a0908;--s1:#120d0c;--s2:#1c1614;--s3:#241b19;
+    /* 7-token type scale (labels floor at 11px, copy at 12px) */
+    --fs-2xs:11px;--fs-xs:12px;--fs-sm:13px;--fs-md:15px;--fs-lg:18px;--fs-xl:24px;--fs-2xl:30px;
     --brand:#bf1f1f;--brandhi:#d94a4a;--blood:#8f1212;
     --ok:#3fb950;--bad:#ff4d4d;--acc:#d9b24e;--acc-deep:#b8901f;
     /* interactive accent (replaces the old neon-blue accent everywhere) */
@@ -21,8 +30,18 @@
     --font-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
     --font-sans:'Inter',system-ui,-apple-system,sans-serif;
     --font-display:'Saira',var(--font-sans);
+    /* ── Facelift Phase 1: 6 semantic z-index tokens (replace all ad-hoc layers) ── */
+    --z-map:0; --z-hud:10; --z-toast:20; --z-banner:30; --z-modal:40; --z-system:50;
+    /* sidebar width as a token so the HUD tracks it instead of a magic 310px offset */
+    --aside-w:292px; --hud-gap:12px;
   }
-  *{box-sizing:border-box;margin:0;font-family:var(--font-mono)}
+  /* Facelift Phase 3: kill the global mono default — restores type hierarchy.
+     Inter = body/labels/descriptions · Saira = headings · JetBrains Mono = opt-in. */
+  *{box-sizing:border-box;margin:0}
+  body{font-family:var(--font-sans)}
+  .logo,.card h1,.hubhead b,#district #d_name,.paneltitle,#nc_title,.fthd b,.nb-name,.dhead b{font-family:var(--font-display)}
+  /* JetBrains Mono is now OPT-IN only (data / raw feeds / handles / flags) */
+  #raw,.flaginput,.mono,.chathandle,[data-id],.srvlbl,#timer,#pipboy,.pb-tabs button{font-family:var(--font-mono)}
   body{background:var(--bg);color:var(--txt);height:100vh;display:flex;flex-direction:column;overflow:hidden;
     background-image:radial-gradient(ellipse 1000px 520px at 82% -12%,rgba(191,31,31,.10),transparent 60%),radial-gradient(ellipse 720px 380px at -5% 100%,rgba(139,0,0,.12),transparent 60%)}
   header{display:flex;align-items:center;gap:13px;padding:7px 14px;background:linear-gradient(180deg,#140f0f,#0a0807);border-bottom:1px solid var(--edge);font-size:13px;flex-wrap:wrap;letter-spacing:.01em}
@@ -48,17 +67,17 @@
   .slot{width:52px;height:52px;background:var(--panel);border:1px solid var(--edge);border-radius:7px;position:relative;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:.12s}
   .slot:hover{border-color:var(--ui);box-shadow:0 0 12px rgba(217,74,74,.25)}
   .slot .k{position:absolute;top:2px;left:4px;font-size:9px;color:var(--acc);font-weight:bold}
-  .slot .nm{font-size:8.5px;color:var(--dim);text-align:center;line-height:1.1;padding:0 2px}
+  .slot .nm{font-size:var(--fs-2xs);color:var(--txt-3);text-align:center;line-height:1.1;padding:0 2px}
   .slot .ic{font-size:17px}
   .slot .cd{position:absolute;inset:0;background:rgba(8,6,6,.8);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:bold;color:#fff}
   .slot.ult{border-color:var(--acc)}
-  #tip{position:fixed;transform:translate(-50%,-100%);background:var(--panel2);border:1px solid var(--ui);border-radius:7px;padding:8px 11px;font-size:12px;pointer-events:none;z-index:30;box-shadow:0 0 16px rgba(191,31,31,.3);white-space:nowrap}
+  #tip{position:fixed;transform:translate(-50%,-100%);background:var(--panel2);border:1px solid var(--ui);border-radius:7px;padding:8px 11px;font-size:12px;pointer-events:none;z-index:var(--z-banner);box-shadow:0 0 16px rgba(191,31,31,.3);white-space:nowrap}
   #tip.hidden{display:none}
   #tip b{color:var(--brandhi)}#tip .ult{color:var(--acc);font-size:10px;font-weight:bold}
   #tip .tf{color:var(--txt);margin-top:3px}#tip .tm{color:var(--dim);font-size:10.5px;margin-top:2px}
-  aside{width:292px;background:var(--panel);border-left:1px solid var(--edge);display:flex;flex-direction:column;min-height:0}
+  aside{width:var(--aside-w);background:var(--panel);border-left:1px solid var(--edge);display:flex;flex-direction:column;min-height:0}
   .sec{padding:8px 12px;border-bottom:1px solid var(--edge)}
-  .sec h3{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+  .sec h3{font-size:var(--fs-2xs);color:var(--txt-2);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
   #target{font-size:12px}#target .none{color:var(--dim);font-style:italic}
   .plist{max-height:26vh;overflow:auto}.prow{display:flex;justify-content:space-between;font-size:12px;padding:2px 0;cursor:pointer;border-radius:3px}
   .prow:hover{background:rgba(191,31,31,.08)}.prow.tgt{background:rgba(217,178,78,.14)}
@@ -68,10 +87,10 @@
   #chatin{width:100%;background:var(--ground2);border:1px solid var(--edge);color:var(--txt);padding:5px 7px;font-size:12px;border-radius:4px;font-family:inherit}
   #chatin:focus{outline:none;border-color:var(--ui)}
   #raw{overflow:auto;font-size:10px;color:var(--dim);white-space:pre-wrap;word-break:break-all;max-height:14vh}
-  .empty{color:var(--dim);font-style:italic;font-size:11px}
+  .empty{color:var(--txt-2);font-style:italic;font-size:11px}
   /* ── Login / enter-the-world card on the phoenix ground ── */
   #join{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden;
-    background:radial-gradient(ellipse 90% 70% at 50% 0%,rgba(191,31,31,.14),transparent 68%),radial-gradient(ellipse 60% 60% at 82% 108%,rgba(139,0,0,.16),transparent 70%),linear-gradient(180deg,#120a0b 0%,#08060a 100%);z-index:10}
+    background:radial-gradient(ellipse 90% 70% at 50% 0%,rgba(191,31,31,.14),transparent 68%),radial-gradient(ellipse 60% 60% at 82% 108%,rgba(139,0,0,.16),transparent 70%),linear-gradient(180deg,#120a0b 0%,#08060a 100%);z-index:var(--z-modal)}
   #join.hidden{display:none}
   #spark{position:absolute;top:0;left:0;width:150px;height:108px;z-index:12;pointer-events:none;opacity:.92}
   .card{position:relative;z-index:11;background:linear-gradient(180deg,rgba(20,14,14,.94),rgba(10,7,9,.9));border:1px solid rgba(120,20,20,.28);border-radius:18px;padding:26px 30px 24px;width:376px;max-width:92vw;text-align:center;box-shadow:0 26px 70px -24px rgba(0,0,0,.85),0 0 40px rgba(191,31,31,.08);-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px)}
@@ -84,7 +103,7 @@
   .phoenix .p-edge{background-image:var(--p-edge);mix-blend-mode:screen;opacity:.5;filter:drop-shadow(0 0 5px rgba(191,31,31,.6))}
   .card h1{font-family:var(--font-display);color:var(--white);letter-spacing:6px;margin:6px 0 2px;font-size:30px;font-weight:700;text-shadow:0 0 22px rgba(191,31,31,.4)}
   .card .sub{color:var(--acc);letter-spacing:3px;font-size:10.5px;text-transform:uppercase;margin-bottom:14px}
-  .card p{color:var(--dim);font-size:11.5px;margin-bottom:16px;line-height:1.55}
+  .card p{color:var(--txt-2);font-size:11.5px;margin-bottom:16px;line-height:1.55}
   .card p b{color:var(--txt)}
   .fld{display:block;text-align:left;margin-bottom:11px}
   .fld>span{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:4px}
@@ -106,7 +125,7 @@
   .jnote{color:var(--dim);font-size:11.5px;margin-bottom:16px;line-height:1.55}
   .srvlbl{font-size:10px;color:var(--dim);margin-top:12px;font-family:var(--font-mono);opacity:.7}
   .facpick{display:flex;gap:6px;margin-bottom:8px}
-  #facdesc{font-size:10.5px;color:var(--dim);min-height:22px;margin-bottom:10px;line-height:1.4;text-align:center}
+  #facdesc{font-size:var(--fs-2xs);color:var(--txt-2);min-height:22px;margin-bottom:10px;line-height:1.4;text-align:center}
   .facpick label{flex:1;padding:9px 0;border:1px solid var(--edge);border-radius:6px;font-size:11px;cursor:pointer;opacity:.5;transition:.15s}
   .facpick input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
   .facpick label:has(input:checked){opacity:1;border-color:currentColor;font-weight:bold;box-shadow:0 0 12px currentColor}
@@ -123,13 +142,13 @@
   #alfred-av{display:inline-flex;align-items:center;gap:5px;margin-left:10px;color:var(--acc);font-size:11px;letter-spacing:1px;cursor:pointer;opacity:.82;user-select:none;transition:opacity .15s}
   #alfred-av:hover{opacity:1}
   #alfred-av .gly{font-size:13px}
-  #alfred{position:absolute;top:40px;left:0;right:0;margin:0 auto;width:max-content;max-width:92vw;background:linear-gradient(180deg,rgba(22,15,22,.97),rgba(12,8,12,.97));border:1px solid var(--ui);border-radius:8px;padding:9px 14px;font-size:12.5px;line-height:1.45;color:var(--txt);display:flex;gap:9px;align-items:center;z-index:30;opacity:0;transform:none;pointer-events:none;box-shadow:0 6px 26px rgba(0,0,0,.6);transition:opacity .25s ease}
+  #alfred{position:absolute;top:96px;left:0;right:0;margin:0 auto;width:max-content;max-width:92vw;background:linear-gradient(180deg,rgba(22,15,22,.97),rgba(12,8,12,.97));border:1px solid var(--ui);border-radius:8px;padding:9px 14px;font-size:12.5px;line-height:1.45;color:var(--txt);display:flex;gap:9px;align-items:center;z-index:var(--z-toast);opacity:0;transform:none;pointer-events:none;box-shadow:0 6px 26px rgba(0,0,0,.6);transition:opacity .25s ease}
   #alfred.on{opacity:1;pointer-events:auto}
   #alfred .a-gly{color:var(--acc);font-size:15px;flex-shrink:0}
   #alfred .a-name{color:var(--acc);font-weight:bold;letter-spacing:1px}
   #alfred .a-x{margin-left:4px;color:var(--dim);cursor:pointer;font-size:15px;line-height:1}
   #alfred .a-x:hover{color:var(--brandhi)}
-  #hub{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(6,4,6,.9);z-index:20}
+  #hub{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(6,4,6,.9);z-index:var(--z-modal)}
   #hub.hidden{display:none}
   .hubcard{background:var(--panel);border:1px solid var(--edge);border-radius:12px;width:640px;max-width:94vw;max-height:88vh;display:flex;flex-direction:column;box-shadow:0 0 50px rgba(191,31,31,.12)}
   .hubhead{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--edge)}
@@ -148,7 +167,7 @@
   .stat{display:inline-block;background:var(--panel2);border:1px solid var(--edge);border-radius:7px;padding:9px 14px;margin:4px;text-align:center;min-width:78px}
   .stat .v{font-size:19px;font-weight:bold;color:var(--acc)}.stat .l{font-size:10px;color:var(--dim);text-transform:uppercase}
   .row{display:flex;justify-content:space-between;align-items:center;padding:7px 10px;border:1px solid var(--edge);border-radius:6px;margin-bottom:6px;font-size:12px}
-  .row .nm{font-weight:bold}.row .meta{color:var(--dim);font-size:11px}
+  .row .nm{font-weight:bold}.row .meta{color:var(--txt-2);font-size:var(--fs-2xs)}
   .badge{padding:1px 7px;border-radius:3px;font-size:10px;font-weight:bold}
   .d-Beginner,.d-Easy{background:rgba(63,185,80,.15);color:var(--ok)}
   .d-Medium{background:rgba(217,178,78,.15);color:var(--acc)}
@@ -159,9 +178,9 @@
   .lab:hover{border-color:var(--ui)}
   .labtop{display:flex;justify-content:space-between;align-items:center}
   .labtop .nm{font-weight:bold;color:var(--txt);font-size:13px}
-  .labdesc{color:var(--dim);font-size:11px;margin:5px 0;line-height:1.45}
+  .labdesc{color:var(--txt-2);font-size:11px;margin:5px 0;line-height:1.45}
   .labfoot{display:flex;justify-content:space-between;align-items:center;margin-top:5px}
-  .labfoot .meta{color:var(--dim);font-size:10.5px}
+  .labfoot .meta{color:var(--txt-2);font-size:var(--fs-2xs)}
   .launch{background:#241a19;color:var(--brandhi);border:1px solid var(--ui);border-radius:5px;padding:4px 10px;font-family:inherit;font-size:11px;font-weight:bold;cursor:pointer}
   .launch:hover{background:var(--ui);color:#fff}
   .launch.on{background:rgba(63,185,80,.15);color:var(--ok);border-color:var(--ok)}
@@ -190,10 +209,10 @@
   @keyframes phx-veins{0%,100%{opacity:.3}12%{opacity:.58}26%{opacity:.34}}
 
   /* ── Always-on character frame (Phase 1a — real persistent RPG record) ── */
-  #charframe{position:fixed;top:48px;left:10px;z-index:40;min-width:214px;
+  #charframe{position:fixed;top:48px;left:10px;z-index:var(--z-hud);min-width:214px;
     background:linear-gradient(160deg,rgba(22,11,13,.93),rgba(9,5,7,.93));
-    border:1px solid var(--acc);border-radius:7px;padding:8px 11px;
-    box-shadow:0 0 16px rgba(191,31,31,.34),inset 0 0 24px rgba(191,31,31,.06);
+    border:1px solid var(--edge-hi);border-radius:7px;padding:8px 11px;
+    box-shadow:var(--edge-inset),0 4px 16px rgba(0,0,0,.45);
     font-size:12px;display:none}
   #charframe.on{display:block}
   #charframe .cf-top{display:flex;align-items:center;gap:7px;margin-bottom:6px}
@@ -201,27 +220,27 @@
     box-shadow:0 0 9px var(--acc);display:grid;place-items:center;font-size:11px;color:#fff;
     background:radial-gradient(circle at 40% 35%,var(--acc),#2a0a0a)}
   #charframe .cf-name{font-weight:700;color:#fff;letter-spacing:.3px}
-  #charframe .cf-fac{margin-left:auto;font-size:9.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.6px}
+  #charframe .cf-fac{margin-left:auto;font-size:var(--fs-2xs);color:var(--txt-3);text-transform:uppercase;letter-spacing:.6px}
   #charframe .cf-lvlrow{display:flex;align-items:center;gap:6px;margin-bottom:5px}
   #charframe .cf-lvl{font-weight:700;color:var(--acc);font-size:13px;min-width:46px}
   #charframe .cf-xpbar{flex:1;height:9px;border-radius:5px;background:#241417;
     border:1px solid rgba(191,31,31,.4);overflow:hidden}
   #charframe .cf-xpfill{height:100%;width:0;transition:width .5s ease;
     background:linear-gradient(90deg,#ff3b5c,#ffb03b);box-shadow:0 0 8px #ff3b5c}
-  #charframe .cf-xptxt{font-size:9.5px;color:var(--dim);min-width:60px;text-align:right;font-variant-numeric:tabular-nums}
+  #charframe .cf-xptxt{font-size:var(--fs-2xs);color:var(--txt-3);min-width:60px;text-align:right;font-variant-numeric:tabular-nums}
   #charframe .cf-btm{display:flex;gap:13px;font-size:11px;color:#d8d2c8}
   #charframe .cf-cred b{color:#ffd76a}
 
   /* ── District HUD banner (Phase 2 Night City) ── */
-  #district{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:38;display:none;pointer-events:none;
-    background:linear-gradient(180deg,rgba(14,10,14,.9),rgba(8,5,8,.92));border:1px solid var(--acc);border-radius:7px;
-    padding:5px 18px;text-align:center;box-shadow:0 0 20px rgba(191,31,31,.32)}
+  #district{position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:var(--z-toast);display:none;pointer-events:none;
+    background:linear-gradient(180deg,rgba(14,10,14,.9),rgba(8,5,8,.92));border:1px solid var(--edge-hi);border-radius:7px;
+    padding:5px 18px;text-align:center;box-shadow:var(--edge-inset),0 4px 16px rgba(0,0,0,.45)}
   #district.on{display:block}
   #district #d_name{font-weight:700;font-size:14px;letter-spacing:1.5px;display:block}
-  #district #d_sub{font-size:8.5px;letter-spacing:2px;text-transform:uppercase;opacity:.72;color:var(--dim)}
+  #district #d_sub{font-size:var(--fs-2xs);letter-spacing:2px;text-transform:uppercase;opacity:.72;color:var(--dim)}
 
   /* ── PIP-BOY 3000 (Fallout-style character terminal) ── */
-  #pipboy{position:fixed;inset:0;z-index:60;display:none;background:radial-gradient(ellipse at 50% 50%,#02140a,#000600 75%);
+  #pipboy{position:fixed;inset:0;z-index:var(--z-system);display:none;background:radial-gradient(ellipse at 50% 50%,#02140a,#000600 75%);
     font-family:'JetBrains Mono',monospace;color:#37f58f;text-shadow:0 0 6px rgba(55,245,143,.55);padding:26px 4vw}
   #pipboy.on{display:block}
   @keyframes pipboot{0%{opacity:0;filter:brightness(3)}18%{opacity:.4}22%{opacity:.05}30%{opacity:.7}100%{opacity:1;filter:none}}
@@ -252,17 +271,17 @@
   #pipboy .pb-karma i{display:inline-block;height:9px;background:#37f58f;box-shadow:0 0 8px #37f58f;vertical-align:middle}
 
   /* ── Loot toasts (Fallout-style acquisitions) ── */
-  #loot{position:fixed;top:64px;right:16px;z-index:46;display:flex;flex-direction:column;gap:6px;pointer-events:none;align-items:flex-end}
+  #loot{position:fixed;top:64px;right:16px;z-index:var(--z-toast);display:flex;flex-direction:column;gap:6px;pointer-events:none;align-items:flex-end}
   #loot .loot-item{background:linear-gradient(180deg,rgba(16,12,8,.94),rgba(9,6,5,.94));border:1px solid #9aa0a6;border-left-width:4px;
     border-radius:5px;padding:6px 12px;font:600 12px 'JetBrains Mono',monospace;letter-spacing:.5px;
     box-shadow:0 4px 16px rgba(0,0,0,.5);transition:opacity .5s,transform .5s;opacity:1;white-space:nowrap}
-  #loot .lt-tag{font-size:9px;letter-spacing:2px;opacity:.7;margin-right:4px}
+  #loot .lt-tag{font-size:var(--fs-2xs);letter-spacing:2px;opacity:.7;margin-right:4px}
   #loot .lt-rar{font-size:10px;font-weight:700}
 
   /* ── Living world (R04/R05): HUD indicator + event banner ── */
-  #worldinfo{position:fixed;top:12px;right:310px;z-index:38;font:600 11px 'JetBrains Mono',monospace;
+  #worldinfo{position:fixed;top:12px;right:calc(var(--aside-w) + 18px);z-index:var(--z-hud);font:600 11px 'JetBrains Mono',monospace;
     letter-spacing:.08em;color:#c9b8b0;background:rgba(10,7,8,.7);border:1px solid var(--edge);border-radius:5px;padding:4px 10px;pointer-events:none}
-  #worldevent{position:fixed;top:46px;left:50%;transform:translateX(-50%);z-index:39;display:none;pointer-events:none;text-align:center;
+  #worldevent{position:fixed;top:48px;left:50%;transform:translateX(-50%);z-index:var(--z-banner);display:none;pointer-events:none;text-align:center;
     background:linear-gradient(180deg,rgba(28,10,10,.94),rgba(12,6,6,.94));border:1px solid #ff3b5c;border-radius:7px;padding:5px 20px;
     box-shadow:0 0 22px rgba(255,59,92,.4);animation:evpulse 1.6s ease-in-out infinite}
   #worldevent.on{display:block}
@@ -270,7 +289,7 @@
   #worldevent #we_kind{font-weight:700;font-size:13px;letter-spacing:1px;color:#ff6a6a;display:block}
   #worldevent #we_dist{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#e6d24a;opacity:.85}
   /* ── R30 — responsive layout ── */
-  @media (max-width:900px){ aside{width:236px} header{font-size:12px;gap:9px} .hubcard{width:96vw} }
+  @media (max-width:900px){ :root{--aside-w:236px} header{font-size:12px;gap:9px} .hubcard{width:96vw} }
   @media (max-width:640px){
     main{flex-direction:column}
     aside{width:auto;height:150px;border-left:0;border-top:1px solid var(--edge);flex-direction:row;overflow-x:auto}
@@ -281,7 +300,7 @@
   /* ── R30 — on-screen touch controls (only on coarse-pointer devices) ── */
   #touchpad{display:none}
   @media (pointer:coarse){
-    #touchpad{display:block;position:absolute;inset:0;pointer-events:none;z-index:16}
+    #touchpad{display:block;position:absolute;inset:0;pointer-events:none;z-index:var(--z-hud)}
     #touchpad .dpad{position:absolute;left:16px;bottom:20px;width:132px;height:132px;pointer-events:auto}
     #touchpad .db{position:absolute;width:44px;height:44px;background:rgba(36,26,25,.8);border:1px solid var(--ui);border-radius:8px;color:var(--brandhi);font-size:18px;display:flex;align-items:center;justify-content:center;user-select:none;-webkit-user-select:none;touch-action:none}
     #touchpad .db:active{background:var(--ui);color:#fff}
@@ -289,6 +308,14 @@
     #touchpad .act{position:absolute;right:20px;bottom:34px;width:76px;height:76px;border-radius:50%;background:rgba(225,29,42,.85);border:1px solid #fff;color:#fff;font-size:12px;font-weight:bold;pointer-events:auto;display:flex;align-items:center;justify-content:center;touch-action:none}
     #touchpad .act:active{background:#ff3b3b}
   }
+  /* ── Facelift Phase 4: re-skin the Data Vault (knowledge-collection.js #kc-panel)
+     to the Phoenix crimson theme from THIS file (the module is out of scope to edit).
+     Lift it onto the modal layer so it can never land under a toast, and retint its
+     off-theme #4fc3f7 blue -> gold accent via inline-style attribute overrides. ── */
+  #kc-panel{z-index:var(--z-modal)!important;background:var(--panel2)!important;border-color:var(--ui)!important;
+    box-shadow:var(--edge-inset),0 12px 40px rgba(0,0,0,.7),0 0 20px rgba(191,31,31,.22)!important;font-family:var(--font-sans)!important}
+  #kc-panel [style*="4fc3f7"]{color:var(--acc)!important}
+  #kc-panel [style*="#ff2d55"]{color:var(--brandhi)!important}
 </style>
 <script src="/vendor/three.min.js"></script>
 <script src="/vendor/CopyShader.js"></script>
@@ -300,7 +327,7 @@
 <script src="/vendor/UnrealBloomPass.js"></script>
 <script src="/season0.js"></script>
 <script src="/systems.js"></script><script src="/knowledge.js"></script><script src="/knowledge-codex.js"></script><script src="/knowledge-collection.js"></script>
-</head><body>
+</head><body><style>#pt-banner{position:fixed;top:6px;right:8px;z-index:99999;font:700 10px/1 ui-monospace,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase;color:#f5f1ee;background:linear-gradient(180deg,#bf1f1f,#8f1212);border:1px solid #d94a4a;border-radius:5px;padding:5px 8px;box-shadow:0 0 16px -4px rgba(191,31,31,.7);pointer-events:none}#pt-banner b{color:#ffd7d7}</style><div id="pt-banner">Admin test · <b>live world-server</b></div>
 <header>
   <div id="dot"></div><span class="brandmark">SYN<span class="u">_</span>OS</span><b class="logo">GRIMOIRE</b><span class="kv" style="color:var(--dim);letter-spacing:1px">THE WEAVE</span>
   <span class="phase" id="phase">—</span>
@@ -309,7 +336,7 @@
   <span class="kv">◈ <b id="pc">0</b></span>
   <span class="kv" style="margin-left:auto">me <b id="me">—</b> <b id="hp"></b></span>
   <button id="readybtn" style="display:none;background:#2b2b31;color:var(--acc);border:1px solid var(--acc);border-radius:4px;padding:3px 10px;cursor:pointer;font-family:inherit;font-size:12px">Ready [R]</button>
-  <button id="mapbtn" class="osbtn" title="Fast Travel — The Weave [M]">◈ MAP</button><button id="dossbtn" class="osbtn" title="Operator Dossier [C]">◈ FILE</button><button id="v3dbtn" class="osbtn" title="3D view [V]">◈ 3D</button><button id="pipbtn" class="osbtn" title="Pip-Boy [P]">◈ PIP</button><button id="hubbtn" class="osbtn">◈ HUB</button>
+  <button id="mapbtn" class="osbtn" title="Fast Travel — The Weave [M]">◈ MAP</button><button id="dossbtn" class="osbtn" title="Operator Dossier [C]">◈ FILE</button><button id="v3dbtn" class="osbtn" title="3D view [G]">◈ 3D</button><button id="vaultbtn" class="osbtn" title="Data Vault [V/K]">◆ VAULT</button><button id="pipbtn" class="osbtn" title="Pip-Boy [P]">◈ PIP</button><button id="hubbtn" class="osbtn">◈ HUB</button>
   <span id="alfred-av" title="ALFRED — your Syn_OS assistant"><span class="gly">◆</span>ALFRED</span>
 </header>
 <div id="alfred"><span class="a-gly">◆</span><span><span class="a-name">ALFRED:</span> <span id="alfred-msg">standing by.</span></span><span class="a-x" id="alfred-x">✕</span></div>
@@ -452,18 +479,19 @@ function drawCaptureFlash(){ if(capFlash.t<=0)return; const a=capFlash.t;
     cx.shadowBlur=0; cx.globalAlpha=1; }
   capFlash.t-=0.012; }
 let tutorialDone=localStorage.getItem("grim_tut")=="1"; // first-spawn onboarding
-function drawTutorial(meP,ox,oy){ if(tutorialDone||!meP||!NODES.length)return;
-  let best=null,bd=1e9; for(const n of NODES){ const ns=nodeState[n.id]; if(ns&&ns.state=="Captured")continue;
-    const d=Math.hypot(n.pos[0]-meP.rx,n.pos[2]-meP.rz); if(d<bd){bd=d;best=n;} }
-  if(!best)return;
-  const bx=ox+best.pos[0]*scale, by=oy+best.pos[2]*scale, ang=Math.atan2(by-cv.height/2,bx-cv.width/2), ar=70+8*Math.sin(fr*0.12);
+// Facelift Phase 2: the canvas tutorial banner + nearest-node arrow is replaced by
+// ONE always-on #objective strip (see resolveObjective) + a single directional
+// chevron toward the CURRENT objective's world position (window.__objState.worldPos).
+// No more floating canvas text box; no more arrow pointing at the wrong node.
+function drawTutorial(meP,ox,oy){ const s=window.__objState; const wp=s&&s.worldPos; if(!wp||!meP)return;
+  const bx=ox+wp.x*scale, by=oy+wp.z*scale;
+  const onScreen=bx>50&&bx<cv.width-50&&by>50&&by<cv.height-110;
+  const d=Math.hypot(wp.x-meP.rx,wp.z-meP.rz);
+  if(onScreen&&d<26)return;  // arrived / clearly visible — no chevron needed
+  const ang=Math.atan2(by-cv.height/2,bx-cv.width/2), ar=72+8*Math.sin(fr*0.12);
   const axp=cv.width/2+Math.cos(ang)*ar, ayp=cv.height/2+Math.sin(ang)*ar;
-  cx.fillStyle="rgba(225,29,42,"+(0.6+0.3*Math.sin(fr*0.12))+")"; cx.save(); cx.translate(axp,ayp); cx.rotate(ang);
-  cx.beginPath(); cx.moveTo(11,0); cx.lineTo(-6,-6); cx.lineTo(-6,6); cx.closePath(); cx.fill(); cx.restore();
-  const hint=bd<NRADIUS?"Press [ENTER] to CONTEST — then solve its lab & submit the flag to capture it":("Walk to "+best.name+" — your first territory to capture");
-  cx.fillStyle="rgba(10,10,11,.9)"; cx.fillRect(cv.width/2-200,cv.height-94,400,30);
-  cx.strokeStyle="#e11d2a"; cx.lineWidth=1.5; cx.strokeRect(cv.width/2-200,cv.height-94,400,30);
-  cx.fillStyle="#ececee"; cx.font="11px monospace"; cx.textAlign="center"; cx.fillText("◈ TUTORIAL — "+hint,cv.width/2,cv.height-74); }
+  cx.fillStyle="rgba(245,197,24,"+(0.5+0.32*Math.sin(fr*0.12))+")"; cx.save(); cx.translate(axp,ayp); cx.rotate(ang);
+  cx.beginPath(); cx.moveTo(12,0); cx.lineTo(-7,-7); cx.lineTo(-7,7); cx.closePath(); cx.fill(); cx.restore(); }
 // built-in registry — mirrors the daemon's world_node_layout; used if the fetch fails
 const FALLBACK_NODES=[
   {id:"zone_recon",name:"Recon Outpost",pos:[-196,0,-152],lab:"tut_first_scan",icon:"🔭"},
@@ -604,7 +632,7 @@ function qualityGovernor(){
 // ── [O] render settings panel (DOM-injected, no CSS-anchor dependency) ──
 function _qPanel(){ let p=document.getElementById("qset");
   if(!p){ p=document.createElement("div"); p.id="qset";
-    p.style.cssText="position:fixed;right:14px;bottom:60px;z-index:70;background:rgba(10,10,14,.95);border:1px solid #bf1f1f;border-radius:8px;padding:11px 13px;font:11px/1.5 monospace;color:#ececee;min-width:210px;display:none;box-shadow:0 6px 28px rgba(0,0,0,.7)";
+    p.style.cssText="position:fixed;right:14px;bottom:60px;z-index:var(--z-system);background:rgba(10,10,14,.95);border:1px solid #bf1f1f;border-radius:8px;padding:11px 13px;font:11px/1.5 monospace;color:#ececee;min-width:210px;display:none;box-shadow:0 6px 28px rgba(0,0,0,.7)";
     document.body.appendChild(p); }
   return p; }
 function toggleQSet(){ const p=_qPanel(); p.style.display=p.style.display==="none"?"block":"none"; if(p.style.display==="block")renderQSet(); }
@@ -804,7 +832,8 @@ addEventListener("keydown",e=>{ if(typing||!hubHidden()||!pipHidden()||(typeof d
   if(k.startsWith("arrow"))e.preventDefault();
   if(k>="1"&&k<="9"){ useAbility(+k-1); }
   if(k=="r"&&me!=null){ action({type:"set_ready",ready:true}); wlog("readied up"); }
-  if(k=="v"){ toggle3D(); }
+  if(k=="g"){ toggle3D(); }   // Facelift Phase 4: 3D moved off 'v' (freed the V/Vault collision) to 'g' + the header button
+  if(k=="k"){ openVault(); }   // Data Vault via the game's single gated keydown handler (secondary to KC's own 'v')
   if(k=="o"){ toggleQSet(); }
   if(k=="c"){ toggleDossier(); }
   if(k=="m"){ openFtMap(); }
@@ -848,7 +877,7 @@ setInterval(()=>{ if(!ws||ws.readyState!=1||me==null||!hubHidden())return;
 // ── Fast-travel MAP overlay ([M]) — hubs unlock as you discover districts ──
 function ensureFtDOM(){ if(document.getElementById("ftmap"))return;
   const s=document.createElement("style"); s.textContent=
-   "#ftmap{position:absolute;inset:0;z-index:46;display:none;align-items:center;justify-content:center;background:rgba(5,3,6,.92)}"+
+   "#ftmap{position:absolute;inset:0;z-index:var(--z-modal);display:none;align-items:center;justify-content:center;background:rgba(5,3,6,.92)}"+
    "#ftmap.on{display:flex}"+
    "#ftmap .ftcard{background:var(--panel);border:1px solid var(--ui);border-radius:12px;padding:14px 16px;box-shadow:0 0 60px rgba(191,31,31,.16)}"+
    "#ftmap .fthd{display:flex;align-items:center;gap:10px;margin-bottom:10px}"+
@@ -863,7 +892,7 @@ function ensureFtDOM(){ if(document.getElementById("ftmap"))return;
    "#ftmap .hub.here .dot{background:currentColor;animation:ftpulse 1.3s ease-in-out infinite}"+
    "#ftmap .ftfoot{font-size:10px;color:var(--dim);margin-top:8px;text-align:center}"+
    "@keyframes ftpulse{50%{box-shadow:0 0 20px currentColor}}"+
-   "#ftroute{position:absolute;inset:0;z-index:60;display:none;align-items:center;justify-content:center;flex-direction:column;gap:12px;background:rgba(4,2,5,.72);backdrop-filter:blur(2px)}"+
+   "#ftroute{position:absolute;inset:0;z-index:var(--z-system);display:none;align-items:center;justify-content:center;flex-direction:column;gap:12px;background:rgba(4,2,5,.72);backdrop-filter:blur(2px)}"+
    "#ftroute.on{display:flex}"+
    "#ftroute .rr{font-family:var(--font-display,monospace);color:var(--brandhi);letter-spacing:3px;font-size:15px}"+
    "#ftroute .rd{color:var(--acc);font-size:20px;font-weight:bold;letter-spacing:2px}"+
@@ -1230,7 +1259,7 @@ function drawNPCs(ox,oy,meP){ nearNPC=null; let nd=1e9;
 // ── dialogue + quest-log DOM (injected once) ──
 function ensureNarrDOM(){ if(document.getElementById("npcbox"))return;
   const s=document.createElement("style"); s.textContent=
-   "#npcbox{position:absolute;left:0;right:0;bottom:0;margin:0 auto;width:min(680px,94vw);background:linear-gradient(180deg,rgba(14,10,16,.98),rgba(9,6,10,.99));border:1px solid var(--ui);border-top-left-radius:12px;border-top-right-radius:12px;box-shadow:0 -8px 40px rgba(0,0,0,.7);z-index:40;padding:14px 18px 16px;display:none}"+
+   "#npcbox{position:absolute;left:0;right:0;bottom:0;margin:0 auto;width:min(680px,94vw);background:linear-gradient(180deg,rgba(14,10,16,.98),rgba(9,6,10,.99));border:1px solid var(--ui);border-top-left-radius:12px;border-top-right-radius:12px;box-shadow:0 -8px 40px rgba(0,0,0,.7);z-index:var(--z-modal);padding:14px 18px 16px;display:none}"+
    "#npcbox.on{display:block}"+
    "#npcbox .nb-head{display:flex;align-items:center;gap:10px;margin-bottom:9px}"+
    "#npcbox .nb-gly{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border:1px solid currentColor;border-radius:7px;font-size:17px;flex-shrink:0}"+
@@ -1242,7 +1271,7 @@ function ensureNarrDOM(){ if(document.getElementById("npcbox"))return;
    "#npcbox .nb-opt{display:block;width:100%;text-align:left;background:#1a1420;border:1px solid var(--edge);color:var(--txt);padding:9px 12px;border-radius:7px;margin-top:6px;cursor:pointer;font-family:inherit;font-size:12.5px;transition:border-color .12s,background .12s}"+
    "#npcbox .nb-opt:hover{border-color:var(--ui);background:#241826}"+
    "#npcbox .nb-opt .k{color:var(--acc);font-weight:bold;margin-right:9px}"+
-   "#questlog{position:absolute;left:14px;bottom:14px;width:252px;background:rgba(10,8,12,.9);border:1px solid var(--edge);border-radius:9px;padding:10px 12px;font-size:11px;z-index:18;display:none}"+
+   "#questlog{position:absolute;left:14px;bottom:14px;width:252px;background:rgba(10,8,12,.9);border:1px solid var(--edge);border-radius:9px;padding:10px 12px;font-size:11px;z-index:var(--z-hud);display:none}"+
    "#questlog.on{display:block}"+
    "#questlog h4{color:var(--acc);font-size:10px;letter-spacing:1.5px;margin:0 0 7px;text-transform:uppercase}"+
    "#questlog .q{margin-bottom:9px}#questlog .q:last-child{margin-bottom:0}"+
@@ -1314,7 +1343,7 @@ if(window.SEASON0){ setTimeout(renderQuestLog,300); setTimeout(refreshFacWar,250
 // ── DOSSIER — faction standing + contracts board (visible reputation + job board) ──
 function ensureDossierDOM(){ if(document.getElementById("dossier"))return;
   const s=document.createElement("style"); s.textContent=
-   "#dossier{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:rgba(6,4,6,.9);z-index:45}"+
+   "#dossier{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:rgba(6,4,6,.9);z-index:var(--z-modal)}"+
    "#dossier.on{display:flex}"+
    "#dossier .dcard{background:var(--panel);border:1px solid var(--edge);border-radius:12px;width:560px;max-width:94vw;max-height:88vh;overflow:auto;box-shadow:0 0 50px rgba(191,31,31,.14)}"+
    "#dossier .dhead{display:flex;align-items:center;gap:10px;padding:13px 18px;border-bottom:1px solid var(--edge)}"+
@@ -1458,38 +1487,58 @@ function init3D(){
   cv3.style.cssText="position:absolute;inset:0;width:100%;height:100%;display:none;z-index:1";
   $("wrap").appendChild(cv3);
   const rndr=new Tj.WebGLRenderer({canvas:cv3,antialias:true}); rndr.setPixelRatio(Math.min(2,devicePixelRatio||1));
-  const scene=new Tj.Scene(); scene.background=new Tj.Color(0x06040a); scene.fog=new Tj.FogExp2(0x0a0712,0.0018);
+  // Facelift Phase 3 — premium filmic grade: ACES tone-map + gentle exposure so
+  // neon reads as light, not blown-out white. Guarded (r128 constant names).
+  try{ rndr.toneMapping=Tj.ACESFilmicToneMapping; rndr.toneMappingExposure=1.06;
+    if(Tj.sRGBEncoding!==undefined) rndr.outputEncoding=Tj.sRGBEncoding; }catch(e){}
+  // cohesive deep-indigo night: fog color == background so the skyline dissolves
+  // into atmospheric haze (depth), instead of a hard horizon line.
+  const SKY=0x08060f;
+  const scene=new Tj.Scene(); scene.background=new Tj.Color(SKY); scene.fog=new Tj.FogExp2(SKY,0.0016);
   const cam=new Tj.PerspectiveCamera(60,1,0.5,4000);
-  scene.add(new Tj.AmbientLight(0x223044,0.75));
-  const moon=new Tj.DirectionalLight(0x4a6cae,0.55); moon.position.set(-1,2,1); scene.add(moon);
-  // ground + street grid
-  const ground=new Tj.Mesh(new Tj.PlaneGeometry(CITY.extent*2.6,CITY.extent*2.6), new Tj.MeshStandardMaterial({color:0x090910,roughness:0.85,metalness:0.25}));
+  // moody cohesive lighting: hemisphere (cold indigo sky / warm crimson ground bounce)
+  // + one dim crimson key. Low fill keeps the neon emissives doing the storytelling.
+  scene.add(new Tj.HemisphereLight(0x3a4066,0x1a0a0c,0.62));
+  scene.add(new Tj.AmbientLight(0x141726,0.35));
+  const key=new Tj.DirectionalLight(0xbf5a6a,0.5); key.position.set(-1.4,2.1,0.9); scene.add(key);
+  const rim=new Tj.DirectionalLight(0x4a6cae,0.3); rim.position.set(1.2,0.7,-1.4); scene.add(rim);
+  // ── wet-asphalt ground: dark, low-roughness + metallic so district neon reflects ──
+  const ground=new Tj.Mesh(new Tj.PlaneGeometry(CITY.extent*2.6,CITY.extent*2.6), new Tj.MeshStandardMaterial({color:0x0b0a12,roughness:0.42,metalness:0.7}));
   ground.rotation.x=-Math.PI/2; scene.add(ground);
   const gv=[],E=CITY.extent; for(let g=-E;g<=E;g+=30){ gv.push(g,0.1,-E,g,0.1,E,-E,0.1,g,E,0.1,g); }
   const gGeo=new Tj.BufferGeometry(); gGeo.setAttribute("position",new Tj.Float32BufferAttribute(gv,3));
-  scene.add(new Tj.LineSegments(gGeo,new Tj.LineBasicMaterial({color:0x1d6f78,transparent:true,opacity:0.32})));
-  // districts
+  scene.add(new Tj.LineSegments(gGeo,new Tj.LineBasicMaterial({color:0x243a5a,transparent:true,opacity:0.2})));
+  // districts — softer floor disc + a brighter identity ring (each district owns a hue)
   for(const d of CITY.districts){
-    const disc=new Tj.Mesh(new Tj.CircleGeometry(d.r,44),new Tj.MeshBasicMaterial({color:new Tj.Color(d.col),transparent:true,opacity:0.07}));
+    const disc=new Tj.Mesh(new Tj.CircleGeometry(d.r,44),new Tj.MeshBasicMaterial({color:new Tj.Color(d.col),transparent:true,opacity:0.05}));
     disc.rotation.x=-Math.PI/2; disc.position.set(d.cx,0.15,d.cz); scene.add(disc);
-    const ring=new Tj.Mesh(new Tj.RingGeometry(d.r-1.6,d.r,52),new Tj.MeshBasicMaterial({color:new Tj.Color(d.col),transparent:true,opacity:0.5,side:Tj.DoubleSide}));
+    const ring=new Tj.Mesh(new Tj.RingGeometry(d.r-1.6,d.r,52),new Tj.MeshBasicMaterial({color:new Tj.Color(d.accent||d.col),transparent:true,opacity:0.6,side:Tj.DoubleSide}));
     ring.rotation.x=-Math.PI/2; ring.position.set(d.cx,0.2,d.cz); scene.add(ring);
     scene.add(makeLabel3(d.name.toUpperCase(),d.cx,30,d.cz,d.accent));
   }
-  // buildings: ONE InstancedMesh for all N (was N meshes + N edge-lines ≈ 730 draw calls → ~1).
+  // buildings: ONE InstancedMesh for all N (was N meshes + N edge-lines ~730 draw calls -> ~1).
   { const box=new Tj.BoxGeometry(1,1,1);
-    const bmat=new Tj.MeshStandardMaterial({color:0xffffff,roughness:0.55,metalness:0.55,emissive:0x141420,emissiveIntensity:0.35});
+    // metallic facades with a faint indigo self-glow; instanceColor tints each toward
+    // its district's identity hue so the sprawl reads as cohesive neon color-zones.
+    const bmat=new Tj.MeshStandardMaterial({color:0xffffff,roughness:0.34,metalness:0.82,emissive:0x0d1024,emissiveIntensity:0.18});
+    window._cityBMat=bmat;
     const N=CITY.buildings.length, inst=new Tj.InstancedMesh(box,bmat,N), dummy=new Tj.Object3D();
     const canColor=typeof inst.setColorAt==="function";
+    // per-district accent lookup (nearest district center) — computed once at init
+    const nearestAccent=(x,z)=>{ let best=CITY.districts[0],bd=1e9; for(const d of CITY.districts){ const dd=(x-d.cx)*(x-d.cx)+(z-d.cz)*(z-d.cz); if(dd<bd){bd=dd;best=d;} } return new Tj.Color(best.accent||best.col); };
+    const tmpc=new Tj.Color();
     for(let i=0;i<N;i++){ const b=CITY.buildings[i];
       dummy.position.set(b.x,b.ht/2,b.z); dummy.scale.set(b.w,b.ht,b.h); dummy.updateMatrix();
       inst.setMatrixAt(i,dummy.matrix);
-      if(canColor) inst.setColorAt(i,new Tj.Color(b.col).multiplyScalar(0.55)); }
+      if(canColor){ // base facade blended toward the district hue; taller = brighter (depth cue)
+        tmpc.copy(new Tj.Color(b.col)).lerp(nearestAccent(b.x,b.z),0.5);
+        const lum=0.24+Math.min(0.42,(b.ht/120)*0.42);
+        inst.setColorAt(i,tmpc.multiplyScalar(lum)); } }
     inst.instanceMatrix.needsUpdate=true; if(inst.instanceColor) inst.instanceColor.needsUpdate=true;
     inst.frustumCulled=true; scene.add(inst);
     // one merged edge-glow pass (skipped on low tiers / when instancing lacks color support)
     if(canColor && QUALITY.tier!=="potato" && QUALITY.tier!=="low"){
-      const emat=new Tj.MeshBasicMaterial({color:0x2a2a3a,wireframe:true,transparent:true,opacity:0.22});
+      const emat=new Tj.MeshBasicMaterial({color:0x33507a,wireframe:true,transparent:true,opacity:0.16});
       const einst=new Tj.InstancedMesh(box,emat,N);
       for(let i=0;i<N;i++){ const b=CITY.buildings[i];
         dummy.position.set(b.x,b.ht/2,b.z); dummy.scale.set(b.w*1.002,b.ht*1.002,b.h*1.002); dummy.updateMatrix(); einst.setMatrixAt(i,dummy.matrix); }
@@ -1502,7 +1551,7 @@ function init3D(){
   // bloom pipeline — makes the neon actually glow
   let composer=null,bloom=null;
   try{ composer=new Tj.EffectComposer(rndr); composer.addPass(new Tj.RenderPass(scene,cam));
-    bloom=new Tj.UnrealBloomPass(new Tj.Vector2(cv.clientWidth||960,cv.clientHeight||600),0.9,0.6,0.5); composer.addPass(bloom);
+    bloom=new Tj.UnrealBloomPass(new Tj.Vector2(cv.clientWidth||960,cv.clientHeight||600),0.62,0.5,0.7); composer.addPass(bloom);
     console.log("bloom OK"); }catch(e){ console.log("bloom fail "+e.message); composer=null; }
   // 3D capture-nodes: glowing hex pad + skybeam + label
   for(const n of (NODES||[])){ const col=new Tj.Color(0xf5c518);
@@ -1538,6 +1587,8 @@ function render3D(){ if(!R3.ready||!R3.on)return;
   R3.pMesh.position.set(px,2.5,pz); R3.pGlow.position.set(px,6,pz);
   R3.yaw+=0.0015; const dist=80,height=48;
   R3.cam.position.set(px-Math.sin(R3.yaw)*dist,height,pz-Math.cos(R3.yaw)*dist); R3.cam.lookAt(px,5,pz);
+  // subtle ambient life: a slow facade self-glow breathe (one uniform, ~free)
+  if(window._cityBMat) window._cityBMat.emissiveIntensity=0.15+0.05*Math.sin(fr*0.018);
   if(R3.rain){ const a=R3.rain.geometry.attributes.position.array;
     for(let i=0;i<a.length;i+=3){ a[i+1]-=3.4; if(a[i+1]<0){ a[i+1]=320; a[i]=px+(Math.random()-0.5)*640; a[i+2]=pz+(Math.random()-0.5)*640; } }
     R3.rain.geometry.attributes.position.needsUpdate=true; }
@@ -1672,21 +1723,9 @@ function draw(){
   for(const f of floaters){ const x=ox+f.x*scale,y=oy+f.z*scale-(1-f.t)*34;
     cx.globalAlpha=Math.min(1,f.t*1.6); cx.fillStyle=f.gold?"#ffd76a":(f.heal?"#22e39a":"#ff3b5c"); cx.font="bold 15px monospace"; cx.textAlign="center";
     cx.shadowColor=cx.fillStyle;cx.shadowBlur=8; cx.fillText(f.lbl||((f.heal?"+":"-")+Math.abs(Math.round(f.v))),x,y-26); cx.shadowBlur=0; cx.globalAlpha=1; f.t-=0.017; }
-  // ── v88 Fusion: capture prompt + active-capture banner ──
-  if(activeCapture&&nodeState[activeCapture]){ const ns=nodeState[activeCapture];
-    cx.fillStyle="rgba(7,10,18,.86)"; cx.fillRect(cv.width/2-170,10,340,30);
-    cx.strokeStyle="#f5c518"; cx.lineWidth=1.5; cx.strokeRect(cv.width/2-170,10,340,30);
-    cx.fillStyle="#f5c518"; cx.font="bold 11px monospace"; cx.textAlign="center";
-    const msg=ns.token?("⚔ CAPTURING "+nodeName(activeCapture)+" — solve "+ns.lab+", submit flag"):("⚔ contesting "+nodeName(activeCapture)+"…");
-    cx.fillText(msg,cv.width/2,29); }
-  if(nearNode){ cx.fillStyle="rgba(7,10,18,.86)"; cx.fillRect(cv.width/2-120,cv.height-56,240,26);
-    cx.strokeStyle="#e11d2a"; cx.lineWidth=1.5; cx.strokeRect(cv.width/2-120,cv.height-56,240,26);
-    cx.fillStyle="#e11d2a"; cx.font="bold 12px monospace"; cx.textAlign="center";
-    cx.fillText("[ENTER] CONTEST "+nodeName(nearNode).toUpperCase(),cv.width/2,cv.height-38); }
-  else if(nearLab){ cx.fillStyle="rgba(7,10,18,.88)"; cx.fillRect(cv.width/2-155,cv.height-56,310,26);
-    cx.strokeStyle=nearLab.col; cx.lineWidth=1.5; cx.strokeRect(cv.width/2-155,cv.height-56,310,26);
-    cx.fillStyle=nearLab.accent; cx.font="bold 12px monospace"; cx.textAlign="center";
-    cx.fillText("[ENTER] JACK IN — "+nearLab.name.toUpperCase(),cv.width/2,cv.height-38); }
+  // ── Facelift Phase 2: canvas capture/contest/jack-in prompts are replaced by the
+  //    contextual NODE CARD (a real, tappable DOM surface) — see updateNodeCard(). ──
+  if(typeof updateNodeCard==="function") updateNodeCard();
   drawAtmosphere(); drawWorldTint();
   drawMinimap(camX,camZ);
   drawTutorial(meP,ox,oy);
@@ -2016,14 +2055,14 @@ applyCosmetics();
 // ── R30 — first-run onboarding (shown once; complements NEXUS/ALFRED) ──
 (function onboarding(){ try{ if(localStorage.getItem("grim_onboard"))return; }catch(e){}
   const o=document.createElement("div");
-  o.style.cssText="position:absolute;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;background:rgba(5,3,5,.86)";
+  o.style.cssText="position:absolute;inset:0;z-index:var(--z-system);display:flex;align-items:center;justify-content:center;background:rgba(5,3,5,.86)";
   o.innerHTML='<div style="background:var(--panel);border:1px solid var(--ui);border-radius:12px;max-width:440px;width:92vw;padding:22px 24px;box-shadow:0 0 50px rgba(191,31,31,.18)">'+
     '<div style="font-family:var(--font-display,monospace);color:var(--brandhi);letter-spacing:2px;font-size:17px;margin-bottom:4px">◈ WELCOME TO THE WEAVE</div>'+
     '<div style="color:var(--dim);font-size:11.5px;margin-bottom:14px">A persistent hacking MMO built into Syn_OS — the education engine. Every district teaches a real layer of the kill-chain; every lab is an isolated target you actually hack.</div>'+
     '<div style="font-size:12.5px;line-height:1.9">'+
     '<b style="color:var(--acc)">Arrows</b> move · <b style="color:var(--acc)">Enter</b> interact / talk to NPCs<br>'+
     '<b style="color:var(--acc)">Tab</b> HUB (labs, academy, market) · <b style="color:var(--acc)">C</b> dossier<br>'+
-    '<b style="color:var(--acc)">O</b> render settings · <b style="color:var(--acc)">V</b> 3D · <b style="color:var(--acc)">P</b> Pip-Boy</div>'+
+    '<b style="color:var(--acc)">O</b> render settings · <b style="color:var(--acc)">G</b> 3D · <b style="color:var(--acc)">V</b>/<b style="color:var(--acc)">K</b> Data Vault · <b style="color:var(--acc)">P</b> Pip-Boy</div>'+
     '<div style="color:var(--dim);font-size:11.5px;margin:14px 0 16px">Find <b style="color:#8fb0c0">NEXUS</b> at The Grid to begin your first contract.</div>'+
     '<button id="ob_go" style="width:100%;background:linear-gradient(180deg,var(--brandhi),var(--brand));color:#fff;border:0;padding:11px;font-weight:bold;border-radius:7px;cursor:pointer;letter-spacing:1px;font-family:inherit">◈ JACK IN</button></div>';
   document.body.appendChild(o);
@@ -2116,6 +2155,133 @@ $("srvlbl").textContent=URL.replace(/\/$/,"");
     requestAnimationFrame(loop); })(0);
 })();
 
+// ═══════════════ Facelift Phase 2 — UNIFIED GUIDANCE ═══════════════
+// ONE writer (setObjective) -> ONE reader (#objective strip). A priority resolver
+// picks the single line to show: scripted tutorial > active contract step >
+// nearest uncaptured node > idle. Plus ONE contextual node card whose primary
+// action is a REAL tappable button (comms and task-entry become distinct surfaces).
+(function guidanceUI(){
+  var s=document.createElement("style"); s.textContent=
+   "#objective{position:fixed;left:10px;top:132px;z-index:var(--z-hud);max-width:min(340px,72vw);display:none;"+
+     "background:linear-gradient(180deg,rgba(20,14,14,.94),rgba(10,7,9,.94));border:1px solid var(--edge-hi,#4a3a36);"+
+     "border-left:3px solid var(--acc);border-radius:8px;padding:8px 11px;box-shadow:0 6px 22px rgba(0,0,0,.5)}"+
+   "#objective.on{display:block}"+
+   "#objective .obj-k{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--acc);font-weight:700}"+
+   "#objective .obj-row{display:flex;align-items:center;gap:9px;margin-top:3px}"+
+   "#objective #obj_text{flex:1;font-size:12.5px;line-height:1.35;color:#f0ebe8}"+
+   "#objective #obj_go{flex:0 0 auto;background:#241a19;color:var(--brandhi);border:1px solid var(--ui);border-radius:5px;"+
+     "padding:5px 10px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;min-height:32px}"+
+   "#objective #obj_go:hover{background:var(--ui);color:#fff}"+
+   "#nodecard{position:fixed;left:50%;bottom:78px;transform:translateX(-50%);z-index:var(--z-hud);display:none;"+
+     "min-width:250px;max-width:min(440px,92vw);text-align:center;"+
+     "background:linear-gradient(180deg,rgba(16,11,15,.97),rgba(9,6,9,.98));border:1px solid var(--nc-glow,var(--acc));"+
+     "border-radius:11px;padding:11px 15px 13px;box-shadow:0 -6px 30px rgba(0,0,0,.6),0 0 18px color-mix(in srgb,var(--nc-glow,var(--acc)) 26%,transparent)}"+
+   "#nodecard.on{display:block}"+
+   "#nodecard #nc_title{font-family:var(--font-display,inherit);font-weight:700;letter-spacing:.5px;font-size:15px;color:#fff}"+
+   "#nodecard #nc_sub{font-size:11px;color:var(--txt-2,#b8ada8);margin:3px 0 9px;line-height:1.4}"+
+   "#nodecard #nc_btn{width:100%;background:linear-gradient(180deg,var(--brandhi),var(--brand));color:#fff;border:1px solid var(--brand);"+
+     "border-radius:8px;padding:10px 14px;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.04em;cursor:pointer;min-height:44px}"+
+   "#nodecard #nc_btn:hover{filter:brightness(1.1)}";
+  document.head.appendChild(s);
+  var o=document.createElement("div"); o.id="objective";
+  o.innerHTML='<div class="obj-k">&#9656; Current Objective</div><div class="obj-row"><span id="obj_text">&mdash;</span><button id="obj_go" type="button">Locate &#9656;</button></div>';
+  document.body.appendChild(o);
+  var nc=document.createElement("div"); nc.id="nodecard";
+  nc.innerHTML='<div id="nc_title">&mdash;</div><div id="nc_sub"></div><button id="nc_btn" type="button"></button>';
+  document.body.appendChild(nc);
+})();
+window.__objState=null;
+function renderObjective(){ var strip=document.getElementById("objective"); if(!strip)return; var s=window.__objState;
+  if(!s||!s.text){ strip.classList.remove("on"); return; }
+  document.getElementById("obj_text").textContent=s.text;
+  var go=document.getElementById("obj_go"); go.style.display=s.onClick?"":"none"; go.onclick=s.onClick||null;
+  strip.classList.add("on"); }
+function setObjective(text,worldPos,onClick){
+  var prev=window.__objState; if(prev&&prev.text===text){ prev.worldPos=worldPos||null; prev.onClick=onClick||null; renderObjective(); return; }
+  window.__objState={text:text,worldPos:worldPos||null,onClick:onClick||null}; renderObjective(); }
+function locateTo(x,z){ try{ ensureFtDOM(); }catch(e){}
+  ftTarget={x:x,z:z}; ftName="objective";
+  var ov=$("ftroute"); if(ov){ var dst=$("ft_dest"); if(dst)dst.textContent="OBJECTIVE"; ov.classList.add("on"); }
+  wlog("routing uplink to objective"); try{sfx(520,0.1,"sine");}catch(e){} }
+function resolveObjective(){
+  var meP=(typeof me!=="undefined"&&me!=null)?players.get(me):null;
+  if(!meP){ setObjective("",null,null); return; }
+  // 1) scripted tutorial — always point at NEXUS until the first contract is accepted
+  if(!tutorialDone){
+    var hasContract=NARR&&NARR.quests&&Object.keys(NARR.quests).length>0;
+    var anyDone=NARR&&NARR.done&&Object.keys(NARR.done).length>0;
+    if(!hasContract&&!anyDone){ var nx=NPCBYID&&NPCBYID["nexus_ai"];
+      setObjective("Talk to NEXUS at The Grid — accept your first contract", nx?{x:nx.x,z:nx.z}:null, nx?function(){locateTo(nx.x,nx.z);}:null); return; }
+  }
+  // 2) active contract's next step (mirrors the SEASON0 questlog into one line)
+  if(window.SEASON0&&NARR&&NARR.quests){ var qid=Object.keys(NARR.quests)[0];
+    if(qid){ var q=SEASON0.quests.find(function(x){return x.id===qid;});
+      if(q){ var st=NARR.quests[qid]; var no=q.obj.find(function(ob){return !st.obj[ob.id];});
+        if(no){ var wp=null; if(no.type==="talk"&&NPCBYID&&NPCBYID[no.target]){ var n=NPCBYID[no.target]; wp={x:n.x,z:n.z}; }
+          setObjective(q.title+": "+no.t, wp, wp?function(){locateTo(wp.x,wp.z);}:null); return; } } } }
+  // 3) nearest uncaptured node
+  var best=null,bd=1e9;
+  for(var i=0;i<NODES.length;i++){ var nd=NODES[i], ns=nodeState[nd.id]; if(ns&&ns.state=="Captured")continue;
+    var d=Math.hypot(nd.pos[0]-meP.rx,nd.pos[2]-meP.rz); if(d<bd){bd=d;best=nd;} }
+  if(best){ setObjective("Capture "+best.name+" — solve its lab to take the territory",
+    {x:best.pos[0],z:best.pos[2]}, function(){locateTo(best.pos[0],best.pos[2]);}); return; }
+  // 4) idle fallback (never leaves the player with no guidance)
+  setObjective("Explore The Weave — talk to fixers, capture nodes",null,null);
+}
+var _ncSig="";
+function updateNodeCard(){
+  var sig="",title="",sub="",label="",act=null,glow="var(--acc)";
+  if(activeCapture&&nodeState[activeCapture]&&nodeState[activeCapture].token){ var id=activeCapture, ns=nodeState[id];
+    sig="active:"+id; title=nodeName(id); sub="Lab <b>"+(ns.lab||"?")+"</b> armed &#183; solve it, then submit the flag in the Labs tab to capture";
+    label="&#9873; LAUNCH LAB IN SYN_OS"; act=(function(a,b,c){return function(){ launchLabNative(a,b,c); };})(id,ns.lab,ns.token); glow="#f5c518"; }
+  else if(typeof nearNode!=="undefined"&&nearNode){ var nid=nearNode, nn=NODES.find(function(x){return x.id==nid;});
+    sig="contest:"+nid; title=nodeName(nid); sub=(nn&&nn.lab)?("Contest &#183; lab "+nn.lab):"Contest this territory for your faction";
+    label="&#9166; CONTEST"; act=(function(x){return function(){ contestNode(x); };})(nid); glow="var(--brand)"; }
+  else if(typeof nearLab!=="undefined"&&nearLab){ var p=nearLab;
+    sig="lab:"+(p.id||p.name); title=p.name; sub=(p.district||"lab site")+" &#183; an isolated target you actually hack";
+    label="&#9166; JACK IN"; act=(function(pp){return function(){ enterLab(pp); };})(p); glow=(p.accent||"var(--acc)"); }
+  if(sig===_ncSig)return; _ncSig=sig;
+  var card=document.getElementById("nodecard"); if(!card)return;
+  if(!sig){ card.classList.remove("on"); return; }
+  card.style.setProperty("--nc-glow",glow);
+  document.getElementById("nc_title").textContent=title;
+  document.getElementById("nc_sub").innerHTML=sub;
+  var btn=document.getElementById("nc_btn"); btn.innerHTML=label; btn.onclick=act;
+  card.classList.add("on");
+}
+// ── Lab-launch UX: fire the OS-native launcher from the node card. The launch_token
+//    arrived on the node_challenge_ready message (stored as nodeState[id].token). The
+//    flag-submit path in the Labs tab is unchanged — this is only the "open it" step. ──
+function launchLabNative(nodeId,labId,launchToken){
+  // Optional loopback status channel — a backend agent is building the local
+  // endpoint in parallel; guard it so failure degrades to the synos:// launch alone.
+  try{ var st=new WebSocket("wss://grimoire-local.synos-linux.pro:0/lab-status?node="+encodeURIComponent(nodeId||"")+"&lab="+encodeURIComponent(labId||""));
+    st.onopen=function(){ try{ st.send(JSON.stringify({type:"watch",node:nodeId,lab:labId})); }catch(e){} };
+    st.onmessage=function(ev){ try{ var m=JSON.parse(ev.data); if(m&&m.status){ var sub=document.getElementById("nc_sub"); if(sub)sub.innerHTML="Syn_OS: "+String(m.status).slice(0,60); } }catch(e){} };
+    st.onerror=function(){}; st.onclose=function(){};
+    setTimeout(function(){ try{ st.close(); }catch(e){} },20000);
+  }catch(e){}
+  // The synos:// handler + local agent verify an Ed25519 Launch Grant OFFLINE,
+  // NOT the WS launch_token. So fetch the grant from the daemon (sole holder of
+  // the signing key) via POST /wargames/:lab_id/grant, THEN fire synos:// with it.
+  var subEl=document.getElementById("nc_sub"); if(subEl)subEl.innerHTML="&#9873; Requesting lab grant&hellip;";
+  var catalog=(window.LAB_CATALOG&&window.LAB_CATALOG[labId])||"toy-fileserver-traversal-v1";
+  if(typeof hapi!=="function"){ wlog("no API to request lab grant"); return; }
+  hapi("/api/v1/wargames/"+encodeURIComponent(labId)+"/grant",{method:"POST",body:JSON.stringify({node_id:nodeId||"",catalog_id:catalog})})
+    .then(function(r){
+      var grant=(r&&r.grant)||"";
+      if(!grant){ wlog("lab grant denied"); if(subEl)subEl.innerHTML="Lab grant denied"; return; }
+      // fire the OS-native launcher (handled by the Syn_OS synos:// URL scheme handler)
+      var href="synos://lab/launch?token="+encodeURIComponent(grant)+"&node="+encodeURIComponent(nodeId||"")+"&lab="+encodeURIComponent(labId||"");
+      try{ window.location.href=href; }catch(e){ wlog("native launch failed: "+e.message); }
+      wlog("launching lab '"+labId+"' in Syn_OS...");
+      if(subEl)subEl.innerHTML="&#9873; Launching lab in Syn_OS&hellip; (solve it, then submit the flag in the Labs tab)";
+      if(typeof alfred==="function") alfred("Spinning up "+labId+" in your Syn_OS sandbox. Solve it, then drop the flag in the Labs tab to claim the node.",6000);
+    })
+    .catch(function(e){ wlog("lab grant fetch failed: "+((e&&e.message)||e)); if(subEl)subEl.innerHTML="Lab grant fetch failed"; });
+}
+setInterval(function(){ try{ resolveObjective(); }catch(e){} },700);
+
 // initial login stage (respects a captured OAuth / prior-session token)
 showJoin();
 buildHotbar(); draw();
@@ -2133,7 +2299,7 @@ if(location.search.indexOf("citydemo")>=0){ try{
   scale=1.5;
   if(location.search.indexOf("view3d")>=0){ try{ toggle3D(); console.log("3DDEMO toggled on="+R3.on); }catch(e){ console.log("3DDEMO err "+e.message+" | "+e.stack); } }
   if(location.search.indexOf("pip")>=0){
-    pipData={pl:{username:"operator",faction:"GraySyndicate",level:1,credits:200,xp_current:50,xp_to_next:331,alignment:0},
+    pipData={pl:{username:"tylimo56",faction:"GraySyndicate",level:1,credits:200,xp_current:50,xp_to_next:331,alignment:0},
       mt:{hacker_reputation_index:0,metrics:{flags_captured:1,contracts_fulfilled:0,current_streak:0,first_blood_awards:0,commands_executed:0,credits_earned:75}},
       inv:{items:[],credits:200},
       pk:[{attribute:"Scanning",name:"Port Profiler",description:"Enhanced port scanning",attribute_requirement:1,max_rank:3},
@@ -2151,16 +2317,23 @@ if(location.search.indexOf("citydemo")>=0){ try{
     setTimeout(()=>showLoot("Sovereign Root Key","Mythic",1),320);
   }
 }catch(e){ console.log("citydemo",e); } }
-// ── Knowledge-collection: server-authoritative wiring (recs #43/#44/#45) ──
+// ── Knowledge-collection (Data Vault): server-authoritative wiring ──
 // Reuses the game's hapi (Bearer + same-origin daemon). Manifest is public;
-// collection syncs once logged in and refreshes when the V panel opens.
+// collection syncs once logged in and refreshes when the Vault opens.
+// Facelift Phase 4: the module's OWN KeyV listener (bindKey, auto-run at boot)
+// stays as the primary Vault toggle now that 3D has vacated 'v' — so no more
+// double-fire. We ALSO expose openVault() so the game's single gated keydown
+// handler ('k') and the header VAULT button route through one place, and we
+// drop the redundant private 'v' sync-listener that used to double up.
+function _kcSync(){ try{ if(window.KnowledgeCollection&&token) KnowledgeCollection.syncFromServer().catch(function(){}); }catch(e){} }
+function openVault(){ if(!window.KnowledgeCollection){ wlog("Data Vault module unavailable"); return; }
+  _kcSync(); try{ KnowledgeCollection.renderPanel(); }catch(e){ console.log("vault-open",e); } }
 try{
   if(window.KnowledgeCollection){
     KnowledgeCollection.useServer(hapi);
     KnowledgeCollection.loadManifestFromServer().catch(function(){});
-    var _kcSync=function(){ try{ if(token) KnowledgeCollection.syncFromServer().catch(function(){}); }catch(e){} };
     _kcSync();
-    window.addEventListener("keydown",function(e){ if((e.key==="v"||e.key==="V")&&!e.ctrlKey&&!e.metaKey&&!e.altKey&&token) _kcSync(); });
   }
 }catch(e){ console.log("kc-wire",e); }
+var _vb=document.getElementById("vaultbtn"); if(_vb)_vb.onclick=openVault;
 </script></body></html>

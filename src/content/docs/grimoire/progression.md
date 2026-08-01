@@ -94,8 +94,8 @@ XP does not escalate you to the Enterprise Edition. It cannot. Curtain v4 enforc
 - AI dispatch operations always return `ENOSYS` (Curtain v4 capability-token enforcement)
 - LLM federation stays tier-isolated to GRIMOIRE peers
 - Audit chain HMAC roots stay separated
-- Fragment Field IDS kernel-side detection stays limited to the licensed Enterprise Edition
+- Fragment Field IDS kernel-side detection stays limited to the (planned) Enterprise Edition tier
 
-This is by design: GRIMOIRE produces operators; the Enterprise Edition is the licensed commercial product for organizations that need Syn_OS's full capability at scale.
+This is by design: GRIMOIRE produces operators; the Enterprise Edition is a planned commercial tier, not yet purchasable, intended for organizations that need Syn_OS's full capability at scale.
 
 ## Next: [Competition Mode →](/grimoire/competition/)

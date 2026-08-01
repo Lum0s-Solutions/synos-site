@@ -21,17 +21,17 @@ The Syn_OS codebase has accumulated its own vocabulary. This is the canonical re
 
 ## Components & products
 
-**ALFRED** — Adaptive Learning Framework for Responsive Evolution & Defense. The AI daemon. Two-layer Rust + Python architecture. **v6.0** (1.0 GA consolidation).
+**ALFRED** — Adaptive Learning Framework for Responsive Evolution & Defense. The AI daemon. Two-layer Rust + Python architecture. **v6.0** (1.0 stable API).
 
-**GRIMOIRE** — Gamified Reconnaissance, Intelligence, Malware Operations, Intrusion Response & Exploitation. The training platform. **117 labs, 13 categories** (catalog **1.0**), 110+ game modules.
+**GRIMOIRE** — Gamified Reconnaissance, Intelligence, Malware Operations, Intrusion Response & Exploitation. The training platform. **241 labs, 13 categories** (catalog **1.0**), 110+ game modules.
 
-**ARCANUM Hive** — The distributed mesh layer. Tailscale + WireGuard + Kubernetes operator. v55 Stoneglass shipped 8-node Ansible GA.
+**ARCANUM Hive** — The distributed mesh layer. Tailscale + WireGuard + Kubernetes operator. v55 Stoneglass wrote the 8-node Ansible playbook set; a small reference mesh runs today, and a large fleet has not yet been deployed.
 
 **Sanctum** — Multi-tenant federation server. v49 Crystal Net. Each Sanctum is a tenant boundary; tenants federate selectively.
 
 **Icarus** — Post-quantum cryptography engine. v9.0 implements ML-KEM (FIPS 203), ML-DSA (FIPS 204), SLH-DSA (FIPS 205).
 
-**Forge** — Reproducible-build supply chain. v48. Cosign + Sigstore Rekor + SLSA-3 + cross-oracle verify.
+**Forge** — Reproducible-build supply chain. v48. Cosign + Sigstore Rekor + build provenance targeting SLSA-3; cross-oracle verify is written but not yet exercised against a second oracle.
 
 **Riftrunner** — In-kernel safe-bytecode VM. v52. 22-instruction eBPF subset with in-kernel verifier and interpreter.
 
@@ -43,7 +43,7 @@ The Syn_OS codebase has accumulated its own vocabulary. This is the canonical re
 
 **Sun & Salt** — Commercial-readiness & business-hardening package. v60 (prior release).
 
-**Last Light** — The 1.0 GA release. **v111.0.0 (current).** Completes the v101→v111 "Rust Everything" software campaign. ALFRED v6.0, GRIMOIRE 1.0 (117 labs), 245 crates, post-quantum by default.
+**Last Light** — The 1.0 release candidate (code-complete; public ISOs pending). **v111.0.0 (current).** Completes the v101→v111 "Rust Everything" software campaign. ALFRED v6.0, GRIMOIRE 1.0 (241 labs), 226 crates, post-quantum by default.
 
 ## Kernel & interface
 
@@ -109,7 +109,7 @@ The Syn_OS codebase has accumulated its own vocabulary. This is the canonical re
 
 ## Compliance & supply chain
 
-**SLSA** — Supply-chain Levels for Software Artefacts. Forge ships SLSA-3 provenance.
+**SLSA** — Supply-chain Levels for Software Artefacts. Forge produces build provenance targeting SLSA-3.
 
 **SBOM** — Software Bill of Materials. CycloneDX format, generated per release.
 
@@ -123,7 +123,7 @@ The Syn_OS codebase has accumulated its own vocabulary. This is the canonical re
 
 ## ISO profiles
 
-**Enterprise Edition** — Licensed commercial product. GoodLife's full sovereign capability at organizational scale, plus multi-tenant ARCANUM federation, fleet management, and a FedRAMP Moderate / CMMC L2 / SOC2 compliance posture. **Not a public download** — by customer agreement.
+**Enterprise Edition** — Planned commercial tier, not yet purchasable. GoodLife's full sovereign capability at organizational scale, plus multi-tenant ARCANUM federation, fleet management, and a compliance posture mapped against FedRAMP Moderate / CMMC L2 / SOC2 control families. **Not a public download** and not available under any license yet.
 
 **GRIMOIRE Public** — Progressive-unlock training profile. Public release.
 
@@ -133,7 +133,7 @@ The Syn_OS codebase has accumulated its own vocabulary. This is the canonical re
 
 **Operation Warp Speed** — Umbrella codename for the v44 → v60 codesprint. Code-complete on `feat/operation-warp-speed`.
 
-**v101→v111 "Rust Everything" campaign** — The 11-version codesprint that delivered the 1.0 GA milestone. Completes with v111.0.0 "Last Light".
+**v101→v111 "Rust Everything" campaign** — The 11-version codesprint that delivered the 1.0 release-candidate milestone (code-complete; public ISOs pending). Completes with v111.0.0 "Last Light".
 
 **SYNOS_STRICT** — Build-orchestrator flag. When `=1`, any stage failure aborts the entire build (fail-loud).
 

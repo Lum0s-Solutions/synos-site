@@ -123,7 +123,7 @@ The Syn_OS codebase has accumulated its own vocabulary. This is the canonical re
 
 ## ISO profiles
 
-**Enterprise Edition** — Planned licensed commercial product: the full stack at organizational scale, plus multi-tenant ARCANUM federation, fleet management, and FedRAMP Moderate / CMMC L2 / SOC2 control mappings. **Roadmap — not yet available; not a public download.**
+**Enterprise Edition** — Licensed commercial product, tailored per contract: the full stack at organizational scale, plus multi-tenant ARCANUM federation, fleet management, and FedRAMP Moderate / CMMC L2 / SOC2 control mappings. **Not a generic image or public download — scoped and built per engagement; contact sales to start one.**
 
 **GRIMOIRE Public** — Progressive-unlock training profile. Public release.
 

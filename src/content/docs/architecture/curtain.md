@@ -57,7 +57,7 @@ The `algorithm` field supports both `ed25519` and **ML-DSA** — post-quantum si
 | Tier               | Issued by                | Authorised claims                                                  |
 |--------------------|--------------------------|--------------------------------------------------------------------|
 | `grimoire-public`  | GRIMOIRE federation root | XP-bounded tool unlocks, lab launch, GRIMOIRE-tier mesh peering; optional AI-research tooling unlocked at late progression. No operational offensive tooling; cannot escalate to the Enterprise Edition. |
-| `enterprise`       | Enterprise Edition federation root | *(Roadmap — not yet issued.)* Full ALFRED, AI cortex + dispatch, the complete ARCANUM mesh, at organizational scale, **plus** multi-tenant ARCANUM federation and fleet management, and FedRAMP Moderate / CMMC L2 / SOC2 control mappings; gated by a commercial license and a hardware attestation |
+| `enterprise`       | Enterprise Edition federation root | *(Issued per contract — no self-serve or generic enterprise token; not yet issued.)* Full ALFRED, AI cortex + dispatch, the complete ARCANUM mesh, at organizational scale, **plus** multi-tenant ARCANUM federation and fleet management, and FedRAMP Moderate / CMMC L2 / SOC2 control mappings; gated by a commercial license and a hardware attestation |
 
 There is no "elevate" claim. A `grimoire-public` subject cannot acquire an `enterprise` token under any in-band path — the issuance ceremony for an `enterprise` root requires a hardware-attested ceremony with two custodians, and the federation root's signing key never leaves an offline HSM.
 
@@ -118,7 +118,7 @@ The ledger is append-only, replicated across Sanctum federation peers, and signe
 
 ## Why this matters commercially
 
-The Curtain is the bedrock of the LumOs commercial model. GRIMOIRE Public is the free talent funnel that produces the best cybersecurity operators in the world; the **Enterprise Edition** is the planned commercial product — not yet available — that would deliver the full stack at organizational scale plus multi-tenant ARCANUM federation, fleet management, and FedRAMP Moderate / CMMC L2 / SOC2 control mappings under a commercial license. Both are built from the same codebase and shipped by the same supply chain — Curtain v4 makes the boundary that matters — the capability ceiling that holds the free and training image below the licensed Enterprise Edition — mechanical, signed, and externally auditable.
+The Curtain is the bedrock of the LumOs commercial model. GRIMOIRE Public is the free talent funnel that produces the best cybersecurity operators in the world; the **Enterprise Edition** is the commercial product — contract-tailored, not a generic download — that delivers the full stack at organizational scale plus multi-tenant ARCANUM federation, fleet management, and FedRAMP Moderate / CMMC L2 / SOC2 control mappings under a commercial license, scoped per engagement. Both are built from the same codebase and shipped by the same supply chain — Curtain v4 makes the boundary that matters — the capability ceiling that holds the free and training image below the licensed Enterprise Edition — mechanical, signed, and externally auditable.
 
 ## Related
 

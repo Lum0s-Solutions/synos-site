@@ -40,7 +40,7 @@ Three reinforcing missions drive every architectural decision:
 Syn_OS ships as a **two-image family** so the same codebase serves very different audiences without exposing sensitive capabilities:
 
 - **GRIMOIRE Public** — progressive-unlock cybersecurity training platform. Players start with a 10-tool starter kit and unlock capabilities by completing labs, earning XP, progressing through faction quests, and building personal hardware meshes from reclaimed machines. Free, public download.
-- **Enterprise Edition** — the planned commercial product: the full stack at organizational scale, plus multi-tenant ARCANUM federation, fleet management, and a FedRAMP Moderate / CMMC L2 / SOC2 compliance posture. Roadmap — not yet available; not a public download.
+- **Enterprise Edition** — the commercial product for organizations: the full stack at scale, plus multi-tenant ARCANUM federation, fleet management, and FedRAMP Moderate / CMMC L2 / SOC2 control mappings. Not a generic download — every Enterprise image is scoped and built per contract; [contact us →](/guides/download/#images) to start an engagement.
 
 Both share the same kernel, Rust userspace, and GRIMOIRE engine, but a build-time **Curtain** (ELF symbol scanner + feature audit + lab integrity manifests) plus a runtime capability ceiling enforces that **GRIMOIRE can never escalate to the licensed Enterprise Edition** no matter how far a player progresses. See [Curtain Capability Tokens →](/architecture/curtain/)
 

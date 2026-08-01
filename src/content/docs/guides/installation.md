@@ -1,33 +1,42 @@
 ---
 title: Installation
-description: Burn a USB, boot Syn_OS, and install with the Calamares wizard. Optional Ventoy multi-boot, FIDO2/TPM unlock, and persistence.
+description: Write a direct-boot USB, boot Syn_OS, and install with the Calamares wizard. FIDO2/TPM unlock and persistence. Ventoy is for trying the live environment only, not installing.
 ---
 
 Syn_OS uses the **Calamares** graphical installer with a custom Syn_OS branding module and the v43.2 first-boot wizard rewrite. The installation flow is identical across the three ISOs; the difference is which profile flag the ISO carries internally.
 
-## Burn the USB
+## Write the ISO to a USB drive
 
-Pick one. All ISOs are bootable on UEFI and Legacy BIOS.
+To **install** Syn_OS to disk, write the ISO directly to a USB drive with one of the tools below — all ISOs are bootable on UEFI and Legacy BIOS. See the Ventoy note at the end of this section before reaching for a multi-boot USB.
+
+### Rufus (Windows) — recommended
+
+1. Download the ISO and verify SHA-256 against the published checksum
+2. Open Rufus, select the ISO, set **Partition scheme** to GPT, **Target system** to UEFI
+3. When prompted, choose **DD Image mode** (not ISO Image mode) — this writes the ISO as a raw disk image
+4. Click **Start**
+
+### balenaEtcher (Windows / macOS / Linux)
+
+1. Download the ISO and verify SHA-256 against the published checksum
+2. Open balenaEtcher, select the ISO as the source and your USB drive as the target
+3. Click **Flash!** — balenaEtcher always writes in raw image mode
 
 ### dd (Linux / macOS)
 
 ```bash
-sudo dd if=synos-grimoire-public-v111.0.0.iso of=/dev/sdX bs=4M status=progress conv=fsync
-sync
+sudo dd if=synos-grimoire-public-v111.0.0.iso of=/dev/sdX bs=4M status=progress oflag=sync
 ```
 
 Replace `/dev/sdX` with your USB device. **Double-check** with `lsblk` first — `dd` overwrites the target without prompting.
 
-### Rufus (Windows)
+:::caution[Do not install from a Ventoy multi-boot USB]
+Ventoy boots the ISO through a loopback mount, and the Calamares installer then can't locate the live root (squashfs) filesystem to unpack — the install stalls or won't start. Ventoy is fine for trying the live environment, but to install Syn_OS to disk use a direct-write USB (Rufus / balenaEtcher / dd).
+:::
 
-1. Download the ISO and verify SHA-256 against the published checksum
-2. Open Rufus, select the ISO, set **Partition scheme** to GPT, **Target system** to UEFI
-3. Leave file system as FAT32 (Rufus will create a hybrid layout)
-4. Click **Start** → **Write in DD Image mode** when prompted
+### Ventoy — for trying the live environment only
 
-### Ventoy multi-boot
-
-Syn_OS ISOs are Ventoy-compatible. Drop the ISO onto a Ventoy USB drive (`/ventoy/iso/`) alongside other distributions and select Syn_OS from the Ventoy boot menu. Ventoy plugin support includes locked menu (admin PIN) and ISO signature verification — the v42 USB power toolkit ships a `ventoy.json` template.
+Syn_OS ISOs are Ventoy-compatible for booting into the **live** desktop to try before you install. Drop the ISO onto a Ventoy USB drive (`/ventoy/iso/`) alongside other distributions and select Syn_OS from the Ventoy boot menu. Ventoy plugin support includes locked menu (admin PIN) and ISO signature verification — the v42 USB power toolkit ships a `ventoy.json` template. When you're ready to install to disk, re-write the ISO to a dedicated USB with Rufus, balenaEtcher, or `dd` first.
 
 ## Boot the live ISO
 

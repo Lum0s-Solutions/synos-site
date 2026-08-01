@@ -1,7 +1,7 @@
 ---
 /*
   HomeLanding — approved heartbeat homepage (splash surface).
-  Full-bleed hero + "Three images. One codebase." teaser + "Built different"
+  Full-bleed hero + "Two images. One codebase." teaser + "Built different"
   grid + synaptic-gap close. Styles are Astro-scoped and namespaced under
   .synland so they win over (and never leak into) Starlight's markdown CSS.
 */
@@ -41,11 +41,11 @@ import HeartbeatHero from './HeartbeatHero.astro';
     </div>
   </section>
 
-  <!-- THREE IMAGES TEASER -->
+  <!-- IMAGES TEASER -->
   <section class="band">
     <div class="hbwrap">
       <div class="sechead reveal">
-        <h2>Three images<span class="u">.</span> One codebase.</h2>
+        <h2>Two images<span class="u">.</span> One codebase.</h2>
         <p>// same kernel, same 245-crate workspace — split by a build-time Curtain</p>
       </div>
       <div class="imgs">
@@ -55,16 +55,10 @@ import HeartbeatHero from './HeartbeatHero.astro';
           <p>Learn to hack for real — a shared-world hacking MMO. 117 progressive labs, faction wars, cert-path mapping. Boot the image.</p>
           <span class="go">Get GRIMOIRE →</span>
         </a>
-        <a class="icard reveal" href="/guides/download/">
-          <div class="k">Sovereign · Free personal</div>
-          <h3>GoodLife</h3>
-          <p>The full sovereign build — everything except operational offensive tooling. Full ALFRED, full mesh, the whole stack, plus a dedicated Research Division.</p>
-          <span class="go">Get GoodLife →</span>
-        </a>
         <a class="icard ent reveal" href="/guides/download/">
-          <div class="k">Enterprise · Licensed</div>
+          <div class="k">Enterprise · Roadmap</div>
           <h3>Enterprise Edition</h3>
-          <p>The commercial build for teams and regulated environments — multi-tenant federation, FedRAMP / CMMC / SOC2 posture, fleet management, priority support.</p>
+          <p>The planned commercial build for teams and regulated environments — multi-tenant federation, FedRAMP / CMMC / SOC2 control mappings, fleet management. Not available today.</p>
           <span class="go">Talk to us →</span>
         </a>
       </div>
@@ -84,7 +78,7 @@ import HeartbeatHero from './HeartbeatHero.astro';
         <div class="feat reveal"><h4><span class="d"></span>ALFRED consciousness fusion</h4><p>11 neuroanatomical brain crates wired into a four-path fusion engine. Woken by a kernel push-channel on <b>/dev/synos_consciousness</b> — no polling.</p></div>
         <div class="feat reveal"><h4><span class="d"></span>The Curtain</h4><p>A signed, capability-token ceiling that keeps the public images in their lane — no operational offensive tooling, no in-band escalation to the licensed tier. Mechanical, not best-effort.</p></div>
         <div class="feat reveal"><h4><span class="d"></span>ARCANUM Hive mesh</h4><p>Tailscale + WireGuard + a Kubernetes operator turn reclaimed laptops into a distributed inference mesh. The floor drops from <b>"$2,000 GPU"</b> to "a working laptop."</p></div>
-        <div class="feat reveal"><h4><span class="d"></span>Reproducible &amp; signed</h4><p><b>SLSA-3</b> reproducible builds, cosign + Sigstore Rekor, CycloneDX SBOM, cross-oracle verify. FedRAMP Moderate / CMMC L2 / SOC2 control maps ship in the box.</p></div>
+        <div class="feat reveal"><h4><span class="d"></span>Reproducible &amp; signed</h4><p><b>SLSA-3</b> provenance, cosign + Sigstore Rekor, CycloneDX SBOM; cross-oracle verify lands with the second build oracle. FedRAMP Moderate / CMMC L2 / SOC2 control mappings are authored — no formal audit or ATO performed.</p></div>
       </div>
     </div>
   </section>
@@ -226,8 +220,8 @@ import HeartbeatHero from './HeartbeatHero.astro';
   .sechead h2 .u { color: var(--crimson-hi); }
   .sechead p { color: var(--muted); margin-top: 12px; font-family: var(--mono); font-size: 13px; max-width: none; }
 
-  /* three images teaser */
-  .imgs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  /* images teaser */
+  .imgs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
   @media (max-width: 840px) { .imgs { grid-template-columns: 1fr; } }
   .icard { position: relative; border: 1px solid var(--line); border-radius: 15px; background: linear-gradient(180deg, var(--surface), var(--ground2)); padding: 24px 22px; transition: .25s; overflow: hidden; }
   .icard:hover { transform: translateY(-4px); border-color: var(--line-hi); }

@@ -37,14 +37,14 @@ The kernel-module interface covers the following domains:
 
 The Curtain v4 LSM hook intercepts each interface call and consults the calling process's capability token before dispatching:
 
-| Operation domain | grimoire-public | goodlife | enterprise |
-|------------------|-----------------|----------|--------|
-| Consciousness state (read-only) | allowed (read-only) | allowed (read-only) | allowed |
-| AI dispatch / memory update | `ENOSYS` | allowed (research-mode) | allowed |
-| Fragment Field IDS state | userspace-only path | kernel + userspace | allowed |
-| Observability counters | allowed | allowed | allowed |
-| Incident sink | allowed | allowed | allowed |
-| Mitigation state | allowed | allowed | allowed |
+| Operation domain | grimoire-public | enterprise |
+|------------------|-----------------|--------|
+| Consciousness state (read-only) | allowed (read-only) | allowed |
+| AI dispatch / memory update | `ENOSYS` | allowed |
+| Fragment Field IDS state | userspace-only path | allowed |
+| Observability counters | allowed | allowed |
+| Incident sink | allowed | allowed |
+| Mitigation state | allowed | allowed |
 
 Read more: [Curtain Capability Tokens →](/architecture/curtain/)
 

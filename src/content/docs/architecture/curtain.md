@@ -1,6 +1,6 @@
 ---
 title: Curtain Capability Tokens
-description: Curtain v4 — tier-based ed25519 capability tokens enforced by an LSM hook, with compile-time ELF symbol scanning. The mechanism that holds the free and training images to a capability ceiling below the licensed Enterprise Edition.
+description: Curtain v4 — tier-based ed25519 capability tokens enforced by an LSM hook, with compile-time ELF symbol scanning. The mechanism that holds the free training image to a capability ceiling below the planned Enterprise Edition.
 ---
 
 The **Curtain** is the mechanism that lets Syn_OS ship the same code to a 14-year-old playing GRIMOIRE and to an organization running the licensed Enterprise Edition at scale, without those two systems being interchangeable.
@@ -14,7 +14,7 @@ It evolved across four generations:
 
 ## Why Curtain exists
 
-The Curtain draws the boundaries that let the same codebase ship safely to every audience. The public images — GRIMOIRE Public and personal GoodLife — are held to a **capability ceiling**: they carry no operational offensive tooling and cannot escalate to the licensed **Enterprise Edition**. Everything else Syn_OS can do — the full AI cortex and dispatch, the complete ARCANUM mesh, the whole 245-crate development stack, and the Research Division — is available in the full sovereign build that GoodLife delivers.
+The Curtain draws the boundaries that let the same codebase ship safely to every audience. The public image — GRIMOIRE Public — is held to a **capability ceiling**: it carries no operational offensive tooling and cannot escalate to the licensed **Enterprise Edition**.
 
 GRIMOIRE Public is the talent funnel. The premise is that play produces operators. But play is only valuable if the platform under the play stays educational — if a sufficiently determined player could compile their way out of the public profile and past the capability ceiling, the platform would be a vulnerability vendor disguised as a school. So the boundary Curtain makes mechanical and non-negotiable is the capability ceiling: the public images ship without operational offensive tooling, and no in-band path escalates them to the licensed Enterprise Edition.
 
@@ -37,7 +37,7 @@ A Curtain v4 capability token is an ed25519-signed envelope containing:
   "version":   3,
   "issuer":    "<sanctum-fqdn>",
   "tenant":    "<tenant-uuid>",
-  "tier":      "grimoire-public" | "goodlife" | "enterprise",
+  "tier":      "grimoire-public" | "enterprise",
   "subject":   "<process-or-node-uuid>",
   "claims":    [ "kernel:ai-dispatch", "ebpf:enable", "federation:peer" ],
   "issued":    1746813600,
@@ -57,8 +57,7 @@ The `algorithm` field supports both `ed25519` and **ML-DSA** — post-quantum si
 | Tier               | Issued by                | Authorised claims                                                  |
 |--------------------|--------------------------|--------------------------------------------------------------------|
 | `grimoire-public`  | GRIMOIRE federation root | XP-bounded tool unlocks, lab launch, GRIMOIRE-tier mesh peering; optional AI-research tooling unlocked at late progression. No operational offensive tooling; cannot escalate to the Enterprise Edition. |
-| `goodlife`         | GoodLife federation root | Full sovereign capability — full ALFRED, AI cortex + dispatch, complete ARCANUM mesh, the whole 245-crate stack, and the Research Division. No operational offensive tooling; no Enterprise Edition peering. |
-| `enterprise`       | Enterprise Edition federation root | Everything GoodLife has at organizational scale, **plus** multi-tenant ARCANUM federation and fleet management, and a FedRAMP Moderate / CMMC L2 / SOC2 compliance posture with evidence packs; gated by a commercial license and a hardware attestation |
+| `enterprise`       | Enterprise Edition federation root | *(Roadmap — not yet issued.)* Full ALFRED, AI cortex + dispatch, the complete ARCANUM mesh, at organizational scale, **plus** multi-tenant ARCANUM federation and fleet management, and FedRAMP Moderate / CMMC L2 / SOC2 control mappings; gated by a commercial license and a hardware attestation |
 
 There is no "elevate" claim. A `grimoire-public` subject cannot acquire an `enterprise` token under any in-band path — the issuance ceremony for an `enterprise` root requires a hardware-attested ceremony with two custodians, and the federation root's signing key never leaves an offline HSM.
 
@@ -115,11 +114,11 @@ Every Curtain decision produces a **PromptGuard receipt** chained into `synos-at
 - Timestamp
 - HMAC-SHA256 chain link
 
-The ledger is append-only, replicated across Sanctum federation peers, and signed at epoch roots with SLH-DSA. Audit pulls it for SOC2 / CMMC / FedRAMP evidence.
+The ledger is append-only, replicated across Sanctum federation peers, and signed at epoch roots with SLH-DSA. It is the technical evidence source that would back a future SOC2 / CMMC / FedRAMP audit engagement — no such audit has been performed to date.
 
 ## Why this matters commercially
 
-The Curtain is the bedrock of the LumOs commercial model. GRIMOIRE Public is the free talent funnel that produces the best cybersecurity operators in the world; GoodLife is the full sovereign build — everything Syn_OS can do — free for personal and sovereign use and licensed for commercial or organizational deployment; the **Enterprise Edition** is the commercial product LumOs sells, delivering GoodLife's full capability at organizational scale plus multi-tenant ARCANUM federation, fleet management, and a FedRAMP Moderate / CMMC L2 / SOC2 compliance posture with evidence packs under a commercial license. All three are built from the same codebase, audited together, and shipped by the same supply chain — but Curtain v4 makes the boundary that matters — the capability ceiling that holds the free and training images below the licensed Enterprise Edition — mechanical, signed, and externally auditable.
+The Curtain is the bedrock of the LumOs commercial model. GRIMOIRE Public is the free talent funnel that produces the best cybersecurity operators in the world; the **Enterprise Edition** is the planned commercial product — not yet available — that would deliver the full stack at organizational scale plus multi-tenant ARCANUM federation, fleet management, and FedRAMP Moderate / CMMC L2 / SOC2 control mappings under a commercial license. Both are built from the same codebase and shipped by the same supply chain — Curtain v4 makes the boundary that matters — the capability ceiling that holds the free and training image below the licensed Enterprise Edition — mechanical, signed, and externally auditable.
 
 ## Related
 

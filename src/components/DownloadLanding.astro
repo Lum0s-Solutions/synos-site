@@ -1,10 +1,11 @@
 ---
 /*
-  DownloadLanding — approved "Three images. One fire." download surface (splash).
-  Full-bleed heartbeat hero + three image panels (GRIMOIRE / GoodLife / Enterprise)
-  + Church of Malware members-only band + signed-integrity strip.
-  GoodLife/Enterprise copy uses the reconciled non-offensive framing (no "weapon",
-  no public "Master" image). Styles scoped + namespaced under .synland.
+  DownloadLanding — approved "Two images. One fire." download surface (splash).
+  Full-bleed heartbeat hero + image panels (GRIMOIRE public download, Enterprise
+  Edition roadmap) + Church of Malware members-only band + signed-integrity strip.
+  Enterprise copy is reconciled non-offensive, pre-ship/roadmap framing (no "weapon",
+  no public "Master" image, no live SLA/purchase claim). Styles scoped + namespaced
+  under .synland.
 */
 import HeartbeatHero from './HeartbeatHero.astro';
 ---
@@ -14,7 +15,7 @@ import HeartbeatHero from './HeartbeatHero.astro';
     <HeartbeatHero bpm={60} intensity={0.7} />
     <div class="hbwrap">
       <span class="pulsechip"><span class="hb"></span> v111.0.0 · Last Light · the OS has a pulse</span>
-      <h1 class="title">Three images.<br>One <span class="fire">fire</span>.</h1>
+      <h1 class="title">Two images.<br>One <span class="fire">fire</span>.</h1>
       <p class="lede">One Rust-for-Linux kernel, one Rust userspace, one GRIMOIRE engine — split into distinct images by a build-time Curtain and a runtime capability ceiling. <b>Pick the way in that fits you.</b></p>
       <div class="herometa">
         <span>arch <b>x86-64</b></span><span>kernel <b>Linux 7.0 · Rust</b></span>
@@ -50,36 +51,19 @@ import HeartbeatHero from './HeartbeatHero.astro';
           </div>
         </article>
 
-        <!-- GoodLife -->
-        <article class="panel p-good reveal">
-          <div class="ptop"><span class="pbadge">Sovereign</span><span class="status free">Free personal · Beta</span></div>
-          <div class="pname">GoodLife</div>
-          <div class="ptag">The full sovereign build — everything except operational offensive tooling. Your own AI, your own mesh, your own research lab.</div>
-          <ul class="specs">
-            <li>Full ALFRED v6.0 · full AI cortex + dispatch</li>
-            <li>Full ARCANUM mesh · the complete 245-crate stack</li>
-            <li>Dedicated Research Division — Jupyter, local models, ML lab</li>
-            <li>No operational offensive tooling — simply not included</li>
-          </ul>
-          <div class="pfoot">
-            <div class="dl"><span>synos-goodlife-v111.iso</span> · <b>free personal · licensed commercial</b></div>
-            <a class="cta" href="#"><span>Download image</span><span class="arw">→</span></a>
-          </div>
-        </article>
-
         <!-- Enterprise Edition -->
         <article class="panel p-master reveal">
-          <div class="ptop"><span class="pbadge">Enterprise</span><span class="status locked">◆ Licensed</span></div>
+          <div class="ptop"><span class="pbadge">Enterprise</span><span class="status locked">◆ Roadmap</span></div>
           <div class="pname">Enterprise Edition</div>
-          <div class="ptag">The commercial build for teams and regulated environments — the full stack, multi-tenant, compliant, supported.</div>
+          <div class="ptag">The planned commercial build for teams and regulated environments — the full stack, multi-tenant, compliance-mapped. Not available today.</div>
           <ul class="specs">
-            <li>Everything in GoodLife, at organizational scale</li>
+            <li>Full ALFRED v6.0 · full AI cortex + dispatch, at organizational scale</li>
             <li>Multi-tenant ARCANUM federation + fleet management</li>
-            <li>FedRAMP Moderate · CMMC L2 · SOC2 posture with evidence packs</li>
-            <li>Priority support &amp; SLAs · by customer agreement</li>
+            <li>FedRAMP Moderate · CMMC L2 · SOC2 control mappings authored — no formal audit or ATO performed</li>
+            <li>Support &amp; SLA terms not yet defined — pre-ship</li>
           </ul>
           <div class="pfoot">
-            <div class="lockrow">🔒 licensed · customer agreement</div>
+            <div class="lockrow">🛠 pre-ship · roadmap, not a current offering</div>
             <a class="cta" href="#"><span>Talk to us</span><span class="arw">→</span></a>
           </div>
         </article>
@@ -112,10 +96,10 @@ import HeartbeatHero from './HeartbeatHero.astro';
     <div class="hbwrap">
       <div class="reveal">
         <h3>Every image is signed.</h3>
-        <p>Reproducible from source across independent build oracles, cosign-signed, and logged to a public transparency record. Trust the fire, verify the ash.</p>
+        <p>Reproducible from source, cosign-signed, and logged to a public transparency record. Cross-oracle verification lands once the second build oracle is provisioned. Trust the fire, verify the ash.</p>
         <div class="chips">
           <span class="chip"><b>SHA-256</b> per image</span>
-          <span class="chip"><b>SLSA-3</b> reproducible</span>
+          <span class="chip"><b>SLSA-3</b> provenance</span>
           <span class="chip"><b>cosign</b> + Sigstore Rekor</span>
           <span class="chip"><b>CycloneDX</b> SBOM</span>
         </div>
@@ -184,7 +168,7 @@ import HeartbeatHero from './HeartbeatHero.astro';
   .sechead h2 .u { color: var(--crimson); }
   .sechead p { color: var(--muted); font-family: var(--mono); font-size: 13px; max-width: 42ch; }
 
-  .grid { display: grid; grid-template-columns: 1.35fr 1fr 1fr; gap: 18px; }
+  .grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: 18px; }
   @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
 
   .panel { position: relative; border: 1px solid var(--line); border-radius: 16px; background: linear-gradient(180deg, var(--surface), var(--ground2)); padding: 26px 24px 24px; display: flex; flex-direction: column; min-height: 452px; overflow: hidden; transition: border-color .25s, transform .25s, box-shadow .25s; }
@@ -216,12 +200,6 @@ import HeartbeatHero from './HeartbeatHero.astro';
   .p-grim .cta { background: linear-gradient(180deg, var(--crimson-hi), var(--crimson)); color: #fff; box-shadow: 0 10px 30px -12px var(--crimson-glow); }
   .p-grim .cta:hover { filter: brightness(1.08); box-shadow: 0 16px 42px -12px var(--crimson-glow); }
   .p-grim::after { content: ""; position: absolute; top: -40%; right: -30%; width: 62%; height: 82%; background: radial-gradient(closest-side, var(--crimson-glow), transparent 70%); opacity: .2; pointer-events: none; }
-
-  /* GoodLife — quiet, cool */
-  .p-good:hover { box-shadow: 0 22px 60px -28px rgba(139, 150, 158, 0.32); border-color: var(--line-hi); }
-  .p-good .pbadge { color: #8b969e; }
-  .p-good .cta { background: var(--surface2); color: var(--text); border-color: var(--line-hi); }
-  .p-good .cta:hover { background: #26201f; border-color: #8b969e; }
 
   /* Enterprise — gold, gated */
   .p-master { background: linear-gradient(180deg, #17130c, var(--ground2)); }

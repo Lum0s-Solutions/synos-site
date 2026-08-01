@@ -4,7 +4,6 @@
 # Convenience: bare /grimoire → /grimoire/overview/
 /grimoire     /grimoire/overview/     301
 /architecture /architecture/layers/   301
-/goodlife     /goodlife/overview/     301
 /guides       /guides/overview/       301
 /reference    /reference/syscalls/    301
 

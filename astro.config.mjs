@@ -9,7 +9,7 @@ export default defineConfig({
 		starlight({
 			title: 'Syn_OS',
 			description:
-				'The Synaptic Operating System — AI-aware Linux kernel, 227-crate Rust workspace, post-quantum crypto by default, gamified cybersecurity training. v111.0.0 "Last Light" (1.0 release candidate).',
+				'The Synaptic Operating System — AI-aware Linux kernel, 226-crate Rust workspace, post-quantum crypto by default, gamified cybersecurity training. v111.0.0 "Last Light" (1.0 release candidate).',
 			logo: {
 				src: './src/assets/phoenix-logo.png',
 				alt: 'Syn_OS Phoenix',
@@ -26,7 +26,7 @@ export default defineConfig({
 			head: [
 				// Open Graph
 				{ tag: 'meta', attrs: { property: 'og:title',        content: 'Syn_OS — Synaptic Operating System' } },
-				{ tag: 'meta', attrs: { property: 'og:description',  content: 'AI-aware Linux kernel, 227-crate Rust workspace, post-quantum crypto by default, GRIMOIRE 1.0 (241 labs), ARCANUM mesh. v111.0.0 Last Light (1.0 release candidate).' } },
+				{ tag: 'meta', attrs: { property: 'og:description',  content: 'AI-aware Linux kernel, 226-crate Rust workspace, post-quantum crypto by default, GRIMOIRE 1.0 (241 labs), ARCANUM mesh. v111.0.0 Last Light (1.0 release candidate).' } },
 				{ tag: 'meta', attrs: { property: 'og:type',         content: 'website' } },
 				{ tag: 'meta', attrs: { property: 'og:url',          content: 'https://synos-linux.pro/' } },
 				{ tag: 'meta', attrs: { property: 'og:image',        content: 'https://synos-linux.pro/og-image.svg' } },

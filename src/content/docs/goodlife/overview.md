@@ -1,9 +1,9 @@
 ---
 title: GoodLife Sovereign ISO
-description: GoodLife — the full sovereign build of Syn_OS. Full ALFRED, full AI cortex, full ARCANUM mesh, the complete 227-crate stack, and a dedicated Research Division. Operational offensive tooling is not included. No telemetry, air-gap capable, local models.
+description: GoodLife — the full sovereign build of Syn_OS. Full ALFRED, full AI cortex, full ARCANUM mesh, the complete 226-crate stack, and a dedicated Research Division. Operational offensive tooling is not included. No telemetry, air-gap capable, local models.
 ---
 
-**GoodLife** is the **full sovereign build** of Syn_OS. Same custom 7.0-synos-ai kernel, same 227-crate Rust workspace, the full ALFRED v6.0 daemon, the full AI cortex and dispatch, the complete ARCANUM mesh, and a dedicated **Research Division** (Jupyter, local models, ML lab) layered on top. **Operational offensive tooling is simply not included** — GoodLife is a complete AI-and-development platform, not an offensive-operations profile. It keeps Syn_OS's sovereign values — no telemetry, air-gap capable, local models by default — so you get a complete, self-owned platform without becoming a target by accident. Free for personal and sovereign use; commercial or organizational deployment is intended to require a license once the planned Enterprise Edition tier ships.
+**GoodLife** is the **full sovereign build** of Syn_OS. Same custom 7.0-synos-ai kernel, same 226-crate Rust workspace, the full ALFRED v6.0 daemon, the full AI cortex and dispatch, the complete ARCANUM mesh, and a dedicated **Research Division** (Jupyter, local models, ML lab) layered on top. **Operational offensive tooling is simply not included** — GoodLife is a complete AI-and-development platform, not an offensive-operations profile. It keeps Syn_OS's sovereign values — no telemetry, air-gap capable, local models by default — so you get a complete, self-owned platform without becoming a target by accident. Free for personal and sovereign use; commercial or organizational deployment is intended to require a license once the planned Enterprise Edition tier ships.
 
 ## What's in the box
 
@@ -65,7 +65,7 @@ The design intent is that a 4-node i5-class mesh can rival a single mid-range wo
 
 ## What GoodLife is for
 
-- **A complete sovereign platform** — the full 227-crate stack, full ALFRED, and the full AI cortex + dispatch, all self-owned
+- **A complete sovereign platform** — the full 226-crate stack, full ALFRED, and the full AI cortex + dispatch, all self-owned
 - **Local AI research** — sovereign LLM inference, no cloud bills, no telemetry
 - **Federated inference experiments** — the mesh is the substrate
 - **RAG / embedding pipelines** against your own corpus

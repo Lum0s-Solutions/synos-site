@@ -14,7 +14,7 @@ It evolved across four generations:
 
 ## Why Curtain exists
 
-The Curtain draws the boundaries that let the same codebase ship safely to every audience. The public images — GRIMOIRE Public and personal GoodLife — are held to a **capability ceiling**: they carry no operational offensive tooling and cannot escalate to the (planned) **Enterprise Edition**. Everything else Syn_OS can do — the full AI cortex and dispatch, the complete ARCANUM mesh, the whole 227-crate development stack, and the Research Division — is available in the full sovereign build that GoodLife delivers.
+The Curtain draws the boundaries that let the same codebase ship safely to every audience. The public images — GRIMOIRE Public and personal GoodLife — are held to a **capability ceiling**: they carry no operational offensive tooling and cannot escalate to the (planned) **Enterprise Edition**. Everything else Syn_OS can do — the full AI cortex and dispatch, the complete ARCANUM mesh, the whole 226-crate development stack, and the Research Division — is available in the full sovereign build that GoodLife delivers.
 
 GRIMOIRE Public is the talent funnel. The premise is that play produces operators. But play is only valuable if the platform under the play stays educational — if a sufficiently determined player could compile their way out of the public profile and past the capability ceiling, the platform would be a vulnerability vendor disguised as a school. So the boundary Curtain makes mechanical and non-negotiable is the capability ceiling: the public images ship without operational offensive tooling, and no in-band path escalates them to the Enterprise Edition tier.
 
@@ -57,7 +57,7 @@ The `algorithm` field supports both `ed25519` and **ML-DSA** — post-quantum si
 | Tier               | Issued by                | Authorised claims                                                  |
 |--------------------|--------------------------|--------------------------------------------------------------------|
 | `grimoire-public`  | GRIMOIRE federation root | XP-bounded tool unlocks, lab launch, GRIMOIRE-tier mesh peering; optional AI-research tooling unlocked at late progression. No operational offensive tooling; cannot escalate to the Enterprise Edition. |
-| `goodlife`         | GoodLife federation root | Full sovereign capability — full ALFRED, AI cortex + dispatch, complete ARCANUM mesh, the whole 227-crate stack, and the Research Division. No operational offensive tooling; no Enterprise Edition peering. |
+| `goodlife`         | GoodLife federation root | Full sovereign capability — full ALFRED, AI cortex + dispatch, complete ARCANUM mesh, the whole 226-crate stack, and the Research Division. No operational offensive tooling; no Enterprise Edition peering. |
 | `enterprise`       | Enterprise Edition federation root (planned; tier does not exist yet) | Design intent: everything GoodLife has at organizational scale, **plus** multi-tenant ARCANUM federation and fleet management, and a compliance posture mapped against FedRAMP Moderate / CMMC L2 / SOC2 control families (third-party audits not yet performed); to be gated by a commercial license and a hardware attestation |
 
 There is no "elevate" claim. A `grimoire-public` subject cannot acquire an `enterprise` token under any in-band path — the issuance ceremony for an `enterprise` root requires a hardware-attested ceremony with two custodians, and the federation root's signing key never leaves an offline HSM.

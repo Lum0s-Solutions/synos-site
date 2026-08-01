@@ -127,4 +127,4 @@ The Curtain is the bedrock of the LumOs commercial model. GRIMOIRE Public is the
 - **[Custom Kernel →](/architecture/kernel/)** — the LSM hook that consults tokens
 - **[Forge →](/architecture/forge/)** — token signing keys live alongside release signing
 - **[ARCANUM Mesh →](/architecture/arcanum/)** — federation refuses cross-tier peering
-- **[Build from Source →](/guides/build-from-source/)** — the source-level open-core boundary (git-crypt) that complements this runtime one
+- **[Build from Source →](/guides/build-from-source/)** — the public forge is plaintext and buildable end to end; the boundary it holds is that master-only crates simply aren't in the tree, which is a source-level guarantee that complements this runtime one

@@ -57,14 +57,16 @@ The Salvage Yard quest in GRIMOIRE assumes you can reclaim 3-4 discarded laptops
 
 ## Is the source open?
 
-**Yes, the source is open now**, at the Church of Malware forge (`git.churchofmalware.org`), under an open-core model:
+**Yes, the source is open now**, at the Church of Malware forge (`git.churchofmalware.org`), as plaintext — no keys, no unlock step:
 
-- The bulk of the workspace (kernel, brain crates, GRIMOIRE engine, ALFRED Rust daemon, Bevy plugins) resolves and builds for anyone who clones the repo.
-- The offensive and commercial-tier crates are **maintainer-sealed** with git-crypt in the same repo. They don't decrypt or compile in a member's checkout, so `cargo build --workspace` fails on them by design. This isn't a gate members unlock: the maintainer holds the sole key, and decrypting those crates is a maintainer-only step. Members who need what's in them download the **published ISO** the maintainer builds instead.
+- Clone it and run `just iso churchofmalware` (or `grimoire` / `goodlife`) and you get the real, fully-functional image — the same pipeline the maintainer's own builds use. Nothing decrypts, nothing unlocks; it's just there.
+- The forge deliberately **cannot** produce a `master` (internal) image. The master ISO profile and the fleet-C2, fleet-OTA, and key-escrow/tenant-crypto crates it depends on are absent from the tree entirely — `build.sh --profile master` aborts before any build work runs. That's a feature: the community can't accidentally walk out with internal fleet tooling.
 
-This is a separate thing from **runtime membership**: `/claim` in the Church of Malware Discord issues a runtime membership token (faction loadout, XP head-start) on a booted image, independent of source access.
+This is a separate thing from **runtime membership**: `/claim` in the Church of Malware Discord DMs a signed member token (faction loadout, XP head-start, member-exclusive labs) on a booted image. It is not a build key and isn't required to build anything.
 
-The `Lum0s-Solutions/Syn_OS` GitHub repo (the private upstream mirror this site tracks) remains private; the public build surface is the Church of Malware forge.
+Members update an installed system with `synos-update`, a pacman/AUR host updater with supply-chain gates — there's no fleet-OTA in the community image; that push mechanism is master-only.
+
+The `Lum0s-Solutions/Syn_OS` GitHub repo (the private canonical upstream this site tracks) remains private; the public build surface is the Church of Malware forge.
 
 [Build from source →](/guides/build-from-source/)
 

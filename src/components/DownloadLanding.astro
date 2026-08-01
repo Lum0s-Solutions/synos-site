@@ -46,7 +46,7 @@ import HeartbeatHero from './HeartbeatHero.astro';
           </ul>
           <div class="pfoot">
             <div class="dl"><span>synos-grimoire-v111.iso</span> · <b>x86-64 · UEFI</b></div>
-            <a class="cta" href="#"><span>Coming soon</span><span class="arw">→</span></a>
+            <a class="cta" href="/guides/build-from-source/"><span>Build it now</span><span class="arw">→</span></a>
           </div>
         </article>
 
@@ -63,7 +63,7 @@ import HeartbeatHero from './HeartbeatHero.astro';
           </ul>
           <div class="pfoot">
             <div class="dl"><span>synos-goodlife-v111.iso</span> · <b>free personal · licensed commercial</b></div>
-            <a class="cta" href="#"><span>Coming soon</span><span class="arw">→</span></a>
+            <a class="cta" href="/guides/build-from-source/"><span>Build it now</span><span class="arw">→</span></a>
           </div>
         </article>
 
@@ -79,7 +79,7 @@ import HeartbeatHero from './HeartbeatHero.astro';
           </ul>
           <div class="pfoot">
             <div class="lockrow">◆ planned tier · not yet available</div>
-            <a class="cta" href="#"><span>Register interest</span><span class="arw">→</span></a>
+            <a class="cta" href="mailto:info@lumossolutions.io?subject=Enterprise%20Edition%20interest"><span>Register interest</span><span class="arw">→</span></a>
           </div>
         </article>
       </div>
@@ -90,16 +90,16 @@ import HeartbeatHero from './HeartbeatHero.astro';
           <div>
             <div class="comeyebrow"><span class="sigil">⛧</span> Church of Malware · Open Forge</div>
             <div class="comtitle">Enter through the <b>Church</b>.</div>
-            <p>The source is open now at the <a href="https://churchofmalware.org">Church of Malware</a> forge, an open-core split of the same codebase. Anyone can clone it and build the open workspace. The offensive/commercial crates stay maintainer-sealed. That's not a member unlock; it's how the full functional image gets published as an ISO for everyone to download.</p>
+            <p>The source is open now at the <a href="https://churchofmalware.org">Church of Malware</a> forge — plaintext, no keys, no unlock step. Clone it and <code>just iso churchofmalware</code> builds the real, fully-functional image. The forge deliberately can't produce a master (internal) image: the master-only fleet-C2, fleet-OTA, and key-escrow crates simply aren't in the tree, and <code>--profile master</code> aborts before any build work runs.</p>
             <div class="comscript">// code is scripture · exploitation is sermon</div>
             <a class="combtn" href="/guides/build-from-source/"><span>Build from source</span><span class="arw">→</span></a>
             <div class="commeta">runtime membership (perks, XP head-start, faction loadout) is separate — join the Discord and run <code>/claim</code></div>
           </div>
           <ol class="comflow">
             <li><span class="n">1</span><span>Clone the public forge — <a href="/guides/build-from-source/">build-from-source guide →</a></span></li>
-            <li><span class="n">2</span><span>Build the open workspace yourself, or skip straight to the <b class="comwhite">published ISO</b> for the full image</span></li>
-            <li><span class="n">3</span><span>Offensive/commercial crates stay <b class="comwhite">maintainer-sealed</b> — not a member unlock</span></li>
-            <li><span class="n">4</span><span>Join the CoM Discord and run <code>/claim</code> for a runtime membership token — independent of build access</span></li>
+            <li><span class="n">2</span><span>Run <code>just iso churchofmalware</code> — no keys, no unlock, the full image is yours</span></li>
+            <li><span class="n">3</span><span>Master-only fleet-C2/OTA/escrow crates aren't in this tree — <code>--profile master</code> isn't buildable here, by design</span></li>
+            <li><span class="n">4</span><span>Join the CoM Discord and run <code>/claim</code> for a runtime membership token — separate from build access</span></li>
           </ol>
         </div>
       </div>

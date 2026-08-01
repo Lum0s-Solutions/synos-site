@@ -1,9 +1,9 @@
 ---
 title: Build from Source
-description: Clone the Church of Malware forge and build the open parts of Syn_OS yourself. What resolves, what stays sealed, and how the published ISO and runtime membership fit in.
+description: Clone the Church of Malware forge and build the real churchofmalware image yourself. No keys, no unlock step — plaintext source, and one guarantee it will never produce a master image.
 ---
 
-The source is open now, at the **Church of Malware** forge — a public open-core mirror of the Syn_OS codebase. Anyone can clone it and build the open parts.
+The source is open now, at the **Church of Malware** forge — a public mirror of the Syn_OS codebase, published as plaintext. Clone it, build it, it's yours: no keys, no unlock step, no waiting on a maintainer to hand you something.
 
 ## Clone
 
@@ -20,46 +20,39 @@ This is a public HTTPS clone routed through Cloudflare. That path is not indepen
 just iso churchofmalware
 ```
 
-This runs the same ISO build pipeline the site's other profiles use, targeted at the `churchofmalware` profile.
+That's the whole build key requirement: none. This runs the same ISO pipeline the maintainer's own builds use, and produces the real, fully-functional `churchofmalware` image — the education/offensive-training profile, not a stub or a teaser. The same forge also builds the `grimoire` and `goodlife` profiles (`just iso grimoire`, `just iso goodlife`); it's one open tree with three buildable profiles.
 
-## What resolves and what doesn't
+## What's in the tree, and what isn't
 
-The forge repo is a single git history, but not everything in it compiles for you:
+| Component | Status on this forge |
+|-----------|------------------------|
+| Kernel, base userspace, GRIMOIRE engine, ALFRED Rust daemon, Curtain capability tokens, `synos_rootkit`, `synos-specter`, the anonymity-tooling shelf, tier gating, build-attest | Open, plaintext, buildable. This is the real churchofmalware image, not a redacted one. |
+| Fleet-C2 controller (`godmode.rs`), fleet OTA push (`synos-ota`), key escrow + MSSP tenant crypto (`synos-sovereign-keyring`), the `master` ISO profile itself | **Absent from this tree.** Not encrypted, not gated behind a key — the source files simply aren't here. They live only in the private canonical repo. |
 
-| Component                                                        | Status for anyone who clones             |
-|--------------------------------------------------------------------|-------------------------------------------|
-| Kernel, base userspace, GRIMOIRE engine, ALFRED Rust daemon, Bevy plugins | Open. Resolves and builds. |
-| Offensive-tier and commercial-tier crates                           | **Maintainer-sealed** with git-crypt. They do not decrypt or compile in your checkout. `cargo build --workspace` fails on them by design. |
+## No master image, by design
 
-The sealed crates are not a member-facing unlock path. The maintainer holds the sole git-crypt key for the forge repo, and decrypting those crates is a maintainer-only step (occasionally extended to a specific, explicitly-chosen co-maintainer, but never a general membership benefit). If you need what's in them, the way in is the **published ISO** the maintainer builds and ships, not your own decrypt.
+This forge cannot produce a master (internal) image, and that's deliberate — not a limitation anyone needs to work around. Three independent layers guarantee it:
 
-```bash
-# what you get from a clean clone:
-just iso churchofmalware
-# → builds the open workspace into an image
-# → offensive/commercial crates are absent, sealed and unresolved
-```
+1. **The master profile doesn't exist here.** `fruit/iso/profiles/master.toml` and its package lists aren't in this tree, so `build.sh --profile master` hard-aborts at profile validation before any build work runs.
+2. **The crates it depends on aren't here either.** The fleet-C2 controller, fleet-OTA push, and key-escrow/tenant-crypto modules are absent from the forge, so even a hand-rolled `master.toml` wouldn't compile against this source.
+3. **The public profile already disables the capability.** `churchofmalware.toml` ships `god_mode = false` and `fleet_management = false` regardless.
 
-## The published ISO
+The community can build the full churchofmalware/grimoire/goodlife education and offensive-training images — and cannot accidentally, or deliberately, walk out with internal fleet-command tooling.
 
-For the full functional image, sealed crates included, download the ISO the maintainer publishes rather than trying to build it yourself. See [Three ISOs →](/guides/download/).
+## Keeping an installed system updated
+
+CoM ships `synos-update`, a pacman/AUR-based host updater with supply-chain gates (signature verification, changelog diffing) for keeping an installed system current. There's no fleet-OTA in the community image — that push mechanism is master-only, per the exclusion above. `synos-update` is the member update path, full stop.
 
 ## `/claim` is a separate thing entirely
 
-Running `/claim` in the Church of Malware Discord issues a **runtime membership token** — a faction loadout, an XP head-start, and member-exclusive GRIMOIRE labs, applied to a booted image (yours or the published ISO). It has nothing to do with source access:
+Running `/claim` in the Church of Malware Discord DMs a signed **runtime membership token** — a faction loadout, an XP head-start, and member-exclusive GRIMOIRE labs, applied to a booted image. It has nothing to do with building:
 
-- `/claim` gets you runtime perks on a booted image
-- The sealed crates stay sealed regardless of your Discord role or how long you've been a member
-
-Most community members will only ever need `/claim` plus the published ISO. Building from source is for inspecting or extending the open parts of the codebase.
-
-## Why git-crypt
-
-Curtain's build-time boundary (the `xtask` ELF/string scanner and feature audit) enforces what ships in a *built* image. git-crypt enforces a boundary one step earlier, at the *source* level, specifically for the community forge: it lets one public repository host both the fully-open crates and the sealed ones, without the sealed source ever leaving the maintainer's machine. Curtain and git-crypt are complementary, not redundant. See [Curtain Capability Tokens →](/architecture/curtain/) for the runtime/build-time enforcement that applies to every profile, including the maintainer's own sealed builds.
+- `/claim` gets you runtime perks on a booted image.
+- It is not a build key, and it's not required to build the ISO — anyone can clone and build with zero Discord interaction.
 
 ## Related
 
-- **[Three ISOs →](/guides/download/)** — the published-ISO path for the full functional image
+- **[Three ISOs →](/guides/download/)** — the ISO family this profile belongs to
 - **[FAQ: Is the source open? →](/reference/faq/#is-the-source-open)** — the short version of this page
-- **[Curtain Capability Tokens →](/architecture/curtain/)** — the capability ceiling that holds every built image to its tier
+- **[Curtain Capability Tokens →](/architecture/curtain/)** — the runtime capability ceiling that still applies inside every built image
 - **[Reproducible Builds →](/architecture/forge/)** — how a build can be verified against the published digest

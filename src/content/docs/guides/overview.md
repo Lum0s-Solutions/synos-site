@@ -22,7 +22,7 @@ Three reinforcing missions drive every architectural decision:
 | **Release line** | v111.0.0 "Last Light" — **1.0 GA release** |
 | **Codename umbrella** | v101→v111 "Rust Everything" campaign — code-complete |
 | **Base OS** | Arch Linux (`mkarchiso` + `pacstrap`, Docker-based on sanctum oracle) |
-| **Rust workspace** | **245 crates**, 0 compile errors |
+| **Rust workspace** | **227 crates**, 0 compile errors |
 | **Kernel** | 7.0-synos-ai (LLVM + `CONFIG_RUST=y`), 12 `CONFIG_SYNOS_*` knobs, capability-gated signed Rust kernel modules |
 | **Kernel AI interface** | Capability-gated, signed Rust kernel-module interface (root-only, `CAP_SYS_ADMIN`-gated, `0600` device nodes via udev); replaces the dead syscall approach (upstream 7.0 collision) |
 | **ALFRED** | **v6.0** — Rust daemon, brainstem-wired consciousness fusion (Traditional + Neuromorphic + Quantum + TNGS + MPS cortex) |

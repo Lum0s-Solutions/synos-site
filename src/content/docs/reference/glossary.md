@@ -43,7 +43,7 @@ The Syn_OS codebase has accumulated its own vocabulary. This is the canonical re
 
 **Sun & Salt** — Commercial-readiness & business-hardening package. v60 (prior release).
 
-**Last Light** — The 1.0 GA release. **v111.0.0 (current).** Completes the v101→v111 "Rust Everything" software campaign. ALFRED v6.0, GRIMOIRE 1.0 (117 labs), 245 crates, post-quantum by default.
+**Last Light** — The 1.0 GA release. **v111.0.0 (current).** Completes the v101→v111 "Rust Everything" software campaign. ALFRED v6.0, GRIMOIRE 1.0 (117 labs), 227 crates, post-quantum by default.
 
 ## Kernel & interface
 

@@ -5,7 +5,7 @@ description: Frequently asked questions about Syn_OS — what it is, who it's fo
 
 ## What is Syn_OS?
 
-The **Synaptic Operating System** — an Arch Linux derivative built almost entirely in Rust, with a capability-gated AI kernel interface, a 245-crate workspace, post-quantum crypto by default, gamified cybersecurity training (117 labs), and a distributed mesh layer for federated inference. The OS itself is the security product, not a tool collection on top of one.
+The **Synaptic Operating System** — an Arch Linux derivative built almost entirely in Rust, with a capability-gated AI kernel interface, a 227-crate workspace, post-quantum crypto by default, gamified cybersecurity training (117 labs), and a distributed mesh layer for federated inference. The OS itself is the security product, not a tool collection on top of one.
 
 [Read the overview →](/guides/overview/)
 
@@ -15,13 +15,13 @@ The underscore in `Syn_OS` is the synaptic gap — the cleft where electrical si
 
 ## Is this real or is it vapourware?
 
-It's real. **v111.0.0 "Last Light"** is on `main` — the current shipping release (v101–v111 "Rust Everything" campaign). 245 Rust crates, 0 compile errors. Capability-gated, signed Rust kernel modules — QEMU-boot-validated. GRIMOIRE Public is code-complete; public release is gated on counsel review and cyber-liability binding, not on engineering.
+It's real. **v111.0.0 "Last Light"** is on `main` — the current shipping release (v101–v111 "Rust Everything" campaign). 227 Rust crates, 0 compile errors. Capability-gated, signed Rust kernel modules — QEMU-boot-validated. GRIMOIRE Public is code-complete; public release is gated on counsel review and cyber-liability binding, not on engineering.
 
 ## Where can I download it?
 
 Public ISOs are not yet shipping; they are **code-complete** but gated on legal and compliance milestones — counsel review of the licensing/EULA terms and a cyber-liability binding — not on engineering.
 
-Star [the GitHub repo](https://github.com/Lum0s-Solutions/Syn_OS) and join [Discord](https://discord.gg/synos) for build-day announcements.
+Star [the GitHub repo](https://github.com/Lum0s-Solutions/CoM-Syn_OS-Public) and join [Discord](https://discord.gg/synos) for build-day announcements.
 
 ## How is GRIMOIRE Public different from Enterprise Edition?
 
@@ -85,7 +85,7 @@ The vocabulary is borrowed from neuroscience because the architecture is borrowe
 | Field | Means |
 |-------|-------|
 | **Capability-gated kernel interface** | Real, loadable, QEMU-boot-validated Rust kernel modules — not stubs. `CAP_SYS_ADMIN`-gated, signed, `0600` device nodes. |
-| **245 crates, 0 compile errors** | `cargo check --workspace` clean across 245 crates. |
+| **227 crates, 0 compile errors** | `cargo check --workspace` clean across 227 crates. |
 | **ALFRED v6.0** | GA consolidation: 1.0 stable API, 11 brain crates wired, consciousness fusion engine fully integrated. |
 | **GRIMOIRE 1.0** | Catalog promoted to 1.0: 117 labs, 13 categories, SHA-256 manifests verified on every merge. |
 | **Post-quantum by default** | No classical-only path in TLS, SSH, SBOM signing, ALFRED models, audit trail, or release attestation. |
@@ -98,4 +98,4 @@ The vocabulary is borrowed from neuroscience because the architecture is borrowe
 
 ## I have a question that's not here.
 
-[Open an issue](https://github.com/Lum0s-Solutions/Syn_OS/issues), drop it in [Discord](https://discord.gg/synos), or email `mogeem33@gmail.com`.
+[Open an issue](https://github.com/Lum0s-Solutions/CoM-Syn_OS-Public/issues), drop it in [Discord](https://discord.gg/synos), or email `mogeem33@gmail.com`.

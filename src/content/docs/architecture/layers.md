@@ -25,7 +25,7 @@ Syn_OS is structured as a six-layer stack from silicon to story, with strict sep
 ║  Security Arsenal (600+ tools + 3,400+ Distrobox)           ║
 ║  spider-web intel dashboard, grimoire-mobile companion      ║
 ╠══════════════════════════════════════════════════════════════╣
-║  CORE PLATFORM — 245 Rust Crates                            ║
+║  CORE PLATFORM — 227 Rust Crates                            ║
 ║  ALFRED + 11 brain crates (nucleus root-of-trust)           ║
 ║  Arcanum Hive (controller, attestor, profiler, tests)       ║
 ║  synos-fragment-field (energy IDS pipeline, 3,002 LOC)      ║
@@ -117,7 +117,7 @@ The fusion engine is not aspirational. Path 1 runs on every event. Path 2 runs o
 
 - **Hardware** — Physical substrate. Nothing application-specific lives here.
 - **Kernel** — Ring 0. The custom syscalls, kernel modules, eBPF programs, and LSM integration. Everything here is *cycles per operation*; if a feature can live in userspace, it does.
-- **Core Platform** — The 245-crate Rust workspace. The actual product. ALFRED v6.0, Icarus, Fragment Field, Curtain, Forge, federation, the brain crates, and the supporting infrastructure.
+- **Core Platform** — The 227-crate Rust workspace. The actual product. ALFRED v6.0, Icarus, Fragment Field, Curtain, Forge, federation, the brain crates, and the supporting infrastructure.
 - **Application** — Things you run *on* Syn_OS. GRIMOIRE labs, security arsenal tools, the spider-web intelligence dashboard, the mobile companion.
 - **Experience** — The shell. Bevy desktop plugins, the synos-ops TUI, Cinnamon DE customisation, branding assets.
 - **Narrative** — The story that makes the rest cohere. Faction lore, RICO contracts, boss-contract chains, the Sovereign Operator Path.

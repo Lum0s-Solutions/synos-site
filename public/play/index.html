@@ -2133,14 +2133,14 @@ if(location.search.indexOf("citydemo")>=0){ try{
   scale=1.5;
   if(location.search.indexOf("view3d")>=0){ try{ toggle3D(); console.log("3DDEMO toggled on="+R3.on); }catch(e){ console.log("3DDEMO err "+e.message+" | "+e.stack); } }
   if(location.search.indexOf("pip")>=0){
-    pipData={pl:{username:"tylimo56",faction:"GraySyndicate",level:1,credits:200,xp_current:50,xp_to_next:331,alignment:0},
+    pipData={pl:{username:"ShellDiablo33",faction:"GraySyndicate",level:1,credits:200,xp_current:50,xp_to_next:331,alignment:0},
       mt:{hacker_reputation_index:0,metrics:{flags_captured:1,contracts_fulfilled:0,current_streak:0,first_blood_awards:0,commands_executed:0,credits_earned:75}},
       inv:{items:[],credits:200},
       pk:[{attribute:"Scanning",name:"Port Profiler",description:"Enhanced port scanning",attribute_requirement:1,max_rank:3},
           {attribute:"Networking",name:"Packet Weaver",description:"Craft raw packets",attribute_requirement:1,max_rank:2},
           {attribute:"Obfuscation",name:"Ghost Protocol",description:"Mask your traffic",attribute_requirement:2,max_rank:3}],
       cr:{tracks:[{track:"PenetrationTester",current_rank:0,labs_completed:0,track_xp:0}]}};
-    $("pb_name").textContent="PIP-BOY 3000 · TYLIMO56"; $("pb_lvl").textContent="LVL 1"; $("pb_caps").innerHTML="◈ 200 CAPS"; $("pb_xp").style.width="15%";
+    $("pb_name").textContent="PIP-BOY 3000 · SHELLDIABLO33"; $("pb_lvl").textContent="LVL 1"; $("pb_caps").innerHTML="◈ 200 CAPS"; $("pb_xp").style.width="15%";
     $("pipboy").classList.add("on"); pipTabName="special"; renderPip();
   }
   if(location.search.indexOf("loot")>=0){

@@ -25,7 +25,7 @@ The Syn_OS codebase has accumulated its own vocabulary. This is the canonical re
 
 **GRIMOIRE** — Gamified Reconnaissance, Intelligence, Malware Operations, Intrusion Response & Exploitation. The training platform. **117 labs, 13 categories** (catalog **1.0**), 110+ game modules.
 
-**ARCANUM Hive** — The distributed mesh layer. Tailscale + WireGuard + Kubernetes operator. v55 Stoneglass shipped 8-node Ansible GA.
+**ARCANUM Hive** — The distributed mesh layer. Tailscale + WireGuard + Kubernetes operator. v55 Stoneglass shipped the bootstrap Ansible playbooks; the live mesh runs on 3 nodes today, with fleet growth on the roadmap.
 
 **Sanctum** — Multi-tenant federation server. v49 Crystal Net. Each Sanctum is a tenant boundary; tenants federate selectively.
 
@@ -43,7 +43,7 @@ The Syn_OS codebase has accumulated its own vocabulary. This is the canonical re
 
 **Sun & Salt** — Commercial-readiness & business-hardening package. v60 (prior release).
 
-**Last Light** — The 1.0 GA release. **v111.0.0 (current).** Completes the v101→v111 "Rust Everything" software campaign. ALFRED v6.0, GRIMOIRE 1.0 (117 labs), 245 crates, post-quantum by default.
+**Last Light** — The 1.0 GA release. **v111.0.0 (current).** Completes the v101→v111 "Rust Everything" software campaign. ALFRED v6.0, GRIMOIRE 1.0 (117 labs), 227 crates, post-quantum by default.
 
 ## Kernel & interface
 
@@ -123,11 +123,9 @@ The Syn_OS codebase has accumulated its own vocabulary. This is the canonical re
 
 ## ISO profiles
 
-**Enterprise Edition** — Licensed commercial product. GoodLife's full sovereign capability at organizational scale, plus multi-tenant ARCANUM federation, fleet management, and a FedRAMP Moderate / CMMC L2 / SOC2 compliance posture. **Not a public download** — by customer agreement.
+**Enterprise Edition** — Licensed commercial product, tailored per contract: the full stack at organizational scale, plus multi-tenant ARCANUM federation, fleet management, and FedRAMP Moderate / CMMC L2 / SOC2 control mappings. **Not a generic image or public download — scoped and built per engagement; contact sales to start one.**
 
 **GRIMOIRE Public** — Progressive-unlock training profile. Public release.
-
-**GoodLife** — AI-research profile. Local LLMs, no offensive tools.
 
 ## Build & release
 

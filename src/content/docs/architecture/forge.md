@@ -1,13 +1,13 @@
 ---
 title: Reproducible Builds (Forge)
-description: Forge (v48) — bit-for-bit reproducible Syn_OS builds. Cosign + Sigstore Rekor attestation, deterministic squashfs, cross-oracle verify, SLSA-3 provenance, FedRAMP / CMMC / SOC2 control maps.
+description: Forge (v48) — bit-for-bit reproducible Syn_OS build pipeline. Cosign + Sigstore Rekor attestation, deterministic squashfs, SLSA-3 provenance, FedRAMP / CMMC / SOC2 control mappings. Cross-oracle verify lands with the second build oracle.
 ---
 
-**Forge** is the supply-chain hardening release of Syn_OS. The v48 codename. Its job: make it possible for someone who does not trust the build infrastructure to **independently verify** that a Syn_OS ISO is the exact image it claims to be — and to chain that verification into FedRAMP Moderate, CMMC L2, and SOC2 evidence.
+**Forge** is the supply-chain hardening release of Syn_OS. The v48 codename. Its job: make it possible for someone who does not trust the build infrastructure to **independently verify** that a Syn_OS ISO is the exact image it claims to be — and to lay the technical groundwork that a future FedRAMP Moderate, CMMC L2, and SOC2 audit engagement would draw evidence from. No such audit has been performed to date.
 
 ## Reproducibility
 
-Forge guarantees **bit-for-bit reproducibility** when an ISO is rebuilt on a different oracle node. This is achieved via:
+Forge is engineered for **bit-for-bit reproducibility**: rebuilding an ISO from the same commit on the same pipeline produces an identical digest. This is achieved via:
 
 | Technique | What it fixes |
 |-----------|---------------|
@@ -18,23 +18,22 @@ Forge guarantees **bit-for-bit reproducibility** when an ISO is rebuilt on a dif
 | **Locale archive verification** | The `glibc` locale archive is rebuilt deterministically (v43.2 fix) |
 | **Squashfs canonicalisation** | mksquashfs invoked with `-no-fragments -reproducible -force-uid 0 -force-gid 0` |
 
-The result: two oracle nodes, building from the same commit, produce ISOs whose SHA-256 digests are identical.
+The result: rebuilding from the same commit on the pipeline reproduces an identical SHA-256 digest. **Cross-oracle verification** — an independent second machine rebuilding the same commit and asserting the same digest — is the design target but is not live today: it lands once a second build oracle is provisioned (tracked, not yet scheduled).
 
-## Cross-oracle verifier
+## Rebuild verifier
 
 ```bash
-# on a second oracle:
 synos-rebuild-verify.sh \
     --release v111.0.0 \
     --commit 8fee198a \
-    --reference https://releases.synos-linux.pro/v111.0.0/synos-goodlife-v111.0.0.iso.sha256
+    --reference https://releases.synos-linux.pro/v111.0.0/synos-grimoire-v111.0.0.iso.sha256
 
 # →   PASS — local digest matches reference
 #     Sigstore Rekor entry verified
 #     SLSA-3 provenance verified
 ```
 
-The `synos-rebuild-verify.sh` script in `growth/development/scripts/iso-build/` is the canonical cross-oracle verification entry point.
+The `synos-rebuild-verify.sh` script in `growth/development/scripts/iso-build/` rebuilds a release from source and diffs the digest against the published reference. Run today, it verifies the pipeline is reproducible on the same oracle; it becomes a true cross-oracle verifier once a second oracle is online.
 
 ## Cosign + Sigstore Rekor
 
@@ -42,13 +41,13 @@ Every release artefact is signed with **cosign** and the signature is published 
 
 ```bash
 cosign verify-blob \
-    --certificate synos-goodlife-v111.0.0.iso.cert \
-    --signature  synos-goodlife-v111.0.0.iso.sig \
+    --certificate synos-grimoire-v111.0.0.iso.cert \
+    --signature  synos-grimoire-v111.0.0.iso.sig \
     --certificate-identity-regexp '.*@lumossolutions\.io$' \
     --certificate-oidc-issuer https://github.com/login/oauth \
-    synos-goodlife-v111.0.0.iso
+    synos-grimoire-v111.0.0.iso
 
-rekor-cli search --artifact synos-goodlife-v111.0.0.iso
+rekor-cli search --artifact synos-grimoire-v111.0.0.iso
 ```
 
 Public Rekor index entries make every release independently verifiable forever, even if Lumos goes dark — the transparency log is operated by Sigstore, not by Lumos.
@@ -72,13 +71,13 @@ The dependency advisory register lives at `docs/security/SECURITY_ADVISORIES.md`
 
 ## Compliance posture
 
-Forge underpins the compliance evidence shipped in v47 (Beachhead) + v59 (Doublecross):
+Forge underpins the control mappings authored in v47 (Beachhead) + v59 (Doublecross). **No formal audit or ATO has been performed** — this is mapping work, not certification:
 
 - **CMMC L2** — control map at `fruit/distribution/legal/CMMC_L2_CONTROL_MAP.md`
-- **SOC2** — exporters generate Type 2 evidence packs from `synos-attest-ledger`
+- **SOC2** — `synos-attest-ledger` exports the technical evidence a Type 2 engagement would draw on; no SOC2 audit has been run
 - **FedRAMP Moderate** — NIST SP 800-53 Rev 5 control map at `fruit/distribution/legal/FEDRAMP_MODERATE_CONTROL_MAP.md`, daily ConMon collector at `growth/development/scripts/monitoring/fedramp-monitor.sh`
 
-Each control points to the technical mechanism that satisfies it (e.g. SI-7 *Software, Firmware, and Information Integrity* points to the Forge cosign + SLSA-3 chain).
+Each control points to the technical mechanism that would satisfy it (e.g. SI-7 *Software, Firmware, and Information Integrity* points to the Forge cosign + SLSA-3 chain) — mapping, not attestation by an accredited third party.
 
 ## Module signing
 
@@ -102,10 +101,10 @@ The Linux kernel build itself is reproducible:
 
 ## What Forge enables
 
-- A federal customer can hand the released ISO + Rekor entry + provenance + SBOM to their ATO process
+- A federal customer's ATO process would have a released ISO + Rekor entry + provenance + SBOM to start from — no ATO has been pursued or granted to date
 - A security researcher can independently rebuild and verify any release on their own hardware
-- A supply-chain attack on the oracle is detectable: an ISO whose Rekor signature is missing, or whose digest doesn't match cross-oracle rebuild, is by definition not a real release
-- A regulated buyer can pull SOC2 / CMMC / FedRAMP evidence directly from `synos-attest-ledger` without trusting Lumos's attestation
+- A supply-chain attack on the oracle is detectable: an ISO whose Rekor signature is missing, or whose digest doesn't match the rebuild, is by definition not a real release
+- A regulated buyer can pull the SOC2 / CMMC / FedRAMP control-mapping evidence directly from `synos-attest-ledger` without trusting Lumos's attestation — evidence for a future audit, not proof one has occurred
 
 ## Related
 

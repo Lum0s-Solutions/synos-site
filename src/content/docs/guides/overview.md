@@ -22,7 +22,7 @@ Three reinforcing missions drive every architectural decision:
 | **Release line** | v111.0.0 "Last Light" — **1.0 GA release** |
 | **Codename umbrella** | v101→v111 "Rust Everything" campaign — code-complete |
 | **Base OS** | Arch Linux (`mkarchiso` + `pacstrap`, Docker-based on sanctum oracle) |
-| **Rust workspace** | **245 crates**, 0 compile errors |
+| **Rust workspace** | **227 crates**, 0 compile errors |
 | **Kernel** | 7.0-synos-ai (LLVM + `CONFIG_RUST=y`), 12 `CONFIG_SYNOS_*` knobs, capability-gated signed Rust kernel modules |
 | **Kernel AI interface** | Capability-gated, signed Rust kernel-module interface (root-only, `CAP_SYS_ADMIN`-gated, `0600` device nodes via udev); replaces the dead syscall approach (upstream 7.0 collision) |
 | **ALFRED** | **v6.0** — Rust daemon, brainstem-wired consciousness fusion (Traditional + Neuromorphic + Quantum + TNGS + MPS cortex) |
@@ -31,31 +31,29 @@ Three reinforcing missions drive every architectural decision:
 | **Post-quantum crypto** | **By default** — ML-KEM, ML-DSA, SLH-DSA across TLS, SSH, SBOM signing, ALFRED models, audit trail |
 | **Local LLM** | Ollama (`qwen2.5:7b` + `llama3.2:3b`) pre-bundled — ISO is offline-capable |
 | **Security tools** | 600+ : 155 native + 250 Arsenal container + 2,800 BlackArch on-demand |
-| **Supply chain** | v48 Forge — Sigstore Rekor attestation, deterministic squashfs, cross-oracle reproducibility verify |
-| **Compliance** | CMMC L2 + SOC2 + FedRAMP Moderate (NIST SP 800-53 Rev 5) control maps shipped |
+| **Supply chain** | v48 Forge — Sigstore Rekor attestation, deterministic squashfs, reproducible build pipeline; cross-oracle verify lands with the second build oracle |
+| **Compliance** | CMMC L2 + SOC2 + FedRAMP Moderate (NIST SP 800-53 Rev 5) control mappings authored — no formal audit or ATO performed |
 | **ISO pipeline** | 30+ stages, single-command Master Generation Run Kit |
 
-## The three ISOs
+## The two ISOs
 
-Syn_OS ships as a **three-image family** so the same codebase serves very different audiences without exposing sensitive capabilities:
+Syn_OS ships as a **two-image family** so the same codebase serves very different audiences without exposing sensitive capabilities:
 
-- **Enterprise Edition** — the licensed commercial product: GoodLife's full sovereign capability at organizational scale, plus multi-tenant ARCANUM federation, fleet management, and a FedRAMP Moderate / CMMC L2 / SOC2 compliance posture with evidence packs. By customer agreement; not a public download.
-- **GRIMOIRE Public** — progressive-unlock cybersecurity training platform. Players start with a 10-tool starter kit and unlock capabilities by completing labs, earning XP, progressing through faction quests, and building personal hardware meshes from reclaimed machines.
-- **GoodLife** — AI-research image with analytical tooling and the local LLM stack. No offensive tooling.
+- **GRIMOIRE Public** — progressive-unlock cybersecurity training platform. Players start with a 10-tool starter kit and unlock capabilities by completing labs, earning XP, progressing through faction quests, and building personal hardware meshes from reclaimed machines. Free, public download.
+- **Enterprise Edition** — the commercial product for organizations: the full stack at scale, plus multi-tenant ARCANUM federation, fleet management, and FedRAMP Moderate / CMMC L2 / SOC2 control mappings. Not a generic download — every Enterprise image is scoped and built per contract; [contact us →](/guides/download/#images) to start an engagement.
 
-All three share the same kernel, Rust userspace, and GRIMOIRE engine, but a build-time **Curtain** (ELF symbol scanner + feature audit + lab integrity manifests) plus a runtime capability ceiling enforces that **GRIMOIRE can never escalate to the licensed Enterprise Edition** no matter how far a player progresses. See [Curtain Capability Tokens →](/architecture/curtain/)
+Both share the same kernel, Rust userspace, and GRIMOIRE engine, but a build-time **Curtain** (ELF symbol scanner + feature audit + lab integrity manifests) plus a runtime capability ceiling enforces that **GRIMOIRE can never escalate to the licensed Enterprise Edition** no matter how far a player progresses. See [Curtain Capability Tokens →](/architecture/curtain/)
 
 ## Who Syn_OS is for
 
 - **Cybersecurity students** — GRIMOIRE provides 117 hands-on labs with gamified progression and certification mapping.
 - **Security researchers** — Post-quantum crypto by default, custom kernel, eBPF tooling, kernel-level observability interface.
-- **AI researchers** — GoodLife ISO with pre-configured local AI stack and `research-mode` cargo feature.
 - **Salvage operators** — ARCANUM Hive turns discarded laptops into a distributed inference mesh.
-- **Federal / regulated buyers** — FedRAMP Moderate + CMMC L2 + SOC2 control maps, SLSA-3 reproducible builds, multi-tenant Sanctum federation.
+- **Federal / regulated buyers** — FedRAMP Moderate + CMMC L2 + SOC2 control mappings, SLSA-3 build provenance, multi-tenant Sanctum federation (roadmap — no formal audit or ATO performed yet).
 
 ## What's next
 
-- **[Three ISOs →](/guides/download/)** — pick the right image
+- **[Two ISOs →](/guides/download/)** — pick the right image
 - **[Installation →](/guides/installation/)** — burn a USB and boot
 - **[First Boot →](/guides/first-boot/)** — what to expect on the live system
 - **[Six-Layer Stack →](/architecture/layers/)** — the architecture from silicon to story

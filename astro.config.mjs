@@ -16,9 +16,7 @@ export default defineConfig({
 				replacesTitle: false,
 			},
 			favicon: '/favicon.svg',
-			social: [
-				{ icon: 'discord', label: 'Discord', href: 'https://discord.gg/synos' },
-			],
+			social: [],
 			customCss: ['./src/styles/custom.css'],
 			components: {
 				Footer: './src/components/Footer.astro',
@@ -65,7 +63,7 @@ export default defineConfig({
 					label: '▶ Getting Started',
 					items: [
 						{ label: 'What is Syn_OS?',           slug: 'guides/overview' },
-						{ label: 'Three ISOs',                slug: 'guides/download' },
+						{ label: 'Two ISOs',                  slug: 'guides/download' },
 						{ label: 'Installation',              slug: 'guides/installation' },
 						{ label: 'First Boot',                slug: 'guides/first-boot' },
 					],
@@ -89,13 +87,6 @@ export default defineConfig({
 						{ label: 'ARCANUM Mesh',              slug: 'architecture/arcanum' },
 						{ label: 'Curtain Capability Tokens', slug: 'architecture/curtain' },
 						{ label: 'Reproducible Builds',       slug: 'architecture/forge' },
-					],
-				},
-				{
-					label: '◉ GoodLife',
-					items: [
-						{ label: 'AI Research ISO',           slug: 'goodlife/overview' },
-						{ label: 'Included Tools',            slug: 'goodlife/tools' },
 					],
 				},
 				{

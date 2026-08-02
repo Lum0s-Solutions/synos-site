@@ -76,7 +76,7 @@ Every incoming event goes through **all four** in parallel:
 |------|------------|---------|---------------|
 | **Traditional AI** | Known-unknown threats — signature matching, decision trees, Bayesian inference, rule engines | Every event | `consciousness_fusion::traditional` |
 | **Neuromorphic SNN** | Temporal pattern recognition | Temporal anomalies | LIF / Izhikevich / Hodgkin-Huxley / AdEx / SRM models |
-| **Quantum coherence** | Energy-topology anomaly detection | Kernel signals via the observability interface | Penrose-Hameroff Orch-OR, clock-edge collapse, fragment superposition |
+| **Quantum coherence** *(research path)* | Energy-topology anomaly detection | Kernel signals via the observability interface | Modelled on the Penrose-Hameroff Orch-OR hypothesis — a speculative, unproven theory of consciousness we use as a design metaphor for anomaly scoring, not a claim of literal quantum computation |
 | **TNGS** (neural Darwinism) | Novel attacks recognised by analogy | Idle consolidation cycles in the Default Mode Network | Edelman's Theory of Neuronal Group Selection |
 
 A fifth path — the **MPS cortex** (`synos-cortex-q`) — is a tensor-network matrix-product-state inference path for high-dimensional pattern compression, added in v53.
@@ -101,7 +101,7 @@ synos-alfred-mode set enterprise     # full execution (Enterprise Edition only)
 synos-alfred-mode set mesh           # mesh consciousness
 ```
 
-Every command on public profiles passes through `CommandSafetyChecker` before execution. On GoodLife profile, ALFRED is built with the `research-mode` cargo feature and loads `ResearchModeSettings` from `~/.config/alfred/research.toml`.
+Every command on public profiles passes through `CommandSafetyChecker` before execution.
 
 ## REST API
 

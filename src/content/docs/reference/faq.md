@@ -5,7 +5,7 @@ description: Frequently asked questions about Syn_OS — what it is, who it's fo
 
 ## What is Syn_OS?
 
-The **Synaptic Operating System** — an Arch Linux derivative built almost entirely in Rust, with a capability-gated AI kernel interface, a 245-crate workspace, post-quantum crypto by default, gamified cybersecurity training (117 labs), and a distributed mesh layer for federated inference. The OS itself is the security product, not a tool collection on top of one.
+The **Synaptic Operating System** — an Arch Linux derivative built almost entirely in Rust, with a capability-gated AI kernel interface, a 227-crate workspace, post-quantum crypto by default, gamified cybersecurity training (117 labs), and a distributed mesh layer for federated inference. The OS itself is the security product, not a tool collection on top of one.
 
 [Read the overview →](/guides/overview/)
 
@@ -15,13 +15,13 @@ The underscore in `Syn_OS` is the synaptic gap — the cleft where electrical si
 
 ## Is this real or is it vapourware?
 
-It's real. **v111.0.0 "Last Light"** is on `main` — the current shipping release (v101–v111 "Rust Everything" campaign). 245 Rust crates, 0 compile errors. Capability-gated, signed Rust kernel modules — QEMU-boot-validated. Three ISO profiles building from the same codebase. Public release of GRIMOIRE Public and GoodLife is gated on counsel review and cyber-liability binding, not on engineering.
+It's real. **v111.0.0 "Last Light"** is on `main` — the current shipping release (v101–v111 "Rust Everything" campaign). 227 Rust crates, 0 compile errors. Capability-gated, signed Rust kernel modules — QEMU-boot-validated. GRIMOIRE Public is code-complete; public release is gated on counsel review and cyber-liability binding, not on engineering.
 
 ## Where can I download it?
 
 Public ISOs are not yet shipping; they are **code-complete** but gated on legal and compliance milestones — counsel review of the licensing/EULA terms and a cyber-liability binding — not on engineering.
 
-Star [the GitHub repo](https://github.com/Lum0s-Solutions/Syn_OS) and join [Discord](https://discord.gg/synos) for build-day announcements.
+Star [the GitHub repo](https://github.com/Lum0s-Solutions/CoM-Syn_OS-Public) for build-day announcements.
 
 ## How is GRIMOIRE Public different from Enterprise Edition?
 
@@ -39,7 +39,7 @@ GRIMOIRE Public cannot escalate to the Enterprise Edition no matter how far a pl
 
 ## Is ALFRED an LLM wrapper?
 
-No. ALFRED v6.0 is a **fusion engine** that routes every event through four parallel processing paths and combines their outputs into a single decision vector. Path 1: traditional AI (decision trees, signature matching). Path 2: neuromorphic spiking neural networks. Path 3: quantum coherence collapse theory (Penrose-Hameroff Orch-OR). Path 4: TNGS / Edelman's neural Darwinism. Plus the MPS cortex tensor-network path.
+No. ALFRED v6.0 is a **fusion engine** that routes every event through four parallel processing paths and combines their outputs into a single decision vector. Path 1: traditional AI (decision trees, signature matching). Path 2: neuromorphic spiking neural networks. Path 3: an energy-topology anomaly path modelled on the Penrose-Hameroff Orch-OR hypothesis — a speculative, unproven consciousness theory we borrow as a design metaphor, not a literal quantum-computing claim. Path 4: TNGS / Edelman's neural Darwinism. Plus the MPS cortex tensor-network path.
 
 LLMs (Ollama, Claude, OpenAI, Gemini, DeepSeek, llama-cpp) are *backends* the Python user-facing layer can use. They are not ALFRED.
 
@@ -58,7 +58,7 @@ The Salvage Yard quest in GRIMOIRE assumes you can reclaim 3-4 discarded laptops
 Mixed. The plan (pending counsel review) is a **tiered licence model**:
 
 - **Apache 2.0** for the kernel, brain crates, GRIMOIRE engine, ALFRED Rust daemon, Bevy plugins
-- **LicenseRef-Proprietary** for the Enterprise Edition, Curtain admin tokens, FedRAMP/CMMC/SOC2 control evidence, and the federation root-signing infrastructure
+- **LicenseRef-Proprietary** for the Enterprise Edition, Curtain admin tokens, FedRAMP/CMMC/SOC2 control mappings, and the federation root-signing infrastructure
 
 The `Lum0s-Solutions/Syn_OS` GitHub repo is currently private; it goes public alongside the first GRIMOIRE Public ISO release.
 
@@ -78,19 +78,19 @@ The vocabulary is borrowed from neuroscience because the architecture is borrowe
 
 ## How do I report a security issue?
 
-`security@lumossolutions.io`. Our PGP key and coordinated-disclosure policy are published in `SECURITY.md` in the GitHub repo.
+`mogeem33@gmail.com`. Our PGP key and coordinated-disclosure policy are published in `SECURITY.md` in the GitHub repo.
 
 ## What does the v111 status table actually mean?
 
 | Field | Means |
 |-------|-------|
 | **Capability-gated kernel interface** | Real, loadable, QEMU-boot-validated Rust kernel modules — not stubs. `CAP_SYS_ADMIN`-gated, signed, `0600` device nodes. |
-| **245 crates, 0 compile errors** | `cargo check --workspace` clean across 245 crates. |
+| **227 crates, 0 compile errors** | `cargo check --workspace` clean across 227 crates. |
 | **ALFRED v6.0** | GA consolidation: 1.0 stable API, 11 brain crates wired, consciousness fusion engine fully integrated. |
 | **GRIMOIRE 1.0** | Catalog promoted to 1.0: 117 labs, 13 categories, SHA-256 manifests verified on every merge. |
 | **Post-quantum by default** | No classical-only path in TLS, SSH, SBOM signing, ALFRED models, audit trail, or release attestation. |
-| **SLSA-3 reproducible** | Cross-oracle build verification works today; SLSA-4 (two-witness) is queued behind provisioning the second build oracle. |
-| **FedRAMP / CMMC / SOC2** | Control maps are written and the daily ConMon collector runs. The audits themselves are gated on a Big-4 engagement kickoff. |
+| **SLSA-3 provenance** | The build pipeline is reproducible and generates SLSA-3 provenance today. Cross-oracle verification (an independent second machine confirming the digest) and SLSA-4 (two-witness) are both queued behind provisioning the second build oracle. |
+| **FedRAMP / CMMC / SOC2** | Control maps are written and the daily ConMon collector runs. No formal audit or ATO has been performed — that's gated on a Big-4 engagement kickoff. |
 
 ## Who is building this?
 
@@ -98,4 +98,4 @@ The vocabulary is borrowed from neuroscience because the architecture is borrowe
 
 ## I have a question that's not here.
 
-[Open an issue](https://github.com/Lum0s-Solutions/Syn_OS/issues), drop it in [Discord](https://discord.gg/synos), or email `info@lumossolutions.io`.
+[Open an issue](https://github.com/Lum0s-Solutions/CoM-Syn_OS-Public/issues) or email `mogeem33@gmail.com`.

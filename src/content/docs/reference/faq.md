@@ -21,7 +21,7 @@ It's real. **v111.0.0 "Last Light"** is on `main` — the current shipping relea
 
 Public ISOs are not yet shipping; they are **code-complete** but gated on legal and compliance milestones — counsel review of the licensing/EULA terms and a cyber-liability binding — not on engineering.
 
-Star [the GitHub repo](https://github.com/Lum0s-Solutions/CoM-Syn_OS-Public) and join [Discord](https://discord.gg/synos) for build-day announcements.
+Star [the GitHub repo](https://github.com/Lum0s-Solutions/CoM-Syn_OS-Public) for build-day announcements.
 
 ## How is GRIMOIRE Public different from Enterprise Edition?
 
@@ -98,4 +98,4 @@ The vocabulary is borrowed from neuroscience because the architecture is borrowe
 
 ## I have a question that's not here.
 
-[Open an issue](https://github.com/Lum0s-Solutions/CoM-Syn_OS-Public/issues), drop it in [Discord](https://discord.gg/synos), or email `mogeem33@gmail.com`.
+[Open an issue](https://github.com/Lum0s-Solutions/CoM-Syn_OS-Public/issues) or email `mogeem33@gmail.com`.

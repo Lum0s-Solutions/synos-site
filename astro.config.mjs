@@ -16,9 +16,7 @@ export default defineConfig({
 				replacesTitle: false,
 			},
 			favicon: '/favicon.svg',
-			social: [
-				{ icon: 'discord', label: 'Discord', href: 'https://discord.gg/synos' },
-			],
+			social: [],
 			customCss: ['./src/styles/custom.css'],
 			components: {
 				Footer: './src/components/Footer.astro',

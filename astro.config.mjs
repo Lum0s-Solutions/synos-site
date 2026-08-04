@@ -75,6 +75,30 @@ export default defineConfig({
 						{ label: 'Lab Catalog',               slug: 'grimoire/labs' },
 						{ label: 'XP & Progression',          slug: 'grimoire/progression' },
 						{ label: 'Competition Mode',          slug: 'grimoire/competition' },
+						{ label: 'Tool Manifest',             slug: 'grimoire/tool-manifest' },
+					],
+				},
+				{
+					label: '■ User Guide',
+					items: [
+						{ label: 'GRIMOIRE Guide',            slug: 'user-guide/grimoire-guide' },
+						{ label: 'Troubleshooting',           slug: 'user-guide/troubleshooting' },
+						{ label: 'Support FAQ',                slug: 'user-guide/faq' },
+						{
+							label: 'Tutorials',
+							items: [
+								{ label: 'Using AI Features',        slug: 'user-guide/tutorials/using-ai-features' },
+								{ label: 'First Security Scan',      slug: 'user-guide/tutorials/first-security-scan' },
+								{ label: 'Customizing Your Desktop', slug: 'user-guide/tutorials/customizing-desktop' },
+								{ label: 'Benchmarking',             slug: 'user-guide/tutorials/benchmarking' },
+							],
+						},
+					],
+				},
+				{
+					label: '◇ Church of Malware',
+					items: [
+						{ label: 'Membership & /claim',       slug: 'churchofmalware/membership' },
 					],
 				},
 				{
@@ -92,6 +116,20 @@ export default defineConfig({
 				{
 					label: '◆ Reference',
 					autogenerate: { directory: 'reference' },
+				},
+				{
+					label: '⚙ Operator Guide',
+					items: [
+						{ label: 'ISO Build — How It Works', slug: 'operator-guide/iso-build-deep-dive' },
+						{ label: 'Build Runbook',             slug: 'operator-guide/build-runbook' },
+						{ label: 'Build Observatory',         slug: 'operator-guide/build-observatory' },
+					],
+				},
+				{
+					label: '◇ Contributing',
+					items: [
+						{ label: 'Contributor Onboarding',    slug: 'contributing/onboarding' },
+					],
 				},
 			],
 		}),

@@ -61,8 +61,26 @@ async function resolveDiscordId(request, env) {
   } catch { return null; }
 }
 
+// Per-image gating, mirroring each profile's `public` flag: PUBLIC images
+// (grimoire/goodlife) download anonymously; MEMBERS images (churchofmalware +
+// master, public=false) stay behind CF Access + the nightly Discord roster. The
+// first path segment after /download/ selects the tier. Unknown/missing =>
+// fail-closed (treated as gated), so a newly-added image is never accidentally
+// public until it's explicitly listed here.
+const GATED = { com: true, master: true, grimoire: false, goodlife: false };
+
 export async function onRequest(context) {
   const { request, env, next } = context;
+
+  const image = new URL(request.url).pathname.replace(/^\/+download\/+/, '').split('/')[0] || '';
+  if (GATED[image] === false) {
+    // Public image — no membership gate. Stream anonymously; still no-store/noindex.
+    const res = await next();
+    const h = new Headers(res.headers);
+    h.set('cache-control', 'public, max-age=0, must-revalidate');
+    h.set('x-robots-tag', 'noindex');
+    return new Response(res.body, { status: res.status, headers: h });
+  }
 
   const token = request.headers.get('Cf-Access-Jwt-Assertion') ||
     parseCookies(request.headers.get('Cookie'))['CF_Authorization'];

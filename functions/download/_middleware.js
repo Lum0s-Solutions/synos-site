@@ -31,6 +31,36 @@ function downloadAllowedEmails(env) {
   return (env.DOWNLOAD_ALLOWED_EMAILS || '').split(',').map(s => s.trim()).filter(Boolean);
 }
 
+// Resolve the member's Discord user ID (snowflake) from the Cloudflare Access
+// identity. CF Access's JWT `sub` is a CF-internal id, NOT the Discord ID, so we
+// call the team's get-identity endpoint (authorized by the same Access cookie)
+// and pull the Discord snowflake out of the IdP claims. CF surfaces OIDC claims
+// in different shapes, so we check the well-known spots and validate a 17-20
+// digit snowflake; pin the exact JSON key via MEMBER_ID_CLAIM if your setup
+// differs (inspect /cdn-cgi/access/get-identity once after wiring the IdP).
+async function resolveDiscordId(request, env) {
+  try {
+    const teamDomain = env.CF_ACCESS_TEAM_DOMAIN;
+    if (!teamDomain) return null;
+    const jwt = request.headers.get('Cf-Access-Jwt-Assertion') ||
+      parseCookies(request.headers.get('Cookie'))['CF_Authorization'];
+    if (!jwt) return null;
+    const res = await fetch(`https://${teamDomain}/cdn-cgi/access/get-identity`, {
+      headers: { cookie: `CF_Authorization=${jwt}` },
+    });
+    if (!res.ok) return null;
+    const idn = await res.json();
+    const isSnowflake = (v) => typeof v === 'string' && /^\d{17,20}$/.test(v);
+    if (env.MEMBER_ID_CLAIM && isSnowflake(idn[env.MEMBER_ID_CLAIM])) return idn[env.MEMBER_ID_CLAIM];
+    const oauth = idn.oauth || idn.idp || {};
+    const candidates = [idn.oauth_id, oauth.id, oauth.sub, oauth && oauth.raw && oauth.raw.id,
+      idn.custom && idn.custom.discord_id, idn.sub];
+    for (const c of candidates) if (isSnowflake(c)) return c;
+    for (const v of Object.values(idn)) if (isSnowflake(v)) return v;
+    return null;
+  } catch { return null; }
+}
+
 export async function onRequest(context) {
   const { request, env, next } = context;
 
@@ -50,6 +80,24 @@ export async function onRequest(context) {
       'members-only — request access at <a href="https://churchofmalware.org">churchofmalware.org</a>.',
       403
     );
+  }
+
+  // ---- Roster gate: Discord ID must be on the nightly-synced KV allowlist ----
+  // Enforced only when MEMBER_KV is bound, so the gate can ship before the roster
+  // sync is live (until then CF Access alone gates). Once bound: a valid Access
+  // login whose Discord ID can't be resolved, or isn't on the current roster,
+  // gets 403. Keys self-expire (TTL on write) so a stalled sync revokes, never
+  // grants. Fail closed on any resolver error.
+  if (env.MEMBER_KV) {
+    const discordId = await resolveDiscordId(request, env);
+    if (!discordId || !(await env.MEMBER_KV.get(`member:${discordId}`))) {
+      return deny(
+        'Your Church of Malware membership could not be verified for this download. ' +
+        'If you just joined, the member roster syncs nightly — try again tomorrow, or ' +
+        'check your standing at <a href="https://churchofmalware.org">churchofmalware.org</a>.',
+        403
+      );
+    }
   }
 
   const res = await next();

@@ -19,3 +19,14 @@ SITE_URL = "https://synos-linux.pro"
 [[r2_buckets]]
 binding = "ISO_BUCKET"
 bucket_name = "synos-iso"
+
+# KV allowlist of current members, keyed by the identity the /download gate can
+# verify (member:<discord-id>). Populated out-of-band by a nightly job on a
+# mesh node (see the discord-harvester repo) — this repo only READS it, so no
+# member data or harvesting mechanism is exposed here. Values self-expire (TTL)
+# so a stalled sync revokes access rather than granting it forever.
+# Create the namespace with:  npx wrangler kv namespace create MEMBER_KV
+# then paste its id below (and a *_preview id for `wrangler pages dev`).
+[[kv_namespaces]]
+binding = "MEMBER_KV"
+id = "REPLACE_WITH_KV_NAMESPACE_ID"

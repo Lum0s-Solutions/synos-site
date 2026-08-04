@@ -10,3 +10,12 @@ pages_build_output_dir = "./dist"
 # Public, build-time environment for the static site.
 # Anything secret must go in GitHub Actions secrets, not here.
 SITE_URL = "https://synos-linux.pro"
+
+# Private R2 bucket holding the members-only Church of Malware ISO. Served ONLY
+# through the Cloudflare Access-gated /download/* Pages Function
+# (functions/download/*). The bucket must have NO public r2.dev / custom-domain
+# access — the gated Function is the sole path to the bytes. Create it with:
+#   npx wrangler r2 bucket create synos-iso
+[[r2_buckets]]
+binding = "ISO_BUCKET"
+bucket_name = "synos-iso"

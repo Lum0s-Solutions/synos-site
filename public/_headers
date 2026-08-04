@@ -32,3 +32,9 @@
 /play-test/*
   X-Robots-Tag: noindex, nofollow
   Cache-Control: private, no-store, must-revalidate
+
+# Members-only ISO download, gated by Cloudflare Access in functions/download/*.
+# Never cached, never indexed. The Function sets its own auth-aware headers.
+/download/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: private, no-store, must-revalidate

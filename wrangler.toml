@@ -27,6 +27,24 @@ bucket_name = "synos-iso"
 # so a stalled sync revokes access rather than granting it forever.
 # Create the namespace with:  npx wrangler kv namespace create MEMBER_KV
 # then paste its id below (and a *_preview id for `wrangler pages dev`).
-[[kv_namespaces]]
-binding = "MEMBER_KV"
-id = "REPLACE_WITH_KV_NAMESPACE_ID"
+#
+# COMMENTED OUT FOR SOFT LAUNCH (2026-08-07). Two reasons:
+#
+#   1. A literal placeholder id FAILS `wrangler pages deploy` outright, so leaving
+#      this block active blocks the release entirely.
+#   2. It is not needed yet. functions/download/_middleware.js enforces the member
+#      roster ONLY when this binding exists ("Enforced only when MEMBER_KV is bound,
+#      so the gate can ship before the roster"). With the binding absent, the
+#      Cloudflare Access application is the gate — which is the intended day-one
+#      posture. Nothing is loosened by removing it: an unbound MEMBER_KV cannot
+#      grant access, it can only skip a second, additive check.
+#
+# To enable the roster later:
+#   npx wrangler kv namespace create MEMBER_KV
+#   npx wrangler kv namespace create MEMBER_KV --preview
+# then uncomment and paste both ids.
+#
+# [[kv_namespaces]]
+# binding = "MEMBER_KV"
+# id = "REPLACE_WITH_KV_NAMESPACE_ID"
+# preview_id = "REPLACE_WITH_KV_PREVIEW_ID"

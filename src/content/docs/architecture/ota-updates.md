@@ -1,3 +1,8 @@
+---
+title: OTA Updates
+description: OTA Updates
+---
+
 # OTA Updates
 
 **Version**: v111.0.0 "Last Light"

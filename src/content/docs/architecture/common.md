@@ -1,3 +1,8 @@
+---
+title: common — Common utilities for Syn_OS
+description: common — Common utilities for Syn_OS
+---
+
 # common — Common utilities for Syn_OS
 
 **Classification:** PUBLIC

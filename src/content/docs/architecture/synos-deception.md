@@ -1,3 +1,8 @@
+---
+title: synos-deception — Advanced Deception Technology Framework for Syn_OS
+description: synos-deception — Advanced Deception Technology Framework for Syn_OS
+---
+
 # synos-deception — Advanced Deception Technology Framework for Syn_OS
 
 **Classification:** PUBLIC

@@ -1,3 +1,8 @@
+---
+title: synos-ztna — Zero-Trust Network Access enforcement for Syn_OS
+description: synos-ztna — Zero-Trust Network Access enforcement for Syn_OS
+---
+
 # synos-ztna — Zero-Trust Network Access enforcement for Syn_OS
 
 **Classification:** PUBLIC

@@ -1,3 +1,8 @@
+---
+title: Architecture
+description: Architecture
+---
+
 # Architecture
 
 This section is the deep-dive reference for how Syn_OS is built. It complements the

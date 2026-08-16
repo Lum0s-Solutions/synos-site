@@ -1,3 +1,8 @@
+---
+title: synos-cli — Unified command-line interface for Syn_OS services
+description: synos-cli — Unified command-line interface for Syn_OS services
+---
+
 # synos-cli — Unified command-line interface for Syn_OS services
 
 **Classification:** PUBLIC

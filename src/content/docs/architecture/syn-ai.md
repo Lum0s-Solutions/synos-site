@@ -1,3 +1,8 @@
+---
+title: syn-ai — Core AI abstraction layer
+description: syn-ai — Core AI abstraction layer
+---
+
 # syn-ai — Core AI abstraction layer
 
 **Classification:** PUBLIC  
@@ -38,4 +43,10 @@
 
 1. Expose a WASM-safe subset of `syn-ai` for browser-side inference in the GRIMOIRE client.
 2. Add a `syn-ai-proto` gRPC/HTTP bridge for cross-process AI service calls.
+
+## See Also
+
+- [syn-security](syn-security.md) — Security integration and consciousness bridge
+- [ALFRED](alfred.md) — AI daemon and consciousness fusion engine
+- [ARCANUM](arcanum.md) — Distributed mesh and federated consciousness
 3. Formalize the `quantum` module into a standalone `syn-quantum` crate with PQClean bindings mirroring `synos-icarus`.

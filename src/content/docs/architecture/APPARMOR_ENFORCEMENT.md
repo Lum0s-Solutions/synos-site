@@ -1,3 +1,8 @@
+---
+title: AppArmor Enforcement in Syn_OS
+description: AppArmor enforcement profiles for ALFRED, GRIMOIRE, and consciousness engine daemons.
+---
+
 # AppArmor Enforcement in Syn_OS
 
 **v41 Wave 10 — CISO Rec 02 closure**
@@ -15,6 +20,10 @@ event — only a log line that nobody may ever read.
 
 Complain mode is a development aid, not a production posture. Syn_OS ships with
 four daemon profiles in enforce mode. A CI gate prevents any PR from regressing them.
+
+:::danger[CI Gate]
+A CI gate prevents any PR from regressing AppArmor profiles from enforce to complain mode. This is enforced in the build pipeline and must not be bypassed.
+:::
 
 ---
 

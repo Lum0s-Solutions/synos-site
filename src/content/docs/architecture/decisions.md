@@ -1,8 +1,13 @@
-# Architecture Decision Records
+---
+title: Architecture Decision Records
+description: Architecture Decision Records
+---
 
+:::note[Note]
 This page tracks the architectural decisions that shaped Syn_OS. Each record follows a compact
 **Context → Decision → Consequences** format. Decisions are listed chronologically; where a
 later decision supersedes an earlier one, that is noted in-line.
+:::
 
 The canonical decision log is maintained in `docs/internal/eyesonly/architecture/SYNOS_MASTER_ARCHITECTURE.md`
 and in the "Key Decisions" section of `.claude/CLAUDE.md`. This page is the public-facing

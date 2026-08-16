@@ -1,3 +1,8 @@
+---
+title: Secure Hardware-Sharing Mesh — Reference Blueprint
+description: Secure Hardware-Sharing Mesh — Reference Blueprint
+---
+
 # Secure Hardware-Sharing Mesh — Reference Blueprint
 
 **Audience:** Syn_OS operators building a multi-node setup that shares compute,

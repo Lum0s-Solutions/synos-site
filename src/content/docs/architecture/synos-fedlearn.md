@@ -1,3 +1,8 @@
+---
+title: synos-fedlearn — Federated Learning Aggregation Core
+description: synos-fedlearn — Federated Learning Aggregation Core
+---
+
 # synos-fedlearn — Federated Learning Aggregation Core
 
 **Classification:** PUBLIC  

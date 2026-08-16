@@ -1,3 +1,8 @@
+---
+title: synos-consciousness-daemon — Syn_OS consciousness processing daemon
+description: synos-consciousness-daemon — Syn_OS consciousness processing daemon
+---
+
 # synos-consciousness-daemon — Syn_OS consciousness processing daemon
 
 **Classification:** PUBLIC

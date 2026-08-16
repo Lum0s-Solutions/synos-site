@@ -1,3 +1,8 @@
+---
+title: Syn_OS ISO Build — Deep Dive
+description: Syn_OS ISO Build — Deep Dive
+---
+
 # Syn_OS ISO Build — Deep Dive
 
 **Originally written:** 2026-04-25 during v41 build (snapshot at stage 03, 17m31s, 425 crates)

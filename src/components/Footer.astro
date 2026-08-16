@@ -8,4 +8,6 @@
 */
 import Default from '@astrojs/starlight/components/Footer.astro';
 ---
-<Default><slot /></Default>
+<Default>
+	<a href="/security.txt" slot="after-links" style="margin-left: 1rem; color: var(--sl-color-text-accent);">Security Policy</a>
+</Default>

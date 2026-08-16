@@ -58,8 +58,18 @@ The v55 Stoneglass release shipped Ansible playbooks for the full bootstrap:
 # from a control node:
 ansible-playbook hive-bootstrap.yml -i inventory --extra-vars "tenant=tenant1"
 ansible-playbook master-image-distribute.yml
-ansible-playbook sanctum-federation-join.yml --extra-vars "federation=primary"
 ```
+
+<details>
+<summary>Full bootstrap sequence (v55 Stoneglass)</summary>
+
+1. **System prep** — `hive-bootstrap.yml` configures the OS, installs Tailscale, WireGuard, and the Kubernetes operator.
+2. **Image distribution** — `master-image-distribute.yml` pushes the Syn_OS ISO image to all nodes.
+3. **Attestation** — `arcanum-attestor` bootstraps mTLS and issues Curtain v4 tokens.
+4. **Profiling** — `arcanum-profiler` runs hardware benchmarks and reports model placement suitability.
+5. **Verification** — `arcanum-tests` runs integration tests against the live mesh.
+
+</details>
 
 The playbooks:
 

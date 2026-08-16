@@ -1,3 +1,8 @@
+---
+title: synos-threat-hunting — Threat hunting engine
+description: synos-threat-hunting — Threat hunting engine
+---
+
 # synos-threat-hunting — Threat hunting engine
 
 **Classification:** PUBLIC  

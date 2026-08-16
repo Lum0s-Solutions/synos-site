@@ -1,3 +1,8 @@
+---
+title: AI Surface Hardening — Wave 10 (v41)
+description: AI Surface Hardening — Wave 10 (v41)
+---
+
 # AI Surface Hardening — Wave 10 (v41)
 
 **Status:** Implemented — Wave 10, Recs 21 + 26 closed

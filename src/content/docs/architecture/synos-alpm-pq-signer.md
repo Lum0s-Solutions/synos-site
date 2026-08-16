@@ -1,3 +1,8 @@
+---
+title: synos-alpm-pq-signer — Hybrid RSA-3072 + ML-DSA-65 signature sidecars for pacman/ALPM packages (v61 Lockstep track G scaffold)
+description: synos-alpm-pq-signer — Hybrid RSA-3072 + ML-DSA-65 signature sidecars for pacman/ALPM packages (v61 Lockstep track G scaffold)
+---
+
 # synos-alpm-pq-signer — Hybrid RSA-3072 + ML-DSA-65 signature sidecars for pacman/ALPM packages (v61 Lockstep track G scaffold)
 
 **Classification:** PUBLIC

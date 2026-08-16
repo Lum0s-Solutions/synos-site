@@ -1,3 +1,8 @@
+---
+title: synos-riftrunner — v52 Riftrunner — safe bytecode VM with verifier for client-uploaded policy probes
+description: synos-riftrunner — v52 Riftrunner — safe bytecode VM with verifier for client-uploaded policy probes
+---
+
 # synos-riftrunner — v52 Riftrunner — safe bytecode VM with verifier for client-uploaded policy probes
 
 **Classification:** PUBLIC

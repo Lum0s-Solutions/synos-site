@@ -1,3 +1,8 @@
+---
+title: synos-bevy
+description: synos-bevy
+---
+
 # synos-bevy
 
 > **Status: TABLED (2026-07).** GRIMOIRE's front-end has pivoted from this Bevy 0.14 3D client

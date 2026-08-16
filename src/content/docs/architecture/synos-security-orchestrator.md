@@ -1,3 +1,8 @@
+---
+title: synos-security-orchestrator — Syn_OS security tools orchestration daemon
+description: synos-security-orchestrator — Syn_OS security tools orchestration daemon
+---
+
 # synos-security-orchestrator — Syn_OS security tools orchestration daemon
 
 **Classification:** PUBLIC

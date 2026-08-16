@@ -1,3 +1,8 @@
+---
+title: "GRIMOIRE Lab Execution: Firecracker Isolation Architecture"
+description: "GRIMOIRE Lab Execution: Firecracker Isolation Architecture"
+---
+
 # GRIMOIRE Lab Execution: Firecracker Isolation Architecture
 
 **Version:** v111+  

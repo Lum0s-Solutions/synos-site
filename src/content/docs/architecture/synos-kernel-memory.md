@@ -1,3 +1,8 @@
+---
+title: synos-kernel-memory — Syn_OS kernel memory management reference logic — heap + slab allocation (std-testable); paging + GlobalAlloc are kernel-build only
+description: synos-kernel-memory — Syn_OS kernel memory management reference logic — heap + slab allocation (std-testable); paging + GlobalAlloc are kernel-build only
+---
+
 # synos-kernel-memory — Syn_OS kernel memory management reference logic — heap + slab allocation (std-testable); paging + GlobalAlloc are kernel-build only
 
 **Classification:** PUBLIC

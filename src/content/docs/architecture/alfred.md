@@ -1,3 +1,8 @@
+---
+title: ALFRED v6.0
+description: ALFRED v6.0
+---
+
 # ALFRED v6.0
 
 ALFRED is the Rust AI daemon at the center of Syn_OS. It is not a chatbot
@@ -8,6 +13,10 @@ long-running system service, and — on the master profile — drives the
 social media outreach layer through `synos-social`. This page covers what
 ALFRED is, where its code lives, how its subsystems talk to each other,
 and how to interact with it from the shell, the desktop, and the network.
+
+:::warning[Production Warning]
+ALFRED internals are `LicenseRef-Proprietary`. The consciousness fusion engine contains original research not yet ready for open publication. Do not redistribute ALFRED binaries in public ISOs without a licensing agreement.
+:::
 
 ## Overview
 

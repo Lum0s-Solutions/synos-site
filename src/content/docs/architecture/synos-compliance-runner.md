@@ -1,3 +1,8 @@
+---
+title: synos-compliance-runner — Automated Compliance Assessment
+description: synos-compliance-runner — Automated Compliance Assessment
+---
+
 # synos-compliance-runner — Automated Compliance Assessment
 
 **Classification:** PUBLIC  

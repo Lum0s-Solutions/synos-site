@@ -1,3 +1,8 @@
+---
+title: synos-hydra — Multi-head coordination runtime
+description: synos-hydra — Multi-head coordination runtime
+---
+
 # synos-hydra — Multi-head coordination runtime
 
 **Classification:** PUBLIC  

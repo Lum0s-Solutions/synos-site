@@ -1,3 +1,8 @@
+---
+title: "synos-playthrough — v67 Wirewalker Track J — lab playthrough recorder: event log capture, JSONL persistence, replay, instructor export"
+description: "synos-playthrough — v67 Wirewalker Track J — lab playthrough recorder: event log capture, JSONL persistence, replay, instructor export"
+---
+
 # synos-playthrough — v67 Wirewalker Track J — lab playthrough recorder: event log capture, JSONL persistence, replay, instructor export
 
 **Classification:** PUBLIC

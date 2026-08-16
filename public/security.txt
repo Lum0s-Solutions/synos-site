@@ -1,0 +1,4 @@
+Contact: mailto:security@synos-linux.pro
+Contact: https://github.com/synos-linux/synos/security/advisories
+Expires: 2027-08-16T00:00:00.000Z
+Preferred-Languages: en

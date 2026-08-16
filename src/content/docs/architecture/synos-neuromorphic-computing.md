@@ -1,3 +1,8 @@
+---
+title: synos-neuromorphic-computing — Spiking Neural Network Framework
+description: synos-neuromorphic-computing — Spiking Neural Network Framework
+---
+
 # synos-neuromorphic-computing — Spiking Neural Network Framework
 
 **Classification:** PUBLIC  

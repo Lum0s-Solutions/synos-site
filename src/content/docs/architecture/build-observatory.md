@@ -1,3 +1,8 @@
+---
+title: Build Observatory
+description: Build Observatory
+---
+
 # Build Observatory
 
 The Build Observatory is the operator-facing instrumentation layer that ships with

@@ -1,3 +1,8 @@
+---
+title: "synos-totw — v67 Wirewalker Track D — threat-of-the-week scheduler: rotates the LabLauncher featured-lab.json pointer"
+description: "synos-totw — v67 Wirewalker Track D — threat-of-the-week scheduler: rotates the LabLauncher featured-lab.json pointer"
+---
+
 # synos-totw — v67 Wirewalker Track D — threat-of-the-week scheduler: rotates the LabLauncher featured-lab.json pointer
 
 **Classification:** PUBLIC

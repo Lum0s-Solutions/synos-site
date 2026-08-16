@@ -1,3 +1,8 @@
+---
+title: synos-ai-daemon — Syn_OS AI Consciousness Engine Daemon
+description: synos-ai-daemon — Syn_OS AI Consciousness Engine Daemon
+---
+
 # synos-ai-daemon — Syn_OS AI Consciousness Engine Daemon
 
 **Classification:** PUBLIC

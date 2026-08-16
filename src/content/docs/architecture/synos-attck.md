@@ -1,3 +1,8 @@
+---
+title: "synos-attck — v66 Citation — MITRE ATT&CK technique ↔ Syn_OS-shipped tool mapping + CLI"
+description: "synos-attck — v66 Citation — MITRE ATT&CK technique ↔ Syn_OS-shipped tool mapping + CLI"
+---
+
 # synos-attck — v66 Citation — MITRE ATT&CK technique ↔ Syn_OS-shipped tool mapping + CLI
 
 **Classification:** PUBLIC
@@ -8,6 +13,10 @@
 ## What It Is
 
 `synos-attck` v66 Citation — MITRE ATT&CK technique ↔ Syn_OS-shipped tool mapping + CLI.
+
+:::tip[Tip]
+Use the `synos-attck` CLI to query technique mappings from the terminal. The data module contains the curated bi-directional mapping between MITRE ATT&CK techniques and Syn_OS-shipped tools.
+:::
 
 ## Architecture
 

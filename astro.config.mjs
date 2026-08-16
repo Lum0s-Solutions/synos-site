@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
@@ -16,7 +17,14 @@ export default defineConfig({
 				replacesTitle: false,
 			},
 			favicon: '/favicon.svg',
-			social: [],
+			social: [
+				{ icon: 'github', label: 'GitHub', href: 'https://github.com/synos-linux/synos' },
+				{ icon: 'discord', label: 'Discord', href: 'https://discord.gg/synos' },
+				{ icon: 'x.com', label: 'X / Twitter', href: 'https://x.com/synos_linux' },
+			],
+			editLink: {
+				baseUrl: 'https://github.com/synos-linux/synos/edit/main/growth/development/docs/internal/eyesonly/development/project-status/reference/research/research/knowledge-sync/architecture/infra/a_LumOs-Repos/synos-ops/LumOs-Repos/SynOSdev/com-public/synos-site/src/content/docs/',
+			},
 			customCss: ['./src/styles/custom.css'],
 			components: {
 				Footer: './src/components/Footer.astro',
@@ -52,7 +60,7 @@ export default defineConfig({
 			],
 			lastUpdated: true,
 			pagination: true,
-			tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 3 },
+			tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 4 },
 			sidebar: [
 				{
 					label: '◈ LumOs Solutions',
@@ -117,9 +125,15 @@ export default defineConfig({
 					label: '◇ Contributing',
 					items: [
 						{ label: 'Contributor Onboarding',    slug: 'contributing/onboarding' },
+						{ label: 'Doc Writing Standards',    slug: 'contributing/standards' },
 					],
 				},
 			],
+		}),
+		sitemap({
+			changefreq: 'weekly',
+			priority: 0.7,
+			lastmod: new Date(),
 		}),
 	],
 });

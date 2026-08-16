@@ -39,6 +39,12 @@ Different PQC families have different security assumptions. Syn_OS uses all thre
 
 Measured on Haswell-era CPU (the <admin-node> admin node baseline):
 
+## See Also
+
+- [syn-security](syn-security.md) — Quantum-resistant authentication primitives
+- [Security Posture](security-posture.md) — Overall security posture and hardening
+- [kernel](kernel.md) — Kernel module signing and build attestation
+
 | Operation                          | ML-KEM | ML-DSA | SLH-DSA |
 |------------------------------------|-------:|-------:|--------:|
 | Keygen                             |  47 µs |  61 µs |  6.8 ms |

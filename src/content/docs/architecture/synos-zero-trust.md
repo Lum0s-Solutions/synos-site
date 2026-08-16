@@ -1,3 +1,8 @@
+---
+title: synos-zero-trust — Zero-Trust Network Architecture Policy Engine for Syn_OS
+description: synos-zero-trust — Zero-Trust Network Architecture Policy Engine for Syn_OS
+---
+
 # synos-zero-trust — Zero-Trust Network Architecture Policy Engine for Syn_OS
 
 **Classification:** PUBLIC

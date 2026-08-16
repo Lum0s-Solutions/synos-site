@@ -1,3 +1,8 @@
+---
+title: "Security Posture — Understanding Your System's Defenses"
+description: "Security Posture — Understanding Your System's Defenses"
+---
+
 # Security Posture — Understanding Your System's Defenses
 
 This guide explains how to check and interpret your Syn_OS system's security posture. You'll learn what each defense mechanism does and how to verify it's working.

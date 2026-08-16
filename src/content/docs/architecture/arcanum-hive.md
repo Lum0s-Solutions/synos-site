@@ -1,13 +1,13 @@
+---
+title: ARCANUM Hive
+description: ARCANUM Hive
+---
+
 # ARCANUM Hive
 
-ARCANUM Hive is Syn_OS's horizontally-scalable encrypted mesh. It combines a Tailscale
-backbone for trusted transport, a single-tenant K3s cluster per node for
-workload orchestration, custom Kubernetes CRDs for cross-node policy, an
-OTA update system, remote attestation of every peer before it is trusted,
-and hardware-tier profiling so the controller can schedule work where it
-makes sense. This page documents the topology, the component crates, the
-systemd glue, the identity model, the deployment scripts, and the runtime
-failure modes operators are most likely to encounter.
+:::note[Note]
+ARCANUM Hive is Syn_OS's horizontally-scalable encrypted mesh. It combines a Tailscale backbone for trusted transport, a single-tenant K3s cluster per node for workload orchestration, custom Kubernetes CRDs for cross-node policy, an OTA update system, remote attestation of every peer before it is trusted, and hardware-tier profiling so the controller can schedule work where it makes sense.
+:::
 
 Hive is what makes Syn_OS feel like more than one machine. A single
 workstation running Syn_OS is useful on its own; two or more running it

@@ -1,3 +1,8 @@
+---
+title: synos-hive-bft — HotStuff Byzantine-Fault-Tolerant Consensus
+description: synos-hive-bft — HotStuff Byzantine-Fault-Tolerant Consensus
+---
+
 # synos-hive-bft — HotStuff Byzantine-Fault-Tolerant Consensus
 
 **Classification:** PUBLIC  

@@ -1,3 +1,8 @@
+---
+title: synos-lab-agent — Laboratory agent runtime
+description: synos-lab-agent — Laboratory agent runtime
+---
+
 # synos-lab-agent — Laboratory agent runtime
 
 **Classification:** PUBLIC  

@@ -1,3 +1,8 @@
+---
+title: The 34-Stage ISO Build Pipeline
+description: The 34-Stage ISO Build Pipeline
+---
+
 # The 34-Stage ISO Build Pipeline
 
 Syn_OS is assembled by a deterministic, checkpoint-driven, strict-mode

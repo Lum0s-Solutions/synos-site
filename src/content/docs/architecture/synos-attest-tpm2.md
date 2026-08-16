@@ -1,3 +1,8 @@
+---
+title: synos-attest-tpm2 — TPM2 attestation CLI
+description: synos-attest-tpm2 — TPM2 attestation CLI
+---
+
 # synos-attest-tpm2 — TPM2 attestation CLI
 
 **Classification:** PUBLIC  

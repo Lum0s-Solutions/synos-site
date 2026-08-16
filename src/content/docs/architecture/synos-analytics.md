@@ -1,3 +1,8 @@
+---
+title: "synos-analytics — Security Metrics & Analytics Dashboard for Syn_OS"
+description: "synos-analytics — Security Metrics & Analytics Dashboard for Syn_OS"
+---
+
 # synos-analytics — Security Metrics & Analytics Dashboard for Syn_OS
 
 **Classification:** PUBLIC

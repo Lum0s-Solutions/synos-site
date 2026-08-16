@@ -1,3 +1,8 @@
+---
+title: Systemd Hardening — Syn_OS Service Isolation
+description: Systemd Hardening — Syn_OS Service Isolation
+---
+
 # Systemd Hardening — Syn_OS Service Isolation
 
 **Wave 10 | CISO Rec 03 (seccomp) + Rec 09 (ProtectProc)**

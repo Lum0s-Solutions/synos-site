@@ -1,3 +1,8 @@
+---
+title: synos-package-manager — Package management abstraction
+description: synos-package-manager — Package management abstraction
+---
+
 # synos-package-manager — Package management abstraction
 
 **Classification:** PUBLIC  

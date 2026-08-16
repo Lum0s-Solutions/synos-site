@@ -1,3 +1,8 @@
+---
+title: Reproducible Builds — Architecture Decision Record
+description: Reproducible Builds — Architecture Decision Record
+---
+
 # Reproducible Builds — Architecture Decision Record
 
 **Scope:** Syn_OS ISO build pipeline  

@@ -1,3 +1,8 @@
+---
+title: synos-vault-integration — Vault integration for Syn_OS services
+description: synos-vault-integration — Vault integration for Syn_OS services
+---
+
 # synos-vault-integration — Vault integration for Syn_OS services
 
 **Classification:** PUBLIC

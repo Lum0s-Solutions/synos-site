@@ -1,3 +1,8 @@
+---
+title: synos-llm-engine — Syn_OS LLM inference engine
+description: synos-llm-engine — Syn_OS LLM inference engine
+---
+
 # synos-llm-engine — Syn_OS LLM inference engine
 
 **Classification:** PUBLIC

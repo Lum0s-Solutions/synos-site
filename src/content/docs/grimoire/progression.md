@@ -1,6 +1,6 @@
 ---
-title: XP & Progression
-description: How the GRIMOIRE progressive-unlock system works — XP, tier gates, certification mapping, and the Sovereign Operator Path.
+title: "XP & Progression"
+description: "How the GRIMOIRE progressive-unlock system works — XP, tier gates, certification mapping, and the Sovereign Operator Path."
 ---
 
 GRIMOIRE Public is built around **earned-not-given progression**. You start with a 10-tool starter kit and 5 intro labs, and you build the rest of your toolkit, your authority, and your reputation through play. Everything ships pre-bundled in the ISO; XP grants execution permission via Curtain v4 capability tokens.

@@ -1,3 +1,8 @@
+---
+title: Syn_OS World Server
+description: Syn_OS World Server
+---
+
 # Syn_OS World Server
 
 **Binary:** `synos-world-server` | **Status:** shipping in v111 (GRIMOIRE multiplayer backend)

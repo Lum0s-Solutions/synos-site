@@ -1,3 +1,8 @@
+---
+title: synos-threat-intel — Threat intelligence processing
+description: synos-threat-intel — Threat intelligence processing
+---
+
 # synos-threat-intel — Threat intelligence processing
 
 **Classification:** PUBLIC  

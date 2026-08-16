@@ -1,3 +1,8 @@
+---
+title: synos-progression — GRIMOIRE Progression Daemon
+description: synos-progression — GRIMOIRE Progression Daemon
+---
+
 # synos-progression — GRIMOIRE Progression Daemon
 
 **Classification:** PUBLIC  

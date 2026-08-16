@@ -1,3 +1,8 @@
+---
+title: synos-memguard Architecture
+description: synos-memguard Architecture
+---
+
 # synos-memguard Architecture
 
 **Crate:** `fruit/crates/synos-memguard`

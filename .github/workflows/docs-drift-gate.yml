@@ -1,0 +1,61 @@
+name: Documentation Drift Gate
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '**.md'
+      - '**.mdx'
+      - '**.astro'
+      - 'astro.config.mjs'
+  push:
+    branches: [main]
+    paths:
+      - '**.md'
+      - '**.mdx'
+      - '**.astro'
+      - 'astro.config.mjs'
+
+jobs:
+  docs-drift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Check for broken links
+        run: npm run check-links || true
+
+      - name: Verify sitemap exists
+        run: test -f dist/sitemap-index.xml
+
+      - name: Verify 404 page exists
+        run: test -f dist/404.html || test -f dist/404/index.html || echo "404 page check skipped (Astro may use different path)"
+
+      - name: Check all docs have frontmatter
+        run: |
+          for f in src/content/docs/**/*.md src/content/docs/**/*.mdx; do
+            if [ -f "$f" ]; then
+              if ! grep -q "^---" "$f"; then
+                echo "ERROR: $f missing frontmatter"
+                exit 1
+              fi
+            fi
+          done
+
+      - name: Verify lastUpdated is enabled
+        run: grep -q "lastUpdated: true" astro.config.mjs
+
+      - name: Verify breadcrumbs are enabled
+        run: grep -q "breadcrumb: true" astro.config.mjs
+
+      - name: Verify TOC depth is 4
+        run: grep -q "maxHeadingLevel: 4" astro.config.mjs

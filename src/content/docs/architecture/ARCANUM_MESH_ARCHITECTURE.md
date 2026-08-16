@@ -1,3 +1,8 @@
+---
+title: ARCANUM Mesh — Architecture Overview (Public)
+description: ARCANUM Mesh — Architecture Overview (Public)
+---
+
 # ARCANUM Mesh — Architecture Overview (Public)
 
 **Audience:** collaborators, reviewers, and the public.

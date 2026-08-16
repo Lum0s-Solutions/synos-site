@@ -1,3 +1,8 @@
+---
+title: synos-compliance-dashboard — Web Compliance Monitoring Dashboard
+description: synos-compliance-dashboard — Web Compliance Monitoring Dashboard
+---
+
 # synos-compliance-dashboard — Web Compliance Monitoring Dashboard
 
 **Classification:** PUBLIC  

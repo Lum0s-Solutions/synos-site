@@ -1,3 +1,8 @@
+---
+title: Progressive Unlock System — Grimoire Public Design Spec
+description: Progressive Unlock System — Grimoire Public Design Spec
+---
+
 # Progressive Unlock System — Grimoire Public Design Spec
 
 **Date:** 2026-04-17 (v40 Wave 7.5 strategic pivot)

@@ -1,3 +1,8 @@
+---
+title: synos-pq-tls — Post-quantum hybrid TLS defaults for Syn_OS services (v68 Bone Sigil Track G)
+description: synos-pq-tls — Post-quantum hybrid TLS defaults for Syn_OS services (v68 Bone Sigil Track G)
+---
+
 # synos-pq-tls — Post-quantum hybrid TLS defaults for Syn_OS services (v68 Bone Sigil Track G)
 
 **Classification:** PUBLIC

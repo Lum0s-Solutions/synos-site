@@ -1,3 +1,8 @@
+---
+title: synos-vuln-research — Vulnerability research framework
+description: synos-vuln-research — Vulnerability research framework
+---
+
 # synos-vuln-research — Vulnerability research framework
 
 **Classification:** PUBLIC  

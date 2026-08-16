@@ -1,3 +1,8 @@
+---
+title: synos-vault-client — Vault client integration
+description: synos-vault-client — Vault client integration
+---
+
 # synos-vault-client — Vault client integration
 
 **Classification:** PUBLIC  

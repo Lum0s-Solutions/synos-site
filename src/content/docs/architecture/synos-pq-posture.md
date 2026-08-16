@@ -1,3 +1,8 @@
+---
+title: "synos-pq-posture — Syn_OS v68 Bone Sigil Track I: PQ posture registry, self-scan, cross-hive aggregator + ALFRED query interface"
+description: "synos-pq-posture — Syn_OS v68 Bone Sigil Track I: PQ posture registry, self-scan, cross-hive aggregator + ALFRED query interface"
+---
+
 # synos-pq-posture — Syn_OS v68 Bone Sigil Track I: PQ posture registry, self-scan, cross-hive aggregator + ALFRED query interface
 
 **Classification:** PUBLIC

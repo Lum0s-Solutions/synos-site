@@ -1,3 +1,8 @@
+---
+title: GRIMOIRE
+description: GRIMOIRE
+---
+
 # GRIMOIRE
 
 GRIMOIRE is the gamified cybersecurity training platform that ships as the

@@ -1,3 +1,8 @@
+---
+title: synos-findings-store — Security findings persistence
+description: synos-findings-store — Security findings persistence
+---
+
 # synos-findings-store — Security findings persistence
 
 **Classification:** PUBLIC  

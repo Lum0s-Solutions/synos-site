@@ -1,3 +1,8 @@
+---
+title: Salvaged Hardware Mesh — Strategic Vision
+description: Salvaged Hardware Mesh — Strategic Vision
+---
+
 # Salvaged Hardware Mesh — Strategic Vision
 
 **Date:** 2026-04-17 (v40 Wave 7.5 strategic pivot)

@@ -1,3 +1,8 @@
+---
+title: synpkg — Syn_OS Consciousness-Aware Package Manager
+description: synpkg — Syn_OS Consciousness-Aware Package Manager
+---
+
 # synpkg — Syn_OS Consciousness-Aware Package Manager
 
 **Classification:** PUBLIC

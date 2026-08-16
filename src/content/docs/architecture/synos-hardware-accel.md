@@ -1,3 +1,8 @@
+---
+title: synos-hardware-accel — Syn_OS hardware acceleration daemon
+description: synos-hardware-accel — Syn_OS hardware acceleration daemon
+---
+
 # synos-hardware-accel — Syn_OS hardware acceleration daemon
 
 **Classification:** PUBLIC

@@ -1,3 +1,8 @@
+---
+title: capacity-planner — Capacity planning tool - analyzes load test results and provides recommendations
+description: capacity-planner — Capacity planning tool - analyzes load test results and provides recommendations
+---
+
 # capacity-planner — Capacity planning tool - analyzes load test results and provides recommendations
 
 **Classification:** PUBLIC

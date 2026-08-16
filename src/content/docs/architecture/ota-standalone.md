@@ -1,3 +1,8 @@
+---
+title: synos-ota — Standalone A/B Update Client
+description: synos-ota — Standalone A/B Update Client
+---
+
 # synos-ota — Standalone A/B Update Client
 
 **Binary:** `synos-ota` | **Crate:** `fruit/crates/synos-ota/` | **Track:** v62 "Hollow Point" Track K

@@ -839,3 +839,20 @@ button[aria-label*='earch']::after {
 		mix-blend-mode: overlay;
 	}
 }
+
+/* ============================================================
+   PRINT CSS — Clean PDF export
+   ============================================================ */
+@media print {
+	* { box-shadow: none !important; text-shadow: none !important; }
+	body { background: #fff !important; color: #000 !important; font-size: 11pt; }
+	header, footer, nav, .sl-breadcrumbs, .sl-navbar, .sl-table-of-contents,
+	.sl-sidebar, .sl-page-header, .sl-footer, .starlight-aside, .sl-edit-link { display: none !important; }
+	main { max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
+	a { color: #000 !important; text-decoration: underline !important; }
+	a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.8em; }
+	pre, code, blockquote { page-break-inside: avoid; }
+	table { page-break-inside: avoid; }
+	h1, h2, h3 { page-break-after: avoid; }
+	.sl-markdown-content { max-width: 100% !important; }
+}

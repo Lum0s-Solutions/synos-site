@@ -1,3 +1,8 @@
+---
+title: Tail Slayer Architecture
+description: Tail Slayer Architecture
+---
+
 # Tail Slayer Architecture
 
 **Crate:** `synos-tail-slayer`

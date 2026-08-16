@@ -18,6 +18,10 @@ The Syn_OS kernel is built from upstream Linux **7.0** (the launch base; a **7.2
 | **Custom config knobs** | 12 — all under `CONFIG_SYNOS_*` |
 | **Module signing** | Required — build stage hard-fails if the kernel signing key is absent; cosign-attested keys |
 
+:::danger[Production Note]
+Never disable module signing in production builds. The `02b` build stage will hard-fail if the kernel signing key is absent, and this is intentional — unsigned modules are a security boundary violation.
+::: |
+
 ## Kernel AI interface
 
 The v111 kernel interface is a **capability-gated, signed Rust kernel-module interface** that exposes AI state and observability data to userspace. The old custom-syscall approach is retired — those syscall numbers now collide with upstream Linux 7.0 and the old stubs were empty shells with no real handlers.

@@ -1,3 +1,8 @@
+---
+title: The 7.0-synos-ai Kernel
+description: The 7.0-synos-ai Kernel
+---
+
 # The 7.0-synos-ai Kernel
 
 Syn_OS ships its own Linux kernel fork, branded `7.0-synos-ai`. It is not a

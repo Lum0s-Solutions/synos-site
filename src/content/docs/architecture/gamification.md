@@ -1,3 +1,8 @@
+---
+title: GRIMOIRE — Gamified Security Training
+description: GRIMOIRE — Gamified Security Training
+---
+
 # GRIMOIRE — Gamified Security Training
 
 **Crate:** `synos-gamification` (~114k LOC, 110+ modules) + `synos-grimoire` (catalog engine)
@@ -13,6 +18,10 @@ front-end binary in the `synos-gamification` crate, built on the Bevy-free engin
 earlier Bevy 0.14 3D client (`synos-bevy`) is **tabled** and excluded from workspace resolution.
 `grimoire-tui` loads the full lab corpus (`tui/corpus.rs`), runs playable accept / turn-in quests
 (persisted sidecar), and hosts the learning-loop engine (see below).
+
+:::tip[Tip]
+Use `GRIMOIRE_TUI_VALIDATE=1` to run the content-pipeline validator before committing new labs. This catches integrity errors early.
+:::
 
 ## Core systems
 | System | What it does |

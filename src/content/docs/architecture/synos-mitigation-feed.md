@@ -1,3 +1,8 @@
+---
+title: synos-mitigation-feed — CVE Speculation-Mitigation Posture Aggregator
+description: synos-mitigation-feed — CVE Speculation-Mitigation Posture Aggregator
+---
+
 # synos-mitigation-feed — CVE Speculation-Mitigation Posture Aggregator
 
 **Classification:** PUBLIC  

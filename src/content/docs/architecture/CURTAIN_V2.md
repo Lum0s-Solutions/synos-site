@@ -1,3 +1,8 @@
+---
+title: Curtain v2 — Runtime Capability Ceiling
+description: Curtain v2 — Runtime Capability Ceiling
+---
+
 # Curtain v2 — Runtime Capability Ceiling
 
 **Status:** v41 deliverable (Wave 13, Cipher parallel batch)
@@ -6,6 +11,10 @@
 ---
 
 ## 1. Tier Model
+
+:::note[Milestone]
+Syn_OS v111.0.0 ships with three ISO profiles: Master, Grimoire, and GoodLife. Each profile maps to a capability tier that controls kernel interfaces, daemons, and packaged binaries.
+:::
 
 Syn_OS ships three ISO profiles. Each profile maps to a capability tier that controls which kernel interfaces, daemons, and packaged binaries are accessible.
 

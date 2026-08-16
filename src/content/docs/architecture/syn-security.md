@@ -1,3 +1,8 @@
+---
+title: syn-security — Security orchestration crate
+description: syn-security — Security orchestration crate
+---
+
 # syn-security — Security orchestration crate
 
 **Classification:** PUBLIC  
@@ -11,6 +16,10 @@
 `syn-security` is the security orchestration framework for Syn_OS, implementing authentication, cryptography, audit logging, input validation, and zero-trust networking primitives. It bridges the AI engine (`syn-ai`) into security policy decisions via a `consciousness_bridge` module, and provides both standard and quantum-resistant security enhancements through modular feature flags.
 
 ## Architecture
+
+:::warning[Master-only]
+All `syn-security` kernel operations require `CAP_SYS_ADMIN`. Device nodes are `0600` via udev rules. Do not expose to untrusted userspaces.
+:::
 
 ### Modules
 
@@ -37,6 +46,17 @@
 
 ## Future Ideas
 
+<details>
+<summary>Long-term enhancements (v112+)</summary>
+
 1. Replace the hand-rolled `security_enhancements` behavioral analytics with a dedicated `syn-security-behavior` crate backed by `synos-threat-hunting` timeline analysis.
 2. Add `libbpf-rs` CO-RE (Compile Once — Run Everywhere) support so eBPF programs work across kernel versions without recompilation.
 3. Expose `syn-security` event types via `synos-findings-store` so all security decisions are content-addressed and deduplicated across the hive.
+
+</details>
+
+## See Also
+
+- [syn-ai](syn-ai.md) — AI engine integration and consciousness bridge
+- [kernel](kernel.md) — Kernel module signing and eBPF integration
+- [Security Posture](security-posture.md) — Overall security posture and hardening

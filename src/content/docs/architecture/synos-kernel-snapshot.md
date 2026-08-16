@@ -1,3 +1,8 @@
+---
+title: synos-kernel-snapshot — v51 Storm Glass — kernel snapshot/restore primitives for digital-twin substrate
+description: synos-kernel-snapshot — v51 Storm Glass — kernel snapshot/restore primitives for digital-twin substrate
+---
+
 # synos-kernel-snapshot — v51 Storm Glass — kernel snapshot/restore primitives for digital-twin substrate
 
 **Classification:** PUBLIC

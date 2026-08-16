@@ -1,3 +1,8 @@
+---
+title: synos-security-automation — synos-security-automation
+description: synos-security-automation — synos-security-automation
+---
+
 # synos-security-automation — synos-security-automation
 
 **Classification:** PUBLIC

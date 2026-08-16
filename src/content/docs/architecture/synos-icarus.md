@@ -1,3 +1,8 @@
+---
+title: synos-icarus — Icarus flight system
+description: synos-icarus — Icarus flight system
+---
+
 # synos-icarus — Icarus flight system
 
 **Classification:** PUBLIC  

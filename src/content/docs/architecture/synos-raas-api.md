@@ -1,3 +1,8 @@
+---
+title: synos-raas-api — RaaS API surface
+description: synos-raas-api — RaaS API surface
+---
+
 # synos-raas-api — RaaS API surface
 
 **Classification:** PUBLIC  

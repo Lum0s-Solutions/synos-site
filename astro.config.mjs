@@ -101,30 +101,18 @@ export default defineConfig({
 						{ label: 'Membership & /claim',       slug: 'churchofmalware/membership' },
 					],
 				},
-				{
-					label: '◈ Architecture',
-					items: [
-						{ label: 'Six-Layer Stack',           slug: 'architecture/layers' },
-						{ label: 'ALFRED AI Daemon',          slug: 'architecture/alfred' },
-						{ label: 'Custom Kernel',             slug: 'architecture/kernel' },
-						{ label: 'Icarus Post-Quantum',       slug: 'architecture/icarus' },
-						{ label: 'ARCANUM Mesh',              slug: 'architecture/arcanum' },
-						{ label: 'Curtain Capability Tokens', slug: 'architecture/curtain' },
-						{ label: 'Reproducible Builds',       slug: 'architecture/forge' },
-					],
-				},
+			{
+				label: '◈ Architecture',
+				autogenerate: { directory: 'architecture' },
+			},
 				{
 					label: '◆ Reference',
 					autogenerate: { directory: 'reference' },
 				},
-				{
-					label: '⚙ Operator Guide',
-					items: [
-						{ label: 'ISO Build — How It Works', slug: 'operator-guide/iso-build-deep-dive' },
-						{ label: 'Build Runbook',             slug: 'operator-guide/build-runbook' },
-						{ label: 'Build Observatory',         slug: 'operator-guide/build-observatory' },
-					],
-				},
+			{
+				label: '⚙ Operator Guide',
+				autogenerate: { directory: 'operator-guide' },
+			},
 				{
 					label: '◇ Contributing',
 					items: [

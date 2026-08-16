@@ -33,7 +33,7 @@ synos-rebuild-verify.sh \
 #     SLSA-3 provenance verified
 ```
 
-The `synos-rebuild-verify.sh` script in `growth/development/scripts/iso-build/` rebuilds a release from source and diffs the digest against the published reference. Run today, it verifies the pipeline is reproducible on the same oracle; it becomes a true cross-oracle verifier once a second oracle is online.
+The `synos-rebuild-verify.sh` script in `fruit/iso/iso-build/` rebuilds a release from source and diffs the digest against the published reference. Run today, it verifies the pipeline is reproducible on the same oracle; it becomes a true cross-oracle verifier once a second oracle is online.
 
 ## Cosign + Sigstore Rekor
 

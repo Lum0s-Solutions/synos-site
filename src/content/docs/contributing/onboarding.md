@@ -33,7 +33,7 @@ contributions don't need this.
 | `fruit/core/` | Shared infrastructure (AI, kernel, security, services, apps) |
 | `fruit/core/src/linux-kernel/rust-modules/` | Loadable Rust kernel modules (33, capability-gated char-device/ioctl interface) |
 | `fruit/distribution/` | ISO packaging, deployment, installer |
-| `growth/development/scripts/iso-build/stages/` | The `mkarchiso`-based ISO build pipeline |
+| `fruit/iso/iso-build/stages/` | The `mkarchiso`-based ISO build pipeline |
 | `growth/development/docs/` | Public and internal documentation |
 | `growth/xtask/` | `cargo xtask` — curtain, feature-audit, lab-integrity, and more |
 

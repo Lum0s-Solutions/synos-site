@@ -11,6 +11,7 @@
     "gen:play-test": "node scripts/gen-play-test.mjs",
     "prebuild": "node scripts/gen-play-test.mjs",
     "build": "astro build",
+    "postbuild": "npx pagefind --site dist --output dist/pagefind",
     "preview": "astro preview",
     "test": "node --test tests/",
     "astro": "astro"
@@ -18,6 +19,7 @@
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
     "@astrojs/starlight": "^0.38.3",
+    "@pagefind/default-ui": "^1.5.2",
     "astro": "^6.0.1",
     "sharp": "^0.34.2"
   }

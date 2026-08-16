@@ -1,0 +1,138 @@
+---
+// Pagefind search component for synos-site
+---
+
+<div id="search" class="pagefind-search">
+  <input type="search" id="pagefind-search" placeholder="Search docs..." autocomplete="off" />
+  <div id="pagefind-results" class="pagefind-results"></div>
+</div>
+
+<script>
+  // Initialize Pagefind after DOM is ready
+  async function initSearch() {
+    try {
+      const pagefind = await import('pagefind');
+      await pagefind.init();
+      
+      const searchInput = document.getElementById('pagefind-search');
+      const resultsDiv = document.getElementById('pagefind-results');
+      
+      if (!searchInput || !resultsDiv) return;
+      
+      let searchTimeout;
+      searchInput.addEventListener('input', (e) => {
+        clearTimeout(searchTimeout);
+        const query = e.target.value.trim();
+        
+        if (query.length < 2) {
+          resultsDiv.innerHTML = '';
+          return;
+        }
+        
+        searchTimeout = setTimeout(async () => {
+          const results = await pagefind.search(query);
+          resultsDiv.innerHTML = '';
+          
+          if (results.results.length === 0) {
+            resultsDiv.innerHTML = '<p class="no-results">No results found</p>';
+            return;
+          }
+          
+          const ul = document.createElement('ul');
+          ul.className = 'search-results-list';
+          
+          results.results.slice(0, 10).forEach(result => {
+            const li = document.createElement('li');
+            li.className = 'search-result-item';
+            li.innerHTML = `
+              <a href="${result.url}" class="search-result-link">
+                <h4>${result.meta.title || result.url}</h4>
+                <p>${result.excerpt}</p>
+              </a>
+            `;
+            ul.appendChild(li);
+          });
+          
+          resultsDiv.appendChild(ul);
+        }, 300);
+      });
+    } catch (e) {
+      console.log('Pagefind not available:', e);
+    }
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSearch);
+  } else {
+    initSearch();
+  }
+</script>
+
+<style>
+  .pagefind-search {
+    position: relative;
+    margin-bottom: 1rem;
+  }
+  #pagefind-search {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: var(--sl-color-bg-nav);
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 0.5rem;
+    color: var(--sl-color-gray-1);
+    font-size: 0.95rem;
+  }
+  #pagefind-search:focus {
+    outline: none;
+    border-color: var(--phoenix-ember);
+  }
+  .pagefind-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--sl-color-bg-nav);
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 0.5rem;
+    margin-top: 0.25rem;
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 100;
+  }
+  .search-results-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .search-result-item {
+    border-bottom: 1px solid var(--sl-color-hairline);
+  }
+  .search-result-item:last-child {
+    border-bottom: none;
+  }
+  .search-result-link {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: var(--sl-color-gray-1);
+    text-decoration: none;
+  }
+  .search-result-link:hover {
+    background: rgba(220, 38, 38, 0.06);
+  }
+  .search-result-link h4 {
+    margin: 0 0 0.25rem;
+    font-size: 0.95rem;
+    color: var(--phoenix-ember-hi);
+  }
+  .search-result-link p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--sl-color-gray-2);
+  }
+  .no-results {
+    padding: 1rem;
+    text-align: center;
+    color: var(--sl-color-gray-2);
+    font-size: 0.9rem;
+  }
+</style>

@@ -16,9 +16,17 @@ SITE_URL = "https://synos-linux.pro"
 # (functions/download/*). The bucket must have NO public r2.dev / custom-domain
 # access — the gated Function is the sole path to the bytes. Create it with:
 #   npx wrangler r2 bucket create synos-iso
-[[r2_buckets]]
-binding = "ISO_BUCKET"
-bucket_name = "synos-iso"
+#
+# COMMENTED OUT FOR SOFT LAUNCH (2026-08-07). The bucket does not exist yet.
+# functions/download/_middleware.js handles missing bindings gracefully.
+#
+# To enable later:
+#   npx wrangler r2 bucket create synos-iso
+# then uncomment below.
+#
+# [[r2_buckets]]
+# binding = "ISO_BUCKET"
+# bucket_name = "synos-iso"
 
 # KV allowlist of current members, keyed by the identity the /download gate can
 # verify (member:<discord-id>). Populated out-of-band by a nightly job on a

@@ -242,3 +242,45 @@ See: [INDEX.md](../../../internal/architecture/proprietary/INDEX.md)
 tags: [general]
 
 _Updated: v111.0.0 Last Light, August 2026._
+
+---
+
+## System Architecture Diagram
+
+```mermaid
+graph TB
+    subgraph "User Space"
+        ALFRED[ALFRED Daemon]
+        GRIMOIRE[GRIMOIRE TUI]
+        OPS[synos-ops]
+        PROGRESSION[synos-progression]
+    end
+
+    subgraph "Kernel Space"
+        KERNEL[7.0-synos-ai]
+        CHARDEV[33 Char-Device Modules]
+        CURTAIN[Curtain]
+        FFI[synos-safe-ffi]
+    end
+
+    subgraph "Mesh"
+        HIVE[ARCANUM Hive]
+        BFT[HotStuff BFT]
+        PROFILER[Hive Profiler]
+    end
+
+    subgraph "Security"
+        BOUNDARY[synos-security-boundary]
+        AUDIT[synos-audit-trail]
+        ATTEST[TPM2 Attestation]
+    end
+
+    ALFRED --> KERNEL
+    GRIMOIRE --> PROGRESSION
+    OPS --> AUDIT
+    KERNEL --> CHARDEV
+    CURTAIN --> BOUNDARY
+    HIVE --> BFT
+    HIVE --> PROFILER
+    ATTEST --> BOUNDARY
+```

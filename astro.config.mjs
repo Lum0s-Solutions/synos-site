@@ -23,7 +23,7 @@ export default defineConfig({
 				{ icon: 'x.com', label: 'X / Twitter', href: 'https://x.com/synos_linux' },
 			],
 			editLink: {
-				baseUrl: 'https://github.com/synos-linux/synos/edit/main/growth/development/docs/internal/eyesonly/development/project-status/reference/research/research/knowledge-sync/architecture/infra/a_LumOs-Repos/synos-ops/LumOs-Repos/SynOSdev/com-public/synos-site/src/content/docs/',
+				baseUrl: 'https://github.com/synos-linux/synos/edit/main/growth/development/docs/public/operator-guide/architecture/',
 			},
 			customCss: ['./src/styles/custom.css'],
 			components: {
@@ -61,27 +61,33 @@ export default defineConfig({
 				{ tag: 'link', attrs: { rel: 'preload', href: '/fonts/inter-latin.woff2',         as: 'font', type: 'font/woff2', crossorigin: 'anonymous' } },
 				{ tag: 'link', attrs: { rel: 'preload', href: '/fonts/saira-latin.woff2',         as: 'font', type: 'font/woff2', crossorigin: 'anonymous' } },
 
-			// Plausible analytics
-			{ tag: 'script', attrs: { src: '/js/plausible.js', defer: true } },
+				// Plausible analytics
+				{ tag: 'script', attrs: { src: '/js/plausible.js', defer: true } },
 
-			// JSON-LD Organization schema
-			{ tag: 'script', attrs: { type: 'application/ld+json', innerHTML: JSON.stringify({
-					"@context": "https://schema.org",
-					"@type": "Organization",
-					"name": "LumOs Solutions",
-					"url": "https://lumossolutions.io",
-					"logo": "https://synos-linux.pro/og-image.svg",
-					"sameAs": [
-						"https://github.com/Lum0s-Solutions",
-						"https://discord.gg/synos",
-						"https://x.com/synos_linux"
-					],
-					"contactPoint": {
-						"@type": "ContactPoint",
-						"email": "hello@lumossolutions.io",
-						"contactType": "business"
+				// JSON-LD Organization schema
+				{
+					tag: 'script',
+					attrs: {
+						type: 'application/ld+json',
+						innerHTML: JSON.stringify({
+							"@context": "https://schema.org",
+							"@type": "Organization",
+							"name": "LumOs Solutions",
+							"url": "https://lumossolutions.io",
+							"logo": "https://synos-linux.pro/og-image.svg",
+							"sameAs": [
+								"https://github.com/Lum0s-Solutions",
+								"https://discord.gg/synos",
+								"https://x.com/synos_linux"
+							],
+							"contactPoint": {
+								"@type": "ContactPoint",
+								"email": "hello@lumossolutions.io",
+								"contactType": "business"
+							}
+						})
 					}
-				})},
+				},
 			],
 			lastUpdated: true,
 			pagination: true,
@@ -134,18 +140,18 @@ export default defineConfig({
 						{ label: 'Membership & /claim',       slug: 'churchofmalware/membership' },
 					],
 				},
-			{
-				label: '◈ Architecture',
-				autogenerate: { directory: 'architecture' },
-			},
+				{
+					label: '◈ Architecture',
+					autogenerate: { directory: 'architecture' },
+				},
 				{
 					label: '◆ Reference',
 					autogenerate: { directory: 'reference' },
 				},
-			{
-				label: '⚙ Operator Guide',
-				autogenerate: { directory: 'operator-guide' },
-			},
+				{
+					label: '⚙ Operator Guide',
+					autogenerate: { directory: 'operator-guide' },
+				},
 				{
 					label: '◇ Contributing',
 					items: [

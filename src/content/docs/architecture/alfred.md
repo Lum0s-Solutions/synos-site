@@ -434,3 +434,9 @@ compiled with `--features research-mode` and that
 `~/.config/alfred/research.toml` exists. If either is missing, the
 endpoints will not surface and the research tab in the TUI will be
 hidden — deliberately, not buggy.
+
+---
+
+## Video: ALFRED in Action
+
+<VideoEmbed src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="ALFRED Consciousness Fusion Demo" />

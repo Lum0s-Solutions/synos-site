@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: AI Surface Hardening — Wave 10 (v41)
 description: AI Surface Hardening — Wave 10 (v41)
 ---
+tags: [general]
 
 # AI Surface Hardening — Wave 10 (v41)
 
@@ -10,6 +12,7 @@ description: AI Surface Hardening — Wave 10 (v41)
 **Date:** 2026-04-16
 
 ---
+tags: [general]
 
 ## Overview
 
@@ -19,6 +22,7 @@ ALFRED's AI surface has two structural attack vectors closed in Wave 10:
 2. **Rec 21 — Prompt Injection Defense Layer**: every outbound LLM request is wrapped by `PromptGuard` middleware, which fences untrusted input, validates response schema, and enforces a tier-scoped tool allowlist.
 
 ---
+tags: [general]
 
 ## 1. Taint Model (Rec 26)
 
@@ -58,6 +62,7 @@ Signal routing applies per-variant routing:
 - `HealthAlert`, `DmnCycleSummary`: `SignalRoute::Acknowledge` regardless of taint (these are awareness signals, not decision triggers).
 
 ---
+tags: [general]
 
 ## 2. PromptGuard Architecture (Rec 21)
 
@@ -133,6 +138,7 @@ Edit `is_tool_allowed` in `/fruit/crates/alfred-daemon/src/prompt_guard.rs`:
 - Update this doc with the new tool entry in the allowlist table above.
 
 ---
+tags: [general]
 
 ## 3. Red Team Campaign Integration
 
@@ -159,6 +165,7 @@ The campaign runner submits each payload via a grimoire-tier `LlmFederation` que
 Results are logged to `growth/arcanum/red-team-results/llm-injection-<date>.jsonl`.
 
 ---
+tags: [general]
 
 ## 4. Known Limitations
 
@@ -168,6 +175,7 @@ Results are logged to `growth/arcanum/red-team-results/llm-injection-<date>.json
 - **Output schema evolution**: as ALFRED's decision surface grows, `GuardedResponse` may need additional fields. Each new field must go through the same security review as a new tool addition.
 
 ---
+tags: [general]
 
 ## 5. v42+ Roadmap
 

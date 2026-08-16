@@ -1,0 +1,98 @@
+---
+// Custom page feedback component for synos-site
+// Stores feedback in localStorage
+const pageId = Astro.url.pathname;
+---
+
+<div class="page-feedback" id="page-feedback">
+  <p class="feedback-prompt">Was this page helpful?</p>
+  <div class="feedback-buttons">
+    <button class="feedback-btn" data-vote="yes" aria-label="Yes, this page was helpful">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+      </svg>
+    </button>
+    <button class="feedback-btn" data-vote="no" aria-label="No, this page needs improvement">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 2.3l1.38 9a2 2 0 0 0 2 1.7zM17 2h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3"></path>
+      </svg>
+    </button>
+  </div>
+  <p class="feedback-thanks" id="feedback-thanks">Thanks for the feedback!</p>
+</div>
+
+<script>
+  (function() {
+    const container = document.getElementById('page-feedback');
+    if (!container) return;
+    
+    const pageId = location.pathname;
+    const storageKey = 'synos-feedback-' + pageId;
+    
+    if (localStorage.getItem(storageKey)) {
+      container.style.display = 'none';
+      return;
+    }
+    
+    const buttons = container.querySelectorAll('.feedback-btn');
+    const thanks = document.getElementById('feedback-thanks');
+    
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const vote = btn.dataset.vote;
+        localStorage.setItem(storageKey, vote);
+        container.querySelector('.feedback-prompt').style.display = 'none';
+        container.querySelector('.feedback-buttons').style.display = 'none';
+        thanks.style.display = 'block';
+        
+        // Send to analytics if available
+        if (typeof Plausible !== 'undefined') {
+          Plausible('feedback', { props: { page: pageId, vote: vote } });
+        }
+      });
+    });
+  })();
+</script>
+
+<style>
+  .page-feedback {
+    margin-top: 2rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 0.5rem;
+    background: var(--sl-color-bg-nav);
+  }
+  .feedback-prompt {
+    font-size: 0.9rem;
+    color: var(--sl-color-gray-1);
+    margin: 0 0 0.75rem;
+  }
+  .feedback-buttons {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .feedback-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 0.375rem;
+    background: transparent;
+    color: var(--sl-color-gray-1);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .feedback-btn:hover {
+    border-color: var(--phoenix-ember);
+    color: var(--phoenix-ember-hi);
+    background: rgba(220, 38, 38, 0.06);
+  }
+  .feedback-thanks {
+    display: none;
+    font-size: 0.85rem;
+    color: var(--sl-color-accent);
+    margin: 0;
+  }
+</style>

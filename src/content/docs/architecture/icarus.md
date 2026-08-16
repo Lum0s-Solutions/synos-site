@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: Icarus Post-Quantum Crypto
 description: Icarus v9.0 — NIST-standardised post-quantum cryptography for Syn_OS, on by default. ML-KEM (FIPS 203), ML-DSA (FIPS 204), SLH-DSA (FIPS 205). Quantum-safe today, across every transport and signing path.
 ---
+tags: [general]
 
 **Icarus** is the post-quantum cryptography engine of Syn_OS. v9.0 implements all three NIST-standardised PQC algorithms and exposes them through a single Rust crate (`synos-icarus`) used by every component that signs, encrypts, or attests anything. As of v111.0.0 "Last Light", post-quantum is **on by default** — not an opt-in flag. Every transport, signing path, and audit trail uses ML-KEM, ML-DSA, or SLH-DSA (or a hybrid pairing).
 

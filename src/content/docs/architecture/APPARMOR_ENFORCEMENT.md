@@ -1,7 +1,9 @@
 ---
+tags: [security curtain]
 title: AppArmor Enforcement in Syn_OS
 description: AppArmor enforcement profiles for ALFRED, GRIMOIRE, and consciousness engine daemons.
 ---
+tags: [security curtain]
 
 # AppArmor Enforcement in Syn_OS
 
@@ -9,6 +11,7 @@ description: AppArmor enforcement profiles for ALFRED, GRIMOIRE, and consciousne
 **Applies to:** all ISO profiles (master, grimoire, goodlife)
 
 ---
+tags: [security curtain]
 
 ## Why enforce mode is non-negotiable
 
@@ -26,6 +29,7 @@ A CI gate prevents any PR from regressing AppArmor profiles from enforce to comp
 :::
 
 ---
+tags: [security curtain]
 
 ## Profile inventory
 
@@ -41,6 +45,7 @@ loads them at boot in enforce mode — no runtime `aa-enforce` call is needed af
 first boot, but stage 08 still runs it for belt-and-suspenders coverage.
 
 ---
+tags: [security curtain]
 
 ## Troubleshooting a legitimate denial
 
@@ -92,6 +97,7 @@ This is **not permitted on production or MSSP customer deployments**. The ops
 dashboard flags any node whose ALFRED profile is not in enforce mode.
 
 ---
+tags: [security curtain]
 
 ## CI gate — adding new profiles
 
@@ -114,6 +120,7 @@ To add a new synos-* daemon profile to the gate:
    it can merge.
 
 ---
+tags: [security curtain]
 
 ## Kernel lockdown interaction
 
@@ -139,5 +146,6 @@ AppArmor profile rules that deny `/dev/mem` are retained even with lockdown enab
 because defense-in-depth requires both layers to enforce independently.
 
 ---
+tags: [security curtain]
 
 *Last updated: v41 Wave 10 | Author: Cipher | CISO Recs 01+02*

@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-bevy
 description: synos-bevy
 ---
+tags: [general]
 
 # synos-bevy
 
@@ -20,6 +22,7 @@ description: synos-bevy
 **Target hardware**: Intel HD 4400 integrated GPU (build oracle)
 
 ---
+tags: [general]
 
 ## Overview
 
@@ -43,6 +46,7 @@ the rest of GRIMOIRE. For the student-facing user guide, see
 [`user-guide/grimoire-guide.md`](../user-guide/grimoire-guide.md).
 
 ---
+tags: [general]
 
 ## Bevy version
 
@@ -65,6 +69,7 @@ doing the port produces a compile error at the first use of the
 manual pipeline machinery.
 
 ---
+tags: [general]
 
 ## Source layout
 
@@ -98,6 +103,7 @@ plugin is behind its own feature, so profile-specific builds can
 include or exclude individual plugins.
 
 ---
+tags: [general]
 
 ## The seven plugins
 
@@ -252,6 +258,7 @@ second on a background task and pushed into a shared resource
 that the rendering systems consume.
 
 ---
+tags: [general]
 
 ## Feature gates
 
@@ -288,6 +295,7 @@ profile TOML — at least at present. Moving the feature set into
 the profile TOML is on the v35 cleanup list.
 
 ---
+tags: [general]
 
 ## Entry point
 
@@ -338,6 +346,7 @@ fn main() {
 Everything else happens inside the seven plugins.
 
 ---
+tags: [general]
 
 ## Persistence
 
@@ -365,6 +374,7 @@ leaves the old save intact rather than producing a zero-length
 file.
 
 ---
+tags: [general]
 
 ## Rendering pipeline
 
@@ -381,6 +391,7 @@ which matters a lot when iterating on the phosphor glow
 parameters.
 
 ---
+tags: [general]
 
 ## Performance budget
 
@@ -410,6 +421,7 @@ reduces its mesh density and effect count until the budget is
 met, at the cost of visual fidelity on the sphere.
 
 ---
+tags: [general]
 
 ## Integration with GRIMOIRE
 
@@ -442,6 +454,7 @@ This is the path used when the user minimizes the game and later
 wants to bring it back without logging out.
 
 ---
+tags: [general]
 
 ## Testing
 
@@ -464,6 +477,7 @@ cover everything except the raw rendering with unit tests and
 leave the visual regression work for a later sprint.
 
 ---
+tags: [general]
 
 ## Related reading
 

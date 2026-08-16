@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-threat-intel — Threat intelligence processing
 description: synos-threat-intel — Threat intelligence processing
 ---
+tags: [general]
 
 # synos-threat-intel — Threat intelligence processing
 

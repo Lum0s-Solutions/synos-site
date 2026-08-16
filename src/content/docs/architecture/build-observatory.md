@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: Build Observatory
 description: Build Observatory
 ---
+tags: [general]
 
 # Build Observatory
 
@@ -26,6 +28,7 @@ All scripts live under:
 `fruit/iso/iso-build/scripts/observability/`
 
 ---
+tags: [general]
 
 ## The WHY-While-It-Runs Concept
 
@@ -47,6 +50,7 @@ the stage 04 log means "abort and fix now," not "probably fine."
 The wizard does not replace the logs. It sits above them and contextualizes them.
 
 ---
+tags: [general]
 
 ## Dashboard Quick Start
 
@@ -103,6 +107,7 @@ The wizard pane (`synos-build-wizard.sh`) polls
 transition.
 
 ---
+tags: [general]
 
 ## Wizard Markdown Format
 
@@ -121,6 +126,7 @@ Match the stage script name exactly: `04-arch-base.sh` → `04-arch-base.md`.
 
 ```yaml
 ---
+tags: [general]
 stage: 04-arch-base          # stage identifier — must match the script basename
 why: >                        # one paragraph: why this stage exists; what breaks
                               # downstream if it goes wrong
@@ -139,6 +145,7 @@ expected_seconds: 180         # expected wall-clock; used to draw the progress b
 notes: |                      # optional: version-specific ops notes, dated
   v60.1 (2026-05-08) replaced pacstrap → plain pacman + nspawn hooks.
 ---
+tags: [general]
 ```
 
 ### Canonical example
@@ -162,6 +169,7 @@ reference implementation. It documents the pacstrap → nspawn pivot from Incide
   build configuration. Keep it dated so it is easy to prune.
 
 ---
+tags: [general]
 
 ## HTTP Mesh Viewer
 
@@ -224,6 +232,7 @@ Note: the HTTP server also internally bounds each wizard render to a 2-second
 `timeout` call, so a slow render cannot block a request indefinitely.
 
 ---
+tags: [general]
 
 ## Observability Tools Reference
 
@@ -248,6 +257,7 @@ most are also called from stage hooks or the orchestrator's `stage_end` handler.
 | `synos-success-diagnostic.sh` | Capture happy-path baseline diagnostics on stage success (CA bundle size, group count, rootfs size) so future failures can auto-diff against known-good values. Stages that adopt `DIAGNOSTIC_PROBES=(...)` get this automatically. |
 
 ---
+tags: [general]
 
 ## Library Helpers
 
@@ -261,6 +271,7 @@ The Observatory depends on three sourced libraries in
 | `snapshot.sh` | btrfs copy-on-write snapshot helpers (`snapshot_create`, `snapshot_restore`, `snapshot_drop`). On btrfs: instant rollback to pre-stage state after a failure, no re-running the kernel build. On ext4/xfs: no-ops harmlessly. |
 
 ---
+tags: [general]
 
 ## Related
 

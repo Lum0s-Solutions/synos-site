@@ -1,7 +1,9 @@
 ---
+tags: [ai consciousness cortex]
 title: ALFRED v6.0
 description: ALFRED v6.0
 ---
+tags: [ai consciousness cortex]
 
 # ALFRED v6.0
 
@@ -402,6 +404,7 @@ let bytes = generate_story(&StoryParams {
 ```
 
 ---
+tags: [ai consciousness cortex]
 
 ## Troubleshooting
 

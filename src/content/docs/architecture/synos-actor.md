@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-actor — Active-inference planner that minimizes prediction error over the world-model (F3.3/A3)
 description: synos-actor — Active-inference planner that minimizes prediction error over the world-model (F3.3/A3)
 ---
+tags: [general]
 
 # synos-actor — Active-inference planner that minimizes prediction error over the world-model (F3.3/A3)
 

@@ -1,7 +1,9 @@
 ---
+tags: [kernel security]
 title: synos-kernel-observability — v45 Glasswalker — kernel observability primitives (syscalls 480-485)
 description: synos-kernel-observability — v45 Glasswalker — kernel observability primitives (syscalls 480-485)
 ---
+tags: [kernel security]
 
 # synos-kernel-observability — v45 Glasswalker — kernel observability primitives (syscalls 480-485)
 

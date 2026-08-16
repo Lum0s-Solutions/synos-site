@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-attest — v46 Threadwalker — process-level LSM attestation (bprm_check_security hook)
 description: synos-attest — v46 Threadwalker — process-level LSM attestation (bprm_check_security hook)
 ---
+tags: [general]
 
 # synos-attest — v46 Threadwalker — process-level LSM attestation (bprm_check_security hook)
 

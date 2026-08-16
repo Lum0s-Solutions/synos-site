@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: "synos-upside-down — Syn_OS v8.0 The Upside-Down - Kernel Hardening & Security Primitives"
 description: "synos-upside-down — Syn_OS v8.0 The Upside-Down - Kernel Hardening & Security Primitives"
 ---
+tags: [general]
 
 # synos-upside-down — Syn_OS v8.0 The Upside-Down - Kernel Hardening & Security Primitives
 

@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: common — Common utilities for Syn_OS
 description: common — Common utilities for Syn_OS
 ---
+tags: [general]
 
 # common — Common utilities for Syn_OS
 

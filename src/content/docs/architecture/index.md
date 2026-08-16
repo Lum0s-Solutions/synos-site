@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: Architecture
 description: Architecture
 ---
+tags: [general]
 
 # Architecture
 
@@ -16,6 +18,7 @@ workspace. The subsystems below are the load-bearing pieces — each has its own
 diagrams, crate paths, test counts, and known limitations.
 
 ---
+tags: [general]
 
 ## Core Subsystems
 
@@ -173,6 +176,7 @@ errors. An HTTP+SSE mesh viewer (`synos-obs-serve.py`) allows remote monitoring.
 See: [build-observatory.md](build-observatory.md), [build-runbook.md](build-runbook.md)
 
 ---
+tags: [general]
 
 ## Security & Compliance
 
@@ -205,6 +209,7 @@ See: [security-posture.md](security-posture.md), [CURTAIN_V2.md](CURTAIN_V2.md),
 See: [REPRODUCIBLE_BUILDS.md](REPRODUCIBLE_BUILDS.md)
 
 ---
+tags: [general]
 
 ## Cross-Cutting Topics
 
@@ -213,6 +218,7 @@ See: [REPRODUCIBLE_BUILDS.md](REPRODUCIBLE_BUILDS.md)
 - **Biological architecture** — See FEV section 4: the codebase mirrors four living systems (mammalian CNS, fungal mycelium, eukaryotic cell, prokaryotic cell) as a design constraint.
 
 ---
+tags: [general]
 
 ## Proprietary Features (Internal)
 
@@ -233,5 +239,6 @@ These features are **excluded from the public forge** and documented in the inte
 See: [INDEX.md](../../../internal/architecture/proprietary/INDEX.md)
 
 ---
+tags: [general]
 
 _Updated: v111.0.0 Last Light, August 2026._

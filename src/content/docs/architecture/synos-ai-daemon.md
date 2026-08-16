@@ -1,7 +1,9 @@
 ---
+tags: [ai consciousness cortex]
 title: synos-ai-daemon — Syn_OS AI Consciousness Engine Daemon
 description: synos-ai-daemon — Syn_OS AI Consciousness Engine Daemon
 ---
+tags: [ai consciousness cortex]
 
 # synos-ai-daemon — Syn_OS AI Consciousness Engine Daemon
 

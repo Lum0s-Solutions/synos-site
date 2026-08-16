@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-package-manager — Package management abstraction
 description: synos-package-manager — Package management abstraction
 ---
+tags: [general]
 
 # synos-package-manager — Package management abstraction
 

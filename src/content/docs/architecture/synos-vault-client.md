@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-vault-client — Vault client integration
 description: synos-vault-client — Vault client integration
 ---
+tags: [general]
 
 # synos-vault-client — Vault client integration
 

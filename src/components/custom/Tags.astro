@@ -1,0 +1,33 @@
+---
+// Tags component - displays tags from frontmatter
+const { tags = [] } = Astro.props;
+---
+
+{tags.length > 0 && (
+  <div class="doc-tags">
+    {tags.map(tag => (
+      <span class="doc-tag">{tag}</span>
+    ))}
+  </div>
+)}
+
+<style>
+  .doc-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
+  }
+  .doc-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: rgba(220, 38, 38, 0.08);
+    border: 1px solid rgba(220, 38, 38, 0.25);
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    color: var(--phoenix-ember-hi);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+</style>

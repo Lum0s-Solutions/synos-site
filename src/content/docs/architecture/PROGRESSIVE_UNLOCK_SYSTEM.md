@@ -1,7 +1,9 @@
 ---
+tags: [grimoire gamification]
 title: Progressive Unlock System — Grimoire Public Design Spec
 description: Progressive Unlock System — Grimoire Public Design Spec
 ---
+tags: [grimoire gamification]
 
 # Progressive Unlock System — Grimoire Public Design Spec
 
@@ -11,6 +13,7 @@ description: Progressive Unlock System — Grimoire Public Design Spec
 **Parent doc:** `SALVAGED_HARDWARE_MESH_VISION.md`
 
 ---
+tags: [grimoire gamification]
 
 ## 1. Behavior per profile
 
@@ -23,6 +26,7 @@ description: Progressive Unlock System — Grimoire Public Design Spec
 **Curtain enforcement rule:** if `/etc/synos/profile` reads `grimoire`, the progression daemon MUST be running and MUST NOT be in pass-through mode. `synos-grimoire-ceiling-check` service validates this at boot and panics (service-level) if bypass detected.
 
 ---
+tags: [grimoire gamification]
 
 ## 2. State model
 
@@ -84,6 +88,7 @@ rewards = { xp = 1000, tool_unlocks = ["synos-hive-attestor-cli"], achievement =
 ```
 
 ---
+tags: [grimoire gamification]
 
 ## 3. Event bus + triggers
 
@@ -111,6 +116,7 @@ rewards = { xp = 1000, tool_unlocks = ["synos-hive-attestor-cli"], achievement =
 8. Player's XP ticker animates, new-lab notification fires
 
 ---
+tags: [grimoire gamification]
 
 ## 4. Auto-extract on unlock
 
@@ -127,6 +133,7 @@ Leverage the existing content-addressable bundle architecture from Wave 7 Cipher
 - Same mechanism works for tools (extract to `/usr/local/`), configs (overlay to `~/.config/`), labs (materialize to `~/.local/share/grimoire/labs/`)
 
 ---
+tags: [grimoire gamification]
 
 ## 5. Master pass-through mode
 
@@ -142,6 +149,7 @@ On Master ISO:
 The pass-through state is explicit and auditable — a Master operator can verify everything is unlocked by checking the flag file + running `synos-progression status`.
 
 ---
+tags: [grimoire gamification]
 
 ## 6. Curtain v2 — runtime capability ceiling (Grimoire only)
 
@@ -161,6 +169,7 @@ The pass-through state is explicit and auditable — a Master operator can verif
 - Loading a master-signed kernel module — blocked because Grimoire's kernel MOK key is different and `module.sig_enforce=1`
 
 ---
+tags: [grimoire gamification]
 
 ## 7. v40 vs v41 scope
 
@@ -186,5 +195,6 @@ The pass-through state is explicit and auditable — a Master operator can verif
 - The Salvage Yard quest arc expansion
 
 ---
+tags: [grimoire gamification]
 
 *This design spec is derived from `SALVAGED_HARDWARE_MESH_VISION.md`. Any conflict between this doc and the parent is resolved in favor of the parent.*

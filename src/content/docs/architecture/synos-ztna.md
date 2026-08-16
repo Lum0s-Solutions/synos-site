@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-ztna — Zero-Trust Network Access enforcement for Syn_OS
 description: synos-ztna — Zero-Trust Network Access enforcement for Syn_OS
 ---
+tags: [general]
 
 # synos-ztna — Zero-Trust Network Access enforcement for Syn_OS
 

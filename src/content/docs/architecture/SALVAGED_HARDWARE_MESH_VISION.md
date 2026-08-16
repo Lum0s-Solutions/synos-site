@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: Salvaged Hardware Mesh — Strategic Vision
 description: Salvaged Hardware Mesh — Strategic Vision
 ---
+tags: [general]
 
 # Salvaged Hardware Mesh — Strategic Vision
 
@@ -17,6 +19,7 @@ description: Salvaged Hardware Mesh — Strategic Vision
 > training platform, the MSSP contracts — is architecture in service of this core.
 
 ---
+tags: [general]
 
 ## The Four Reinforcing Pillars
 
@@ -64,6 +67,7 @@ every other security distro — Kali, Parrot, BlackArch, Commando VM are tool co
 Syn_OS is a substrate where AI and security are the same layer.
 
 ---
+tags: [general]
 
 ## Pillar 1 Detail — E-Waste Reduction Through Meshed Intelligence
 
@@ -80,6 +84,7 @@ This is not a side-benefit. It is the thesis.
 3. **Sovereign:** Local AI on hardware you physically own, in a building you physically control, means no data leaves your premises. For MSSP customers in regulated industries (healthcare, legal, defense), this is not a feature — it is the product.
 
 ---
+tags: [general]
 
 ## Non-Negotiable: Master is Fully Unlocked
 
@@ -103,6 +108,7 @@ they can build Grimoire's content.
 progression system, that is a writing error.** Master = unlimited = always.
 
 ---
+tags: [general]
 
 ## The Architectural Shape
 
@@ -196,6 +202,7 @@ The v26 Curtain (binary symbol scanner + feature audit + lab integrity) was the 
 The ceiling enforces "NEVER GIVE AWAY THE WEAPONIZATION" — not "never teach security". Grimoire should produce the best-trained purple team operators in the world, then they contract Master through LumOs when they need the actual weapon for actual work.
 
 ---
+tags: [general]
 
 ## What this means for v40 (immediate) vs v41+ (sprint shape)
 
@@ -239,6 +246,7 @@ Absorb the Trust Chain Closure cluster (CISO Recs 11, 17, 28, 30, 31, 39, 45) AN
 - DRAM hardware-aware security (Recs 51-55) becomes the "why is your OS safe on salvaged hardware with unknown provenance" answer
 
 ---
+tags: [general]
 
 ## The MSSP / LumOs Contract Product
 
@@ -261,6 +269,7 @@ Absorb the Trust Chain Closure cluster (CISO Recs 11, 17, 28, 30, 31, 39, 45) AN
 - Academic relationships feed into SBIR/DoD/IC grant applications
 
 ---
+tags: [general]
 
 ## What We Did NOT Build Yet (honest v40 limitations, after pivot)
 
@@ -276,6 +285,7 @@ Instead of the "8 caveats" cop-out doc, the post-pivot honest list:
 These are NOT "honest caveats because we punted" — they are "this pivot just happened and the work is genuinely ahead." Big difference from hiding behind documentation.
 
 ---
+tags: [general]
 
 ## The Non-Negotiables
 
@@ -301,5 +311,6 @@ No matter how much progressive unlock, mesh building, or game progression a Grim
 **These are the bedrock. Every v41+ feature must preserve them.** Violating any of them violates the LumOs commercial model and compromises the bedrock of business contracts.
 
 ---
+tags: [general]
 
 *This document defines the strategic shape of Syn_OS v41+ and is load-bearing. Changes to this vision require explicit approval from the CEO (Ty Limoges). All subordinate design docs (PROGRESSIVE_UNLOCK_SYSTEM.md, WEAPONIZATION_CEILING.md, HARDWARE_MESH_BOOTSTRAP.md) derive their authority from this document.*

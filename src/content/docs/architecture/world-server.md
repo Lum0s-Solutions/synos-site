@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: Syn_OS World Server
 description: Syn_OS World Server
 ---
+tags: [general]
 
 # Syn_OS World Server
 

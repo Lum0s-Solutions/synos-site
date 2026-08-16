@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-threat-hunting — Threat hunting engine
 description: synos-threat-hunting — Threat hunting engine
 ---
+tags: [general]
 
 # synos-threat-hunting — Threat hunting engine
 

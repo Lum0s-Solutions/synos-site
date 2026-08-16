@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: Build Runbook
 description: Build Runbook
 ---
+tags: [general]
 
 # Build Runbook
 
@@ -13,6 +15,7 @@ The runbook is ordered by severity. Read from the top; stop when the problem is
 resolved.
 
 ---
+tags: [general]
 
 ## Step 1 — Read the wizard `watch_fail` block
 
@@ -36,6 +39,7 @@ before closing the incident. See the
 [wizard format reference](build-observatory.md#wizard-markdown-format).
 
 ---
+tags: [general]
 
 ## Step 2 — Identify the failing stage
 
@@ -55,6 +59,7 @@ tail -200 fruit/iso/iso-build/scripts/logs/04-arch-base.log \
 ```
 
 ---
+tags: [general]
 
 ## Step 3 — Check resume state before doing anything else
 
@@ -84,6 +89,7 @@ If stage 02 (kernel build, ~90 min) shows SKIP, do not clean the build
 directory before relaunching.
 
 ---
+tags: [general]
 
 ## Step 4 — Replay the failing stage in isolation
 
@@ -109,6 +115,7 @@ the previous stage's artifacts exist). Check the wizard's `NEXT:` field backward
 to verify. When in doubt, use the resume inspector first.
 
 ---
+tags: [general]
 
 ## Step 5 — Open a tracked issue
 
@@ -132,6 +139,7 @@ The `gh` CLI must be authenticated with repo write permission. Install with
 `pacman -S github-cli` if absent.
 
 ---
+tags: [general]
 
 ## Stage-Specific Guidance
 
@@ -203,6 +211,7 @@ tail -F fruit/iso/iso-build/scripts/logs/18a-squashfs.log \
 ```
 
 ---
+tags: [general]
 
 ## Timing Regressions
 
@@ -222,6 +231,7 @@ across builds — the leaderboard is only meaningful after 3+ builds on the same
 machine.
 
 ---
+tags: [general]
 
 ## Baseline Drift
 
@@ -239,6 +249,7 @@ does not yet have probes, add them — the pattern is described in the script he
 at `observability/synos-success-diagnostic.sh:14-24`.
 
 ---
+tags: [general]
 
 ## Integrity and Chain of Custody
 
@@ -258,6 +269,7 @@ the build. The attest script no-ops if the variable is absent — safe for
 developer builds where a signing ceremony has not been done.
 
 ---
+tags: [general]
 
 ## Postmortem Template
 
@@ -278,6 +290,7 @@ example: the pacman post-tx hooks segfault that blocked the v60 master ISO relea
 for four build cycles.
 
 ---
+tags: [general]
 
 ## Quick Reference
 

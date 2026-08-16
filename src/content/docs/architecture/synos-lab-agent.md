@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-lab-agent — Laboratory agent runtime
 description: synos-lab-agent — Laboratory agent runtime
 ---
+tags: [general]
 
 # synos-lab-agent — Laboratory agent runtime
 

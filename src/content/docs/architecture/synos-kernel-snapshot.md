@@ -1,7 +1,9 @@
 ---
+tags: [kernel security]
 title: synos-kernel-snapshot — v51 Storm Glass — kernel snapshot/restore primitives for digital-twin substrate
 description: synos-kernel-snapshot — v51 Storm Glass — kernel snapshot/restore primitives for digital-twin substrate
 ---
+tags: [kernel security]
 
 # synos-kernel-snapshot — v51 Storm Glass — kernel snapshot/restore primitives for digital-twin substrate
 

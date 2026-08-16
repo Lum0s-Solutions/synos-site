@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: "synos-analytics — Security Metrics & Analytics Dashboard for Syn_OS"
 description: "synos-analytics — Security Metrics & Analytics Dashboard for Syn_OS"
 ---
+tags: [general]
 
 # synos-analytics — Security Metrics & Analytics Dashboard for Syn_OS
 

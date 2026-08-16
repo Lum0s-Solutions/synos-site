@@ -1,7 +1,9 @@
 ---
+tags: [hive mesh distributed]
 title: ARCANUM Hive
 description: ARCANUM Hive
 ---
+tags: [hive mesh distributed]
 
 # ARCANUM Hive
 

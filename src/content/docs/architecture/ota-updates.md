@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: OTA Updates
 description: OTA Updates
 ---
+tags: [general]
 
 # OTA Updates
 
@@ -11,6 +13,7 @@ description: OTA Updates
 **Status**: Production (single-master) — multi-master deferred to v38
 
 ---
+tags: [general]
 
 ## Overview
 
@@ -54,6 +57,7 @@ operator's perspective of installing and running the hive, see
 see the [Patch format](#patch-format) section below.
 
 ---
+tags: [general]
 
 ## Source layout
 
@@ -79,6 +83,7 @@ layer of this stack, plus an end-to-end happy-path test that spins up an
 real download-verify-apply cycle against mocked dispatch backends.
 
 ---
+tags: [general]
 
 ## Architecture layers
 
@@ -207,6 +212,7 @@ attacker got a signed patch past the signature check, the SBOM check
 prevents downgrading a hive node to a known-vulnerable version.
 
 ---
+tags: [general]
 
 ## Patch format
 
@@ -270,6 +276,7 @@ read from the patch-generator TOML config under `signing_key_path`, with
 `SYNOS_SBOM_SIGN_KEY` as an environment-variable override for CI.
 
 ---
+tags: [general]
 
 ## State machine
 
@@ -333,6 +340,7 @@ that `Failed → Applied` is impossible without an intermediate retry, and
 that the JSON serialization is a bijection under `serde_json`.
 
 ---
+tags: [general]
 
 ## Verification chain
 
@@ -360,6 +368,7 @@ single bit in the checksum, the signature, or the payload must all cause
 verification to fail.
 
 ---
+tags: [general]
 
 ## Canary rollout
 
@@ -401,6 +410,7 @@ uniform across 10,000 synthetic node ids and that the group ordering
 (`Canary < Stable < Lts`) is enforced in the `PartialOrd` impl.
 
 ---
+tags: [general]
 
 ## Streaming downloads
 
@@ -444,6 +454,7 @@ file where the patch should be. This is the same invariant the state
 machine relies on, and for the same reason.
 
 ---
+tags: [general]
 
 ## Transport
 
@@ -480,6 +491,7 @@ mesh overlay for hives that cannot reach the master directly) can be
 dropped in without touching the client's main loop.
 
 ---
+tags: [general]
 
 ## Server endpoints
 
@@ -508,6 +520,7 @@ rejected with 401 on mismatch. Token rotation is a separate operator
 procedure, not an OTA path.
 
 ---
+tags: [general]
 
 ## Rollback
 
@@ -538,6 +551,7 @@ reboots. This is documented in the runbook the hive controller emits at
 a rollback request.
 
 ---
+tags: [general]
 
 ## Deployment on the ISO
 
@@ -563,6 +577,7 @@ prevents the installer ISO from attempting to join a hive before the
 operator has made that decision.
 
 ---
+tags: [general]
 
 ## Testing
 
@@ -588,6 +603,7 @@ rather than executing them, so the tests run without needing root or a
 real btrfs filesystem.
 
 ---
+tags: [general]
 
 ## Out of scope
 

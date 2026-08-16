@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: "synos-art — v67 Wirewalker Track F — Atomic Red Team wrapper: run ART test IDs, map to ATT&CK, pipe results into synos-findings-store"
 description: "synos-art — v67 Wirewalker Track F — Atomic Red Team wrapper: run ART test IDs, map to ATT&CK, pipe results into synos-findings-store"
 ---
+tags: [general]
 
 # synos-art — v67 Wirewalker Track F — Atomic Red Team wrapper: run ART test IDs, map to ATT&CK, pipe results into synos-findings-store
 

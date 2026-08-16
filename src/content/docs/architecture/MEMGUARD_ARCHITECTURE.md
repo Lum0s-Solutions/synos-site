@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-memguard Architecture
 description: synos-memguard Architecture
 ---
+tags: [general]
 
 # synos-memguard Architecture
 
@@ -12,6 +14,7 @@ description: synos-memguard Architecture
 **Research:** DRAM Tail Slayer purple-team brief, Vector 1
 
 ---
+tags: [general]
 
 ## Gen-4 detection status (2026-07-08)
 
@@ -34,6 +37,7 @@ See `fruit/crates/synos-memguard/README.md`,
 `growth/security/research/memguard-gen4-detection-results.md`.
 
 ---
+tags: [general]
 
 ## Overview
 
@@ -54,6 +58,7 @@ A **RefreshController** ties detection to DRAM timing: on alert, tREFI is halved
 All security events are written to the `synos-audit-trail` HMAC chain.
 
 ---
+tags: [general]
 
 ## Module Layout
 
@@ -70,6 +75,7 @@ tests/
 ```
 
 ---
+tags: [general]
 
 ## Public API
 
@@ -98,6 +104,7 @@ pub struct RowhammerAlert {
 ```
 
 ---
+tags: [general]
 
 ## Detection: Sliding-Window Row Monitor
 
@@ -125,6 +132,7 @@ Severity classification:
 | `real-perf` + Linux | `Detector::open_perf_fd()` wraps `perf_event_open(2)` for `PERF_COUNT_HW_CACHE_MISSES` |
 
 ---
+tags: [general]
 
 ## Guard-Row Allocator
 
@@ -145,6 +153,7 @@ Physical addresses of guard and data pages are read from `/proc/self/pagemap`
 in distinct DRAM rows from the protected data.
 
 ---
+tags: [general]
 
 ## Refresh Policy
 
@@ -158,6 +167,7 @@ Once `Panic` is entered it does not downgrade on subsequent lower-severity alert
 `RefreshController::reset()` returns to `Normal` after a confirmed safe period.
 
 ---
+tags: [general]
 
 ## TRR Verification
 
@@ -173,6 +183,7 @@ Once `Panic` is entered it does not downgrade on subsequent lower-severity alert
 for integration with hardware inventory systems.
 
 ---
+tags: [general]
 
 ## Audit Trail Integration
 
@@ -190,6 +201,7 @@ This produces a tamper-evident, chain-verified record of every Rowhammer detecti
 event suitable for SOC 2 compliance evidence.
 
 ---
+tags: [general]
 
 ## Feature Flags
 
@@ -200,6 +212,7 @@ event suitable for SOC 2 compliance evidence.
 | `grimoire-tier` | `init()` returns `Err("Master-only capability")` — enforces Curtain v2 profile ceiling |
 
 ---
+tags: [general]
 
 ## Test Coverage
 
@@ -215,6 +228,7 @@ event suitable for SOC 2 compliance evidence.
 | **Total** | **41** | **43 pass (includes 1 doctest), 0 fail** |
 
 ---
+tags: [general]
 
 ## Security Notes
 

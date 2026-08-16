@@ -1,0 +1,27 @@
+---
+import { Page as StarlightPage } from '@astrojs/starlight/components';
+import PageFeedback from './custom/PageFeedback.astro';
+import PageRating from './custom/PageRating.astro';
+import Tags from './custom/Tags.astro';
+
+// Extract tags from frontmatter
+const { tags = [] } = Astro.props.frontmatter || {};
+---
+
+<StarlightPage {...Astro.props}>
+  <footer slot="doc-after">
+    <Tags tags={tags} />
+    <PageFeedback />
+    <PageRating />
+  </footer>
+</StarlightPage>
+
+<script>
+  // Inject version selector into sidebar
+  const sidebar = document.querySelector('.sl-sidebar');
+  if (sidebar) {
+    const versionDiv = document.createElement('div');
+    versionDiv.innerHTML = '<custom-version-selector></custom-version-selector>';
+    sidebar.insertBefore(versionDiv.firstElementChild, sidebar.firstChild);
+  }
+</script>

@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-netguard — eBPF-powered per-process egress firewall for Syn_OS
 description: synos-netguard — eBPF-powered per-process egress firewall for Syn_OS
 ---
+tags: [general]
 
 # synos-netguard — eBPF-powered per-process egress firewall for Syn_OS
 

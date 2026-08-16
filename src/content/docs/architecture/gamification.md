@@ -1,7 +1,9 @@
 ---
+tags: [grimoire gamification]
 title: GRIMOIRE — Gamified Security Training
 description: GRIMOIRE — Gamified Security Training
 ---
+tags: [grimoire gamification]
 
 # GRIMOIRE — Gamified Security Training
 

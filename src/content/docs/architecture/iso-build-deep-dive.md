@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: Syn_OS ISO Build — Deep Dive
 description: Syn_OS ISO Build — Deep Dive
 ---
+tags: [general]
 
 # Syn_OS ISO Build — Deep Dive
 
@@ -13,6 +15,7 @@ description: Syn_OS ISO Build — Deep Dive
 **Author:** Claude Opus 4.7 (1M context), session with Ty Limoges (the operator)
 
 ---
+tags: [general]
 
 ## TL;DR
 
@@ -25,6 +28,7 @@ This doc covers what each stage actually does, how the system underneath behaves
 It's also a reference for the failure modes and self-healing patterns this codebase has accumulated across the v34 → v60 codesprint range.
 
 ---
+tags: [general]
 
 ## 1. The Pipeline at a Glance
 
@@ -59,6 +63,7 @@ The build pipeline has THREE separate airootfs/overlay sources, all consumed by 
 The `fruit/iso/archiso/airootfs/` tree was technically committed but the build pipeline NEVER rsync'd it into the rootfs. As a result 31 load-bearing files (13 sbin tools incl. `synos-health-check`, `synos-tailscale-bootstrap`, `synos-fido2-enroll`, 7 systemd services, Q1/Q2/Q5 polish, journald-persist tmpfile, sudoers/udev rules) were silently absent from every ISO since the Arch pivot. **Fixed in v60.1 commit `cffa5e13`** — stage 05 now mirrors the fruit/assets/airootfs rsync hook for the archiso airootfs tree. Always check `fruit/iso/archiso/STATUS.md` before assuming an airootfs file "ships just because it's committed."
 
 ---
+tags: [general]
 
 ## 2. Stage 03 — The Rust Workspace Compile (the long one)
 
@@ -130,6 +135,7 @@ When invoked under `sudo`, two things broke:
 Fix for this build: `CARGO_BUILD_RUSTC_WRAPPER=` (empty) overrides the config. Permanent fix: don't run `sudo build.sh` — invoke as user, and the script elevates internally per-stage via `sudo` only where needed.
 
 ---
+tags: [general]
 
 ## 3. The System Layer Underneath
 
@@ -215,6 +221,7 @@ Stage 18a (squashfs) is the I/O-heavy stage to watch. Compressing 25 GB of airoo
 EndeavourOS typically configures **ZRAM** — a compressed RAM-backed swap device. When the kernel evicts pages, they get compressed and stored in a ZRAM block device instead of going to disk. Pros: 2-4x effective RAM expansion, no SSD wear. Cons: pages still take RAM (just less). On this build, ZRAM is doing its job — 1.1 GB of swapped pages probably compressed to ~400-500 MB of actual RAM.
 
 ---
+tags: [general]
 
 ## 4. Critical Tools Deep Dive
 
@@ -289,6 +296,7 @@ Stage 08 loads AppArmor profiles into the chroot's `/etc/apparmor.d/`. AppArmor 
 Syn_OS ships with AppArmor in **enforce mode** (vs upstream Arch which defaults to complain mode). Enforcement enabled in v41 wave 10. Stage 08 has a critical guard against the L21 AppArmor bug — it skips `*.md|*.txt|*.rst|README*|CHANGELOG*|LICENSE*|.*` files when copying into `/etc/apparmor.d/` because `apparmor_parser` would try to parse markdown bullets (`*`) as profile syntax and abort the entire batch load.
 
 ---
+tags: [general]
 
 ## 5. The Hardware Constraint
 
@@ -308,6 +316,7 @@ This shapes every choice in the build pipeline:
 The warm-spare infrastructure (Ansible, `the GPU node`) exists because if this oracle dies mid-build, you need failover. v41 wave 8 shipped that.
 
 ---
+tags: [general]
 
 ## 6. The Self-Healing Toolkit
 
@@ -329,6 +338,7 @@ These were added in Batch L2 of the v34 codesprint, after a 10-attempt build cam
 Critical-artifact allowlist (added in Phase D/E): even if a stage's checkpoint exists, the orchestrator re-runs it if a critical output (e.g., `synos-hive-controller` binary) is missing from the rootfs. Prevents "stage marked complete but output deleted" silent failures.
 
 ---
+tags: [general]
 
 ## 7. Failure Modes Seen This Session (case study)
 
@@ -373,6 +383,7 @@ disown
 Uses `sudo -n true` (not `-n -v`) because `-v` fails under setsid (needs tty in some PAM configs). The keepalive exits cleanly when sudo cache becomes invalid (e.g., user runs `sudo -k` to revoke).
 
 ---
+tags: [general]
 
 ## 7.5 Failure Modes Caught v42 → v60 (later case studies)
 
@@ -478,6 +489,7 @@ Root cause: `((expr))` returns 1 if the expression EVALUATES to 0. With `count_t
 **Fix**: use `count=$((count + 1))` (assignment form returns 0) instead of `((count++))`. Or `((count++)) || true`. Pure-arithmetic post-increment is a classic bash + set -e footgun.
 
 ---
+tags: [general]
 
 ## 8. Post-Build Validation Pipeline
 
@@ -513,6 +525,7 @@ The interrogator verifies:
 vm-test-matrix emits PASS/WARN/FAIL per cell as a markdown report. vm-benchmark emits JSON + markdown. Both write to `growth/output/testing/`.
 
 ---
+tags: [general]
 
 ## 9. Glossary
 
@@ -538,6 +551,7 @@ vm-test-matrix emits PASS/WARN/FAIL per cell as a markdown report. vm-benchmark 
 - **ZRAM** — compressed RAM-backed swap. Pages get compressed in RAM instead of going to disk
 
 ---
+tags: [general]
 
 ## 10. Quick Reference Commands
 
@@ -577,6 +591,7 @@ pgrep -f "build.sh|keepalive.sh|cargo build" | xargs -r sudo kill
 ```
 
 ---
+tags: [general]
 
 ## 11. Reference Snapshot — v60.0.0 shipped (2026-05-13)
 
@@ -618,6 +633,7 @@ Final artifact:
 Next major monitor event: kernel compile finish → stage 02b-synos-rust-modules start. Watch the auto-spawned kitty window for live tail.
 
 ---
+tags: [general]
 
 _Originally written autonomously by Claude Opus 4.7 during the v41 build (2026-04-25). Refreshed 2026-05-13 with v60.0.0 ship reality + the v42 → v60 failure mode catalog (§7.5). Verified against current code state in `$HOME/Syn_OS/` (HEAD `bad81c9c`). For corrections or additions, edit in place — this doc is the working reference, not an immutable artifact._
 

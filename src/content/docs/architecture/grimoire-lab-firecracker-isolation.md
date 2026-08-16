@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: "GRIMOIRE Lab Execution: Firecracker Isolation Architecture"
 description: "GRIMOIRE Lab Execution: Firecracker Isolation Architecture"
 ---
+tags: [general]
 
 # GRIMOIRE Lab Execution: Firecracker Isolation Architecture
 
@@ -11,6 +13,7 @@ description: "GRIMOIRE Lab Execution: Firecracker Isolation Architecture"
 **Source location:** `fruit/crates/synos-lab-sandbox/` (lab execution backend); `fruit/crates/synos-gamification/src/sovereign.rs` (authoring/moderation interface)
 
 ---
+tags: [general]
 
 ## 1. Overview
 
@@ -45,6 +48,7 @@ GRIMOIRE community labs are now executable in real microVMs, ending a five-year 
 All deferred work has code written and verified via tests; the deferral is purely around privileged execution steps that require explicit confirmation before running.
 
 ---
+tags: [general]
 
 ## 2. Authoring and Moderation Workflow
 
@@ -88,6 +92,7 @@ ValidationError::new("unvetted_service",
 ```
 
 ---
+tags: [general]
 
 ## 3. Vetted Service Catalog
 
@@ -120,6 +125,7 @@ This function is called:
 2. By the orchestrator at runtime (defense in depth, in case the protocol boundary is ever crossed)
 
 ---
+tags: [general]
 
 ## 4. Guest Kernel + Rootfs Pipeline
 
@@ -154,6 +160,7 @@ A minimal musl-static binary that runs inside the guest as PID 1:
 5. Init stays exec'd into the service; when the service exits, the kernel panics and the VM shuts down (by design — no persistent session state, each session is a fresh VM)
 
 ---
+tags: [general]
 
 ## 5. Orchestrator Architecture
 
@@ -248,6 +255,7 @@ Runs under `CAP_NET_ADMIN` + kvm-group membership (e.g., `kvm` group on Linux):
 This is a **materially smaller** privilege set than the previous chroot approach, which needed `CAP_SYS_ADMIN` + `CAP_SYS_CHROOT` (or plain root). The systemd unit file for this daemon should apply further hardening (PrivateTmp, ProtectSystem, ProtectHome, RestrictAddressFamilies, SystemCallFilter, etc.) — deliberately not bundled here; that gets its own careful, reviewed pass.
 
 ---
+tags: [general]
 
 ## 6. Network Isolation: TAP Devices and nftables
 
@@ -275,6 +283,7 @@ This ensures the guest VM can only:
 - Never reach any external networks
 
 ---
+tags: [general]
 
 ## 7. Firecracker API Client
 
@@ -319,6 +328,7 @@ This architecture was chosen deliberately to leave room for that growth without 
 All methods return `Result<(), String>` with error details.
 
 ---
+tags: [general]
 
 ## 8. Hive Node Provisioning Tooling
 
@@ -337,6 +347,7 @@ Each new node gets a hive designation matching `.claude/CLAUDE.md`'s Arcanum Hiv
 **This part is hands-on hardware work Ty does** (physically booting each M900 from a direct-write USB, confirming Tailscale enrollment); the scripts here just make that process fast/repeatable rather than ad hoc each time.
 
 ---
+tags: [general]
 
 ## 9. Security Properties
 
@@ -367,6 +378,7 @@ Each new node gets a hive designation matching `.claude/CLAUDE.md`'s Arcanum Hiv
 - **Hive-node provisioning**: physical-hardware work that Ty does hands-on, not something the orchestrator/pipeline itself orchestrates.
 
 ---
+tags: [general]
 
 ## 10. Verification Status
 
@@ -404,6 +416,7 @@ All existing tests (seccomp snapshots, integration tests) still pass and still a
 All of these have code written and test-verified; the deferral is purely privileged execution steps requiring explicit confirmation.
 
 ---
+tags: [general]
 
 ## 11. Security Review Reconciliation
 
@@ -528,6 +541,7 @@ The old design had namespace-escape-detection canaries that were never hooked in
 **Mechanism now:** The new design (real KVM boundary) doesn't have an equivalent escape-detection mechanism. Whether to add VM-escape-detection telemetry (e.g., monitoring for signs of KVM hypervisor exploitation) is an open item for future work. This is deferred pending explicit design/review of what signals matter and how to act on them.
 
 ---
+tags: [general]
 
 ## 12. File Reference
 
@@ -546,6 +560,7 @@ The old design had namespace-escape-detection canaries that were never hooked in
 | **Hive provisioning** | `growth/development/scripts/hive/` (repeatable scripts) |
 
 ---
+tags: [general]
 
 ## 13. Glossary
 

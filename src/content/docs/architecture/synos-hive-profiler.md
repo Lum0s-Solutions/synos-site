@@ -1,7 +1,9 @@
 ---
+tags: [hive mesh distributed]
 title: synos-hive-profiler — Arcanum Hive Hardware Profiler
 description: synos-hive-profiler — Arcanum Hive Hardware Profiler
 ---
+tags: [hive mesh distributed]
 
 # synos-hive-profiler — Arcanum Hive Hardware Profiler
 

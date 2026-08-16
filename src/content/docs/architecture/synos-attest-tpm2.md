@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-attest-tpm2 — TPM2 attestation CLI
 description: synos-attest-tpm2 — TPM2 attestation CLI
 ---
+tags: [general]
 
 # synos-attest-tpm2 — TPM2 attestation CLI
 

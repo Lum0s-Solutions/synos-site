@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: GRIMOIRE
 description: GRIMOIRE
 ---
+tags: [general]
 
 # GRIMOIRE
 

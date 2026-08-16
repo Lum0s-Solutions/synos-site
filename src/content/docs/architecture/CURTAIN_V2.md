@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: Curtain v2 — Runtime Capability Ceiling
 description: Curtain v2 — Runtime Capability Ceiling
 ---
+tags: [general]
 
 # Curtain v2 — Runtime Capability Ceiling
 
@@ -9,6 +11,7 @@ description: Curtain v2 — Runtime Capability Ceiling
 **Owners:** dev-security pod (Cipher — kernel gate + build scrubber; Cipher T — ALFRED + federation; Cipher U — audit chain + fragment field)
 
 ---
+tags: [general]
 
 ## 1. Tier Model
 
@@ -27,6 +30,7 @@ Syn_OS ships three ISO profiles. Each profile maps to a capability tier that con
 The capability ceiling is enforced at multiple layers so that no single bypass vector is sufficient.
 
 ---
+tags: [general]
 
 ## 2. Seven Enforcement Points
 
@@ -95,6 +99,7 @@ Command: `cargo xtask curtain-check --profile grimoire`
 Scans compiled ELF binaries for 13 forbidden symbols and 8 forbidden string patterns that must not appear in Grimoire or GoodLife builds. This is a symbol-level complement to the filesystem-level scrubber (2.6) — it catches binaries that were renamed to avoid the name-based check.
 
 ---
+tags: [general]
 
 ## 3. Verification
 
@@ -111,6 +116,7 @@ The QEMU red-team suite (`growth/tests/integration/curtain-v2/`) attempts the fo
 | `godmode_pattern_exec` | Execute `synos_godmode_binary` | Binary not present (exit 127) |
 
 ---
+tags: [general]
 
 ## 4. Build Integration
 
@@ -129,6 +135,7 @@ just gate
 ```
 
 ---
+tags: [general]
 
 ## 5. v41 Deliverables
 

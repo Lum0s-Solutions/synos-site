@@ -1,7 +1,9 @@
 ---
+tags: [kernel security]
 title: The 7.0-synos-ai Kernel
 description: The 7.0-synos-ai Kernel
 ---
+tags: [kernel security]
 
 # The 7.0-synos-ai Kernel
 

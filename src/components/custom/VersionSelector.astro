@@ -1,0 +1,43 @@
+---
+// Version selector component for synos-site
+const versions = [
+  { label: 'v111.0.0 "Last Light"', href: '/', current: true },
+  { label: 'v60 "Operation Warp Speed"', href: 'https://github.com/Lum0s-Solutions/Syn_OS/tree/v60', current: false },
+  { label: 'v41 "Sentinel Mesh"', href: 'https://github.com/Lum0s-Solutions/Syn_OS/tree/v41', current: false },
+];
+---
+
+<div class="version-selector">
+  <label for="version-select" class="version-label">Version:</label>
+  <select id="version-select" onchange="if(this.value) location.href=this.value">
+    {versions.map(v => (
+      <option value={v.href} selected={v.current}>{v.label}</option>
+    ))}
+  </select>
+</div>
+
+<style>
+  .version-selector {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
+  }
+  .version-label {
+    font-size: 0.8rem;
+    color: var(--sl-color-gray-2);
+    font-family: var(--font-mono);
+  }
+  .version-selector select {
+    background: var(--sl-color-bg-nav);
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 0.375rem;
+    color: var(--sl-color-gray-1);
+    font-size: 0.85rem;
+    padding: 0.35rem 0.75rem;
+    cursor: pointer;
+  }
+  .version-selector select:hover {
+    border-color: var(--phoenix-ember);
+  }
+</style>

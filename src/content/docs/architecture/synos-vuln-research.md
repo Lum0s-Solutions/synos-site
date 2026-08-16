@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-vuln-research — Vulnerability research framework
 description: synos-vuln-research — Vulnerability research framework
 ---
+tags: [general]
 
 # synos-vuln-research — Vulnerability research framework
 

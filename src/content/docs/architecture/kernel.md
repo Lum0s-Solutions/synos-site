@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: Custom Kernel
 description: Linux 7.0-synos-ai with CONFIG_RUST=y, a capability-gated signed Rust kernel-module interface, loadable Rust modules, eBPF monitors, and LSM attestation.
 ---
+tags: [general]
 
 The Syn_OS kernel is built from upstream Linux **7.0** (the launch base; a **7.2 bump is planned** as the next upgrade) with the `CONFIG_RUST=y` toolchain enabled, hardened with KSPP defaults, and extended with a **capability-gated, signed Rust kernel-module interface**, loadable Rust kernel modules, an LSM attestation hook, and eBPF monitors. It is the prokaryotic-cell layer of the biological model — primitive, fast, always-on; the mitochondria for the whole organism.
 

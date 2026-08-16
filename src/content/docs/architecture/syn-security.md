@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: syn-security — Security orchestration crate
 description: syn-security — Security orchestration crate
 ---
+tags: [general]
 
 # syn-security — Security orchestration crate
 

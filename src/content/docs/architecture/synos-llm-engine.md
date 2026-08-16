@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-llm-engine — Syn_OS LLM inference engine
 description: synos-llm-engine — Syn_OS LLM inference engine
 ---
+tags: [general]
 
 # synos-llm-engine — Syn_OS LLM inference engine
 

@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: Reproducible Builds (Forge)
 description: Forge (v48) — bit-for-bit reproducible Syn_OS build pipeline. Cosign + Sigstore Rekor attestation, deterministic squashfs, SLSA-3 provenance, FedRAMP / CMMC / SOC2 control mappings. Cross-oracle verify lands with the second build oracle.
 ---
+tags: [general]
 
 **Forge** is the supply-chain hardening release of Syn_OS. The v48 codename. Its job: make it possible for someone who does not trust the build infrastructure to **independently verify** that a Syn_OS ISO is the exact image it claims to be — and to lay the technical groundwork that a future FedRAMP Moderate, CMMC L2, and SOC2 audit engagement would draw evidence from. No such audit has been performed to date.
 

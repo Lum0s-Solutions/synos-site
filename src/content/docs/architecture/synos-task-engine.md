@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-task-engine — Durable checkpointed task graph for ALFRED
 description: synos-task-engine — Durable checkpointed task graph for ALFRED
 ---
+tags: [general]
 
 # synos-task-engine — Durable checkpointed task graph for ALFRED
 

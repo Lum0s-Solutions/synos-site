@@ -1,7 +1,9 @@
 ---
+tags: [ai consciousness cortex]
 title: synos-neuromorphic-computing — Spiking Neural Network Framework
 description: synos-neuromorphic-computing — Spiking Neural Network Framework
 ---
+tags: [ai consciousness cortex]
 
 # synos-neuromorphic-computing — Spiking Neural Network Framework
 

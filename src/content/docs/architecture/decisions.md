@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: Architecture Decision Records
 description: Architecture Decision Records
 ---
+tags: [general]
 
 :::note[Note]
 This page tracks the architectural decisions that shaped Syn_OS. Each record follows a compact
@@ -14,6 +16,7 @@ and in the "Key Decisions" section of `.claude/CLAUDE.md`. This page is the publ
 summary.
 
 ---
+tags: [general]
 
 ## ADR-001 — Apache 2.0 Base with `LicenseRef-Proprietary` Modules
 
@@ -39,6 +42,7 @@ enforces the boundary at build time so proprietary symbols never leak into the p
 The v35 ship-gate license check now passes.
 
 ---
+tags: [general]
 
 ## ADR-002 — Shift Base Distribution from Debian/Parrot to Arch Linux
 
@@ -62,6 +66,7 @@ Rolling releases eliminate long backports. The downside is that Syn_OS can no lo
 the Debian stability story and users expecting long-term support must switch to `linux-lts`.
 
 ---
+tags: [general]
 
 ## ADR-003 — Pin Bevy to 0.14 (Defer Bevy 0.16)
 
@@ -83,6 +88,7 @@ maintained manually). Long-term: v36 inherits a large one-time upgrade cost but 
 rewriting two plugins under deadline pressure.
 
 ---
+tags: [general]
 
 ## ADR-004 — Build the Custom Kernel with LLVM and `CONFIG_RUST=y`
 
@@ -105,6 +111,7 @@ nightly toolchain (pinned in `rust-toolchain.toml`) and will break on arbitrary 
 upgrades — version bumps are gated behind a pre-sprint check.
 
 ---
+tags: [general]
 
 ## ADR-005 — Three-Image Strategy (Master / GRIMOIRE Public / GoodLife)
 
@@ -134,6 +141,7 @@ Maintenance cost scales with profiles, so the number is capped at three.
 **Update (2026-08):** superseded — now 4 images incl. the ChurchOfMalware members-only tier.
 
 ---
+tags: [general]
 
 ## ADR-006 — Tailscale Backbone with WireGuard Fallback for ARCANUM Hive
 
@@ -155,6 +163,7 @@ when Tailscale is unreachable. Nodes maintain two routing tables and two firewal
 rule sets, which is added complexity but keeps the mesh resilient.
 
 ---
+tags: [general]
 
 ## ADR-007 — ed25519 Node Identity for ARCANUM Hive
 
@@ -176,6 +185,7 @@ key must be revoked by pushing a new commit to the keyring — acceptable for a
 small, centrally-controlled fleet.
 
 ---
+tags: [general]
 
 ## ADR-008 — `cargo xtask` as the Single Workspace Orchestrator
 
@@ -196,6 +206,7 @@ subcommands rather than new binaries. CI invokes the same `cargo xtask` commands
 developers run locally.
 
 ---
+tags: [general]
 
 ## ADR-009 — 34-Stage ISO Build Pipeline with Per-Stage Idempotency
 
@@ -220,6 +231,7 @@ the pipeline is now 34 shell scripts totalling thousands of lines — which requ
 Batch L1–L5 build-infra code freeze to harden against landmines.
 
 ---
+tags: [general]
 
 ## ADR-010 — Consciousness Fusion Engine for ALFRED (Traditional + Neuromorphic + Quantum + TNGS)
 
@@ -243,6 +255,7 @@ why ALFRED internals are `LicenseRef-Proprietary` — the fusion engine contains
 research that is not yet ready for open publication.
 
 ---
+tags: [general]
 
 _Updated: v111.0.0 Last Light, August 2026. For the authoritative list of
 decisions including superseded ones, see `docs/internal/eyesonly/architecture/SYNOS_MASTER_ARCHITECTURE.md`._

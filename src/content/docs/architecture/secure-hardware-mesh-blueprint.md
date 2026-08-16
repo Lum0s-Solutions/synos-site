@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: Secure Hardware-Sharing Mesh — Reference Blueprint
 description: Secure Hardware-Sharing Mesh — Reference Blueprint
 ---
+tags: [general]
 
 # Secure Hardware-Sharing Mesh — Reference Blueprint
 
@@ -13,6 +15,7 @@ options. It documents the **what and why**, not any one deployment's exact keys,
 addresses, or policy. (See *Curtain note* at the end.)
 
 ---
+tags: [general]
 
 ## 1. Intent
 
@@ -107,6 +110,7 @@ The **GRIMOIRE lab `homelab/secure-mesh-build-201`** walks you through assemblin
 this hands-on, with a Red→Blue capstone.
 
 ---
+tags: [general]
 
 ## Curtain note
 

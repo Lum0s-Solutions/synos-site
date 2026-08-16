@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: ISO Profiles
 description: ISO Profiles
 ---
+tags: [general]
 
 # ISO Profiles
 
@@ -10,6 +12,7 @@ description: ISO Profiles
 **Build stages**: 51 total — profile-aware stages are 03, 11, 12, 17a, 20
 
 ---
+tags: [general]
 
 ## Rationale
 
@@ -52,6 +55,7 @@ Grimoire Curtain scanner that enforces the public/private boundary at
 build time, see [The Grimoire Curtain](#the-grimoire-curtain) below.
 
 ---
+tags: [general]
 
 ## Profile configuration
 
@@ -223,6 +227,7 @@ and creates an encrypted `/var/research` partition with a
 user-chosen passphrase during installation.
 
 ---
+tags: [general]
 
 ## The Grimoire Curtain
 
@@ -329,6 +334,7 @@ cargo xtask curtain-check --profile grimoire --strict
 rather than a warning, which is the mode the build pipeline uses.
 
 ---
+tags: [general]
 
 ## Profile-specific build stages
 
@@ -404,6 +410,7 @@ nothing to scan. The fix binds the scan path to the actual
 staging rootfs at the moment of the scan.
 
 ---
+tags: [general]
 
 ## Build commands
 
@@ -447,6 +454,7 @@ The date is the build date in `YYYYMMDD` format, and the
 architecture is always `x86_64`.
 
 ---
+tags: [general]
 
 ## Validating a profile
 
@@ -478,6 +486,7 @@ practical on the build oracle's hardware (an Intel i5-3337U with
 gate instead.
 
 ---
+tags: [general]
 
 ## Adding a new profile
 
@@ -521,6 +530,7 @@ that are silently ignored, stages that defaulted to master
 behaviour, and so on.
 
 ---
+tags: [general]
 
 ## Related reading
 

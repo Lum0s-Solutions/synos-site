@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-sovereign-calendar — Sovereign Ops calendar management — types, traits, in-memory and SQLite stores
 description: synos-sovereign-calendar — Sovereign Ops calendar management — types, traits, in-memory and SQLite stores
 ---
+tags: [general]
 
 # synos-sovereign-calendar — Sovereign Ops calendar management — types, traits, in-memory and SQLite stores
 

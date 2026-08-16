@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: syn-ai — Core AI abstraction layer
 description: syn-ai — Core AI abstraction layer
 ---
+tags: [general]
 
 # syn-ai — Core AI abstraction layer
 

@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-deception — Advanced Deception Technology Framework for Syn_OS
 description: synos-deception — Advanced Deception Technology Framework for Syn_OS
 ---
+tags: [general]
 
 # synos-deception — Advanced Deception Technology Framework for Syn_OS
 

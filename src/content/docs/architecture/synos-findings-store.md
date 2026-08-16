@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-findings-store — Security findings persistence
 description: synos-findings-store — Security findings persistence
 ---
+tags: [general]
 
 # synos-findings-store — Security findings persistence
 

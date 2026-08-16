@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-hsm-integration — Hardware Security Module integration for Syn_OS
 description: synos-hsm-integration — Hardware Security Module integration for Syn_OS
 ---
+tags: [general]
 
 # synos-hsm-integration — Hardware Security Module integration for Syn_OS
 

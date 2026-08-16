@@ -1,0 +1,48 @@
+---
+// Mermaid diagram component for synos-site
+// Usage: <Mermaid chart={flowchart} />
+const { chart } = Astro.props;
+---
+
+<div class="mermaid-container">
+  <div class="mermaid">
+    {chart}
+  </div>
+</div>
+
+<script>
+  // Load Mermaid.js dynamically
+  if (!window.mermaid) {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js';
+    script.onload = () => {
+      mermaid.initialize({ 
+        startOnLoad: true,
+        theme: 'dark',
+        themeVariables: {
+          primaryColor: '#1a1a1a',
+          primaryTextColor: '#e7e7ea',
+          primaryBorderColor: '#26262d',
+          lineColor: '#e11d2a',
+          secondaryColor: '#141418',
+          tertiaryColor: '#0d0d10'
+        }
+      });
+    };
+    document.head.appendChild(script);
+  }
+</script>
+
+<style>
+  .mermaid-container {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 0.5rem;
+    background: var(--sl-color-bg-nav);
+    overflow-x: auto;
+  }
+  .mermaid {
+    text-align: center;
+  }
+</style>

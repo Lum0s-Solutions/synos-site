@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-lab-gen — v67 Wirewalker Track D — threat-feed lab generator (CVE → GRIMOIRE lab starter)
 description: synos-lab-gen — v67 Wirewalker Track D — threat-feed lab generator (CVE → GRIMOIRE lab starter)
 ---
+tags: [general]
 
 # synos-lab-gen — v67 Wirewalker Track D — threat-feed lab generator (CVE → GRIMOIRE lab starter)
 

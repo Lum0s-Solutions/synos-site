@@ -1,0 +1,100 @@
+---
+// Custom page rating/reactions component
+const pageId = Astro.url.pathname;
+---
+
+<div class="page-rating" id="page-rating">
+  <p class="rating-prompt">Rate this page</p>
+  <div class="rating-buttons">
+    <button class="rating-btn" data-rating="1" aria-label="1 star">🔥</button>
+    <button class="rating-btn" data-rating="2" aria-label="2 stars">⚡</button>
+    <button class="rating-btn" data-rating="3" aria-label="3 stars">💡</button>
+    <button class="rating-btn" data-rating="4" aria-label="4 stars">👍</button>
+    <button class="rating-btn" data-rating="5" aria-label="5 stars">❤️</button>
+  </div>
+  <p class="rating-thanks" id="rating-thanks">Thanks for rating!</p>
+</div>
+
+<script>
+  (function() {
+    const container = document.getElementById('page-rating');
+    if (!container) return;
+    
+    const pageId = location.pathname;
+    const storageKey = 'synos-rating-' + pageId;
+    
+    if (localStorage.getItem(storageKey)) {
+      container.style.opacity = '0.6';
+      container.querySelector('.rating-prompt').textContent = 'You rated this page';
+      const buttons = container.querySelectorAll('.rating-btn');
+      const savedRating = localStorage.getItem(storageKey);
+      buttons.forEach(btn => {
+        if (btn.dataset.rating === savedRating) {
+          btn.classList.add('rated');
+        }
+        btn.disabled = true;
+      });
+      return;
+    }
+    
+    const buttons = container.querySelectorAll('.rating-btn');
+    const thanks = document.getElementById('rating-thanks');
+    
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const rating = btn.dataset.rating;
+        localStorage.setItem(storageKey, rating);
+        container.querySelector('.rating-prompt').style.display = 'none';
+        container.querySelector('.rating-buttons').style.display = 'none';
+        thanks.style.display = 'block';
+        
+        if (typeof Plausible !== 'undefined') {
+          Plausible('page_rating', { props: { page: pageId, rating: rating } });
+        }
+      });
+    });
+  })();
+</script>
+
+<style>
+  .page-rating {
+    margin-top: 2rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 0.5rem;
+    background: var(--sl-color-bg-nav);
+  }
+  .rating-prompt {
+    font-size: 0.9rem;
+    color: var(--sl-color-gray-1);
+    margin: 0 0 0.75rem;
+  }
+  .rating-buttons {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .rating-btn {
+    font-size: 1.25rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 0.375rem;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .rating-btn:hover {
+    border-color: var(--phoenix-ember);
+    transform: scale(1.1);
+  }
+  .rating-btn.rated {
+    border-color: var(--phoenix-ember);
+    background: rgba(220, 38, 38, 0.1);
+  }
+  .rating-thanks {
+    display: none;
+    font-size: 0.85rem;
+    color: var(--sl-color-accent);
+    margin: 0;
+  }
+</style>

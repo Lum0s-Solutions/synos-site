@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-icarus — Icarus flight system
 description: synos-icarus — Icarus flight system
 ---
+tags: [general]
 
 # synos-icarus — Icarus flight system
 

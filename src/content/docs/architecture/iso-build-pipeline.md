@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: The 34-Stage ISO Build Pipeline
 description: The 34-Stage ISO Build Pipeline
 ---
+tags: [general]
 
 # The 34-Stage ISO Build Pipeline
 

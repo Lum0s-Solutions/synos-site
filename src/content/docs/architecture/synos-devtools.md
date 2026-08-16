@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-devtools — synos-devtools
 description: synos-devtools — synos-devtools
 ---
+tags: [general]
 
 # synos-devtools — synos-devtools
 

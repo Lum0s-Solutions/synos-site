@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: ARCANUM Mesh
 description: ARCANUM Hive — distributed Syn_OS mesh on Tailscale + WireGuard with a Kubernetes operator. Running today across 3 nodes; the Stoneglass Ansible playbooks scale it further. Federated consciousness, salvaged-hardware AI, multi-tenant Sanctum.
 ---
+tags: [general]
 
 **ARCANUM Hive** is the fungal-mycelium layer of the biological model — the distributed nervous system that lets a fleet of Syn_OS nodes act as one organism. It runs on a **Tailscale** primary backbone with **WireGuard** fallback and is orchestrated by a Kubernetes operator (`synos-arcanum` — 4 crates: controller, attestor, profiler, tests).
 

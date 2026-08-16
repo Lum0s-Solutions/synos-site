@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: Six-Layer Stack
 description: Syn_OS from silicon to story — Hardware → Kernel → Core Platform → Application → Experience → Narrative. Every component has exactly one home.
 ---
+tags: [general]
 
 Syn_OS is structured as a six-layer stack from silicon to story, with strict separation of concerns. When a new component is proposed the first question is *which layer does it belong to?*; every Rust crate, systemd unit, and syscall fits into exactly one. This is the architectural skeleton.
 

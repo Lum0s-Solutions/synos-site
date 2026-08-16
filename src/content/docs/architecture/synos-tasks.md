@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-sovereign-tasks — Sovereign Ops task management — types, traits, and in-memory store
 description: synos-sovereign-tasks — Sovereign Ops task management — types, traits, and in-memory store
 ---
+tags: [general]
 
 # synos-sovereign-tasks — Sovereign Ops task management — types, traits, and in-memory store
 

@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-cli — Unified command-line interface for Syn_OS services
 description: synos-cli — Unified command-line interface for Syn_OS services
 ---
+tags: [general]
 
 # synos-cli — Unified command-line interface for Syn_OS services
 

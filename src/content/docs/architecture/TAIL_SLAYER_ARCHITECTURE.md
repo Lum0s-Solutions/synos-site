@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: Tail Slayer Architecture
 description: Tail Slayer Architecture
 ---
+tags: [general]
 
 # Tail Slayer Architecture
 
@@ -11,6 +13,7 @@ description: Tail Slayer Architecture
 **Status:** Master-profile runtime; Grimoire can compile + link (GRIMOIRE Tail Chaser lab)
 
 ---
+tags: [general]
 
 ## Problem
 
@@ -20,6 +23,7 @@ Traditional mitigations (prefetch hints, NUMA binding) are insufficient because
 contention is non-deterministic across request bursts.
 
 ---
+tags: [general]
 
 ## Solution: Hedged Reads
 
@@ -29,6 +33,7 @@ Return the first response; discard the rest.  Statistically, at least one reader
 wins with a row-buffer hit on every call, collapsing the tail.
 
 ---
+tags: [general]
 
 ## Module Map
 
@@ -42,6 +47,7 @@ synos-tail-slayer/src/
 ```
 
 ---
+tags: [general]
 
 ## Data Flow
 
@@ -65,6 +71,7 @@ TailSlayer::read(virt_addr)
 ```
 
 ---
+tags: [general]
 
 ## Public API
 
@@ -84,6 +91,7 @@ TailSlayer::read(virt_addr)
 | `available_cores()` | `fn -> usize` | `sysconf(_SC_NPROCESSORS_ONLN)` |
 
 ---
+tags: [general]
 
 ## HedgeStrategy Fan-out
 
@@ -96,6 +104,7 @@ TailSlayer::read(virt_addr)
 Target: FourWay P99.99 < 150 ns (validated by Criterion bench `hedged_read/read/4-way`).
 
 ---
+tags: [general]
 
 ## Graceful Degradation
 
@@ -107,6 +116,7 @@ Target: FourWay P99.99 < 150 ns (validated by Criterion bench `hedged_read/read/
 | `sched_setaffinity` EINVAL | `warn` log + OS scheduler fallback |
 
 ---
+tags: [general]
 
 ## Safety Contracts
 
@@ -117,6 +127,7 @@ All `unsafe` blocks carry `// SAFETY:` annotations documenting:
 - `CPU_SET`/`CPU_ZERO`: POD type, correct initialisation sequence
 
 ---
+tags: [general]
 
 ## GRIMOIRE Integration
 

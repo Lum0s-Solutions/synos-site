@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-hydra — Multi-head coordination runtime
 description: synos-hydra — Multi-head coordination runtime
 ---
+tags: [general]
 
 # synos-hydra — Multi-head coordination runtime
 

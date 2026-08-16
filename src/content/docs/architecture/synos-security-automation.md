@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-security-automation — synos-security-automation
 description: synos-security-automation — synos-security-automation
 ---
+tags: [general]
 
 # synos-security-automation — synos-security-automation
 

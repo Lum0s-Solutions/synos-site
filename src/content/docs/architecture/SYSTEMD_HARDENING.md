@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: Systemd Hardening — Syn_OS Service Isolation
 description: Systemd Hardening — Syn_OS Service Isolation
 ---
+tags: [general]
 
 # Systemd Hardening — Syn_OS Service Isolation
 
@@ -9,6 +11,7 @@ description: Systemd Hardening — Syn_OS Service Isolation
 **Version:** 1.0.0 | **Date:** 2026-04-16
 
 ---
+tags: [general]
 
 ## Why Every synos-* Daemon Gets ProtectProc=invisible
 
@@ -21,6 +24,7 @@ Syn_OS runs GRIMOIRE lab containers alongside ALFRED in the same PID namespace o
 `ProtectProc=invisible` restricts each service's view of `/proc` so it sees only its own processes. Combined with `ProcSubset=pid`, non-process kernel files disappear from the service's `/proc` view entirely. This is the structural fix that makes the lab/daemon co-tenancy safe — the alternative (separate PID namespaces for every lab container) carries significantly more orchestration overhead.
 
 ---
+tags: [general]
 
 ## Scope Matrix
 
@@ -55,6 +59,7 @@ SystemCallArchitectures=native
 ```
 
 ---
+tags: [general]
 
 ## Per-Service Hardening Summary
 
@@ -114,6 +119,7 @@ Default scope. Both are oneshot services that run briefly at boot. Full isolatio
 **Expected score:** ~1.5–1.7 (SAFE).
 
 ---
+tags: [general]
 
 ## Adding Hardening to a New Service
 
@@ -138,6 +144,7 @@ fi
 5. If `MemoryDenyWriteExecute=true` breaks a JIT-using dependency (e.g. a Python extension with a JIT compiler), note the deviation in a comment and remove that specific directive via a custom scope case in `lib/systemd-hardening.sh`.
 
 ---
+tags: [general]
 
 ## Debugging: When Hardening Breaks Legitimate Functionality
 
@@ -160,6 +167,7 @@ Python, LuaJIT, and some glibc signal trampolines require W+X pages. If a depend
 The helper will not apply twice if the marker `# Syn_OS hardening applied` is already in the unit. If you need to re-apply (e.g. after editing the scope), remove the marker line and the hardening block from the unit file, then re-run the stage script.
 
 ---
+tags: [general]
 
 ## Idempotency
 
@@ -168,6 +176,7 @@ The helper checks for `# Syn_OS hardening applied` before inserting the block. S
 The `apply_hardening_to_all_synos_units` function iterates over glob patterns and skips any file that does not contain a `[Service]` section, so oneshot helper scripts written as shell scripts (not unit files) will not be affected.
 
 ---
+tags: [general]
 
 ## Reference
 

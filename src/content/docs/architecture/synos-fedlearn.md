@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-fedlearn — Federated Learning Aggregation Core
 description: synos-fedlearn — Federated Learning Aggregation Core
 ---
+tags: [general]
 
 # synos-fedlearn — Federated Learning Aggregation Core
 

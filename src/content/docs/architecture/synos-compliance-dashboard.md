@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-compliance-dashboard — Web Compliance Monitoring Dashboard
 description: synos-compliance-dashboard — Web Compliance Monitoring Dashboard
 ---
+tags: [general]
 
 # synos-compliance-dashboard — Web Compliance Monitoring Dashboard
 

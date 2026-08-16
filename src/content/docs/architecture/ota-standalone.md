@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-ota — Standalone A/B Update Client
 description: synos-ota — Standalone A/B Update Client
 ---
+tags: [general]
 
 # synos-ota — Standalone A/B Update Client
 

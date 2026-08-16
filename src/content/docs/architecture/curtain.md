@@ -1,7 +1,9 @@
 ---
+tags: [security curtain]
 title: Curtain Capability Tokens
 description: Curtain v4 — tier-based ed25519 capability tokens enforced by an LSM hook, with compile-time ELF symbol scanning. The mechanism that holds the free training image to a capability ceiling below the planned Enterprise Edition.
 ---
+tags: [security curtain]
 
 The **Curtain** is the mechanism that lets Syn_OS ship the same code to a 14-year-old playing GRIMOIRE and to an organization running the licensed Enterprise Edition at scale, without those two systems being interchangeable.
 

@@ -1,7 +1,9 @@
 ---
+tags: [kernel security]
 title: synos-kernel-process — Syn_OS kernel process management reference logic — PCB, MLFQ scheduler, context switching (std-testable); real asm context switch is kernel-build only
 description: synos-kernel-process — Syn_OS kernel process management reference logic — PCB, MLFQ scheduler, context switching (std-testable); real asm context switch is kernel-build only
 ---
+tags: [kernel security]
 
 # synos-kernel-process — Syn_OS kernel process management reference logic — PCB, MLFQ scheduler, context switching (std-testable); real asm context switch is kernel-build only
 

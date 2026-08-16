@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-alpm-pin — SHA-256 content-pinning for pacman/ALPM packages — v69 Glasswing track A/G supply-chain trust
 description: synos-alpm-pin — SHA-256 content-pinning for pacman/ALPM packages — v69 Glasswing track A/G supply-chain trust
 ---
+tags: [general]
 
 # synos-alpm-pin — SHA-256 content-pinning for pacman/ALPM packages — v69 Glasswing track A/G supply-chain trust
 

@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: Reproducible Builds — Architecture Decision Record
 description: Reproducible Builds — Architecture Decision Record
 ---
+tags: [general]
 
 # Reproducible Builds — Architecture Decision Record
 
@@ -12,6 +14,7 @@ description: Reproducible Builds — Architecture Decision Record
 produce byte-identical `sha256sum` output, regardless of wall-clock time between builds.
 
 ---
+tags: [general]
 
 ## Why reproducibility matters for Syn_OS
 
@@ -25,6 +28,7 @@ the artifact being attested is deterministic. A non-reproducible build could pro
 a different binary on every run, making provenance chains unfalsifiable.
 
 ---
+tags: [general]
 
 ## Why `SOURCE_DATE_EPOCH` and not another approach
 
@@ -41,6 +45,7 @@ standard. Setting it to `git log -1 --pretty=%ct` ties every build of a given ta
 to the same epoch, making the ISO a deterministic function of the source tree.
 
 ---
+tags: [general]
 
 ## Why Arch Linux archive snapshot pinning instead of lockfile hash pinning
 
@@ -64,6 +69,7 @@ years. Builds from tags older than 3 years will fall back to live mirrors unless
 the archive is manually extended.
 
 ---
+tags: [general]
 
 ## Known non-reproducibility sources and mitigations
 
@@ -84,6 +90,7 @@ the archive is manually extended.
 | initramfs mtime | `mkinitcpio` does not embed wall-clock time; initramfs is reproducible once kernel modules are | Inherited |
 
 ---
+tags: [general]
 
 ## How to investigate a reproducibility regression
 
@@ -151,6 +158,7 @@ Common culprits:
 Re-run `cargo xtask verify-reproducible` to confirm both ISOs now match.
 
 ---
+tags: [general]
 
 ## Environment variables
 
@@ -163,6 +171,7 @@ Re-run `cargo xtask verify-reproducible` to confirm both ISOs now match.
 | `SYNOS_VERIFY_REPRO_PROFILE` | Operator or CI | Override profile for `verify-reproducible` |
 
 ---
+tags: [general]
 
 *Reference: [reproducible-builds.org](https://reproducible-builds.org/) |
 [SOURCE_DATE_EPOCH spec](https://reproducible-builds.org/specs/source-date-epoch/) |

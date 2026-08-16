@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: "synos-attck — v66 Citation — MITRE ATT&CK technique ↔ Syn_OS-shipped tool mapping + CLI"
 description: "synos-attck — v66 Citation — MITRE ATT&CK technique ↔ Syn_OS-shipped tool mapping + CLI"
 ---
+tags: [general]
 
 # synos-attck — v66 Citation — MITRE ATT&CK technique ↔ Syn_OS-shipped tool mapping + CLI
 

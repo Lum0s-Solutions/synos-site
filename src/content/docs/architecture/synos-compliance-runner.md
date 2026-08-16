@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-compliance-runner — Automated Compliance Assessment
 description: synos-compliance-runner — Automated Compliance Assessment
 ---
+tags: [general]
 
 # synos-compliance-runner — Automated Compliance Assessment
 

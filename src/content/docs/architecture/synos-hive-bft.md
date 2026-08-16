@@ -1,7 +1,9 @@
 ---
+tags: [hive mesh distributed]
 title: synos-hive-bft — HotStuff Byzantine-Fault-Tolerant Consensus
 description: synos-hive-bft — HotStuff Byzantine-Fault-Tolerant Consensus
 ---
+tags: [hive mesh distributed]
 
 # synos-hive-bft — HotStuff Byzantine-Fault-Tolerant Consensus
 

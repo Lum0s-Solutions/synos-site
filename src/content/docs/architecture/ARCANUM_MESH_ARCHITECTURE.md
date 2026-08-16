@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: ARCANUM Mesh — Architecture Overview (Public)
 description: ARCANUM Mesh — Architecture Overview (Public)
 ---
+tags: [general]
 
 # ARCANUM Mesh — Architecture Overview (Public)
 

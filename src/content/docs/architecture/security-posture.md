@@ -1,13 +1,16 @@
 ---
+tags: [general]
 title: "Security Posture — Understanding Your System's Defenses"
 description: "Security Posture — Understanding Your System's Defenses"
 ---
+tags: [general]
 
 # Security Posture — Understanding Your System's Defenses
 
 This guide explains how to check and interpret your Syn_OS system's security posture. You'll learn what each defense mechanism does and how to verify it's working.
 
 ---
+tags: [general]
 
 ## Quick Overview
 
@@ -27,6 +30,7 @@ synos-posture
 ```
 
 ---
+tags: [general]
 
 ## Understanding synos-posture Output
 
@@ -98,6 +102,7 @@ apparmor module is loaded.
 ```
 
 ---
+tags: [general]
 
 #### Kernel Lockdown
 
@@ -124,6 +129,7 @@ cat /sys/kernel/security/lockdown
 Expected: `integrity`
 
 ---
+tags: [general]
 
 #### Module Signature Enforcement
 
@@ -149,6 +155,7 @@ Output:
 **On master production node,** this should be `1` and show as **●**.
 
 ---
+tags: [general]
 
 #### Secure Boot
 
@@ -172,6 +179,7 @@ Output:
 After reboot, `synos-posture` should show it as ● or ○ depending on enrollment status.
 
 ---
+tags: [general]
 
 #### Post-Quantum Supply Chain
 
@@ -211,6 +219,7 @@ synos-pq-trust remove synos-master-pq-2026-08
 ```
 
 ---
+tags: [general]
 
 #### Host Firewall
 
@@ -246,6 +255,7 @@ sudo ufw show added
 ```
 
 ---
+tags: [general]
 
 #### Kernel Hardening
 
@@ -272,6 +282,7 @@ cat /proc/sys/kernel/kptr_restrict
 ```
 
 ---
+tags: [general]
 
 ### Understanding GRADE
 
@@ -297,6 +308,7 @@ The grade is calculated as a percentage of security hardening features enabled:
 These are acceptable gaps on a test/dev system but should be addressed on production master nodes.
 
 ---
+tags: [general]
 
 ## Advanced: Checking Individual Subsystems
 
@@ -338,6 +350,7 @@ sudo systemctl status nats-server  # system-wide on some profiles
 ```
 
 ---
+tags: [general]
 
 ## Troubleshooting Low Security Scores
 
@@ -368,6 +381,7 @@ If your grade drops below `C` (70%), investigate:
    ```
 
 ---
+tags: [general]
 
 ## Best Practices
 
@@ -382,6 +396,7 @@ If your grade drops below `C` (70%), investigate:
 5. **Use the PQ trust roster carefully** — once you add a signer, all packages from unknown signers will be rejected. Only add trusted signers.
 
 ---
+tags: [general]
 
 ## Reference: Security Profiles
 
@@ -396,6 +411,7 @@ Different Syn_OS profiles have different security baselines:
 The master profile (v111) maintains B+ posture by default. All profiles support upgrading their posture.
 
 ---
+tags: [general]
 
 ## Verified On
 

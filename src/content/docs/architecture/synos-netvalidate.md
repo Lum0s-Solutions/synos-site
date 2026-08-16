@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-netvalidate — Network security config validation tests for Syn_OS
 description: synos-netvalidate — Network security config validation tests for Syn_OS
 ---
+tags: [general]
 
 # synos-netvalidate — Network security config validation tests for Syn_OS
 

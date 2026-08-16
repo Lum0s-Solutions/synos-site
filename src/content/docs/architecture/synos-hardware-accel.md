@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-hardware-accel — Syn_OS hardware acceleration daemon
 description: synos-hardware-accel — Syn_OS hardware acceleration daemon
 ---
+tags: [general]
 
 # synos-hardware-accel — Syn_OS hardware acceleration daemon
 

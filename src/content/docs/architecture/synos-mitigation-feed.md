@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: synos-mitigation-feed — CVE Speculation-Mitigation Posture Aggregator
 description: synos-mitigation-feed — CVE Speculation-Mitigation Posture Aggregator
 ---
+tags: [general]
 
 # synos-mitigation-feed — CVE Speculation-Mitigation Posture Aggregator
 

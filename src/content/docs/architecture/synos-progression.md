@@ -1,7 +1,9 @@
 ---
+tags: [grimoire gamification]
 title: synos-progression — GRIMOIRE Progression Daemon
 description: synos-progression — GRIMOIRE Progression Daemon
 ---
+tags: [grimoire gamification]
 
 # synos-progression — GRIMOIRE Progression Daemon
 

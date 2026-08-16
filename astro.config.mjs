@@ -28,6 +28,7 @@ export default defineConfig({
 			customCss: ['./src/styles/custom.css'],
 			components: {
 				Footer: './src/components/Footer.astro',
+				Page: './src/components/Page.astro',
 			},
 			head: [
 				// Open Graph
@@ -36,14 +37,16 @@ export default defineConfig({
 				{ tag: 'meta', attrs: { property: 'og:type',         content: 'website' } },
 				{ tag: 'meta', attrs: { property: 'og:url',          content: 'https://synos-linux.pro/' } },
 				{ tag: 'meta', attrs: { property: 'og:image',        content: 'https://synos-linux.pro/og-image.svg' } },
-				{ tag: 'meta', attrs: { property: 'og:image:width',  content: '1200' } },
-				{ tag: 'meta', attrs: { property: 'og:image:height', content: '630' } },
+				{ tag: 'meta', attrs: { property: 'og:image:type',   content: 'image/svg+xml' } },
+				{ tag: 'meta', attrs: { property: 'og:image:alt',    content: 'Syn_OS Phoenix logo' } },
+				{ tag: 'meta', attrs: { property: 'og:site_name',    content: 'Syn_OS Documentation' } },
 
 				// Twitter / X
 				{ tag: 'meta', attrs: { name: 'twitter:card',        content: 'summary_large_image' } },
 				{ tag: 'meta', attrs: { name: 'twitter:title',       content: 'Syn_OS — Synaptic Operating System' } },
 				{ tag: 'meta', attrs: { name: 'twitter:description', content: 'AI-aware Linux kernel, post-quantum crypto by default, gamified cyber training. v111.0.0 Last Light (1.0 GA).' } },
 				{ tag: 'meta', attrs: { name: 'twitter:image',       content: 'https://synos-linux.pro/og-image.svg' } },
+				{ tag: 'meta', attrs: { name: 'twitter:image:alt',   content: 'Syn_OS Phoenix logo' } },
 
 				// Theme
 				{ tag: 'meta', attrs: { name: 'theme-color',  content: '#08060a' } },
@@ -53,10 +56,32 @@ export default defineConfig({
 				{ tag: 'link', attrs: { rel: 'apple-touch-icon', href: '/phoenix-256.png' } },
 				{ tag: 'link', attrs: { rel: 'icon', type: 'image/png', sizes: '256x256', href: '/phoenix-256.png' } },
 
-				// I1 — preload self-hosted fonts (eliminates Google Fonts DNS round-trip)
+				// Preload fonts
 				{ tag: 'link', attrs: { rel: 'preload', href: '/fonts/jetbrains-mono-latin.woff2', as: 'font', type: 'font/woff2', crossorigin: 'anonymous' } },
 				{ tag: 'link', attrs: { rel: 'preload', href: '/fonts/inter-latin.woff2',         as: 'font', type: 'font/woff2', crossorigin: 'anonymous' } },
 				{ tag: 'link', attrs: { rel: 'preload', href: '/fonts/saira-latin.woff2',         as: 'font', type: 'font/woff2', crossorigin: 'anonymous' } },
+
+			// Plausible analytics
+			{ tag: 'script', attrs: { src: '/js/plausible.js', defer: true } },
+
+			// JSON-LD Organization schema
+			{ tag: 'script', attrs: { type: 'application/ld+json', innerHTML: JSON.stringify({
+					"@context": "https://schema.org",
+					"@type": "Organization",
+					"name": "LumOs Solutions",
+					"url": "https://lumossolutions.io",
+					"logo": "https://synos-linux.pro/og-image.svg",
+					"sameAs": [
+						"https://github.com/Lum0s-Solutions",
+						"https://discord.gg/synos",
+						"https://x.com/synos_linux"
+					],
+					"contactPoint": {
+						"@type": "ContactPoint",
+						"email": "hello@lumossolutions.io",
+						"contactType": "business"
+					}
+				})},
 			],
 			lastUpdated: true,
 			pagination: true,

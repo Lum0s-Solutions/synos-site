@@ -1,7 +1,9 @@
 ---
+tags: [general]
 title: grimoire-iso — ISO build orchestration
 description: grimoire-iso — ISO build orchestration
 ---
+tags: [general]
 
 # grimoire-iso — ISO build orchestration
 

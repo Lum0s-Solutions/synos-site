@@ -141,6 +141,19 @@ export default defineConfig({
 					],
 				},
 				{
+					label: '☣ Malware Research',
+					items: [
+						{ label: 'Overview',                  slug: 'malware-research' },
+						{ label: 'Runbooks',                  slug: 'malware-research/runbooks' },
+						{ label: 'ADRs',                      slug: 'malware-research/adr' },
+						{ label: 'Threat Model',              slug: 'malware-research/threat-model' },
+						{ label: 'Audit Checklist',           slug: 'malware-research/audit-checklist' },
+						{ label: 'Onboarding',                slug: 'malware-research/onboarding' },
+						{ label: 'Disaster Recovery',         slug: 'malware-research/dr-plan' },
+						{ label: 'Compliance',                slug: 'malware-research/compliance' },
+					],
+				},
+				{
 					label: '◈ Architecture',
 					autogenerate: { directory: 'architecture' },
 				},

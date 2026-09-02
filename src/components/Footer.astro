@@ -1,14 +1,47 @@
 ---
 /*
-  Site-wide footer. The personal tip-jar link that used to live here was removed
-  ahead of the DEF CON public go-live — it sat on every page, including the
-  compliance/Forge pages pitched at federal and regulated buyers, and that
-  pairing undercut the page's credibility. Re-home a support/donate link on a
-  dedicated page if we want one back.
+  Site-wide footer with support link.
 */
 import Default from '@astrojs/starlight/components/Footer.astro';
+import { Icon } from '@astrojs/starlight/components';
+import config from 'virtual:starlight/user-config';
 ---
-<Default>
-	<a href="/security.txt" slot="after-links" style="margin-left: 1rem; color: var(--sl-color-text-accent);">Security Policy</a>
-	<a href="https://buymeacoffee.com/lumossolutions" slot="after-links" style="margin-left: 1rem; color: var(--sl-color-text-accent);">☕ Buy me a coffee</a>
-</Default>
+<footer class="sl-flex">
+	<div class="meta sl-flex">
+		<slot name="edit-link" />
+		<slot name="last-updated" />
+	</div>
+	<slot name="pagination" />
+
+	{
+		config.credits && (
+			<a class="kudos sl-flex" href="https://starlight.astro.build">
+				<Icon name={'starlight'} /> {Astro.locals.t('builtWithStarlight.label')}
+			</a>
+		)
+	}
+
+	<div class="support-link sl-flex">
+		<a href="https://buymeacoffee.com/lumossolutions" target="_blank" rel="noopener noreferrer" style="margin-left: 1rem; color: var(--sl-color-text-accent); display: inline-flex; align-items: center; gap: 0.5rem;">
+			<Icon name={'mug'} style="width: 1.2em; height: 1.2em;" />
+			<span>Buy me a coffee</span>
+		</a>
+	</div>
+</footer>
+
+<style>
+	@layer starlight.core {
+		.support-link {
+			margin: 1.5rem auto 0;
+			font-size: var(--sl-text-xs);
+			text-decoration: none;
+			color: var(--sl-color-text-accent);
+		}
+		.support-link:hover {
+			color: var(--sl-color-white);
+		}
+		.support-link :global(svg) {
+			color: var(--sl-color-text-accent);
+		}
+	}
+</style>

@@ -154,6 +154,18 @@ export default defineConfig({
 					],
 				},
 				{
+					label: '☣ Malware Encyclopedia',
+					items: [
+						{ label: 'Overview',                  slug: 'malware-encyclopedia' },
+						{ label: 'Quick Reference',           slug: 'malware-encyclopedia/quick-reference' },
+						{ label: 'Classic Malware',           slug: 'malware-encyclopedia/classic' },
+						{ label: 'Advanced Malware',          slug: 'malware-encyclopedia/advanced' },
+						{ label: 'Mobile & Web',              slug: 'malware-encyclopedia/mobile-web' },
+						{ label: 'Emerging Threats',          slug: 'malware-encyclopedia/emerging' },
+						{ label: 'Defence Framework',         slug: 'malware-encyclopedia/defence' },
+					],
+				},
+				{
 					label: '◈ Architecture',
 					autogenerate: { directory: 'architecture' },
 				},
